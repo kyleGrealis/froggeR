@@ -25,7 +25,7 @@
 write_ignore <- function(path = here::here()) {
 
   write_path <- path
-  answer <- 'yes'
+  confirm <- 'no'
 
   # path to .gitignore
   gist_path_ignore <- paste0(
@@ -40,9 +40,13 @@ write_ignore <- function(path = here::here()) {
     answer <- readline(
       "A .gitignore has been found in project level directory! Overwrite? [y/n] "
     )
+    # Confirm overwrite:
+    if (str_to_lower(answer) %in% c('y', 'yes')) {
+      confirm <- readline("Are you sure? [y/n] ")
+    }
   }
 
-  if (!str_to_lower(answer) %in% c('y', 'yes', 'yup')) {
+  if (!str_to_lower(answer) %in% c('y', 'yes') | !confirm %in% c('y', 'yes')) {
     message(".gitignore not changed.")
   } else {
     download.file(gist_path_ignore, paste0(write_path, "/.gitignore"))

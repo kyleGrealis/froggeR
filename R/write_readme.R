@@ -43,7 +43,7 @@ write_readme <- function(path = here::here()) {
     }
   }
 
-  if (!str_to_lower(answer) %in% c('y', 'yes') & !confirm %in% c('y', 'yes')) {
+  if (!str_to_lower(answer) %in% c('y', 'yes') | !confirm %in% c('y', 'yes')) {
     message("README.md not changed.")
   } else {
     download.file(gist_path_readme, paste0(write_path, "/README.md"))
