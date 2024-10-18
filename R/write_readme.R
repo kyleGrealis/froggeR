@@ -18,36 +18,38 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' write_readme(path = "../path_to_project")
+#' write_readme(path = '../path_to_project')
 #' }
 
 write_readme <- function(path = here::here()) {
 
   write_path <- path
-  confirm <- 'no'
+  confirm <- 'yes'
 
   # path to README.md
   gist_path_readme <- paste0(
-    "https://gist.github.com/kyleGrealis/963177f903a434c9b4931d1c4c56f1cc/",
+    'https://gist.github.com/kyleGrealis/963177f903a434c9b4931d1c4c56f1cc/',
     # this changes as the README gist is updated
-    "raw/acb1cec3ac110fe8ae83bd978e381a24296ec122/README.md"
+    'raw/acb1cec3ac110fe8ae83bd978e381a24296ec122/README.md'
   )
 
   # Warn user if README is found in project
   if (file.exists('README.md')) {
-    message("**CAUTION!!**")
-    answer <- readline("README.md found in project level directory! Overwrite? [y/n] ")
+    message('**CAUTION!!**')
+    answer <- readline('README.md found in project level directory! Overwrite? [y/n] ')
     # Confirm overwrite:
     if (str_to_lower(answer) %in% c('y', 'yes')) {
-      confirm <- readline("Are you sure? [y/n] ")
+      confirm <- readline('Are you sure? [y/n] ')
+    } else {
+      confirm <- 'no'
     }
   }
 
-  if (!str_to_lower(answer) %in% c('y', 'yes') | !confirm %in% c('y', 'yes')) {
-    message("README.md not changed.")
+  if (str_to_lower(confirm) %in% c('y', 'yes')) {
+    download.file(gist_path_readme, paste0(write_path, '/README.md'))
+    message('README.md has been updated.')
   } else {
-    download.file(gist_path_readme, paste0(write_path, "/README.md"))
-    message("README.md has been updated.")
+    message('\nREADME.md was not changed.')
   }
 }
 NULL

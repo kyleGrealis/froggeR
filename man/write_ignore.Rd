@@ -28,6 +28,6 @@ at the project level.
 }
 \examples{
 \dontrun{
-write_ignore(path = "../path_to_project")
+write_ignore(path = '../path_to_project')
 }
 }

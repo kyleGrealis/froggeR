@@ -19,38 +19,41 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' write_ignore(path = "../path_to_project")
+#' write_ignore(path = '../path_to_project')
 #' }
 
 write_ignore <- function(path = here::here()) {
 
   write_path <- path
-  confirm <- 'no'
+  confirm <- 'yes'
 
   # path to .gitignore
   gist_path_ignore <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/1978fb42fc520ca57f670908e111585e/",
+    'https://gist.githubusercontent.com/RaymondBalise/1978fb42fc520ca57f670908e111585e/',
     # this changes as the .gitignore gist is updated
-    "raw/e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
+    'raw/e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore'
   )
 
   # Warn user if .gitignore is found in project
   if (file.exists('.gitignore')) {
-    message("**CAUTION!!**")
+    message('**CAUTION!!**')
     answer <- readline(
-      "A .gitignore has been found in project level directory! Overwrite? [y/n] "
+      'A .gitignore has been found in project level directory! Overwrite? [y/n] '
     )
     # Confirm overwrite:
     if (str_to_lower(answer) %in% c('y', 'yes')) {
-      confirm <- readline("Are you sure? [y/n] ")
+      confirm <- readline('Are you sure? [y/n] ')
+    } else{
+      confirm <- 'no'
     }
   }
 
-  if (!str_to_lower(answer) %in% c('y', 'yes') | !confirm %in% c('y', 'yes')) {
-    message(".gitignore not changed.")
+  if (str_to_lower(confirm) %in% c('y', 'yes')) {
+    download.file(gist_path_ignore, paste0(write_path, '/.gitignore'))
+    message('.gitignore has been updated.')
   } else {
-    download.file(gist_path_ignore, paste0(write_path, "/.gitignore"))
-    message(".gitignore has been updated.")
+    message('\n.gitignore was not changed.')
   }
+
 }
 NULL
