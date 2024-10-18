@@ -14,9 +14,11 @@ from \code{here::here()}.}
 A README.md template. Contains sections for project description (study
 name, principle investigator, & author), project setup steps if it's to be shared
 with other team members, project file descriptions, project directory descriptions,
-and miscellaneous. NOTE: this is a modifyable template and should be tailor-fit for 
-your exact purpose. It is highly recommended to keep the file & directory description
-sections.
+and miscellaneous. 
+
+NOTE: Some documentation remains to provide the user with example descriptions for 
+files & directories. It is highly recommended to keep sections. This is a modifiable 
+template and should be tailor-fit for your exact purpose.
 }
 \description{
 This function is designed to first check for the existence of a README file. If none
