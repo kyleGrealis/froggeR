@@ -5,7 +5,14 @@
 #' is downloaded from \url{https://gist.github.com/kyleGrealis} and written at the 
 #' project level.
 #' 
-#' @param path
+#' @param path The path to the main project level. Defaults to returned value
+#' from \code{here::here()}.
+#' @return A README.md template
+#' @export
+#' @examples
+#' \dontrun{
+#' write_readme(path = "../path_to_project")
+#' }
 
 write_readme <- function(path = here::here()) {
 
@@ -26,10 +33,11 @@ write_readme <- function(path = here::here()) {
     )
   }
 
-  if (!stringr::str_to_lower(answer) %in% c('y', 'yes', 'yup')) {
+  if (!str_to_lower(answer) %in% c('y', 'yes', 'yup')) {
     message("README.md not changed.")
   } else {
     download.file(gist_path_readme, paste0(write_path, "/README.md"))
     message("README.md has been updated.")
   }
 }
+NULL
