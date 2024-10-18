@@ -1,3 +1,5 @@
+**froggeR** 🐸 is designed to help you get a "jump" on your project and help you increase
+productivity.
 
 **Project Author**: Kyle Grealis
 
@@ -12,6 +14,3 @@ These are helper functions to enhance workflows. Some functions are wrapper func
 existing packages, while others are custom.
 
 *THIS IS A WORK IN PROGRESS!* Check back for more updates
-
-**NOTE**: This project may require a name change as there is currently a CRAN package
-named "yum". If this is to be released publicly, the name *will* be changing.
