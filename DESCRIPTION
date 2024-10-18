@@ -4,7 +4,7 @@ Title: Enhances And Standardizes Team Workflows
 Version: 0.1.0
 Author: Kyle Grealis
 Maintainer: Kyle Grealis <kyleGrealis@icloud.com>
-Description: This is a collection of helper functions to standardize workflow and project development. This is intended for internal University of Miami Feaster & Balise Lab team use.
+Description: The package is designed to insert Quarto, README, and .gitignore templates into a project environment. It also contains helper functions and wrappers for existing packages.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
