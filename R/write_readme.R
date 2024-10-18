@@ -1,0 +1,35 @@
+#' Create a project README file
+#' 
+#' This function is designed to first check for the existence of a README file. If none
+#' is detected or the user chooses to overwrite the current README, a README template
+#' is downloaded from \url{https://gist.github.com/kyleGrealis} and written at the 
+#' project level.
+#' 
+#' @param path
+
+write_readme <- function(path = here::here()) {
+
+  write_path <- path
+
+  # path to README.md
+  gist_path_readme <- paste0(
+    "https://gist.github.com/kyleGrealis/963177f903a434c9b4931d1c4c56f1cc/",
+    # this changes as the README gist is updated
+    "raw/acb1cec3ac110fe8ae83bd978e381a24296ec122/README.md"
+  )
+
+  # Warn user if README is found in project
+  if (file.exists('README.md')) {
+    message("**CAUTION!!**")
+    answer <- readline(
+      "README.md found in project level directory! Overwrite? [y/n] "
+    )
+  }
+
+  if (!stringr::str_to_lower(answer) %in% c('y', 'yes', 'yup')) {
+    message("README.md not changed.")
+  } else {
+    download.file(gist_path_readme, paste0(write_path, "/README.md"))
+    message("README.md has been updated.")
+  }
+}
