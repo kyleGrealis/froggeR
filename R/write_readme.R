@@ -24,7 +24,7 @@
 write_readme <- function(path = here::here()) {
 
   write_path <- path
-  answer <- 'yes'
+  confirm <- 'no'
 
   # path to README.md
   gist_path_readme <- paste0(
@@ -36,12 +36,14 @@ write_readme <- function(path = here::here()) {
   # Warn user if README is found in project
   if (file.exists('README.md')) {
     message("**CAUTION!!**")
-    answer <- readline(
-      "README.md found in project level directory! Overwrite? [y/n] "
-    )
+    answer <- readline("README.md found in project level directory! Overwrite? [y/n] ")
+    # Confirm overwrite:
+    if (str_to_lower(answer) %in% c('y', 'yes')) {
+      confirm <- readline("Are you sure? [y/n] ")
+    }
   }
 
-  if (!str_to_lower(answer) %in% c('y', 'yes', 'yup')) {
+  if (!str_to_lower(answer) %in% c('y', 'yes') & !confirm %in% c('y', 'yes')) {
     message("README.md not changed.")
   } else {
     download.file(gist_path_readme, paste0(write_path, "/README.md"))
