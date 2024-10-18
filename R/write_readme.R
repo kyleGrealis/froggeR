@@ -24,6 +24,7 @@
 write_readme <- function(path = here::here()) {
 
   write_path <- path
+  answer <- 'yes'
 
   # path to README.md
   gist_path_readme <- paste0(

@@ -25,6 +25,7 @@
 write_ignore <- function(path = here::here()) {
 
   write_path <- path
+  answer <- 'yes'
 
   # path to .gitignore
   gist_path_ignore <- paste0(
