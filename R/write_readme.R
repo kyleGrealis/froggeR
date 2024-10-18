@@ -7,7 +7,12 @@
 #' 
 #' @param path The path to the main project level. Defaults to returned value
 #' from \code{here::here()}.
-#' @return A README.md template
+#' @return A README.md template. Contains sections for project description (study
+#' name, principle investigator, & author), project setup steps if it's to be shared
+#' with other team members, project file descriptions, project directory descriptions,
+#' and miscellaneous. NOTE: this is a modifyable template and should be tailor-fit for 
+#' your exact purpose. It is highly recommended to keep the file & directory description
+#' sections. 
 #' @export
 #' @examples
 #' \dontrun{
