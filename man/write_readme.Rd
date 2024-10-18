@@ -27,6 +27,6 @@ project level.
 }
 \examples{
 \dontrun{
-write_readme(path = "../path_to_project")
+write_readme(path = '../path_to_project')
 }
 }
