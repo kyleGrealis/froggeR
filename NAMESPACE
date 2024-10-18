@@ -3,3 +3,4 @@
 export(write_readme)
 importFrom(here,here)
 importFrom(stringr,str_to_lower)
+importFrom(utils,download.file)
