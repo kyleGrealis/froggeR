@@ -47,15 +47,15 @@ write_quarto <- function(filename = 'new', path = here::here(), user = 'default'
 
   # Warn user if Quarto document already found in the project
   if (file.exists(paste0(write_path, '/', write_name, '.qmd'))) {
-    message('**CAUTION!!**')
+    ui_info('**CAUTION!!**')
     answer <- readline(
-      paste0(
+      ui_todo(paste0(
         write_path, write_name, '.qmd found in provided path! Overwrite? [y/n] '
-      )
+      ))
     )
     # Confirm overwrite:
     if (str_to_lower(answer) %in% c('y', 'yes')) {
-      confirm <- readline('Are you sure? [y/n] ')
+      confirm <- readline(ui_todo('Are you sure? [y/n] '))
     } else {
       confirm <- 'no'
     }
@@ -66,9 +66,9 @@ write_quarto <- function(filename = 'new', path = here::here(), user = 'default'
     if (user == 'kyle') { gist_path_default <- gist_path_kyle }
 
     download.file(gist_path_default, paste0(write_path, '/', write_name, '.qmd'))
-    message('A new Quarto file has been written.')
+    ui_done('A new Quarto file has been written.')
   } else {
-    message('\nQuarto file NOT added.')
+    ui_oops('\nQuarto file NOT added.')
   }
 
 }

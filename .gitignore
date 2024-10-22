@@ -154,3 +154,6 @@ _bookdown_files/
 /_site/
 .quarto/
 _site/
+
+# project-level
+PROG_NOTES.md
