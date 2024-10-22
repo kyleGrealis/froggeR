@@ -15,7 +15,9 @@
 #' @param filename The name of the file. Do not include '.qmd'
 #' @param path The path to the main project level. Defaults to returned value
 #' from \code{here::here()}.
-#' @param user You are the default user. You don't need to change this. 😉
+#' @param default You are the default user. 😉 You NEED to change this, unless you
+#' want a personalized Quarto document with the author's details. \code{*THIS WILL BE
+#' FIXED in a future version!*}
 #' @return A Quarto document with formatted YAML and two blank starter sections.
 #' 
 #' @export
@@ -25,11 +27,10 @@
 #' write_quarto(filename = 'new_doc', path = '../path_to_location')
 #' }
 
-write_quarto <- function(filename = 'new', path = here::here(), user = 'default') {
+write_quarto <- function(filename = 'new', path = here::here(), default = FALSE) {
 
-  write_name <- filename
-  write_path <- path
-  confirm <- 'yes'
+  the_quarto_file <- paste0(path, '/', filename, '.qmd')
+  abort <- FALSE
 
   # path to default Quarto header template
   gist_path_default <- paste0(
@@ -46,29 +47,19 @@ write_quarto <- function(filename = 'new', path = here::here(), user = 'default'
   )
 
   # Warn user if Quarto document already found in the project
-  if (file.exists(paste0(write_path, '/', write_name, '.qmd'))) {
+  if (file.exists(the_quarto_file)) {
     ui_info('**CAUTION!!**')
-    answer <- readline(
-      ui_todo(paste0(
-        write_path, write_name, '.qmd found in provided path! Overwrite? [y/n] '
-      ))
-    )
-    # Confirm overwrite:
-    if (str_to_lower(answer) %in% c('y', 'yes')) {
-      confirm <- readline(ui_todo('Are you sure? [y/n] '))
-    } else {
-      confirm <- 'no'
-    }
+    abort <- ui_nope('{the_quarto_file} found in provided path! Overwrite?')
   }
 
-  if (str_to_lower(confirm) %in% c('y', 'yes')) {
+  if (!abort) {
     # override gist path for Kyle
-    if (user == 'kyle') { gist_path_default <- gist_path_kyle }
+    if (!default) { gist_path_default <- gist_path_kyle }
 
-    download.file(gist_path_default, paste0(write_path, '/', write_name, '.qmd'))
-    ui_done('A new Quarto file has been written.')
+    download.file(gist_path_default, the_quarto_file)
+    ui_done('A new Quarto file has been written.\n\n')
   } else {
-    ui_oops('\nQuarto file NOT added.')
+    ui_oops('\nQuarto file NOT added.\n\n')
   }
 
 }

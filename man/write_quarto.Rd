@@ -4,7 +4,7 @@
 \alias{write_quarto}
 \title{Start a Quarto file with a formatted template header}
 \usage{
-write_quarto(filename = "new", path = here::here(), user = "default")
+write_quarto(filename = "new", path = here::here(), default = FALSE)
 }
 \arguments{
 \item{filename}{The name of the file. Do not include '.qmd'}
@@ -12,7 +12,9 @@ write_quarto(filename = "new", path = here::here(), user = "default")
 \item{path}{The path to the main project level. Defaults to returned value
 from \code{here::here()}.}
 
-\item{user}{You are the default user. You don't need to change this. 😉}
+\item{default}{You are the default user. 😉 You NEED to change this, unless you
+want a personalized Quarto document with the author's details. \code{*THIS WILL BE
+FIXED in a future version!*}}
 }
 \value{
 A Quarto document with formatted YAML and two blank starter sections.
