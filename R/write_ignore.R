@@ -36,13 +36,13 @@ write_ignore <- function(path = here::here()) {
 
   # Warn user if .gitignore is found in project
   if (file.exists('.gitignore')) {
-    message('**CAUTION!!**')
-    answer <- readline(
+    ui_info('**CAUTION!!**')
+    answer <- readline(ui_todo(
       'A .gitignore has been found in project level directory! Overwrite? [y/n] '
-    )
+    ))
     # Confirm overwrite:
     if (str_to_lower(answer) %in% c('y', 'yes')) {
-      confirm <- readline('Are you sure? [y/n] ')
+      confirm <- readline(ui_todo('Are you sure? [y/n] '))
     } else{
       confirm <- 'no'
     }
@@ -50,9 +50,9 @@ write_ignore <- function(path = here::here()) {
 
   if (str_to_lower(confirm) %in% c('y', 'yes')) {
     download.file(gist_path_ignore, paste0(write_path, '/.gitignore'))
-    message('.gitignore has been updated.')
+    ui_done('.gitignore has been updated.')
   } else {
-    message('\n.gitignore was not changed.')
+    ui_oops('\n.gitignore was not changed.')
   }
 
 }
