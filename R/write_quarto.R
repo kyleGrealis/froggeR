@@ -35,14 +35,14 @@ write_quarto <- function(filename = 'new', path = here::here(), user = 'default'
   gist_path_default <- paste0(
     'https://gist.githubusercontent.com/kyleGrealis/693e5d0df41576247900c3bef788d475/',
     # this changes as the default Quarto is updated
-    'raw/aa57c43fae22fb101944b79347ac9cd673216e30/quarto_header.qmd'
+    'raw/fe770eab51c8e600f9c353a53f9a078673343b2c/quarto_header.qmd'
   )
 
   # path to personalized Quarto header template
   gist_path_kyle <- paste0(
     'https://gist.githubusercontent.com/kyleGrealis/d8e61fc834f92868823e71ff26bda745/',
     # this changes as the personalized Quarto is updated
-    'raw/fccb94634e37d8771971be68f6b881fca63152bb/kyle_quarto_header.qmd'
+    'raw/9f2be2469dd2372617e7bf79166c3417591777df/kyle_quarto_header.qmd'
   )
 
   # Warn user if Quarto document already found in the project
