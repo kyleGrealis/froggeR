@@ -13,5 +13,6 @@ Depends: R (>= 3.5.0)
 Imports:
     glue,
     here,
+    quarto,
     stringr,
     usethis
