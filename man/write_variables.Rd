@@ -4,10 +4,11 @@
 \alias{write_variables}
 \title{Create & write values to _variables.yml}
 \usage{
-write_variables(path)
+write_variables(path = here::here())
 }
 \arguments{
-\item{path}{A Quarto project name or other folder.}
+\item{path}{A Quarto project name or other folder. Defaults to returned value
+from \code{here::here()}.}
 }
 \value{
 A _variables.yml file. As described above, the contents of this file are

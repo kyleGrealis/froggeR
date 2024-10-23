@@ -6,7 +6,8 @@
 #' will look for the existence of a Quarto project \code{_variables.yml}
 #' file. If one exists, the user will be asked to proceed to overwrite it.
 #' 
-#' @param path A Quarto project name or other folder.
+#' @param path A Quarto project name or other folder. Defaults to returned value
+#' from \code{here::here()}.
 #' @return A _variables.yml file. As described above, the contents of this file are
 #' used in the custom Quarto header for reusability.
 #' 
@@ -24,10 +25,10 @@
 #' write_variables(path = "my_quarto_project")
 #' }
 
-write_variables <- function(path) {
+write_variables <- function(path = here::here()) {
 
   # create the file in the Quarto project
-  file <- paste0(here::here(), '/', path, '/', '_variables.yml')
+  file <- paste0(path, '/_variables.yml')
 
   abort <- FALSE
 
