@@ -39,7 +39,7 @@ write_readme <- function(path = here::here()) {
   }
 
   if (!abort) {
-    download.file(gist_path_readme, paste0(path, '/README.md'))
+    download.file(gist_path_readme, paste0(path, '/README.md'), quiet = TRUE)
     ui_done('README.md has been updated.\n\n')
   } else {
     ui_oops('\nREADME.md was not changed.\n\n')
