@@ -33,7 +33,7 @@ write_readme <- function(path = here::here()) {
   )
 
   # Warn user if README is found in project
-  if (file.exists('README.md')) {
+  if (file.exists(paste0(path, '/README.md'))) {
     ui_info('**CAUTION!!**')
     abort <- ui_nope('README.md found in project level directory! Overwrite?')
   }

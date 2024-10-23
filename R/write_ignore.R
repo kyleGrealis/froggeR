@@ -34,7 +34,7 @@ write_ignore <- function(path = here::here()) {
   )
 
   # Warn user if .gitignore is found in project
-  if (file.exists('.gitignore')) {
+  if (file.exists(paste0(path, '/.gitignore'))) {
     ui_info('**CAUTION!!**')
     abort <- ui_nope('A .gitignore has been found in project level directory! Overwrite?')
   }
