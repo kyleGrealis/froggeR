@@ -4,10 +4,10 @@
 \alias{write_variables}
 \title{Create & write values to _variables.yml}
 \usage{
-write_variables(name)
+write_variables(path)
 }
 \arguments{
-\item{name}{A Quarto project name.}
+\item{path}{A Quarto project name or other folder.}
 }
 \value{
 A _variables.yml file. As described above, the contents of this file are
