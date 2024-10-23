@@ -4,7 +4,7 @@
 \alias{write_quarto}
 \title{Start a Quarto file with a formatted template header}
 \usage{
-write_quarto(filename = "new", path = here::here(), default = FALSE)
+write_quarto(filename = "new", path = here::here(), default = TRUE)
 }
 \arguments{
 \item{filename}{The name of the file. Do not include '.qmd'}
@@ -12,26 +12,22 @@ write_quarto(filename = "new", path = here::here(), default = FALSE)
 \item{path}{The path to the main project level. Defaults to returned value
 from \code{here::here()}.}
 
-\item{default}{You are the default user. 😉 You NEED to change this, unless you
-want a personalized Quarto document with the author's details. \code{*THIS WILL BE
-FIXED in a future version!*}}
+\item{default}{The default is set to TRUE and will create a Quarto template file
+that pulls infomation from the folder/_variables.yml file.}
 }
 \value{
 A Quarto document with formatted YAML and two blank starter sections.
 }
 \description{
-This function creates a new Quarto document with a pre-formatted YAML header. The user
-needs to update the Title, author details (including optional URL link, email address,
-and ORCID). An abstract is included along with keywords to 'tag' the document.
+This function creates a new Quarto document with a pre-formatted YAML header. The 
+default template requires a _variables.yml file. If none exists in the project, 
+a prompt is provided to create the file. The _variables.yml allows for a reusable
+custom header that will be applied to all \code{froggeR} default-style Quarto 
+documents.
 }
 \details{
-Default options have been set for the table of contents and code output. Either set
-the options to 'false' (do not quote the options in the YAML) or comment out the 
-selected line(s). The default editor is source and not visual.
-
-NOTE: The default theme for this is sandstone. Please visit
-\url{https://quarto.org/docs/output-formats/html-themes.html} to explore more
-theming options.
+NOTE: Please visit \url{https://quarto.org/docs/output-formats/html-themes.html} to 
+explore more Quarto theming options.
 }
 \examples{
 \dontrun{
