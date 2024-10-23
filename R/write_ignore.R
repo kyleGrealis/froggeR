@@ -24,6 +24,7 @@
 
 write_ignore <- function(path = here::here()) {
 
+  the_ignore_file <- paste0(path, '/.gitignore')
   abort <- FALSE
 
   # path to .gitignore
@@ -34,13 +35,13 @@ write_ignore <- function(path = here::here()) {
   )
 
   # Warn user if .gitignore is found in project
-  if (file.exists(paste0(path, '/.gitignore'))) {
+  if (file.exists(the_ignore_file)) {
     ui_info('**CAUTION!!**')
     abort <- ui_nope('A .gitignore has been found in project level directory! Overwrite?')
   }
 
   if (!abort) {
-    download.file(gist_path_ignore, paste0(path, '/.gitignore'), quiet = TRUE)
+    download.file(gist_path_ignore, the_ignore_file, quiet = TRUE)
     ui_done('\n.gitignore has been created.\n\n')
   } else {
     ui_oops('\n.gitignore was not changed.\n\n')

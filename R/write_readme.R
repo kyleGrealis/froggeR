@@ -23,6 +23,7 @@
 
 write_readme <- function(path = here::here()) {
 
+  the_readme_file <- paste0(path, '/README.md')
   abort <- FALSE
 
   # path to README.md
@@ -33,13 +34,13 @@ write_readme <- function(path = here::here()) {
   )
 
   # Warn user if README is found in project
-  if (file.exists(paste0(path, '/README.md'))) {
+  if (file.exists(the_readme_file)) {
     ui_info('**CAUTION!!**')
     abort <- ui_nope('README.md found in project level directory! Overwrite?')
   }
 
   if (!abort) {
-    download.file(gist_path_readme, paste0(path, '/README.md'), quiet = TRUE)
+    download.file(gist_path_readme, the_readme_file, quiet = TRUE)
     ui_done('\nREADME.md has been created.\n\n')
   } else {
     ui_oops('\nREADME.md was not changed.\n\n')
