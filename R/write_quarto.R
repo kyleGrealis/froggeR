@@ -52,8 +52,8 @@ write_quarto <- function(filename = 'new', path = here::here(), default = TRUE) 
     if (default) {
       
       # check if _variables.yml exists and prompt user to create if FALSE
-      if (!file.exists(paste0(path, '/_variables.qmd'))) {
-        message('You need to create a custom _variables.yml file. Here we go!')
+      if (!file.exists(paste0(path, '/_variables.yml'))) {
+        message('\nYou need to create a custom _variables.yml file. Here we go!')
         # use the same path as where the Quarto doc will be created
         froggeR::write_variables(path)
       }
