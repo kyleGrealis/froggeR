@@ -57,9 +57,9 @@ write_quarto <- function(filename = 'new', path = here::here(), default = FALSE)
     if (!default) { gist_path_default <- gist_path_kyle }
 
     download.file(gist_path_default, the_quarto_file, quiet = TRUE)
-    ui_done('A new Quarto file has been written.\n\n')
+    ui_done('\nA new Quarto file has been created.\n\n')
   } else {
-    ui_oops('\nQuarto file NOT added.\n\n')
+    ui_oops('\nQuarto file NOT created.\n\n')
   }
 
 }
