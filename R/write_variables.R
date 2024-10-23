@@ -48,7 +48,6 @@ write_variables <- function(path = here::here()) {
     roles <- readline('Enter your role ("aut" = author, etc): ')
     affiliation <- readline('Enter affiliation: ')
     keywords <- readline('Enter project keywords (i.e., research, data science): ')
-    theme <- readline('Enter Quarto project theme (leave blank for default): ')
     toc_title <- readline('Enter table of contents title. Can be "Table of Contents": ')
 
     content <- glue::glue('
@@ -59,7 +58,6 @@ write_variables <- function(path = here::here()) {
     affiliations: {affiliation}
     roles: {roles}
     keywords: {keywords}
-    theme: {theme}
     toc: {toc_title}
     ')
 
