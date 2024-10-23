@@ -7,7 +7,7 @@
 write_variables(name)
 }
 \arguments{
-\item{name}{A Quarto project name}
+\item{name}{A Quarto project name.}
 }
 \value{
 A _variables.yml file. As described above, the contents of this file are
