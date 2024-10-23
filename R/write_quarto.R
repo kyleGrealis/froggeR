@@ -56,7 +56,7 @@ write_quarto <- function(filename = 'new', path = here::here(), default = FALSE)
     # override gist path for Kyle
     if (!default) { gist_path_default <- gist_path_kyle }
 
-    download.file(gist_path_default, the_quarto_file)
+    download.file(gist_path_default, the_quarto_file, quiet = TRUE)
     ui_done('A new Quarto file has been written.\n\n')
   } else {
     ui_oops('\nQuarto file NOT added.\n\n')

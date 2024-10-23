@@ -40,7 +40,7 @@ write_ignore <- function(path = here::here()) {
   }
 
   if (!abort) {
-    download.file(gist_path_ignore, paste0(path, '/.gitignore'))
+    download.file(gist_path_ignore, paste0(path, '/.gitignore'), quiet = TRUE)
     ui_done('.gitignore has been updated.\n\n')
   } else {
     ui_oops('\n.gitignore was not changed.\n\n')
