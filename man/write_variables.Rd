@@ -30,6 +30,6 @@ file. If one exists, the user will be asked to proceed to overwrite it.
 }
 \examples{
 \dontrun{
-write_variables(name = "my_quarto_project")
+write_variables(path = "my_quarto_project")
 }
 }
