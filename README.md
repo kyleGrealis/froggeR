@@ -43,6 +43,7 @@ This creates a new Quarto project with:
 - A comprehensive `.gitignore`
 - A structured `README.md`
 - A reusable `_variables.yml`
+- A `.Rproj` file
 
 ### 🔄 Reusable YAML Headers
 
@@ -108,6 +109,7 @@ Includes sections for:
 | `write_quarto()` | Creates templated Quarto documents | Standardized formatting |
 | `write_ignore()` | Sets up enhanced `.gitignore` | Better data security |
 | `write_readme()` | Creates structured README template | Improved project documentation |
+| `write_rproj()` | Sets up a RStudio project | Improved project workflow |
 
 ## Why froggeR?
 
