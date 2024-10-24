@@ -40,7 +40,7 @@ write_rproj <- function(path = here::here(), name) {
   )
 
   # Warn user if any .Rproj is found in project
-  if (length(list.files(pattern = '\\.Rproj$')) > 0) {
+  if (length(list.files(path = path, pattern = '\\.Rproj$')) > 0) {
     ui_info('**CAUTION!!**')
     abort <- ui_nope('A .Rproj file found in project level directory! Overwrite?')
   }
