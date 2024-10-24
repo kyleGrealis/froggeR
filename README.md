@@ -1,5 +1,6 @@
 
-# froggeR 🐸
+# froggeR 🐸 <img src="man/figures/logo.png" align="right" height="130" style="padding-bottom: 20px" alt="" />
+
 
 > Enhance your Quarto workflows with reusable templates and project structures and get a *jump* on your R data science projects.
 
