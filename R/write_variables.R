@@ -40,6 +40,7 @@ write_variables <- function(path = here::here()) {
   if (!abort) {
 
     readline(ui_info('\n You may leave any line blank. ENTER to continue.'))
+    message('\n------------------------------------------------------')
 
     author <- readline('Enter author name: ')
     url <- readline('Enter URL to GitHub: ')
@@ -62,6 +63,7 @@ write_variables <- function(path = here::here()) {
     ')
 
     write(content, file = file)
+    message('------------------------------------------------------')
     ui_done('\n_variables.yml has been created.\n\n')
 
   } else {
