@@ -63,7 +63,7 @@ write_variables <- function(path = here::here()) {
     ')
 
     write(content, file = file)
-    message('\n------------------------------------------------------')
+    message('------------------------------------------------------')
     ui_done('\n_variables.yml has been created.\n\n')
 
   } else {
