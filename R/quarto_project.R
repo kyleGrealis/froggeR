@@ -42,21 +42,24 @@ quarto_project <- function(name, default = TRUE) {
     ui_oops('Unexpected $h!t happens!')
   }
 
+  # Initialize project with default files:
+  # Create Quarto doc
   froggeR::write_quarto(
     filename = name,
     path = glue::glue('{here::here()}/{name}'),
     default = default
   )
-  # message('\n')
-  # ui_info('Time to build the _variables.yml file:')
-  # froggeR::write_variables(
-  #   path = glue::glue('{here::here()}/{name}')
-  # )
+  # Create .gitignore
   froggeR::write_ignore(
     path = glue::glue('{here::here()}/{name}')
   )
+  # Create README
   froggeR::write_readme(
     path = glue::glue('{here::here()}/{name}')
   )
-  
+  # Create .Rproj file
+  froggeR::write_rproj(
+    path = glue::glue('{here::here()}/{name}'),
+    name = name
+  )
 }
