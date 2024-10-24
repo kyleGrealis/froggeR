@@ -42,6 +42,8 @@ quarto_project <- function(name, default = TRUE) {
     ui_oops('Unexpected $h!t happens!')
   }
 
+  ui_done(paste(name, 'Quarto project directory has been created.'))
+
   # Initialize project with default files:
   # Create Quarto doc
   froggeR::write_quarto(
@@ -63,3 +65,4 @@ quarto_project <- function(name, default = TRUE) {
     name = name
   )
 }
+NULL
