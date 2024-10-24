@@ -87,6 +87,12 @@ Features enhanced data security by default:
 
 ### 📚 Project Documentation
 
+Create a RStudio project:
+
+```r
+froggeR::write_rproj()
+```
+
 Generate structured README files:
 
 ```r
