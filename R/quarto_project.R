@@ -42,6 +42,7 @@ quarto_project <- function(name, default = TRUE) {
     ui_oops('Unexpected $h!t happens!')
   }
 
+  message('\n')
   ui_done(paste(name, 'Quarto project directory has been created.'))
 
   # Initialize project with default files:
