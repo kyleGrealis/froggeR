@@ -44,6 +44,7 @@ This creates a new Quarto project with:
 - A comprehensive `.gitignore`
 - A structured `README.md`
 - A reusable `_variables.yml`
+- A template `custom.scss` style sheet
 - A `.Rproj` file
 
 ### 🔄 Reusable YAML Headers
@@ -59,7 +60,7 @@ This interactive function helps you create a `_variables.yml` file containing:
 - Contact details
 - Affiliations
 - Project keywords
-- TOC preferences
+- Table of Content preferences
 - And more!
 
 ### 📝 Templated Quarto Documents
@@ -85,6 +86,14 @@ Features enhanced data security by default:
 - Ignores R data files (`.RData`, `.rda`, `.rds`)
 - Excludes common data formats (CSV, Excel, text files)
 - Protects sensitive information
+
+### 🌟 Custom Styling
+
+No more worrying about a SCSS template for that custom look and use:
+
+```r
+froggeR::write_scss()
+```
 
 ### 📚 Project Documentation
 
@@ -116,6 +125,7 @@ Includes sections for:
 | `write_quarto()` | Creates templated Quarto documents | Standardized formatting |
 | `write_ignore()` | Sets up enhanced `.gitignore` | Better data security |
 | `write_readme()` | Creates structured README template | Improved project documentation |
+| `write_scss()` | Creates structured SCSS template | Consistent eye-catching reports |
 | `write_rproj()` | Sets up a RStudio project | Improved project workflow |
 
 ## Why froggeR?
