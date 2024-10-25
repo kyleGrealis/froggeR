@@ -24,13 +24,17 @@ other \code{froggeR} goodies. First, new Quarto project is created in the provid
 }
 \details{
 Since this will most likely be a new project directory, \code{froggeR} searches for 
-the existence of three other files:
+the existence of these other files and creates them by default:
 
    - \code{_variables.yml}
 
    - \code{.gitignore}
 
    - \code{README.md}
+
+   - \code{custom.scss}
+
+   - \code{.Rproj}
 
 If these files do not exist, \code{froggeR} will write them to the new project 
 directory.

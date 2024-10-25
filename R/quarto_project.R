@@ -6,13 +6,17 @@
 #' \code{quarto::quarto_create_project()} is replaced with \code{froggeR::write_quarto()}.
 #' 
 #' Since this will most likely be a new project directory, \code{froggeR} searches for 
-#' the existence of three other files:
+#' the existence of these other files and creates them by default:
 #' 
 #'    - \code{_variables.yml}
 #' 
 #'    - \code{.gitignore}
 #' 
 #'    - \code{README.md}
+#' 
+#'    - \code{custom.scss}
+#' 
+#'    - \code{.Rproj}
 #' 
 #' If these files do not exist, \code{froggeR} will write them to the new project 
 #' directory.
@@ -59,6 +63,11 @@ quarto_project <- function(name, default = TRUE) {
   # Create README
   froggeR::write_readme(
     path = glue::glue('{here::here()}/{name}')
+  )
+  # Create .scss file
+  froggeR::write_scss(
+    path = glue::glue('{here::here()}/{name}'),
+    name = 'custom'
   )
   # Create .Rproj file
   froggeR::write_rproj(
