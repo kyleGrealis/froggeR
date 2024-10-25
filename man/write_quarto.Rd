@@ -26,6 +26,9 @@ custom header that will be applied to all \code{froggeR} default-style Quarto
 documents.
 }
 \details{
+When \code{default = TRUE}, the project \code{path} is checked for a SCSS sheet.
+If none is found, a prompt offers to create one.
+
 NOTE: Please visit \url{https://quarto.org/docs/output-formats/html-themes.html} to 
 explore more Quarto theming options.
 }

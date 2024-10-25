@@ -95,6 +95,52 @@ No more worrying about a SCSS template for that custom look and use:
 froggeR::write_scss()
 ```
 
+Get a formatted styles sheet with examples for:
+- SCSS defaults
+- SCSS mixins
+- SCSS rules
+
+Uncomment any lines to apply them to your document the next time you render it...it's just that easy!
+
+```
+/*-- scss:defaults --*/
+// Colors
+// $primary: #2c365e;  
+// $body-bg: #fefefe;
+// $link-color: $primary;
+// $code-block-bg: #f8f9fa;
+
+/*-- scss:mixins --*/
+// @mixin card-shadow {
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   transition: box-shadow 0.3s ease;
+//   &:hover {
+//     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+//   }
+// }
+
+
+/*-- scss:rules --*/
+// Custom theme rules
+// .title-block {
+//   margin-bottom: 2rem;
+//   border-bottom: 3px solid $primary;
+// }
+
+// .callout {
+//   @include card-shadow;
+//   padding: 1.25rem;
+//   margin: 1rem 0;
+//   border-left: 4px solid $primary;
+// }
+
+// code {
+//   color: darken($primary, 10%);
+//   padding: 0.2em 0.4em;
+//   border-radius: 3px;
+// }
+```
+
 ### 📚 Project Documentation
 
 Create a RStudio project:
