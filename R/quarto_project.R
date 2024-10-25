@@ -25,7 +25,8 @@
 #' @param default Set to TRUE. This will use the custom YAML within the initial 
 #' \code{.qmd} file. See \code{?froggeR::write_quarto()} for more details on
 #' the default setting.
-#' @return A Quarto project with \code{.qmd}, \code{.gitignore}, & \code{README.md} files.
+#' @return A Quarto project with \code{.qmd}, \code{.gitignore}, \code{README.md}, 
+#' \code{custom.scss} & \code{.Rproj} files.
 #' 
 #' @export
 #' @examples

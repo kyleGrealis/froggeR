@@ -14,7 +14,8 @@ quarto_project(name, default = TRUE)
 the default setting.}
 }
 \value{
-A Quarto project with \code{.qmd}, \code{.gitignore}, & \code{README.md} files.
+A Quarto project with \code{.qmd}, \code{.gitignore}, \code{README.md}, 
+\code{custom.scss} & \code{.Rproj} files.
 }
 \description{
 This function is a wrapper for \code{quarto::quarto_create_project()} and adds some
