@@ -24,6 +24,13 @@
 
 write_ignore <- function(path = here::here()) {
 
+  # Check if directory exists
+  if (!dir.exists(path)) {
+    # Exit if directory does not exist
+    stop("Directory does not exist") 
+    return(NULL)
+  } 
+
   the_ignore_file <- paste0(path, '/.gitignore')
   abort <- FALSE
 

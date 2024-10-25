@@ -23,6 +23,13 @@
 
 write_readme <- function(path = here::here()) {
 
+  # Check if directory exists
+  if (!dir.exists(path)) {
+    # Exit if directory does not exist
+    stop("Directory does not exist") 
+    return(NULL)
+  } 
+
   the_readme_file <- paste0(path, '/README.md')
   abort <- FALSE
 

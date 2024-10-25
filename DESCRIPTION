@@ -1,18 +1,38 @@
 Package: froggeR
 Type: Package
-Title: Enhances And Standardizes Team Workflows
+Title: Enhance Quarto Project Workflows and Standards
 Version: 0.1.0
-Author: Kyle Grealis
+Authors@R: 
+    person(
+        "Kyle", 
+        "Grealis", 
+        email = "<kyleGrealis@icloud.com>", 
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0002-9223-8854")
+    )
 Maintainer: Kyle Grealis <kyleGrealis@icloud.com>
-Description: The package is designed to insert Quarto, README, and .gitignore templates into a project environment. It also contains helper functions and wrappers for existing packages.
+Description: Streamlines Quarto workflows by providing tools for consistent project 
+    setup and documentation. Enables reusability through custom YAML variables, 
+    automated project structure creation, and standardized templates. Features 
+    include enhanced project initialization, templated Quarto documents, 
+    comprehensive .gitignore settings, custom SCSS styling, and structured 
+    documentation generation. Designed to improve efficiency and collaboration in R 
+    data science projects by reducing repetitive setup tasks while maintaining 
+    consistent formatting across multiple documents.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
-Depends: R (>= 3.5.0)
+Depends: 
+    R (>= 3.5.0)
 Imports:
-    glue,
-    here,
-    quarto,
-    stringr,
-    usethis
+    glue (>= 1.6.0),
+    here (>= 1.0.0),
+    quarto (>= 1.3.0),
+    stringr (>= 1.5.0),
+    usethis (>= 2.2.0)
+Suggests: 
+    mockery,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3

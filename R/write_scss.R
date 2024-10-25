@@ -23,6 +23,13 @@
 
 write_scss <- function(path = here::here(), name = 'custom') {
 
+  # Check if directory exists
+  if (!dir.exists(path)) {
+    # Exit if directory does not exist
+    stop("Directory does not exist") 
+    return(NULL)
+  } 
+
   the_scss_file <- paste0(path, '/', name, '.scss')
   abort <- FALSE
  
