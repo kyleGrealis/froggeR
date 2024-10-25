@@ -4,7 +4,12 @@
 \alias{write_quarto}
 \title{Start a Quarto file with a formatted template header}
 \usage{
-write_quarto(filename = "new", path = here::here(), default = TRUE)
+write_quarto(
+  filename = "new",
+  path = here::here(),
+  default = TRUE,
+  proj = FALSE
+)
 }
 \arguments{
 \item{filename}{The name of the file. Do not include '.qmd'}
@@ -14,6 +19,8 @@ from \code{here::here()}.}
 
 \item{default}{The default is set to TRUE and will create a Quarto template file
 that pulls infomation from the folder/_variables.yml file.}
+
+\item{proj}{Set to \code{TRUE} for Quarto projects (for internal use).}
 }
 \value{
 A Quarto document with formatted YAML and two blank starter sections.

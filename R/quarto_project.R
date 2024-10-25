@@ -55,7 +55,8 @@ quarto_project <- function(name, default = TRUE) {
   froggeR::write_quarto(
     filename = name,
     path = glue::glue('{here::here()}/{name}'),
-    default = default
+    default = default,
+    proj = TRUE
   )
   # Create .gitignore
   froggeR::write_ignore(

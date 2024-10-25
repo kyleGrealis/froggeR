@@ -17,6 +17,7 @@
 #' from \code{here::here()}.
 #' @param default The default is set to TRUE and will create a Quarto template file
 #' that pulls infomation from the folder/_variables.yml file.
+#' @param proj Set to \code{TRUE} for Quarto projects (for internal use).
 #' @return A Quarto document with formatted YAML and two blank starter sections.
 #' 
 #' @export
@@ -26,7 +27,9 @@
 #' write_quarto(filename = 'new_doc', path = '../path_to_location')
 #' }
 
-write_quarto <- function(filename = 'new', path = here::here(), default = TRUE) {
+write_quarto <- function(
+  filename = 'new', path = here::here(), default = TRUE, proj = FALSE
+) {
 
   # Check if directory exists
   if (!dir.exists(path)) {
@@ -85,8 +88,8 @@ write_quarto <- function(filename = 'new', path = here::here(), default = TRUE) 
       full.names = TRUE, 
       recursive = FALSE
     )
-    
-    if (default & length(listed_files) == 0) {
+    # If not a Quarto project and no SCSS found:
+    if (!proj & length(listed_files) == 0) {
       ui_info('OOPS... I cannot find a styles sheet (SCSS)!')
       if (ui_yeah('Would you like to create one now?')) {
         froggeR::write_scss(path = path, name = 'custom')
