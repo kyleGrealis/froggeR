@@ -28,6 +28,13 @@
 
 write_quarto <- function(filename = 'new', path = here::here(), default = TRUE) {
 
+  # Check if directory exists
+  if (!dir.exists(path)) {
+    # Exit if directory does not exist
+    stop("Directory does not exist") 
+    return(NULL)
+  } 
+
   the_quarto_file <- paste0(path, '/', filename, '.qmd')
   abort <- FALSE
 

@@ -27,6 +27,13 @@
 
 write_variables <- function(path = here::here()) {
 
+  # Check if directory exists
+  if (!dir.exists(path)) {
+    # Exit if directory does not exist
+    stop("Directory does not exist") 
+    return(NULL)
+  } 
+
   # create the file in the Quarto project
   file <- paste0(path, '/_variables.yml')
 

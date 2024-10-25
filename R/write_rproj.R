@@ -16,6 +16,13 @@
 
 write_rproj <- function(path = here::here(), name) {
 
+  # Check if directory exists
+  if (!dir.exists(path)) {
+    # Exit if directory does not exist
+    stop("Directory does not exist") 
+    return(NULL)
+  } 
+
   the_rproj_file <- paste0(path, '/', name, '.Rproj')
   abort <- FALSE
 
