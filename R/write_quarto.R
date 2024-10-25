@@ -6,6 +6,9 @@
 #' custom header that will be applied to all \code{froggeR} default-style Quarto 
 #' documents. 
 #' 
+#' When \code{default = TRUE}, the project \code{path} is checked for a SCSS sheet.
+#' If none is found, a prompt offers to create one.
+#' 
 #' NOTE: Please visit \url{https://quarto.org/docs/output-formats/html-themes.html} to 
 #' explore more Quarto theming options.
 #' 
@@ -32,14 +35,14 @@ write_quarto <- function(filename = 'new', path = here::here(), default = TRUE) 
   gist_path_default <- paste0(
     'https://gist.githubusercontent.com/kyleGrealis/60487135cff714dcb8312b8312df9fc7/',
     # this changes as the default Quarto is updated
-    'raw/262b5b36917ceff1318f9338f17ffb5209de2185/frogger_quarto.qmd'
+    'raw/4a2769e45452001434367141c134e99f7f40a2b7/frogger_quarto.qmd'
   )
 
   # path to Quarto header template the user must complete
   gist_path_other <- paste0(
     'https://gist.githubusercontent.com/kyleGrealis/693e5d0df41576247900c3bef788d475/',
     # this changes as the personalized Quarto is updated
-    'raw/63b42f341882f24f2c319c1feb74a66f99a30438/quarto_header.qmd'
+    'raw/bea0cc31e505181e8c337264540f3f8a0eb038dd/quarto_header.qmd'
   )
 
   # Warn user if Quarto document already found in the project
@@ -67,6 +70,24 @@ write_quarto <- function(filename = 'new', path = here::here(), default = TRUE) 
 
     download.file(gist_path_default, the_quarto_file, quiet = TRUE)
     ui_done('\nA new Quarto file has been created.\n\n')
+
+    # Check if a .scss file is found in project
+    listed_files <- list.files(
+      path = path, 
+      pattern = '\\.scss$', 
+      full.names = TRUE, 
+      recursive = FALSE
+    )
+    
+    if (default & length(listed_files) == 0) {
+      ui_info('OOPS... I cannot find a styles sheet (SCSS)!')
+      if (ui_yeah('Would you like to create one now?')) {
+        froggeR::write_scss(path = path, name = 'custom')
+      } else {
+        ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate "theme" line in the Quarto YAML!')
+      }
+    }
+
   } else {
     ui_oops('\nQuarto file NOT created.\n\n')
   }
