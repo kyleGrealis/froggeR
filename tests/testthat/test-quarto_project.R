@@ -17,9 +17,9 @@ test_that("quarto_project creates directory structure", {
   
   # Mock (fake) the download.file function for all file writers
   # This prevents actual downloads during testing
-  stub(write_ignore, "download.file", function(...) TRUE)
-  stub(write_readme, "download.file", function(...) TRUE)
-  stub(write_quarto, "download.file", function(...) TRUE)
+  mockery::stub(write_ignore, "download.file", function(...) TRUE)
+  mockery::stub(write_readme, "download.file", function(...) TRUE)
+  mockery::stub(write_quarto, "download.file", function(...) TRUE)
   
   # Simple test: just check if directory exists
   expect_true(dir.exists(proj_path))
