@@ -1,0 +1,136 @@
+---
+title: "Hopping into Quarto with froggeR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Hopping into Quarto with froggeR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
+library(froggeR)
+knitr::include_graphics("../man/figures/logo.png")
+```
+
+## Welcome to the Lily Pad! 🐸
+
+Hey there! I'm Teek, and I'll be your amphibian guide to creating awesome Quarto projects. Let's hop right in!
+
+## Why Use froggeR?
+
+Ever felt like project setup was taking longer than the actual analysis? Been there! That's why we created `froggeR` - to help you leap over those pesky setup hurdles and get straight to the good stuff.
+
+## Quick Start
+
+Let's create a new Quarto project with all the ribbit-ing features you need:
+
+```r
+library(froggeR)
+
+# Create a new project with default settings
+quarto_project("my_analysis")
+```
+
+Boom! 🎉 Just like that, you've got:
+- A structured Quarto document
+- Custom SCSS styling
+- Git ignore settings
+- README template
+- And more!
+
+## What's in Your New Pad?
+
+When you create a project with `froggeR`, here's what you get (no flies included):
+
+1. **Quarto Document** (`my_analysis.qmd`):
+   - Pre-configured YAML header
+   - Clean, professional styling
+   - Ready for your brilliant analysis!
+
+2. **Style Sheet** (`custom.scss`):
+   - Make your documents look crisp
+   - Easy to customize
+   - No CSS expertise required
+
+3. **Project Config** (`.Rproj`):
+   - Consistent project settings
+   - Works smoothly with RStudio
+   - No more "but it works on my machine"!
+
+4. **Git Ready** (`.gitignore`):
+   - Smart defaults for R projects
+   - Keeps your repository clean
+   - No accidental file commits
+
+## Customizing Your Pad
+
+Want to make it your own? No problem! Here's how to customize different aspects:
+
+### Custom YAML Variables
+
+```r
+# Create or modify _variables.yml
+write_variables()  # Interactive prompts for your info
+```
+
+### Custom Styling
+
+```r
+# Add your own SCSS styles
+write_scss(name = "my_styles")
+```
+
+## Advanced Hopping
+
+Ready to take your Quarto game to the next level? Here are some pro tips:
+
+1. **Multiple Documents**:
+```r
+# Create additional Quarto docs in your project
+write_quarto(
+  filename = "analysis_part2",
+  path = "my_analysis"
+)
+```
+
+2. **Template Reuse**:
+```r
+# Use your custom setup across projects
+quarto_project(
+  "new_project",
+  default = TRUE  # Uses your _variables.yml
+)
+```
+
+## Troubleshooting
+
+Having trouble? Here are some common hiccups and how to fix them:
+
+- **Q: My styles aren't applying!**  
+  A: Make sure your SCSS file is referenced in your YAML header
+
+- **Q: Where's my _variables.yml?**  
+  A: Run `write_variables()` in your project directory
+
+## Wrap Up
+
+That's it! You're ready to create beautiful, consistent Quarto projects faster than a frog can catch a fly. 
+
+Remember:
+- Keep your projects organized
+- Style consistently
+- Have fun with your analysis!
+
+Need more help? Hop over to our [GitHub repository](https://github.com/kyleGrealis/froggeR) or check out the function documentation.
+
+Happy analyzing! 🐸
+
+---
+*"Because every data scientist deserves a friendly frog guide!"*
