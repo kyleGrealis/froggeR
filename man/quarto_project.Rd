@@ -4,12 +4,17 @@
 \alias{quarto_project}
 \title{Create a custom Quarto project}
 \usage{
-quarto_project(name, default = TRUE)
+quarto_project(name, base_dir = getwd(), default = TRUE)
 }
 \arguments{
 \item{name}{The name of the Quarto project directory and initial \code{.qmd} file.}
 
-\item{default}{Set to TRUE. This will use the custom YAML within the initial 
+\item{base_dir}{Base directory where the project should be created. Defaults to 
+current working directory.}
+
+\item{default}{Set to TRUE. This will use the custom YAML within the initial. Change 
+to \code{FALSE} if you would like the initial Quarto document to have a standard 
+YAML header.
 \code{.qmd} file. See \code{?froggeR::write_quarto()} for more details on
 the default setting.}
 }
@@ -44,9 +49,9 @@ directory.
 \dontrun{
 # Create a new Quarto project that uses a custom formatted YAML header and
 # all other listed files:
-quarto_project('new_project', default = TRUE)
+quarto_project('new_project', base_dir = getwd(), default = TRUE)
 
 # Create a new Quarto project with generic YAML and all other listed files:
-quarto_project('new_project_2', default = FALSE)
+quarto_project('new_project_2', base_dir = getwd(), default = FALSE)
 }
 }

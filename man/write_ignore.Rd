@@ -4,11 +4,11 @@
 \alias{write_ignore}
 \title{Create an aggressive project .gitignore file}
 \usage{
-write_ignore(path = here::here())
+write_ignore(path = getwd())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to returned value
-from \code{here::here()}.}
+\item{path}{The path to the main project level. Defaults to the 
+current working directory.}
 }
 \value{
 A .gitignore file. This has substanital upgrades from the basic .gitignore in
@@ -28,6 +28,6 @@ at the project level.
 }
 \examples{
 \dontrun{
-write_ignore(path = '../path_to_project')
+write_ignore(path = "path/to/project")
 }
 }

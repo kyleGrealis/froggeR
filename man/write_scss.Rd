@@ -4,13 +4,13 @@
 \alias{write_scss}
 \title{Create a Quarto SCSS file}
 \usage{
-write_scss(path = here::here(), name = "custom")
+write_scss(name = "custom", path = getwd())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to returned value
-from \code{here::here()}.}
-
 \item{name}{The name of the scss file without extension.}
+
+\item{path}{The path to the main project level. Defaults to the current
+working directory}
 }
 \value{
 A \code{.scss} file to customize Quarto styling.
@@ -29,6 +29,6 @@ you with over 1500 lines of SCSS variables!
 }
 \examples{
 \dontrun{
-write_scss(path = here::here(), name = "custom")
+write_scss(name = "custom", path = "path/to/project")
 }
 }

@@ -4,18 +4,13 @@
 \alias{write_quarto}
 \title{Start a Quarto file with a formatted template header}
 \usage{
-write_quarto(
-  filename = "new",
-  path = here::here(),
-  default = TRUE,
-  proj = FALSE
-)
+write_quarto(filename = "new", path = getwd(), default = TRUE, proj = FALSE)
 }
 \arguments{
 \item{filename}{The name of the file. Do not include '.qmd'}
 
-\item{path}{The path to the main project level. Defaults to returned value
-from \code{here::here()}.}
+\item{path}{The path to the main project level. Defaults to the 
+current working directory.}
 
 \item{default}{The default is set to TRUE and will create a Quarto template file
 that pulls infomation from the folder/_variables.yml file.}
@@ -42,6 +37,6 @@ explore more Quarto theming options.
 \examples{
 \dontrun{
 # To create new_doc.qmd:
-write_quarto(filename = 'new_doc', path = '../path_to_location')
+write_quarto(filename = "new_doc", path = "path/to/project")
 }
 }

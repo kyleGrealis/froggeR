@@ -4,11 +4,11 @@
 \alias{write_readme}
 \title{Create a project README file}
 \usage{
-write_readme(path = here::here())
+write_readme(path = getwd())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to returned value
-from \code{here::here()}.}
+\item{path}{The path to the main project level. Defaults to the current
+working directory.}
 }
 \value{
 A README.md template. Contains sections for project description (study
@@ -27,6 +27,6 @@ project level.
 }
 \examples{
 \dontrun{
-write_readme(path = '../path_to_project')
+write_readme(path = "path/to/project")
 }
 }

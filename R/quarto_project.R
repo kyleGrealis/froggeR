@@ -22,7 +22,11 @@
 #' directory.
 #' 
 #' @param name The name of the Quarto project directory and initial \code{.qmd} file.
-#' @param default Set to TRUE. This will use the custom YAML within the initial 
+#' @param base_dir Base directory where the project should be created. Defaults to 
+#' current working directory.
+#' @param default Set to TRUE. This will use the custom YAML within the initial. Change 
+#' to \code{FALSE} if you would like the initial Quarto document to have a standard 
+#' YAML header.
 #' \code{.qmd} file. See \code{?froggeR::write_quarto()} for more details on
 #' the default setting.
 #' @return A Quarto project with \code{.qmd}, \code{.gitignore}, \code{README.md}, 
@@ -33,18 +37,35 @@
 #' \dontrun{
 #' # Create a new Quarto project that uses a custom formatted YAML header and
 #' # all other listed files:
-#' quarto_project('new_project', default = TRUE)
+#' quarto_project('new_project', base_dir = getwd(), default = TRUE)
 #' 
 #' # Create a new Quarto project with generic YAML and all other listed files:
-#' quarto_project('new_project_2', default = FALSE)
+#' quarto_project('new_project_2', base_dir = getwd(), default = FALSE)
 #' }
 
-quarto_project <- function(name, default = TRUE) {
+quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
+
+  # Normalize the base directory path
+  base_dir <- normalizePath(base_dir, mustWork = TRUE)
+  
+  # Create the full project path
+  project_dir <- file.path(base_dir, name)
+  
+  # Create the Quarto project
   quarto::quarto_create_project(name, quiet = TRUE)
 
-  # remove default .qmd file created from Quarto project
-  if (!file.remove(paste0(name, '/', name, '.qmd'))) {
-    ui_oops('Unexpected $h!t happens!')
+  # Construct the path to the default .qmd & .gitignore files
+  default_qmd <- file.path(project_dir, paste0(name, '.qmd'))
+  default_ign <- file.path(project_dir, '.gitignore')
+
+  # Remove the default .qmd & .gitignore files from quarto::create_quarto_project()
+  if (!file.remove(default_qmd)) {
+    ui_oops('Could not remove default Quarto document!')
+    return(invisible(FALSE))
+  }
+  if (!file.remove(default_ign)) {
+    ui_oops('Could not remove default Quarto .gitignore!')
+    return(invisible(FALSE))
   }
 
   message('\n')
@@ -54,27 +75,30 @@ quarto_project <- function(name, default = TRUE) {
   # Create Quarto doc
   froggeR::write_quarto(
     filename = name,
-    path = glue::glue('{here::here()}/{name}'),
+    path = project_dir,
     default = default,
     proj = TRUE
   )
   # Create .gitignore
   froggeR::write_ignore(
-    path = glue::glue('{here::here()}/{name}')
+    path = project_dir
   )
   # Create README
   froggeR::write_readme(
-    path = glue::glue('{here::here()}/{name}')
+    path = project_dir
   )
   # Create .scss file
   froggeR::write_scss(
-    path = glue::glue('{here::here()}/{name}'),
+    path = project_dir,
     name = 'custom'
   )
   # Create .Rproj file
   froggeR::write_rproj(
-    path = glue::glue('{here::here()}/{name}'),
+    path = project_dir,
     name = name
   )
+
+  # Return the project directory path invisibly
+  invisible(project_dir)
 }
 NULL

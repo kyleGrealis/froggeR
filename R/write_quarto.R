@@ -13,8 +13,8 @@
 #' explore more Quarto theming options.
 #' 
 #' @param filename The name of the file. Do not include '.qmd'
-#' @param path The path to the main project level. Defaults to returned value
-#' from \code{here::here()}.
+#' @param path The path to the main project level. Defaults to the 
+#' current working directory.
 #' @param default The default is set to TRUE and will create a Quarto template file
 #' that pulls infomation from the folder/_variables.yml file.
 #' @param proj Set to \code{TRUE} for Quarto projects (for internal use).
@@ -24,11 +24,11 @@
 #' @examples
 #' \dontrun{
 #' # To create new_doc.qmd:
-#' write_quarto(filename = 'new_doc', path = '../path_to_location')
+#' write_quarto(filename = "new_doc", path = "path/to/project")
 #' }
 
 write_quarto <- function(
-  filename = 'new', path = here::here(), default = TRUE, proj = FALSE
+  filename = 'new', path = getwd(), default = TRUE, proj = FALSE
 ) {
 
   # Check if directory exists
@@ -38,7 +38,11 @@ write_quarto <- function(
     return(NULL)
   } 
 
-  the_quarto_file <- paste0(path, '/', filename, '.qmd')
+  # Normalize the path for consistency
+  path <- normalizePath(path, mustWork = TRUE)
+  
+  # Use file.path instead of paste0 for better path handling
+  the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
   abort <- FALSE
 
   # path to default Quarto header template using _variables.yml
@@ -65,7 +69,7 @@ write_quarto <- function(
     if (default) {
       
       # check if _variables.yml exists and prompt user to create if FALSE
-      if (!file.exists(paste0(path, '/_variables.yml'))) {
+      if (!file.exists(file.path(path, '_variables.yml'))) {
         message('\nLet\'s create a custom _variables.yml file...')
         message('\n')
         # use the same path as where the Quarto doc will be created
@@ -103,3 +107,4 @@ write_quarto <- function(
   }
 
 }
+NULL
