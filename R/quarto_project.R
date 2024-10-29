@@ -54,12 +54,17 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   # Create the Quarto project
   quarto::quarto_create_project(name, quiet = TRUE)
 
-  # Construct the path to the default .qmd file
+  # Construct the path to the default .qmd & .gitignore files
   default_qmd <- file.path(project_dir, paste0(name, '.qmd'))
+  default_ign <- file.path(project_dir, '.gitignore')
 
-  # Remove the default .qmd file from quarto::create_quarto_project()
+  # Remove the default .qmd & .gitignore files from quarto::create_quarto_project()
   if (!file.remove(default_qmd)) {
     ui_oops('Could not remove default Quarto document!')
+    return(invisible(FALSE))
+  }
+  if (!file.remove(default_ign)) {
+    ui_oops('Could not remove default Quarto .gitignore!')
     return(invisible(FALSE))
   }
 
