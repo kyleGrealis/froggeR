@@ -2,7 +2,7 @@
 # froggeR <img src="man/figures/logo.png" align="right" height="130"  alt="" />
 
 
-> Enhance your Quarto workflows with reusable templates and project structures and get a *jump* on your R data science projects.
+> Leap ahead in your data science journey with froggeR! Streamline your Quarto workflows with reusable templates, catch those pesky project setup bugs, and hop effortlessly through your R analyses - no lily pad hopping required! Create structured projects that'll make you want to croak with joy - your launch pad to amazing data science adventures! 🐸
 
 
 [![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/kyleGrealis/froggeR)
