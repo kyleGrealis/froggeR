@@ -2,20 +2,32 @@
 # froggeR <img src="man/figures/logo.png" align="right" height="130"  alt="" />
 
 
-> Leap ahead in your data science journey with froggeR! Streamline your Quarto workflows with reusable templates, catch those pesky project setup bugs, and hop effortlessly through your R analyses - no lily pad hopping required! Create structured projects that'll make you want to croak with joy - your launch pad to amazing data science adventures! 🐸
-
 
 [![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/kyleGrealis/froggeR)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 
-## Overview
+## Why froggeR?
 
-`froggeR` is an R package designed to streamline your Quarto workflows by enabling seamless reuse of YAML headers, consistent project structures, and automated setup of essential project files. It's particularly valuable for data scientists and R users who:
+> Leap ahead in your data science journey with froggeR! Streamline your Quarto workflows with reusable templates, catch those pesky project setup bugs, and hop effortlessly through your R analyses - no lily pad hopping required! Create structured projects that'll make you want to croak with joy - your launch pad to amazing data science adventures! 🐸
 
-- Work on multiple Quarto projects
-- Value consistency across their documentation
-- Collaborate with others
-- Want to reduce repetitive setup tasks
+Because project setup should be simple and fun! 🐸
+
+- **Jump Right In**: Spend more time on analysis, less time on setup
+- **Consistent Lily Pads**: Maintain uniform document styling and structure across projects
+- **No More Setup Bugs**: Complex configs are un-froggin'-necessary!
+- **Safe Pond**: Enhanced data protection with comprehensive `.gitignore` settings
+- **Friendly for the Whole Pod**: Easier team onboarding with structured documentation
+- **Your Pad, Your Way**: Use our ribbiting defaults or customize to your needs
+
+Because every data scientist deserves a friendly frog guide!
+
+## Who's it for?
+
+`froggeR` is especially valuable for R users who:
+- Juggle multiple Quarto projects
+- Collaborate with team members
+- Want to focus on analysis, not setup
+- Need a quick way to start new projects
 
 ## Installation
 
@@ -173,14 +185,6 @@ Includes sections for:
 | `write_readme()` | Creates structured README template | Improved project documentation |
 | `write_scss()` | Creates structured SCSS template | Consistent eye-catching reports |
 | `write_rproj()` | Sets up a RStudio project | Improved project workflow |
-
-## Why froggeR?
-
-- **Consistency**: Maintain uniform document styling and structure across projects
-- **Efficiency**: Reduce time spent on repetitive setup tasks
-- **Security**: Enhanced data protection with comprehensive `.gitignore` settings
-- **Collaboration**: Easier onboarding with structured documentation
-- **Flexibility**: Use default templates or customize to your needs
 
 ## Contributing
 
