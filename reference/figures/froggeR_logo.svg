@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 500">
+  <!-- Outer white border hexagon (thicker) -->
+  <path d="M230 10 L450 125 L450 375 L230 490 L10 375 L10 125 Z" fill="white"/>
+
+  <!-- Inner green hexagon background -->
+  <path d="M230 50 L418 148 L418 360 L230 460 L40 360 L40 148 Z" fill="#9FD356"/>
+
+  <!-- Clipping path for the chest and other content inside the inner hex -->
+  <defs>
+    <clipPath id="hexClip">
+      <path d="M230 50 L418 148 L418 360 L230 460 L40 360 L40 148 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Chest area with shading - clipped by hexagon -->
+  <g clip-path="url(#hexClip)">
+    <!-- Body shading -->
+    <g transform="translate(85,115) scale(1.32)">
+      <!-- Wider chest area shading -->
+      <path d="M50 180 Q80 180 120 180 Q150 180 150 250 Q80 300 10 240 Q0 180 60 180" fill="#c0ec83"/>
+      
+      <!-- Dark green chest -->
+      <path d="M35 200 Q80 190 125 200 Q125 270 80 280 Q35 270 35 200" fill="#2E7D32"/>
+    </g>
+  </g>
+
+  <!-- Happy Frog Face -->
+  <g transform="translate(85,130) scale(1.32)">
+    <!-- Face shading -->
+    <path d="M80 60 Q160 60 160 120 Q160 160 80 180 Q0 160 0 120 Q0 60 80 60" fill="#c0ec83"/>
+    
+    <!-- Eye contours -->
+    <path d="M35 60 Q45 70 35 85 Q25 70 35 60" fill="#c0ec83"/>
+    <path d="M105 55 Q115 65 105 80 Q95 65 105 55" fill="#c0ec83"/>
+    
+    <!-- Eye shapes -->
+    <ellipse cx="45" cy="80" rx="35" ry="40" fill="#c0ec83"/>
+    <ellipse cx="115" cy="75" rx="35" ry="40" fill="#c0ec83"/>
+
+    <!-- Eyes -->
+    <ellipse cx="45" cy="80" rx="30" ry="35" fill="white"/>
+    <ellipse cx="115" cy="75" rx="30" ry="35" fill="white"/>
+    <ellipse cx="45" cy="80" rx="22" ry="26" fill="black"/>
+    <ellipse cx="115" cy="75" rx="22" ry="26" fill="black"/>
+    <circle cx="40" cy="70" r="8" fill="white"/>
+    <circle cx="110" cy="65" r="8" fill="white"/>
+
+    <!-- Smile -->
+    <path d="M35 125 C55 165 100 175 130 115" fill="black"/>
+
+    <!-- Pink cheeks -->
+    <circle cx="20" cy="130" r="12" fill="#FFB6C1" opacity="0.5"/>
+    <circle cx="142" cy="127" r="12" fill="#FFB6C1" opacity="0.5"/>
+  </g>
+
+  <!-- Package name (froggeR) -->
+  <text x="230" y="160" font-family="Arial" font-size="52" font-weight="bold" fill="white" text-anchor="middle">froggeR</text>
+
+   <!-- Extended arm -->
+  <path d="M265 375 L310 350 L340 310" stroke="#c0ec83" stroke-width="18" fill="none"/>
+  <path d="M270 385 L320 345 L340 310" stroke="#c0ec83" stroke-width="18" fill="none"/>
+
+
+  <!-- Waving hand -->
+  <g transform="translate(310,295) rotate(35)">
+    <!-- Palm -->
+    <ellipse cx="40" cy="30" rx="31" ry="22" fill="#c0ec83"/>
+
+    <!-- Left finger -->
+    <g transform="translate(15,0) rotate(-25)">
+      <ellipse cx="0" cy="12" rx="15" ry="22" fill="#c0ec83"/>  
+      <ellipse cx="0" cy="10" rx="10" ry="15" fill="#FFE082"/> 
+    </g>
+
+    <!-- Middle finger -->
+    <g transform="translate(40,-10)">
+      <ellipse cx="0" cy="12" rx="13" ry="20" fill="#c0ec83"/>
+      <ellipse cx="0" cy="12" rx="10" ry="15" fill="#FFE082"/>
+    </g>
+
+    <!-- Right finger -->
+    <g transform="translate(65,0) rotate(30)">
+      <ellipse cx="2" cy="10" rx="12" ry="19" fill="#c0ec83"/>
+      <ellipse cx="2" cy="10" rx="10" ry="15" fill="#FFE082"/>
+    </g>
+
+    <!-- Palm color -->
+    <ellipse cx="40" cy="30" rx="25" ry="18" fill="#FFE082"/>
+  </g>
+</svg>
