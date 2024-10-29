@@ -10,27 +10,30 @@
 #' \url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
 #' you with over 1500 lines of SCSS variables!
 #' 
-#' @param path The path to the main project level. Defaults to returned value
-#' from \code{here::here()}.
 #' @param name The name of the scss file without extension.
+#' @param path The path to the main project level. Defaults to the current
+#' working directory
 #' @return A \code{.scss} file to customize Quarto styling.
 #' 
 #' @export
 #' @examples
 #' \dontrun{
-#' write_scss(path = here::here(), name = "custom")
+#' write_scss(name = "custom", path = "path/to/project")
 #' }
 
-write_scss <- function(path = here::here(), name = 'custom') {
+write_scss <- function(name = 'custom', path = getwd()) {
 
   # Check if directory exists
   if (!dir.exists(path)) {
     # Exit if directory does not exist
-    stop("Directory does not exist") 
+    stop('Directory does not exist') 
     return(NULL)
-  } 
+  }
 
-  the_scss_file <- paste0(path, '/', name, '.scss')
+  # Normalize the path for consistency
+  path <- normalizePath(path, mustWork = TRUE)
+
+  the_scss_file <- file.path(path, paste0(name, '.scss'))
   abort <- FALSE
  
   content <- glue::glue(
@@ -101,7 +104,7 @@ write_scss <- function(path = here::here(), name = 'custom') {
       abort <- ui_nope('Do you want to overwrite this specific file?')
     } else {
       ui_info(paste0('Other .scss files exist but none named "', name, '.scss"'))
-      abort <- ui_nope('Proceed with creating new file?')
+      abort <- ui_nope('Proceed with creating another SCSS file?')
     }
   }
  
@@ -119,7 +122,7 @@ write_scss <- function(path = here::here(), name = 'custom') {
     ui_info(links)
     message('\n')
   } else {
-    ui_oops('\n.scss was not changed.\n\n')
+    ui_oops('\nThe .scss file was not changed.\n\n')
   }
  }
  NULL

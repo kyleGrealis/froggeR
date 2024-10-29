@@ -5,8 +5,8 @@
 #' is downloaded from \url{https://gist.githubusercontent.com/RaymondBalise} and written 
 #' at the project level.
 #' 
-#' @param path The path to the main project level. Defaults to returned value
-#' from \code{here::here()}.
+#' @param path The path to the main project level. Defaults to the 
+#' current working directory.
 #' @return A .gitignore file. This has substanital upgrades from the basic .gitignore in
 #' that it enhances data security. Some upgrades include ignoring R's data files (i.e.-- 
 #' .RData, .rda, & .rds) as well as CSV, Excel, and text files. 
@@ -19,10 +19,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' write_ignore(path = '../path_to_project')
+#' write_ignore(path = "path/to/project")
 #' }
 
-write_ignore <- function(path = here::here()) {
+write_ignore <- function(path = getwd()) {
 
   # Check if directory exists
   if (!dir.exists(path)) {
@@ -31,7 +31,10 @@ write_ignore <- function(path = here::here()) {
     return(NULL)
   } 
 
-  the_ignore_file <- paste0(path, '/.gitignore')
+  # Normalize the path for consistency
+  path <- normalizePath(path, mustWork = TRUE)
+
+  the_ignore_file <- file.path(path, '.gitignore')
   abort <- FALSE
 
   # path to .gitignore

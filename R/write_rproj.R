@@ -3,18 +3,18 @@
 #' This function creates the \code{.Rproj} file so that any directory can be easily 
 #' converted to a RStudio project.
 #' 
-#' @param path The path to the main project level. Defaults to returned value
-#' from \code{here::here()}.
 #' @param name The name of the project directory.
+#' @param path The path to the main project level. Defaults to the current
+#' working directory.
 #' @return A \code{.Rproj} file to initialize a RStudio project environment.
 #' 
 #' @export
 #' @examples
 #' \dontrun{
-#' write_rproj(path = here::here(), name = "my_quarto_project")
+#' write_rproj(name = "my_quarto_project", path = "path/to/project")
 #' }
 
-write_rproj <- function(path = here::here(), name) {
+write_rproj <- function(name, path = getwd()) {
 
   # Check if directory exists
   if (!dir.exists(path)) {
@@ -23,7 +23,10 @@ write_rproj <- function(path = here::here(), name) {
     return(NULL)
   } 
 
-  the_rproj_file <- paste0(path, '/', name, '.Rproj')
+  # Normalize the path for consistency
+  path <- normalizePath(path, mustWork = TRUE)
+
+  the_rproj_file <- file.path(path, paste0(name, '.Rproj'))
   abort <- FALSE
 
   content <- glue::glue(

@@ -4,13 +4,13 @@
 \alias{write_rproj}
 \title{Create a .Rproj file}
 \usage{
-write_rproj(path = here::here(), name)
+write_rproj(name, path = getwd())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to returned value
-from \code{here::here()}.}
-
 \item{name}{The name of the project directory.}
+
+\item{path}{The path to the main project level. Defaults to the current
+working directory.}
 }
 \value{
 A \code{.Rproj} file to initialize a RStudio project environment.
@@ -21,6 +21,6 @@ converted to a RStudio project.
 }
 \examples{
 \dontrun{
-write_rproj(path = here::here(), name = "my_quarto_project")
+write_rproj(name = "my_quarto_project", path = "path/to/project")
 }
 }

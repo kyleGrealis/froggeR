@@ -5,8 +5,8 @@
 #' is downloaded from \url{https://gist.github.com/kyleGrealis} and written at the 
 #' project level.
 #' 
-#' @param path The path to the main project level. Defaults to returned value
-#' from \code{here::here()}.
+#' @param path The path to the main project level. Defaults to the current
+#' working directory.
 #' @return A README.md template. Contains sections for project description (study
 #' name, principle investigator, & author), project setup steps for ease of portability,
 #' project file descriptions, project directory descriptions, and miscellaneous. 
@@ -18,10 +18,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' write_readme(path = '../path_to_project')
+#' write_readme(path = "path/to/project")
 #' }
 
-write_readme <- function(path = here::here()) {
+write_readme <- function(path = getwd()) {
 
   # Check if directory exists
   if (!dir.exists(path)) {
@@ -30,7 +30,10 @@ write_readme <- function(path = here::here()) {
     return(NULL)
   } 
 
-  the_readme_file <- paste0(path, '/README.md')
+  # Normalize the path for consistency
+  path <- normalizePath(path, mustWork = TRUE)
+
+  the_readme_file <- file.path(path, 'README.md')
   abort <- FALSE
 
   # path to README.md
