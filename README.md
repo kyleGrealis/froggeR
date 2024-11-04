@@ -13,17 +13,16 @@
 Because project setup should be simple and fun! 🐸
 
 - **Jump Right In**: Spend more time on analysis, less time on setup
-- **Consistent Lily Pads**: Maintain uniform document styling and structure across projects
+- **Consistency**: Maintain uniform document styling and structure across projects
 - **No More Setup Bugs**: Complex configs are un-froggin'-necessary!
-- **Safe Pond**: Enhanced data protection with comprehensive `.gitignore` settings
+- **Safety**: Enhanced data protection with comprehensive `.gitignore` settings
 - **Friendly for the Whole Pod**: Easier team onboarding with structured documentation
-- **Your Pad, Your Way**: Use our ribbiting defaults or customize to your needs
-
-Because every data scientist deserves a friendly frog guide!
+- **Your Project, Your Way**: Use our ribbiting defaults or customize to your needs
 
 ## Who's it for?
 
 `froggeR` is especially valuable for R users who:
+
 - Juggle multiple Quarto projects
 - Collaborate with team members
 - Want to focus on analysis, not setup
@@ -31,10 +30,12 @@ Because every data scientist deserves a friendly frog guide!
 
 ## Installation
 
-You can install the development version of `froggeR` from GitHub:
+You can install `froggeR` from GitHub:
 
 ```r
 # install.packages("remotes")
+remotes::install_github('kyleGrealis/froggeR')
+# or the development version
 remotes::install_github('kyleGrealis/froggeR@dev')
 ```
 
@@ -52,6 +53,7 @@ froggeR::quarto_project(
 ```
 
 This creates a new Quarto project with:
+
 - A custom YAML-enabled `.qmd` file
 - A comprehensive `.gitignore`
 - A structured `README.md`
@@ -68,6 +70,7 @@ froggeR::write_variables()
 ```
 
 This interactive function helps you create a `_variables.yml` file containing:
+
 - Author information
 - Contact details
 - Affiliations
@@ -95,6 +98,7 @@ froggeR::write_ignore()
 ```
 
 Features enhanced data security by default:
+
 - Ignores R data files (`.RData`, `.rda`, `.rds`)
 - Excludes common data formats (CSV, Excel, text files)
 - Protects sensitive information
@@ -108,6 +112,7 @@ froggeR::write_scss()
 ```
 
 Get a formatted styles sheet with examples for:
+
 - SCSS defaults
 - SCSS mixins
 - SCSS rules
@@ -168,6 +173,7 @@ froggeR::write_readme()
 ```
 
 Includes sections for:
+
 - Project description
 - Setup instructions
 - File descriptions
