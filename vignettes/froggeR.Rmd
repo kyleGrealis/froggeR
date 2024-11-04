@@ -130,6 +130,8 @@ Remember:
 
 Need more help? Hop over to our [GitHub repository](https://github.com/kyleGrealis/froggeR) or check out the function documentation.
 
+> Check out other goodies that are constantly being developed. For example, explore the new `froggeR::load_data()` function to recursively load various data file types to the local R environment!
+
 Happy analyzing! 🐸
 
 ---
