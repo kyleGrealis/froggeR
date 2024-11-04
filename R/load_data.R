@@ -1,17 +1,15 @@
 #' Load Multiple Data Files into Environment
 #'
-#' This function loads all matching data files from a directory directly into
-#' the R environment. It supports various file types and provides progress feedback
+#' This function loads all supported data files from a directory directly into
+#' the R environment. It automatically detects file types and provides progress feedback
 #' during loading.
 #'
 #' @param directory_path Character string specifying the path to the directory
 #'   containing the data files.
-#' @param file_type Character string specifying the type of files to load.
-#'   Options include "sas7bdat", "csv", "xlsx", "rds", "dta", "sav".
 #' @param recursive Logical indicating whether to search for files recursively
 #'   in subdirectories. Default is TRUE.
 #' @param pattern Optional character string containing a regular expression to
-#'   match specific files. If provided, overrides file_type pattern matching.
+#'   match specific files. If provided, overrides automatic file type detection.
 #' @param loader_function Optional custom function to use for loading files.
 #'   Must take a file path as input and return a data frame.
 #' @param envir Environment where the loaded datasets should be placed.
@@ -21,12 +19,12 @@
 #'   environment.
 #'
 #' @details
-#' The function automatically selects appropriate loader functions based on file
-#' type:
+#' The function automatically detects and loads the following file types:
+#' * .rda/.RData - load
+#' * .rds - readRDS
 #' * .sas7bdat - haven::read_sas
 #' * .csv - readr::read_csv
 #' * .xlsx - readxl::read_excel
-#' * .rds - readRDS
 #' * .dta - haven::read_stata
 #' * .sav - haven::read_spss
 #'
@@ -34,14 +32,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Load all SAS files from a directory
-#' load_data("path/to/sas/files")
-#'
-#' # Load CSV files instead
-#' load_data("path/to/csv/files", file_type = "csv")
+#' # Load all supported files from a directory
+#' load_data("path/to/data")
 #'
 #' # Load files matching a specific pattern
-#' load_data("path/to/files", pattern = "^prefix.*\\.sas7bdat$")
+#' load_data("path/to/files", pattern = "^prefix.*")
 #'
 #' # Use custom loader function
 #' my_loader <- function(file) {
@@ -51,7 +46,7 @@
 #' }
 #'
 #' @importFrom utils txtProgressBar setTxtProgressBar
-#' @importFrom tools file_path_sans_ext
+#' @importFrom tools file_path_sans_ext file_ext
 #' @importFrom haven read_sas read_stata read_spss
 #' @importFrom readr read_csv
 #' @importFrom readxl read_excel
@@ -59,7 +54,6 @@
 #' @export
 load_data <- function(
   directory_path,
-  file_type = "sas7bdat",
   recursive = TRUE,
   pattern = NULL,
   loader_function = NULL,
@@ -73,22 +67,9 @@ if (!dir.exists(directory_path)) {
   stop("Directory does not exist: ", directory_path)
 }
 
-# Set up the file pattern
+# Set up supported file types pattern if no pattern provided
 if (is.null(pattern)) {
-  pattern <- paste0("\\.", file_type, "$")
-}
-
-# Determine the appropriate loader function
-if (is.null(loader_function)) {
-  loader_function <- switch(file_type,
-    "sas7bdat" = haven::read_sas,
-    "csv" = readr::read_csv,
-    "xlsx" = function(x) readxl::read_excel(x, sheet = 1),
-    "rds" = readRDS,
-    "dta" = haven::read_stata,
-    "sav" = haven::read_spss,
-    stop("Unsupported file type: ", file_type)
-  )
+  pattern <- "\\.(rda|RData|rds|sas7bdat|csv|xlsx|dta|sav)$"
 }
 
 # List all matching files
@@ -100,7 +81,7 @@ files <- list.files(
 )
 
 if (length(files) == 0) {
-  stop("No files found matching pattern: ", pattern)
+  stop("No supported files found in directory")
 }
 
 # Create a progress bar
@@ -109,17 +90,60 @@ pb <- txtProgressBar(min = 0, max = length(files), style = 3)
 
 # Load each file into environment
 loaded_names <- character()
+skipped_files <- character()
 
 for (i in seq_along(files)) {
   file_path <- files[i]
   file_name <- tools::file_path_sans_ext(basename(file_path))
+  file_ext <- tolower(tools::file_ext(file_path))
   
   # Make the name valid for R
   valid_name <- make.names(file_name)
   
-  # Load and assign to environment
-  assign(valid_name, loader_function(file_path), envir = envir)
-  loaded_names <- c(loaded_names, valid_name)
+  # Handle loading based on file type
+  if (is.null(loader_function)) {
+    if (file_ext %in% c("rda", "rdata")) {
+      # For .rda/.RData files, load directly into environment
+      tryCatch({
+        load(file_path, envir = envir)
+        loaded_names <- c(loaded_names, valid_name)
+      }, error = function(e) {
+        skipped_files <- c(skipped_files, basename(file_path))
+      })
+    } else {
+      # For other files, use appropriate loader
+      current_loader <- switch(file_ext,
+        "rds" = readRDS,
+        "sas7bdat" = haven::read_sas,
+        "csv" = readr::read_csv,
+        "xlsx" = function(x) readxl::read_excel(x, sheet = 1),
+        "dta" = haven::read_stata,
+        "sav" = haven::read_spss,
+        NULL
+      )
+      
+      if (is.null(current_loader)) {
+        skipped_files <- c(skipped_files, basename(file_path))
+        next
+      }
+      
+      # Try to load and assign to environment
+      tryCatch({
+        assign(valid_name, current_loader(file_path), envir = envir)
+        loaded_names <- c(loaded_names, valid_name)
+      }, error = function(e) {
+        skipped_files <- c(skipped_files, basename(file_path))
+      })
+    }
+  } else {
+    # Use custom loader function
+    tryCatch({
+      assign(valid_name, loader_function(file_path), envir = envir)
+      loaded_names <- c(loaded_names, valid_name)
+    }, error = function(e) {
+      skipped_files <- c(skipped_files, basename(file_path))
+    })
+  }
   
   # Update progress bar
   setTxtProgressBar(pb, i)
@@ -136,6 +160,10 @@ execution_time <- difftime(end_time, start_time, units = "secs")
 message("\nLoaded ", length(loaded_names), " files in ", 
         round(execution_time, 2), " seconds")
 message("Available objects:", paste("\n -", loaded_names))
+
+if (length(skipped_files) > 0) {
+  message("\nSkipped files:", paste("\n -", skipped_files))
+}
 
 # Return nothing visibly
 invisible(NULL)

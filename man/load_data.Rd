@@ -6,7 +6,6 @@
 \usage{
 load_data(
   directory_path,
-  file_type = "sas7bdat",
   recursive = TRUE,
   pattern = NULL,
   loader_function = NULL,
@@ -17,14 +16,11 @@ load_data(
 \item{directory_path}{Character string specifying the path to the directory
 containing the data files.}
 
-\item{file_type}{Character string specifying the type of files to load.
-Options include "sas7bdat", "csv", "xlsx", "rds", "dta", "sav".}
-
 \item{recursive}{Logical indicating whether to search for files recursively
 in subdirectories. Default is TRUE.}
 
 \item{pattern}{Optional character string containing a regular expression to
-match specific files. If provided, overrides file_type pattern matching.}
+match specific files. If provided, overrides automatic file type detection.}
 
 \item{loader_function}{Optional custom function to use for loading files.
 Must take a file path as input and return a data frame.}
@@ -37,17 +33,17 @@ Invisibly returns NULL. Files are loaded directly into the specified
   environment.
 }
 \description{
-This function loads all matching data files from a directory directly into
-the R environment. It supports various file types and provides progress feedback
+This function loads all supported data files from a directory directly into
+the R environment. It automatically detects file types and provides progress feedback
 during loading.
 }
 \details{
-The function automatically selects appropriate loader functions based on file
-type:
+The function automatically detects and loads the following file types:
+* .rda/.RData - load
+* .rds - readRDS
 * .sas7bdat - haven::read_sas
 * .csv - readr::read_csv
 * .xlsx - readxl::read_excel
-* .rds - readRDS
 * .dta - haven::read_stata
 * .sav - haven::read_spss
 
@@ -55,14 +51,11 @@ File names are converted to valid R object names using make.names().
 }
 \examples{
 \dontrun{
-# Load all SAS files from a directory
-load_data("path/to/sas/files")
-
-# Load CSV files instead
-load_data("path/to/csv/files", file_type = "csv")
+# Load all supported files from a directory
+load_data("path/to/data")
 
 # Load files matching a specific pattern
-load_data("path/to/files", pattern = "^prefix.*\\\\.sas7bdat$")
+load_data("path/to/files", pattern = "^prefix.*")
 
 # Use custom loader function
 my_loader <- function(file) {
