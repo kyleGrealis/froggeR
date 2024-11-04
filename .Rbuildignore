@@ -5,3 +5,6 @@ PROG_NOTES.md
 ^doc$
 ^Meta$
 ^docs$
+^_pkgdown\.yml$
+^pkgdown$
+^\.github$
