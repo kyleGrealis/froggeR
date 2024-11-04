@@ -69,29 +69,36 @@
 <li>
 <strong>Jump Right In</strong>: Spend more time on analysis, less time on setup</li>
 <li>
-<strong>Consistent Lily Pads</strong>: Maintain uniform document styling and structure across projects</li>
+<strong>Consistency</strong>: Maintain uniform document styling and structure across projects</li>
 <li>
 <strong>No More Setup Bugs</strong>: Complex configs are un-froggin’-necessary!</li>
 <li>
-<strong>Safe Pond</strong>: Enhanced data protection with comprehensive <code>.gitignore</code> settings</li>
+<strong>Safety</strong>: Enhanced data protection with comprehensive <code>.gitignore</code> settings</li>
 <li>
 <strong>Friendly for the Whole Pod</strong>: Easier team onboarding with structured documentation</li>
 <li>
-<strong>Your Pad, Your Way</strong>: Use our ribbiting defaults or customize to your needs</li>
+<strong>Your Project, Your Way</strong>: Use our ribbiting defaults or customize to your needs</li>
 </ul>
-<p>Because every data scientist deserves a friendly frog guide!</p>
 </div>
 <div class="section level2">
 <h2 id="whos-it-for">Who’s it for?<a class="anchor" aria-label="anchor" href="#whos-it-for"></a>
 </h2>
-<p><code>froggeR</code> is especially valuable for R users who: - Juggle multiple Quarto projects - Collaborate with team members - Want to focus on analysis, not setup - Need a quick way to start new projects</p>
+<p><code>froggeR</code> is especially valuable for R users who:</p>
+<ul>
+<li>Juggle multiple Quarto projects</li>
+<li>Collaborate with team members</li>
+<li>Want to focus on analysis, not setup</li>
+<li>Need a quick way to start new projects</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>froggeR</code> from GitHub:</p>
+<p>You can install <code>froggeR</code> from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'kyleGrealis/froggeR'</span><span class="op">)</span></span>
+<span><span class="co"># or the development version</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'kyleGrealis/froggeR@dev'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -106,7 +113,18 @@
 <span>  name <span class="op">=</span> <span class="st">"my_new_project"</span>,</span>
 <span>  default <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use custom YAML from _variables.yml</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>This creates a new Quarto project with: - A custom YAML-enabled <code>.qmd</code> file - A comprehensive <code>.gitignore</code> - A structured <code>README.md</code> - A reusable <code>_variables.yml</code> - A template <code>custom.scss</code> style sheet - A <code>.Rproj</code> file</p>
+<p>This creates a new Quarto project with:</p>
+<ul>
+<li>A custom YAML-enabled <code>.qmd</code> file</li>
+<li>A comprehensive <code>.gitignore</code>
+</li>
+<li>A structured <code>README.md</code>
+</li>
+<li>A reusable <code>_variables.yml</code>
+</li>
+<li>A template <code>custom.scss</code> style sheet</li>
+<li>A <code>.Rproj</code> file</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="id_-reusable-yaml-headers">🔄 Reusable YAML Headers<a class="anchor" aria-label="anchor" href="#id_-reusable-yaml-headers"></a>
@@ -114,7 +132,15 @@
 <p>Maintain consistency across your documents with <code><a href="reference/write_variables.html">write_variables()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_variables.html">write_variables</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This interactive function helps you create a <code>_variables.yml</code> file containing: - Author information - Contact details - Affiliations - Project keywords - Table of Content preferences - And more!</p>
+<p>This interactive function helps you create a <code>_variables.yml</code> file containing:</p>
+<ul>
+<li>Author information</li>
+<li>Contact details</li>
+<li>Affiliations</li>
+<li>Project keywords</li>
+<li>Table of Content preferences</li>
+<li>And more!</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="id_-templated-quarto-documents">📝 Templated Quarto Documents<a class="anchor" aria-label="anchor" href="#id_-templated-quarto-documents"></a>
@@ -132,7 +158,12 @@
 <p>Set up a comprehensive <code>.gitignore</code> for R projects:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_ignore.html">write_ignore</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Features enhanced data security by default: - Ignores R data files (<code>.RData</code>, <code>.rda</code>, <code>.rds</code>) - Excludes common data formats (CSV, Excel, text files) - Protects sensitive information</p>
+<p>Features enhanced data security by default:</p>
+<ul>
+<li>Ignores R data files (<code>.RData</code>, <code>.rda</code>, <code>.rds</code>)</li>
+<li>Excludes common data formats (CSV, Excel, text files)</li>
+<li>Protects sensitive information</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="id_-custom-styling">🌟 Custom Styling<a class="anchor" aria-label="anchor" href="#id_-custom-styling"></a>
@@ -140,7 +171,12 @@
 <p>No more worrying about a SCSS template for that custom look and use:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_scss.html">write_scss</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Get a formatted styles sheet with examples for: - SCSS defaults - SCSS mixins - SCSS rules</p>
+<p>Get a formatted styles sheet with examples for:</p>
+<ul>
+<li>SCSS defaults</li>
+<li>SCSS mixins</li>
+<li>SCSS rules</li>
+</ul>
 <p>Uncomment any lines to apply them to your document the next time you render it…it’s just that easy!</p>
 <pre><code>/*-- scss:defaults --*/
 // Colors
@@ -188,7 +224,14 @@
 <p>Generate structured README files:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Includes sections for: - Project description - Setup instructions - File descriptions - Directory structure - And more!</p>
+<p>Includes sections for:</p>
+<ul>
+<li>Project description</li>
+<li>Setup instructions</li>
+<li>File descriptions</li>
+<li>Directory structure</li>
+<li>And more!</li>
+</ul>
 </div>
 </div>
 <div class="section level2">

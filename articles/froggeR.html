@@ -88,9 +88,14 @@ you need:</p>
 <span></span>
 <span><span class="co"># Create a new project with default settings</span></span>
 <span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">"my_analysis"</span><span class="op">)</span></span></code></pre></div>
-<p>Boom! 🎉 Just like that, you’ve got: - A structured Quarto document -
-Custom SCSS styling - Git ignore settings - README template - And
-more!</p>
+<p>Boom! 🎉 Just like that, you’ve got:</p>
+<ul>
+<li>A structured Quarto document</li>
+<li>Custom SCSS styling</li>
+<li>Git ignore settings</li>
+<li>README template</li>
+<li>And more!</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="whats-in-your-new-pad">What’s in Your New Pad?<a class="anchor" aria-label="anchor" href="#whats-in-your-new-pad"></a>
@@ -99,7 +104,8 @@ more!</p>
 get (no flies included):</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Quarto Document</strong> (<code>my_analysis.qmd</code>):
+<p><strong>Quarto Document</strong>
+(<code>my_analysis.qmd</code>):</p>
 <ul>
 <li>Pre-configured YAML header</li>
 <li>Clean, professional styling</li>
@@ -107,7 +113,7 @@ get (no flies included):</p>
 </ul>
 </li>
 <li>
-<strong>Style Sheet</strong> (<code>custom.scss</code>):
+<p><strong>Style Sheet</strong> (<code>custom.scss</code>):</p>
 <ul>
 <li>Make your documents look crisp</li>
 <li>Easy to customize</li>
@@ -115,7 +121,7 @@ get (no flies included):</p>
 </ul>
 </li>
 <li>
-<strong>Project Config</strong> (<code>.Rproj</code>):
+<p><strong>Project Config</strong> (<code>.Rproj</code>):</p>
 <ul>
 <li>Consistent project settings</li>
 <li>Works smoothly with RStudio</li>
@@ -123,7 +129,7 @@ get (no flies included):</p>
 </ul>
 </li>
 <li>
-<strong>Git Ready</strong> (<code>.gitignore</code>):
+<p><strong>Git Ready</strong> (<code>.gitignore</code>):</p>
 <ul>
 <li>Smart defaults for R projects</li>
 <li>Keeps your repository clean</li>
@@ -133,13 +139,21 @@ get (no flies included):</p>
 </ol>
 </div>
 <div class="section level2">
-<h2 id="customizing-your-pad">Customizing Your Pad<a class="anchor" aria-label="anchor" href="#customizing-your-pad"></a>
+<h2 id="customizing-your-project">Customizing Your Project<a class="anchor" aria-label="anchor" href="#customizing-your-project"></a>
 </h2>
 <p>Want to make it your own? No problem! Here’s how to customize
 different aspects:</p>
 <div class="section level3">
 <h3 id="custom-yaml-variables">Custom YAML Variables<a class="anchor" aria-label="anchor" href="#custom-yaml-variables"></a>
 </h3>
+<p>Add the ability to re-use the same Quarto header and input:</p>
+<ul>
+<li>your name</li>
+<li>your email address</li>
+<li>add a website link</li>
+<li>add tags to the project for publication</li>
+<li>a custom name for Table of Contents</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create or modify _variables.yml</span></span>
 <span><span class="fu"><a href="../reference/write_variables.html">write_variables</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Interactive prompts for your info</span></span></code></pre></div>
@@ -153,7 +167,7 @@ different aspects:</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="advanced-hopping">Advanced Hopping<a class="anchor" aria-label="anchor" href="#advanced-hopping"></a>
+<h2 id="advanced-development">Advanced Development<a class="anchor" aria-label="anchor" href="#advanced-development"></a>
 </h2>
 <p>Ready to take your Quarto game to the next level? Here are some pro
 tips:</p>
@@ -169,14 +183,11 @@ tips:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>
-<strong>Template Reuse</strong>:</li>
+<strong>Load all data in one shot</strong>:</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Use your custom setup across projects</span></span>
-<span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span></span>
-<span>  <span class="st">"new_project"</span>,</span>
-<span>  default <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Uses your _variables.yml</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Read multiple data types from one directory</span></span>
+<span><span class="fu"><a href="../reference/load_data.html">load_data</a></span><span class="op">(</span><span class="st">"project/data/"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
@@ -194,14 +205,16 @@ A: Run <code><a href="../reference/write_variables.html">write_variables()</a></
 </h2>
 <p>That’s it! You’re ready to create beautiful, consistent Quarto
 projects faster than a frog can catch a fly.</p>
-<p>Remember: - Keep your projects organized - Style consistently - Have
-fun with your analysis!</p>
+<p>Remember:</p>
+<ul>
+<li>Keep your projects organized</li>
+<li>Style consistently</li>
+<li>Have fun with your analysis!</li>
+</ul>
 <p>Need more help? Hop over to our <a href="https://github.com/kyleGrealis/froggeR" class="external-link">GitHub repository</a> or
 check out the function documentation.</p>
 <blockquote>
-<p>Check out other goodies that are constantly being developed. For
-example, explore the new <code><a href="../reference/load_data.html">froggeR::load_data()</a></code> function to
-recursively load various data file types to the local R environment!</p>
+<p>Check out other goodies that are constantly being developed.</p>
 </blockquote>
 <p>Happy analyzing! 🐸</p>
 <hr>
