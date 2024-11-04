@@ -64,12 +64,12 @@ start_time <- Sys.time()
 
 # Input validation
 if (!dir.exists(directory_path)) {
-  stop("Directory does not exist: ", directory_path)
+  stop('Directory does not exist: ', directory_path)
 }
 
 # Set up supported file types pattern if no pattern provided
 if (is.null(pattern)) {
-  pattern <- "\\.(rda|RData|rds|sas7bdat|csv|xlsx|dta|sav)$"
+  pattern <- '\\.(rda|RData|rds|sas7bdat|csv|xlsx|dta|sav)$'
 }
 
 # List all matching files
@@ -81,11 +81,11 @@ files <- list.files(
 )
 
 if (length(files) == 0) {
-  stop("No supported files found in directory")
+  stop('No supported files found in directory')
 }
 
 # Create a progress bar
-message("Loading ", length(files), " files...")
+message('Loading ', length(files), ' files...')
 pb <- txtProgressBar(min = 0, max = length(files), style = 3)
 
 # Load each file into environment
@@ -102,7 +102,7 @@ for (i in seq_along(files)) {
   
   # Handle loading based on file type
   if (is.null(loader_function)) {
-    if (file_ext %in% c("rda", "rdata")) {
+    if (file_ext %in% c('rda', 'rdata', 'rds')) {
       # For .rda/.RData files, load directly into environment
       tryCatch({
         load(file_path, envir = envir)
@@ -113,12 +113,11 @@ for (i in seq_along(files)) {
     } else {
       # For other files, use appropriate loader
       current_loader <- switch(file_ext,
-        "rds" = readRDS,
-        "sas7bdat" = haven::read_sas,
-        "csv" = readr::read_csv,
-        "xlsx" = function(x) readxl::read_excel(x, sheet = 1),
-        "dta" = haven::read_stata,
-        "sav" = haven::read_spss,
+        'sas7bdat' = haven::read_sas,
+        'csv' = readr::read_csv,
+        'xlsx' = function(x) readxl::read_excel(x, sheet = 1),
+        'dta' = haven::read_stata,
+        'sav' = haven::read_spss,
         NULL
       )
       
@@ -154,15 +153,15 @@ close(pb)
 
 # Calculate execution time
 end_time <- Sys.time()
-execution_time <- difftime(end_time, start_time, units = "secs")
+execution_time <- difftime(end_time, start_time, units = 'secs')
 
 # Print summary
-message("\nLoaded ", length(loaded_names), " files in ", 
-        round(execution_time, 2), " seconds")
-message("Available objects:", paste("\n -", loaded_names))
+message('\nLoaded ', length(loaded_names), ' files in ', 
+        round(execution_time, 2), ' seconds')
+message('Available objects:', paste('\n -', loaded_names))
 
 if (length(skipped_files) > 0) {
-  message("\nSkipped files:", paste("\n -", skipped_files))
+  message('\nSkipped files:', paste('\n -', skipped_files))
 }
 
 # Return nothing visibly
