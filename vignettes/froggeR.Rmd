@@ -39,6 +39,7 @@ quarto_project("my_analysis")
 ```
 
 Boom! 🎉 Just like that, you've got:
+
 - A structured Quarto document
 - Custom SCSS styling
 - Git ignore settings
@@ -50,30 +51,42 @@ Boom! 🎉 Just like that, you've got:
 When you create a project with `froggeR`, here's what you get (no flies included):
 
 1. **Quarto Document** (`my_analysis.qmd`):
+
    - Pre-configured YAML header
    - Clean, professional styling
    - Ready for your brilliant analysis!
 
 2. **Style Sheet** (`custom.scss`):
+
    - Make your documents look crisp
    - Easy to customize
    - No CSS expertise required
 
 3. **Project Config** (`.Rproj`):
+
    - Consistent project settings
    - Works smoothly with RStudio
    - No more "but it works on my machine"!
 
 4. **Git Ready** (`.gitignore`):
+
    - Smart defaults for R projects
    - Keeps your repository clean
    - No accidental file commits
 
-## Customizing Your Pad
+## Customizing Your Project
 
 Want to make it your own? No problem! Here's how to customize different aspects:
 
 ### Custom YAML Variables
+
+Add the ability to re-use the same Quarto header and input:
+
+- your name
+- your email address
+- add a website link
+- add tags to the project for publication
+- a custom name for Table of Contents
 
 ```r
 # Create or modify _variables.yml
@@ -87,7 +100,7 @@ write_variables()  # Interactive prompts for your info
 write_scss(name = "my_styles")
 ```
 
-## Advanced Hopping
+## Advanced Development
 
 Ready to take your Quarto game to the next level? Here are some pro tips:
 
@@ -100,13 +113,10 @@ write_quarto(
 )
 ```
 
-2. **Template Reuse**:
+2. **Load all data in one shot**:
 ```r
-# Use your custom setup across projects
-quarto_project(
-  "new_project",
-  default = TRUE  # Uses your _variables.yml
-)
+# Read multiple data types from one directory
+load_data("project/data/")
 ```
 
 ## Troubleshooting
@@ -124,13 +134,14 @@ Having trouble? Here are some common hiccups and how to fix them:
 That's it! You're ready to create beautiful, consistent Quarto projects faster than a frog can catch a fly. 
 
 Remember:
+
 - Keep your projects organized
 - Style consistently
 - Have fun with your analysis!
 
 Need more help? Hop over to our [GitHub repository](https://github.com/kyleGrealis/froggeR) or check out the function documentation.
 
-> Check out other goodies that are constantly being developed. For example, explore the new `froggeR::load_data()` function to recursively load various data file types to the local R environment!
+> Check out other goodies that are constantly being developed.
 
 Happy analyzing! 🐸
 
