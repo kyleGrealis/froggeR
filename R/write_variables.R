@@ -61,6 +61,9 @@ write_variables <- function(path = getwd()) {
     keywords <- readline('Enter project keywords (i.e., research, data science): ')
     toc_title <- readline('Enter table of contents title. Can be "Table of Contents": ')
 
+    # Set default "Table of Contents" if empty
+    if (toc_title == '') { toc_title <- 'Table of Contents' }
+
     content <- glue::glue('
     author: {author}
     email: {email}

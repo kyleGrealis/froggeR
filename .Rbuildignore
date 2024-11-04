@@ -2,7 +2,9 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 PROG_NOTES.md
-^_pkgdown\.yml$
+^doc$
+^Meta$
 ^docs$
+^_pkgdown\.yml$
 ^pkgdown$
 ^\.github$
