@@ -107,6 +107,9 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
     name = name
   )
 
+  # Open project in new window & session:
+  rstudioapi::openProject(path = project_dir, newSession = TRUE)
+
   # Return the project directory path invisibly
   invisible(project_dir)
 }
