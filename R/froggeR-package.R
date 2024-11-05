@@ -3,6 +3,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom cli col_blue col_green
 #' @importFrom glue glue
 #' @importFrom quarto quarto_create_project
 #' @importFrom stringr str_to_lower
