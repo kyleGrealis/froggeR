@@ -11,8 +11,7 @@ write_variables(path = getwd())
 working directory.}
 }
 \value{
-A _variables.yml file. As described above, the contents of this file are
-used in the custom Quarto header for reusability.
+A _variables.yml file.
 
 NOTE: Be sure to inspect the contents that are created. You can choose to add more
 key:value pairs and use them in the Quarto header or anywhere else within the

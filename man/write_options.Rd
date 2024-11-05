@@ -15,14 +15,20 @@ for use across R sessions and projects. It displays existing settings if present
 allows users to either keep or replace them.
 }
 \details{
+Storing user details in the .Rprofile allows \code{froggeR} to populate the Quarto
+YAML header using custom content across projects. This encourages a consistent style
+and formatted output.
+
+
 The function will:
 1. Look for .Rprofile in the user's home directory
 2. Display existing settings if found
 3. Allow user to keep or replace settings
-4. Interactively collect new settings if needed
-5. Write settings to .Rprofile
+4. Backup the existing .Rprofile
+5. Interactively collect new settings if needed
+6. Write settings to .Rprofile
 
-Settings are stored in a list accessible via `getOption("froggeR.options")`
+Settings are stored in a list accessible via \code{getOption("froggeR.options")}.
 }
 \examples{
 \dontrun{

@@ -4,6 +4,10 @@
 #' for use across R sessions and projects. It displays existing settings if present and
 #' allows users to either keep or replace them.
 #' 
+#' Storing user details in the .Rprofile allows \code{froggeR} to populate the Quarto
+#' YAML header using custom content across projects. This encourages a consistent style
+#' and formatted output.
+#' 
 #' @return Invisibly returns TRUE if successful, FALSE if cancelled, errors otherwise
 #' 
 #' @details 
@@ -11,10 +15,11 @@
 #' 1. Look for .Rprofile in the user's home directory
 #' 2. Display existing settings if found
 #' 3. Allow user to keep or replace settings
-#' 4. Interactively collect new settings if needed
-#' 5. Write settings to .Rprofile
+#' 4. Backup the existing .Rprofile
+#' 5. Interactively collect new settings if needed
+#' 6. Write settings to .Rprofile
 #' 
-#' Settings are stored in a list accessible via `getOption("froggeR.options")`
+#' Settings are stored in a list accessible via \code{getOption("froggeR.options")}.
 #' 
 #' @export
 #' @examples
@@ -30,8 +35,8 @@ write_options <- function() {
   
   if (!is.null(existing_opts)) {
     ui_info('Current froggeR settings:')
-    cat('\n')  # Add blank line for readability
-    
+    cat('\n')
+
     # Display existing settings in a formatted way
     opts_display <- paste(
       glue::glue("  name: {existing_opts$name %||% ''}"),
@@ -39,8 +44,6 @@ write_options <- function() {
       glue::glue("  orcid: {existing_opts$orcid %||% ''}"),
       glue::glue("  url: {existing_opts$url %||% ''}"),
       glue::glue("  affiliations: {existing_opts$affiliations %||% ''}"),
-      # glue::glue("  roles: {existing_opts$roles %||% ''}"),
-      # glue::glue("  keywords: {existing_opts$keywords %||% ''}"),
       glue::glue("  toc: {existing_opts$toc %||% ''}"),
       sep = '\n'
     )
@@ -84,9 +87,6 @@ write_options <- function() {
   orcid <- readline('Enter ORCID number: ')
   url <- readline('Enter URL to GitHub: ')
   affiliations <- readline('Enter affiliation: ')
-  # roles <- readline('Enter your role ("aut" = author, etc): ')
-  # keywords <- readline('Enter project keywords (i.e., research): ')
-  # toc <- readline('Enter table of contents title (default: "Table of Contents"): ')
   message('Enter table of contents title.')
   toc <- readline('The default is "Table of Contents": ')
   
@@ -107,6 +107,13 @@ options(
   )
 )\n")
   
+  ###################################################################################
+  # This section is used to search the .Rprofile for existing froggeR.options content
+  # If content exists and the user chooses to overwrite it, the following "if"
+  # statement will remove the commented line in the .Rprofile that identifies the 
+  # content section ("# froggeR Quarto YAML options:") and the entire block of 
+  # options.
+  ###################################################################################
   # Read existing content
   existing_content <- if (file.exists(rprofile_path)) {
     readLines(rprofile_path)
@@ -154,8 +161,10 @@ options(
     }
   }
   
+  ###################################################################################
   # Write updated content
   writeLines(c(existing_content, content), rprofile_path)
+  ###################################################################################
   
   message('------------------------------------------------------')
   ui_done('Settings successfully written to .Rprofile\n')

@@ -8,8 +8,7 @@
 #' 
 #' @param path A Quarto project name or other folder. Defaults to the current
 #' working directory.
-#' @return A _variables.yml file. As described above, the contents of this file are
-#' used in the custom Quarto header for reusability.
+#' @return A _variables.yml file.
 #' 
 #' NOTE: Be sure to inspect the contents that are created. You can choose to add more
 #' key:value pairs and use them in the Quarto header or anywhere else within the
@@ -49,31 +48,21 @@ write_variables <- function(path = getwd()) {
 
   if (!abort) {
 
-    readline(ui_info('\n You may leave any line blank. ENTER to continue.'))
-    message('\n------------------------------------------------------')
+    # Write user information to .Rprofile:
+    froggeR::write_options()
 
-    author <- readline('Enter author name: ')
-    url <- readline('Enter URL to GitHub: ')
-    email <- readline('Enter email address: ')
-    orcid <- readline('Enter ORCID number: ')
-    roles <- readline('Enter your role ("aut" = author, etc): ')
-    affiliation <- readline('Enter affiliation: ')
-    keywords <- readline('Enter project keywords (i.e., research, data science): ')
-    toc_title <- readline('Enter table of contents title. Can be "Table of Contents": ')
-
-    # Set default "Table of Contents" if empty
-    if (toc_title == '') { toc_title <- 'Table of Contents' }
-
-    content <- glue::glue('
-    author: {author}
-    email: {email}
-    orcid: {orcid}
-    url: {url}
-    affiliations: {affiliation}
-    roles: {roles}
-    keywords: {keywords}
-    toc: {toc_title}
-    ')
+    # Write froggeR.options into _variable.yml
+    opts <- getOption('froggeR.options')
+    if (!is.null(opts)) {
+      content <- glue::glue('
+        author: {opts$name}
+        email: {opts$email}
+        orcid: {opts$orcid}
+        url: {opts$url}
+        affiliations: {opts$affiliations}
+        toc: {opts$toc}
+      ')
+    }
 
     write(content, file = file)
     message('------------------------------------------------------')
