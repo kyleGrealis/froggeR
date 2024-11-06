@@ -47,11 +47,20 @@ write_readme <- function(path = getwd()) {
 
   if (!abort) {
 
+    # Write README.md file:
+    # Get the correct path to README template in installed package
+    template_path <- system.file("gists/README.md", package = "froggeR")
+    
+    if (template_path == "") {
+      stop("Could not find README.md template in package installation")
+    }
+
     # Write README.md file
     invisible(file.copy(
-      from = 'inst/gists/README.md',
-      to = glue::glue('{path}/README.md')
+      from = template_path,
+      to = file.path(path, "README.md")
     ))
+    
     ui_done('\nREADME.md has been created.\n\n')
     
     # Add DATED_PROGRESS_NOTES.md template
