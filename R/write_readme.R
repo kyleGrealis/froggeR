@@ -39,14 +39,6 @@ write_readme <- function(path = getwd()) {
   the_readme_file <- file.path(path, 'README.md')
   abort <- FALSE
 
-  # path to README.md
-  # inst/gists/README.md
-  gist_path_readme <- paste0(
-    'https://gist.github.com/kyleGrealis/963177f903a434c9b4931d1c4c56f1cc/',
-    # this changes as the README gist is updated
-    'raw/acb1cec3ac110fe8ae83bd978e381a24296ec122/README.md'
-  )
-
   # Warn user if README is found in project
   if (file.exists(the_readme_file)) {
     ui_info('**CAUTION!!**')
@@ -54,7 +46,8 @@ write_readme <- function(path = getwd()) {
   }
 
   if (!abort) {
-    # download.file(gist_path_readme, the_readme_file, quiet = TRUE)
+
+    # Write README.md file
     invisible(file.copy(
       from = 'inst/gists/README.md',
       to = glue::glue('{path}/README.md')
