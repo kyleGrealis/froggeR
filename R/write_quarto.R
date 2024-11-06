@@ -56,10 +56,17 @@ write_quarto <- function(
   if (!abort) {
     if (!default) { # not started with custom Quarto YAML header:
       
-      # path for template that doesn't use custom yml file
+      # Get the correct path to template in installed package
+      template_path <- system.file("gists/basic_quarto.qmd", package = "froggeR")
+      
+      if (template_path == "") {
+        stop("Could not find basic_quarto.qmd template in package installation")
+      }
+      
+      # Copy the template
       invisible(file.copy(
-        from = 'inst/gists/basic_quarto.qmd',
-        to = glue::glue('{path}/{filename}.qmd')
+        from = template_path,
+        to = file.path(path, paste0(filename, ".qmd"))
       ))
 
     } else { # started with custom Quarto YAML header:
@@ -72,11 +79,19 @@ write_quarto <- function(
         froggeR::write_variables(path)
       }
       
-      # path for template that DOES use custom yml file
+      # Get the correct path to template in installed package
+      template_path <- system.file("gists/custom_quarto.qmd", package = "froggeR")
+      
+      if (template_path == "") {
+        stop("Could not find custom_quarto.qmd template in package installation")
+      }
+      
+      # Copy the template
       invisible(file.copy(
-        from = 'inst/gists/custom_quarto.qmd',
-        to = glue::glue('{path}/{filename}.qmd')
+        from = template_path,
+        to = file.path(path, paste0(filename, ".qmd"))
       ))
+
       ui_done('\nA new Quarto file has been created.\n\n')
 
       # Check if a .scss file is found in project
