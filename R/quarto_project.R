@@ -1,7 +1,7 @@
 #' Create a custom Quarto project
 #' 
 #' This function is a wrapper for \code{quarto::quarto_create_project()} and adds some
-#' other \code{froggeR} goodies. First, new Quarto project is created in the provided
+#' other \code{froggeR} goodies. First, a new Quarto project is created in the provided
 #' \code{name} directory. Then, the original \code{.qmd} file created from the 
 #' \code{quarto::quarto_create_project()} is replaced with \code{froggeR::write_quarto()}.
 #' 
@@ -13,6 +13,8 @@
 #'    - \code{.gitignore}
 #' 
 #'    - \code{README.md}
+#' 
+#'    - \code{DATED_PROGRESS_NOTES.md}
 #' 
 #'    - \code{custom.scss}
 #' 
@@ -30,7 +32,7 @@
 #' \code{.qmd} file. See \code{?froggeR::write_quarto()} for more details on
 #' the default setting.
 #' @return A Quarto project with \code{.qmd}, \code{.gitignore}, \code{README.md}, 
-#' \code{custom.scss} & \code{.Rproj} files.
+#' \code{DATED_PROGRESS_NOTES.md}, \code{custom.scss} & \code{.Rproj} files.
 #' 
 #' @export
 #' @examples
@@ -50,6 +52,16 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   
   # Create the full project path
   project_dir <- file.path(base_dir, name)
+
+  ############################################################################
+  # Check if directory exists
+  if (dir.exists(project_dir)) {
+    # Exit if directory currently exists
+    stop(glue::glue('Directory named "{name}" exists in {base_dir}.')) 
+    return(NULL)
+  }
+  ############################################################################
+
   
   # Create the Quarto project
   quarto::quarto_create_project(name, quiet = TRUE)

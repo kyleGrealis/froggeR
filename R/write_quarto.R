@@ -31,12 +31,14 @@ write_quarto <- function(
   filename = 'new', path = getwd(), default = TRUE, proj = FALSE
 ) {
 
+  ############################################################################
   # Check if directory exists
   if (!dir.exists(path)) {
     # Exit if directory does not exist
     stop("Directory does not exist") 
     return(NULL)
-  } 
+  }
+  ############################################################################
 
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
@@ -45,28 +47,22 @@ write_quarto <- function(
   the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
   abort <- FALSE
 
-  # path to default Quarto header template using _variables.yml
-  gist_path_default <- paste0(
-    'https://gist.githubusercontent.com/kyleGrealis/60487135cff714dcb8312b8312df9fc7/',
-    # this changes as the default Quarto is updated
-    'raw/904da17f5a3969b4560131df5e18dab822223d77/frogger_quarto.qmd'
-  )
-
-  # path to Quarto header template the user must complete
-  gist_path_other <- paste0(
-    'https://gist.githubusercontent.com/kyleGrealis/693e5d0df41576247900c3bef788d475/',
-    # this changes as the personalized Quarto is updated
-    'raw/bea0cc31e505181e8c337264540f3f8a0eb038dd/quarto_header.qmd'
-  )
-
-  # Warn user if Quarto document already found in the project
+  # Warn user if a Quarto document with the same name already found in the project
   if (file.exists(the_quarto_file)) {
     ui_info('**CAUTION!!**')
     abort <- ui_nope('{the_quarto_file} found in provided path! Overwrite?')
   }
 
   if (!abort) {
-    if (default) {
+    if (!default) { # not started with custom Quarto YAML header:
+      
+      # path for template that doesn't use custom yml file
+      invisible(file.copy(
+        from = 'inst/gists/basic_quarto.qmd',
+        to = glue::glue('{path}/{filename}.qmd')
+      ))
+
+    } else { # started with custom Quarto YAML header:
       
       # check if _variables.yml exists and prompt user to create if FALSE
       if (!file.exists(file.path(path, '_variables.yml'))) {
@@ -76,33 +72,35 @@ write_quarto <- function(
         froggeR::write_variables(path)
       }
       
-    } else {
-      # override gist path for template that doesn't use custom yml file
-      gist_path_default <- gist_path_other 
-    }
+      # path for template that DOES use custom yml file
+      invisible(file.copy(
+        from = 'inst/gists/custom_quarto.qmd',
+        to = glue::glue('{path}/{filename}.qmd')
+      ))
+      ui_done('\nA new Quarto file has been created.\n\n')
 
+      # Check if a .scss file is found in project
+      scss_files_found_in_proj <- list.files(
+        path = path, 
+        pattern = '\\.scss$', 
+        full.names = TRUE, 
+        recursive = FALSE
+      )
 
-    download.file(gist_path_default, the_quarto_file, quiet = TRUE)
-    ui_done('\nA new Quarto file has been created.\n\n')
-
-    # Check if a .scss file is found in project
-    listed_files <- list.files(
-      path = path, 
-      pattern = '\\.scss$', 
-      full.names = TRUE, 
-      recursive = FALSE
-    )
-    # If not a Quarto project and no SCSS found:
-    if (!proj & length(listed_files) == 0) {
-      ui_info('OOPS... I cannot find a styles sheet (SCSS)!')
-      if (ui_yeah('Would you like to create one now?')) {
-        froggeR::write_scss(path = path, name = 'custom')
-      } else {
-        ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate "theme" line in the Quarto YAML!')
+      # If not a Quarto project and no SCSS found:
+      if (!proj & length(scss_files_found_in_proj) == 0) {
+        ui_info('OOPS... I cannot find a styles sheet (SCSS)!')
+        if (ui_yeah('Would you like to create one now?')) {
+          froggeR::write_scss(path = path, name = 'custom')
+        } else {
+          ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate "theme" line in the Quarto YAML!')
+        }
       }
+      
     }
 
   } else {
+    # Errors occured or user chose not to continue:
     ui_oops('\nQuarto file NOT created.\n\n')
   }
 
