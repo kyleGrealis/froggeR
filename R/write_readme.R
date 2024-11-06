@@ -11,6 +11,9 @@
 #' name, principle investigator, & author), project setup steps for ease of portability,
 #' project file descriptions, project directory descriptions, and miscellaneous. 
 #' 
+#' A \code{DATED_PROGRESS_NOTES.md} is also created to better maintain project status
+#' and updates.
+#' 
 #' NOTE: Some documentation remains to provide the user with example descriptions for 
 #' files & directories. It is highly recommended to keep these sections. This is a 
 #' modifiable template and should be tailor-fit for your exact purpose. 
@@ -37,6 +40,7 @@ write_readme <- function(path = getwd()) {
   abort <- FALSE
 
   # path to README.md
+  # inst/gists/README.md
   gist_path_readme <- paste0(
     'https://gist.github.com/kyleGrealis/963177f903a434c9b4931d1c4c56f1cc/',
     # this changes as the README gist is updated
@@ -50,8 +54,24 @@ write_readme <- function(path = getwd()) {
   }
 
   if (!abort) {
-    download.file(gist_path_readme, the_readme_file, quiet = TRUE)
+    # download.file(gist_path_readme, the_readme_file, quiet = TRUE)
+    invisible(file.copy(
+      from = 'inst/gists/README.md',
+      to = glue::glue('{path}/README.md')
+    ))
     ui_done('\nREADME.md has been created.\n\n')
+    
+    # Add DATED_PROGRESS_NOTES.md template
+    writeLines(
+      paste0(
+        "# Add project updates here\n", 
+        format(Sys.Date(), "%b %d, %Y"),
+        ": project started"
+      ),
+      con = file.path(paste0(path, "/DATED_PROGRESS_NOTES.md"))
+    )
+    ui_done('\nDATED_PROGRESS_NOTES.md has been created.\n\n')
+
   } else {
     ui_oops('\nREADME.md was not changed.\n\n')
   }

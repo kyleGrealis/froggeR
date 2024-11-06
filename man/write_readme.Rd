@@ -15,6 +15,9 @@ A README.md template. Contains sections for project description (study
 name, principle investigator, & author), project setup steps for ease of portability,
 project file descriptions, project directory descriptions, and miscellaneous. 
 
+A \code{DATED_PROGRESS_NOTES.md} is also created to better maintain project status
+and updates.
+
 NOTE: Some documentation remains to provide the user with example descriptions for 
 files & directories. It is highly recommended to keep these sections. This is a 
 modifiable template and should be tailor-fit for your exact purpose.
