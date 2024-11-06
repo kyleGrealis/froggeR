@@ -41,5 +41,9 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     withr
+Config/build/copy-resources:
+    inst/gists/basic_quarto.qmd
+    inst/gists/custom_quarto.qmd
+    inst/gists/README.md
 Config/testthat/edition: 3
 VignetteBuilder: knitr
