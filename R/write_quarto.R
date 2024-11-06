@@ -49,7 +49,7 @@ write_quarto <- function(
   gist_path_default <- paste0(
     'https://gist.githubusercontent.com/kyleGrealis/60487135cff714dcb8312b8312df9fc7/',
     # this changes as the default Quarto is updated
-    'raw/4a2769e45452001434367141c134e99f7f40a2b7/frogger_quarto.qmd'
+    'raw/904da17f5a3969b4560131df5e18dab822223d77/frogger_quarto.qmd'
   )
 
   # path to Quarto header template the user must complete
