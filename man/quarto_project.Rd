@@ -20,11 +20,11 @@ the default setting.}
 }
 \value{
 A Quarto project with \code{.qmd}, \code{.gitignore}, \code{README.md}, 
-\code{custom.scss} & \code{.Rproj} files.
+\code{DATED_PROGRESS_NOTES.md}, \code{custom.scss} & \code{.Rproj} files.
 }
 \description{
 This function is a wrapper for \code{quarto::quarto_create_project()} and adds some
-other \code{froggeR} goodies. First, new Quarto project is created in the provided
+other \code{froggeR} goodies. First, a new Quarto project is created in the provided
 \code{name} directory. Then, the original \code{.qmd} file created from the 
 \code{quarto::quarto_create_project()} is replaced with \code{froggeR::write_quarto()}.
 }
@@ -37,6 +37,8 @@ the existence of these other files and creates them by default:
    - \code{.gitignore}
 
    - \code{README.md}
+
+   - \code{DATED_PROGRESS_NOTES.md}
 
    - \code{custom.scss}
 
