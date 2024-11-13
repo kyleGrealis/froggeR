@@ -14,11 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo=FALSE}
-library(froggeR)
-knitr::include_graphics("../man/figures/logo.png")
-```
-
 ## Welcome to froggeR! 🐸
 
 `froggeR` streamlines your Quarto workflow by automating project setup and standardizing document creation. Let's explore how it can enhance your productivity!
