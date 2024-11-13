@@ -65,30 +65,40 @@
     
 <p><img src="../reference/figures/logo.png"><!-- --></p>
 <div class="section level2">
-<h2 id="welcome-to-the-lily-pad">Welcome to the Lily Pad! 🐸<a class="anchor" aria-label="anchor" href="#welcome-to-the-lily-pad"></a>
+<h2 id="welcome-to-frogger">Welcome to froggeR! 🐸<a class="anchor" aria-label="anchor" href="#welcome-to-frogger"></a>
 </h2>
-<p>Hey there! I’m Teek, and I’ll be your amphibian guide to creating
-awesome Quarto projects. Let’s hop right in!</p>
+<p><code>froggeR</code> streamlines your Quarto workflow by automating
+project setup and standardizing document creation. Let’s explore how it
+can enhance your productivity!</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install the development version</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kyleGrealis/froggeR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="why-use-frogger">Why Use froggeR?<a class="anchor" aria-label="anchor" href="#why-use-frogger"></a>
 </h2>
-<p>Ever felt like project setup was taking longer than the actual
-analysis? Been there! That’s why we created <code>froggeR</code> - to
-help you leap over those pesky setup hurdles and get straight to the
-good stuff.</p>
+<p>Project setup often requires repetitive tasks that can slow down your
+analysis workflow. <code>froggeR</code> addresses this by providing:</p>
+<ul>
+<li>Automated project initialization</li>
+<li>Standardized document templates</li>
+<li>Consistent styling</li>
+<li>Version control setup</li>
+<li>Reusable configurations</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
 <p>Let’s create a new Quarto project with all the ribbit-ing features
 you need:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">froggeR</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create a new project with default settings</span></span>
 <span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">"my_analysis"</span><span class="op">)</span></span></code></pre></div>
-<p>Boom! 🎉 Just like that, you’ve got:</p>
+<p>That’s it! 🎉 Your new project includes all necessary files and
+configurations.</p>
 <ul>
 <li>A structured Quarto document</li>
 <li>Custom SCSS styling</li>
@@ -98,42 +108,41 @@ you need:</p>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="whats-in-your-new-pad">What’s in Your New Pad?<a class="anchor" aria-label="anchor" href="#whats-in-your-new-pad"></a>
+<h2 id="whats-included">What’s included?<a class="anchor" aria-label="anchor" href="#whats-included"></a>
 </h2>
-<p>When you create a project with <code>froggeR</code>, here’s what you
-get (no flies included):</p>
+<p>When you create a project with <code>froggeR</code>, you get:</p>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Quarto Document</strong>
 (<code>my_analysis.qmd</code>):</p>
 <ul>
 <li>Pre-configured YAML header</li>
-<li>Clean, professional styling</li>
-<li>Ready for your brilliant analysis!</li>
+<li>Professional styling</li>
+<li>Ready for immediate use</li>
 </ul>
 </li>
 <li>
 <p><strong>Style Sheet</strong> (<code>custom.scss</code>):</p>
 <ul>
-<li>Make your documents look crisp</li>
-<li>Easy to customize</li>
-<li>No CSS expertise required</li>
+<li>Clean, modern styling</li>
+<li>Customizable design elements</li>
+<li>Simplified CSS workflow</li>
 </ul>
 </li>
 <li>
 <p><strong>Project Config</strong> (<code>.Rproj</code>):</p>
 <ul>
 <li>Consistent project settings</li>
-<li>Works smoothly with RStudio</li>
-<li>No more “but it works on my machine”!</li>
+<li>RStudio integration</li>
+<li>Reproducible environment</li>
 </ul>
 </li>
 <li>
 <p><strong>Git Ready</strong> (<code>.gitignore</code>):</p>
 <ul>
 <li>Smart defaults for R projects</li>
-<li>Keeps your repository clean</li>
-<li>No accidental file commits</li>
+<li>Clean repository management</li>
+<li>Optimized for data science and protecting PHI</li>
 </ul>
 </li>
 </ol>
@@ -141,41 +150,39 @@ get (no flies included):</p>
 <div class="section level2">
 <h2 id="customizing-your-project">Customizing Your Project<a class="anchor" aria-label="anchor" href="#customizing-your-project"></a>
 </h2>
-<p>Want to make it your own? No problem! Here’s how to customize
-different aspects:</p>
+<p>Make the project yours with easy customization options:</p>
 <div class="section level3">
 <h3 id="custom-yaml-variables">Custom YAML Variables<a class="anchor" aria-label="anchor" href="#custom-yaml-variables"></a>
 </h3>
-<p>Add the ability to re-use the same Quarto header and input:</p>
+<p>Configure reusable document headers with your information. This is
+safely stored in your <code>.Rprofile</code> and retrieved during
+project initialization to consistently include:</p>
 <ul>
-<li>your name</li>
-<li>your email address</li>
-<li>add a website link</li>
-<li>add tags to the project for publication</li>
-<li>a custom name for Table of Contents</li>
+<li>Author name</li>
+<li>Contact information</li>
+<li>Website links</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create or modify _variables.yml</span></span>
 <span><span class="fu"><a href="../reference/write_variables.html">write_variables</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Interactive prompts for your info</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="custom-styling">Custom Styling<a class="anchor" aria-label="anchor" href="#custom-styling"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add your own SCSS styles</span></span>
 <span><span class="fu"><a href="../reference/write_scss.html">write_scss</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_styles"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
-<h2 id="advanced-development">Advanced Development<a class="anchor" aria-label="anchor" href="#advanced-development"></a>
+<h2 id="advanced-features">Advanced Features<a class="anchor" aria-label="anchor" href="#advanced-features"></a>
 </h2>
-<p>Ready to take your Quarto game to the next level? Here are some pro
-tips:</p>
+<p>Take your Quarto projects further with advanced functionality:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Multiple Documents</strong>:</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create additional Quarto docs in your project</span></span>
 <span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
 <span>  filename <span class="op">=</span> <span class="st">"analysis_part2"</span>,</span>
@@ -183,43 +190,48 @@ tips:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>
-<strong>Load all data in one shot</strong>:</li>
+<strong>Data Management</strong>: Let’s say your <code>data/</code>
+directory contains multiple file types (<code>.rda</code>,
+<code>.Rdata</code>, &amp; <code>.csv</code>). Load them all into your
+environment with a single command:</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Read multiple data types from one directory</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Loads all supported file types from the specified directory</span></span>
 <span><span class="fu"><a href="../reference/load_data.html">load_data</a></span><span class="op">(</span><span class="st">"project/data/"</span><span class="op">)</span></span></code></pre></div>
+<p>Note: Supported file types include common R data formats and plain
+text files.</p>
 </div>
 <div class="section level2">
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
 </h2>
-<p>Having trouble? Here are some common hiccups and how to fix them:</p>
+<p>Having trouble? Here are some common issues and their solutions:</p>
 <ul>
 <li><p><strong>Q: My styles aren’t applying!</strong><br>
-A: Make sure your SCSS file is referenced in your YAML header</p></li>
+A: Verify SCSS file reference in YAML header</p></li>
 <li><p>**Q: Where’s my _variables.yml?**<br>
-A: Run <code><a href="../reference/write_variables.html">write_variables()</a></code> in your project directory</p></li>
+A: Execute <code><a href="../reference/write_variables.html">write_variables()</a></code> in your project
+directory</p></li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="wrap-up">Wrap Up<a class="anchor" aria-label="anchor" href="#wrap-up"></a>
+<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>That’s it! You’re ready to create beautiful, consistent Quarto
-projects faster than a frog can catch a fly.</p>
-<p>Remember:</p>
+<p><code>froggeR</code> empowers you to create professional, consistent
+Quarto projects efficiently. Key benefits:</p>
 <ul>
-<li>Keep your projects organized</li>
-<li>Style consistently</li>
-<li>Have fun with your analysis!</li>
+<li>Streamlined project organization</li>
+<li>Consistent styling</li>
+<li>Automated setup</li>
+<li>Enhanced productivity</li>
 </ul>
 <p>Need more help? Hop over to our <a href="https://github.com/kyleGrealis/froggeR" class="external-link">GitHub repository</a> or
 check out the function documentation.</p>
 <blockquote>
-<p>Check out other goodies that are constantly being developed.</p>
+<p>Stay tuned for new features and improvements!</p>
 </blockquote>
 <p>Happy analyzing! 🐸</p>
 <hr>
-<p><em>“Because every data scientist deserves a friendly frog
-guide!”</em></p>
+<p><em>Elevating your Quarto workflow with automated excellence</em></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
