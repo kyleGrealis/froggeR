@@ -124,6 +124,7 @@ write_quarto(
 ```
 
 2. **Data Management**:
+
 Let's say your `data/` directory contains multiple file types (`.rda`, `.Rdata`, & `.csv`). Load them all into your environment with a single command:
 ```r
 # Loads all supported file types from the specified directory
