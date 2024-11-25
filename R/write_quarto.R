@@ -32,11 +32,9 @@ write_quarto <- function(
 ) {
 
   ############################################################################
-  # Check if directory exists
+  # Check if directory exists and create if necessary
   if (!dir.exists(path)) {
-    # Exit if directory does not exist
-    stop("Directory does not exist") 
-    return(NULL)
+    dir.create(path, recursive = TRUE)
   }
   ############################################################################
 
@@ -57,16 +55,16 @@ write_quarto <- function(
     if (!default) { # not started with custom Quarto YAML header:
       
       # Get the correct path to template in installed package
-      template_path <- system.file("gists/basic_quarto.qmd", package = "froggeR")
+      template_path <- system.file('gists/basic_quarto.qmd', package = 'froggeR')
       
-      if (template_path == "") {
-        stop("Could not find basic_quarto.qmd template in package installation")
+      if (template_path == '') {
+        stop('Could not find basic_quarto.qmd template in package installation')
       }
       
       # Copy the template
       invisible(file.copy(
         from = template_path,
-        to = file.path(path, paste0(filename, ".qmd"))
+        to = file.path(path, paste0(filename, '.qmd'))
       ))
 
     } else { # started with custom Quarto YAML header:
@@ -80,16 +78,16 @@ write_quarto <- function(
       }
       
       # Get the correct path to template in installed package
-      template_path <- system.file("gists/custom_quarto.qmd", package = "froggeR")
+      template_path <- system.file('gists/custom_quarto.qmd', package = 'froggeR')
       
-      if (template_path == "") {
-        stop("Could not find custom_quarto.qmd template in package installation")
+      if (template_path == '') {
+        stop('Could not find custom_quarto.qmd template in package installation')
       }
       
       # Copy the template
       invisible(file.copy(
         from = template_path,
-        to = file.path(path, paste0(filename, ".qmd"))
+        to = file.path(path, paste0(filename, '.qmd'))
       ))
 
       ui_done('\nA new Quarto file has been created.\n\n')
@@ -108,7 +106,7 @@ write_quarto <- function(
         if (ui_yeah('Would you like to create one now?')) {
           froggeR::write_scss(path = path, name = 'custom')
         } else {
-          ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate "theme" line in the Quarto YAML!')
+          ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate 'theme' line in the Quarto YAML!')
         }
       }
       
