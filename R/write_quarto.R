@@ -106,7 +106,7 @@ write_quarto <- function(
         if (ui_yeah('Would you like to create one now?')) {
           froggeR::write_scss(path = path, name = 'custom')
         } else {
-          ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate 'theme' line in the Quarto YAML!')
+          ui_todo('You will either need to create one later with `froggeR::write_scss()` or be sure comment out the appropriate "theme" line in the Quarto YAML!')
         }
       }
       
