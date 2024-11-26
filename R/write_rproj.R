@@ -20,34 +20,10 @@ write_rproj <- function(name, path = getwd()) {
   if (!dir.exists(path)) {
     # Exit if directory does not exist
     stop("Directory does not exist") 
-    return(NULL)
   } 
 
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
-
-  the_rproj_file <- file.path(path, paste0(name, '.Rproj'))
-  abort <- FALSE
-
-  content <- glue::glue(
-    'Version: 1.0
-
-    RestoreWorkspace: Default
-    SaveWorkspace: Default
-    AlwaysSaveHistory: Default
-
-    EnableCodeIndexing: Yes
-    UseSpacesForTab: Yes
-    NumSpacesForTab: 2
-    Encoding: UTF-8
-
-    RnwWeave: Sweave
-    LaTeX: pdfLaTeX
-
-    AutoAppendNewline: Yes
-    StripTrailingWhitespace: Yes
-    '
-  )
 
   # Warn user if a .Rproj file is found in project
   listed_files <- list.files(
@@ -59,14 +35,36 @@ write_rproj <- function(name, path = getwd()) {
   
   if (length(listed_files) > 0) {
     ui_info('**CAUTION!!**')
-    abort <- ui_nope('A .Rproj file found in project level directory! Are you sure?')
+    if (ui_nope('A .Rproj file found in project level directory! Overwrite?')) {
+      ui_oops('.Rproj was not changed')
+      return(invisible(NULL))
+    }
   }
 
-  if (!abort) {
-    write(content, file = the_rproj_file)
-    ui_done(paste0('\n', name, '.Rproj has been created.\n\n'))
-  } else {
-    ui_oops('\n.Rproj was not changed.\n\n')
-  }
+  # Define .Rproj file content
+  content <- glue::glue(
+'Version: 1.0
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: pdfLaTeX
+
+AutoAppendNewline: Yes
+StripTrailingWhitespace: Yes
+'
+  )
+
+  # Write .Rproj file
+  the_rproj_file <- file.path(path, paste0(name, '.Rproj'))
+  writeLines(content, the_rproj_file)
+  ui_done(paste0('Created ', name, '.Rproj'))
+  
 }
-NULL

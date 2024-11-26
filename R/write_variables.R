@@ -28,9 +28,7 @@ write_variables <- function(path = getwd()) {
 
   # Check if directory exists
   if (!dir.exists(path)) {
-    # Exit if directory does not exist
     stop("Directory does not exist") 
-    return(NULL)
   } 
 
   # Normalize the path for consistency
@@ -38,39 +36,38 @@ write_variables <- function(path = getwd()) {
 
   # create the file in the Quarto project
   file <- file.path(path, '_variables.yml')
-
-  abort <- FALSE
-
   if (file.exists(file)) {
     ui_info('**CAUTION!!**')
-    abort <- ui_nope('A _variables.yml file already exists! Overwrite?')
-  }
-
-  if (!abort) {
-
-    # Write user information to .Rprofile:
-    froggeR::write_options()
-
-    # Write froggeR.options into _variable.yml
-    opts <- getOption('froggeR.options')
-    if (!is.null(opts)) {
-      content <- glue::glue('
-        author: {opts$name}
-        email: {opts$email}
-        orcid: {opts$orcid}
-        url: {opts$url}
-        affiliations: {opts$affiliations}
-        toc: {opts$toc}
-      ')
+    if (ui_nope('A _variables.yml file already exists! Overwrite?')) {
+      ui_oops('_variables.yml was not changed')
+      return(invisible(NULL))
     }
-
-    write(content, file = file)
-    message('------------------------------------------------------')
-    ui_done('\n_variables.yml has been created.\n\n')
-
-  } else {
-    ui_oops('\n_variables.yml was not changed.\n\n')
   }
+
+  # Ensure there are froggeR options
+  if (is.null(getOption('froggeR.options'))) {
+    ui_info('No froggeR.options found in .Rprofile. Creating them now...')
+    froggeR::write_options()
+  }
+
+  # Double-check options were created/exist already
+  opts <- getOption('froggeR.options')
+  if (is.null(opts)) { stop('Failed to create froggeR.options') }
+
+  # Create variables content
+  content <- glue::glue(
+'author: {opts$name}
+email: {opts$email}
+orcid: {opts$orcid}
+url: {opts$url}
+affiliations: {opts$affiliations}
+toc: {opts$toc}'
+  )
+
+  # Write variables to file
+  writeLines(content, file)
+  ui_done('Created _variables.yml')
+
+  return(invisible(NULL))
   
 }
-NULL

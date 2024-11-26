@@ -35,9 +35,7 @@ write_options <- function() {
   
   if (!is.null(existing_opts)) {
     ui_info('Current froggeR settings:')
-    cat('\n')
-
-    # Display existing settings in a formatted way
+    # Existing settings in a formatted way
     opts_display <- paste(
       glue::glue("  name: {existing_opts$name %||% ''}"),
       glue::glue("  email: {existing_opts$email %||% ''}"),
@@ -47,54 +45,39 @@ write_options <- function() {
       glue::glue("  toc: {existing_opts$toc %||% ''}"),
       sep = '\n'
     )
+    # Display settings and advise how to update
     cat(opts_display, '\n\n')
-    
-    if (ui_nope('Would you like to replace these settings?')) {
-      ui_done('Keeping existing settings')
-      return(invisible(FALSE))
-    }
+    message(
+      glue::glue(
+        '\nUse {col_blue("usethis::edit_r_profile()")} to manually update your froggeR.options'
+      )
+    )
+    return(invisible(NULL))
   }
-
+    
   # Backup existing .Rprofile if it exists
   if (file.exists(rprofile_path)) {
     backup_path <- paste0(rprofile_path, '.backup')
     backup_success <- file.copy(rprofile_path, backup_path, overwrite = TRUE)
-    
-    message('\n------------------------------------------------------')
-    if (backup_success) {
-      ui_done(glue::glue('Backup created at {col_green(backup_path)}'))
-    } else {
-      ui_oops('Failed to create backup! Please check file permissions.')
-      return(invisible(FALSE))
-    }
-    message('------------------------------------------------------\n')
+    ui_done('Created .Rprofile backup')
   }
   
   # Collect new values interactively
-  message(
-    glue::glue(
-      '\nInput your profile information. This will be used to populate the Quarto header in any {col_green("froggeR")} Quarto document throughout your projects.'
-    )
-  )
-  enter_msg <- glue::glue(
-    'You may leave any line blank by pressing {col_blue("ENTER")} to skip.'
-  )
-  ui_info(enter_msg)
-  message('\n------------------------------------------------------')
+  ui_info('Enter your profile information (press ENTER to skip):\n')
   
-  name <- readline('Enter author name: ')
-  email <- readline('Enter email address: ')
-  orcid <- readline('Enter ORCID number: ')
-  url <- readline('Enter URL to GitHub: ')
-  affiliations <- readline('Enter affiliation: ')
-  message('Enter table of contents title.')
-  toc <- readline('The default is "Table of Contents": ')
+  name <- readline('Author name: ')
+  email <- readline('Email address: ')
+  orcid <- readline('ORCID (optional): ')
+  url <- readline('Enter URL (optional): ')
+  affiliations <- readline('Affiliation (optional): ')
+  toc <- readline('Table of contents title (ENTER for default): ')
   
   # Set default 'Table of Contents' if empty
   if (toc == '') toc <- 'Table of Contents'
   
   # Create content using glue
   content <- glue::glue("
+
 # froggeR Quarto YAML options:
 options(
   froggeR.options = list(
@@ -124,54 +107,54 @@ options(
   # Remove any existing froggeR.options block
   if (length(existing_content) > 0) {
     # Find where froggeR.options blocks start
-    froggeR_lines <- grep("froggeR\\.options", existing_content)
+    froggeR_lines <- grep('froggeR\\.options', existing_content)
     
     if (length(froggeR_lines) > 0) {
-      # Also find and remove the comment line if it exists
-      comment_line <- grep("^\\s*#\\s*froggeR\\s+Quarto\\s+YAML\\s+options:", existing_content)
+      # Remove the comment header if it exists
+      comment_line <- grep('^\\s*#\\s*froggeR\\s+Quarto\\s+YAML\\s+options:', existing_content)
       if (length(comment_line) > 0) {
         existing_content <- existing_content[-comment_line]
       }
       
+      # Process each froggeR.options block found (in reverse to maintain line numbers)
       for (start_line in rev(froggeR_lines)) {
-        # Look backwards for the options( start
-        while (start_line > 1 && !grepl("^\\s*options\\(", existing_content[start_line])) {
+        # Find the start of the options() call
+        while (start_line > 1 && 
+              !grepl('^\\s*options\\(', existing_content[start_line])) {
           start_line <- start_line - 1
         }
         
-        # Look forwards for the closing parenthesis
+        # Find the matching closing parenthesis
         end_line <- start_line
-        open_count <- sum(stringr::str_count(existing_content[start_line], "\\("))
-        close_count <- sum(stringr::str_count(existing_content[start_line], "\\)"))
+        open_count <- sum(stringr::str_count(existing_content[start_line], '\\('))
+        close_count <- sum(stringr::str_count(existing_content[start_line], '\\)'))
         
+        # Keep going until we find the matching closing parenthesis
         while (open_count > close_count && end_line < length(existing_content)) {
           end_line <- end_line + 1
-          open_count <- open_count + sum(stringr::str_count(existing_content[end_line], "\\("))
-          close_count <- close_count + sum(stringr::str_count(existing_content[end_line], "\\)"))
+          open_count <- open_count + sum(
+            stringr::str_count(existing_content[end_line], '\\(')
+          )
+          close_count <- close_count + sum(
+            stringr::str_count(existing_content[end_line], '\\)')
+          )
         }
         
-        # Remove entire block including trailing whitespace
+        # Include any trailing empty lines
         while (end_line + 1 <= length(existing_content) && 
-               trimws(existing_content[end_line + 1]) == "") {
+              trimws(existing_content[end_line + 1]) == '') {
           end_line <- end_line + 1
         }
         
+        # Remove the entire block
         existing_content <- existing_content[-(start_line:end_line)]
       }
     }
   }
   
-  ###################################################################################
   # Write updated content
   writeLines(c(existing_content, content), rprofile_path)
-  ###################################################################################
-  
-  message('------------------------------------------------------')
-  ui_done('Settings successfully written to .Rprofile\n')
-
-  if (ui_yeah('Would you like to view your updated .Rprofile?')) {
-    usethis::edit_r_profile()
-  }
+  ui_done('Settings written to .Rprofile\n')
   message(
     glue::glue(
       'Use {col_blue("usethis::edit_r_profile()")} to manually change your options at any time.'
@@ -179,6 +162,5 @@ options(
   )
   ui_info(col_green('Restart R for changes to take effect.'))
   
-  invisible(TRUE)
+  return(invisible(TRUE))
 }
-NULL

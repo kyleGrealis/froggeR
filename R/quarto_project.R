@@ -39,10 +39,10 @@
 #' \dontrun{
 #' # Create a new Quarto project that uses a custom formatted YAML header and
 #' # all other listed files:
-#' quarto_project('new_project', base_dir = getwd(), default = TRUE)
+#' quarto_project('frog_project', base_dir = getwd(), default = TRUE)
 #' 
 #' # Create a new Quarto project with generic YAML and all other listed files:
-#' quarto_project('new_project_2', base_dir = getwd(), default = FALSE)
+#' quarto_project('frog_project_2', base_dir = getwd(), default = FALSE)
 #' }
 
 quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
@@ -53,76 +53,38 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   # Create the full project path
   project_dir <- file.path(base_dir, name)
 
-  ############################################################################
   # Check if directory exists
   if (dir.exists(project_dir)) {
-    # Exit if directory currently exists
     stop(glue::glue('Directory named "{name}" exists in {base_dir}.')) 
-    return(NULL)
   }
-  ############################################################################
-
   
   # Create the Quarto project
   quarto::quarto_create_project(name, quiet = TRUE)
+  ui_done(paste(name, 'Created a Quarto project directory'))
 
-  # Construct the path to the default .qmd & .gitignore files
-  default_qmd <- file.path(project_dir, paste0(name, '.qmd'))
-  default_ign <- file.path(project_dir, '.gitignore')
+  # Remove default files created by Quarto
+  file.remove(file.path(project_dir, paste0(name, '.qmd')))
+  file.remove(file.path(project_dir, '.gitignore'))
 
-  # Remove the default .qmd & .gitignore files from quarto::create_quarto_project()
-  # Try to remove the default .qmd file
-  try({
-    if (file.exists(default_qmd)) {
-      file.remove(default_qmd)
-    } else {
-      ui_oops('Default Quarto document not found - continuing anyway')
-    }
-  }, silent = TRUE)
-
-  # Try to remove the default .gitignore
-  try({
-    if (file.exists(default_ign)) {
-      file.remove(default_ign)
-    } else {
-      ui_oops('Default .gitignore not found - continuing anyway')
-    }
-  }, silent = TRUE)
-
-  message('\n')
-  ui_done(paste(name, 'Quarto project directory has been created.'))
-
-  # Initialize project with default files:
-  # Create Quarto doc
+  # Initialize project with default files
   froggeR::write_quarto(
     filename = name,
     path = project_dir,
     default = default,
-    proj = TRUE
+    is_project = TRUE
   )
-  # Create .gitignore
-  froggeR::write_ignore(
-    path = project_dir
-  )
-  # Create README
-  froggeR::write_readme(
-    path = project_dir
-  )
-  # Create .scss file
-  froggeR::write_scss(
-    path = project_dir,
-    name = 'custom'
-  )
-  # Create .Rproj file
-  froggeR::write_rproj(
-    path = project_dir,
-    name = name
-  )
+
+  froggeR::write_ignore(path = project_dir)
+  froggeR::write_readme(path = project_dir)
+  froggeR::write_scss(path = project_dir, name = 'custom')
+  froggeR::write_rproj(path = project_dir, name = name)
+
+  ui_done('froggeR project setup complete. Opening in new session...')
 
   # Open project in new window & session:
   rstudioapi::openProject(path = project_dir, newSession = TRUE)
 
   # Return the project directory path invisibly
   invisible(project_dir)
+
 }
-NULL
