@@ -59,6 +59,11 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
     stop('Parameter "default" must be TRUE or FALSE')
   }
 
+  # Validate base_dir isn't a file path
+  if (file.exists(base_dir) && !dir.exists(base_dir)) {
+    stop('base_dir must be a directory, not a file')
+  }
+
   # Normalize the base directory path
   base_dir <- normalizePath(base_dir, mustWork = TRUE)
   
@@ -81,12 +86,18 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   if (file.exists(default_qmd)) file.remove(default_qmd)
   if (file.exists(default_ignore)) file.remove(default_ignore)
 
+  # Set-up core requirements
+  if (is.null(getOption('froggeR.options'))) {
+    froggeR::write_options()
+  }
+  froggeR::write_variables(project_dir)
+
   # Create project files
   froggeR::write_ignore(path = project_dir)
   froggeR::write_readme(path = project_dir)
   froggeR::write_rproj(path = project_dir, name = name)
 
-  # Initialize project with default files
+  # Create Quarto document
   froggeR::write_quarto(
     filename = name,
     path = project_dir,

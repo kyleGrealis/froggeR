@@ -64,7 +64,8 @@ write_quarto <- function(
   }
 
   # If using the custom (default) template, ensure all requirements exist
-  if (default) {
+  #   outside of the froggeR Quarto project
+  if (default && !is_project) {
     # Ensure froggeR.options exist
     if (is.null(getOption('froggeR.options'))) {
       froggeR::write_options()
