@@ -64,10 +64,10 @@ write_quarto <- function(
   }
 
   # If using the custom (default) template, ensure all requirements exist
-  #   outside of the froggeR Quarto project
   if (default && !is_project) {
     # Ensure froggeR.options exist
     if (is.null(getOption('froggeR.options'))) {
+      ui_info('No froggeR.options found. Creating them now...')
       froggeR::write_options()
     }
 
@@ -91,11 +91,12 @@ write_quarto <- function(
       )
       ui_done('Created _quarto.yml')
     }
+  }
 
-    # Get custom-styled Quarto template
+  # Select template based on default setting
+  if (default) {
     template_path <- system.file('gists/custom_quarto.qmd', package = 'froggeR')
   } else {
-    # Get basic Quarto template
     template_path <- system.file('gists/basic_quarto.qmd', package = 'froggeR')
   }
 
