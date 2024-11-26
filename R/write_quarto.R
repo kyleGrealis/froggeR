@@ -30,6 +30,18 @@ write_quarto <- function(
   filename = 'frogs', path = getwd(), default = TRUE, is_project = FALSE
 ) {
 
+  # Validate inputs
+  if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
+    stop(
+      'Invalid filename. Use only letters, numbers, hyphens, and underscores.',
+      '\nExample: "my-analysis" or "frog_report"'
+    )
+  }
+
+  if (!is.logical(default) || !is.logical(is_project)) {
+    stop('Parameters "default" and "is_project" must be TRUE or FALSE')
+  }
+
   # Create directory if it doesn't exist
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -42,7 +54,7 @@ write_quarto <- function(
   # Set up full file path
   the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
 
-  # Warn user if a Quarto document with the same name already found in the project
+  # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {
     ui_info('**CAUTION!!**')
     if (ui_nope('{the_quarto_file} found in provided path! Overwrite?')) {
@@ -51,9 +63,9 @@ write_quarto <- function(
     }
   }
 
-  # If the users wants to use the custom YAML template check/create requirements
+  # If using the custom (default) template, ensure all requirements exist
   if (default) {
-    # Check/create froggeR.options in .Rprofile
+    # Ensure froggeR.options exist
     if (is.null(getOption('froggeR.options'))) {
       froggeR::write_options()
     }
@@ -61,16 +73,14 @@ write_quarto <- function(
     # Check/create _variables.yml to populate knitted Quarto doc
     if (!file.exists(file.path(path, '_variables.yml'))) {
       froggeR::write_variables(path)
-      ui_done('Created _variables.yml')
     }
 
     # Check/create custom.scss
     if (!file.exists(file.path(path, 'custom.scss'))) {
       froggeR::write_scss(path, name = 'custom')
-      ui_done('Created custom.scss')
     }
 
-    # Check/create _quarto.yml if not in a project
+    # Create _quarto.yml if not in a project and needed
     # NOTE: without this, the Quarto doc will knit with ?var:<field> instead
     #   of actually displaying populated values.
     if (!is_project && !file.exists(file.path(path, '_quarto.yml'))) {
@@ -86,6 +96,10 @@ write_quarto <- function(
   } else {
     # Get basic Quarto template
     template_path <- system.file('gists/basic_quarto.qmd', package = 'froggeR')
+  }
+
+  if (template_path == "") {
+    stop("Could not find Quarto template in package installation")
   }
 
   # Copy Quarto template to destination

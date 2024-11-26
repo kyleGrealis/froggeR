@@ -47,6 +47,18 @@
 
 quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
 
+  # Validate inputs
+  if (!grepl('^[a-zA-Z0-9_-]+$', name)) {
+    stop(
+      'Invalid project name. Use only letters, numbers, hyphens, and underscores.',
+      '\nExample: "my-project" or "frog_analysis"'
+    )
+  }
+
+  if (!is.logical(default)) {
+    stop('Parameter "default" must be TRUE or FALSE')
+  }
+
   # Normalize the base directory path
   base_dir <- normalizePath(base_dir, mustWork = TRUE)
   
@@ -62,9 +74,17 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   quarto::quarto_create_project(name, quiet = TRUE)
   ui_done(paste(name, 'Created a Quarto project directory'))
 
-  # Remove default files created by Quarto
-  file.remove(file.path(project_dir, paste0(name, '.qmd')))
-  file.remove(file.path(project_dir, '.gitignore'))
+  # Remove default files created by Quarto only if they exist
+  default_qmd <- file.path(project_dir, paste0(name, '.qmd'))
+  default_ignore <- file.path(project_dir, '.gitignore')
+  
+  if (file.exists(default_qmd)) file.remove(default_qmd)
+  if (file.exists(default_ignore)) file.remove(default_ignore)
+
+  # Create project files
+  froggeR::write_ignore(path = project_dir)
+  froggeR::write_readme(path = project_dir)
+  froggeR::write_rproj(path = project_dir, name = name)
 
   # Initialize project with default files
   froggeR::write_quarto(
@@ -73,11 +93,6 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
     default = default,
     is_project = TRUE
   )
-
-  froggeR::write_ignore(path = project_dir)
-  froggeR::write_readme(path = project_dir)
-  froggeR::write_scss(path = project_dir, name = 'custom')
-  froggeR::write_rproj(path = project_dir, name = name)
 
   ui_done('froggeR project setup complete. Opening in new session...')
 
