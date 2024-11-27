@@ -68,21 +68,26 @@ write_quarto <- function(
     # Get or create settings
     settings <- froggeR_settings(interactive = FALSE)
     
-    # Create supporting files
-    .write_variables(path, settings)
+    # Only create _variables.yml if it doesn't exist
+    if (!file.exists(file.path(path, '_variables.yml'))) {
+      .write_variables(path, settings)
+      ui_done('Created _variables.yml')
+    }
 
     # Check/create custom.scss
     if (!file.exists(file.path(path, 'custom.scss'))) {
       froggeR::write_scss(path, name = 'custom')
+      ui_done('Created custom.scss')
     }
 
     # Create _quarto.yml if not in a project and needed
     # NOTE: without this, the Quarto doc will knit with ?var:<field> instead
     #   of actually displaying populated values.
-    if (!is_project && !file.exists(file.path(path, '_quarto.yml'))) {
+    # Only create _quarto.yml if it doesn't exist
+    if (!file.exists(file.path(path, '_quarto.yml'))) {
       writeLines(
-        sprintf('project:\n  title: "%s"', basename(path)),
-        file.path(path, '_quarto.yml')
+          sprintf('project:\n  title: "%s"', basename(path)),
+          file.path(path, '_quarto.yml')
       )
       ui_done('Created _quarto.yml')
     }

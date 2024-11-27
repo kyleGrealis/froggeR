@@ -141,7 +141,8 @@ options(
     affiliations = "{settings$affiliations}",
     toc = "{settings$toc}"
   )
-)'
+)
+'
   )
   
   # Read existing content

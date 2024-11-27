@@ -95,6 +95,11 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   froggeR::write_readme(path = project_dir)
   froggeR::write_rproj(path = project_dir, name = name)
 
+  # If using default template, create SCSS
+  if (default) {
+    froggeR::write_scss(path = project_dir, name = 'custom')
+  }
+
   # Create Quarto document
   froggeR::write_quarto(
     filename = name,
