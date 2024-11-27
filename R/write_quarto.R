@@ -65,16 +65,11 @@ write_quarto <- function(
 
   # If using the custom (default) template, ensure all requirements exist
   if (default && !is_project) {
-    # Ensure froggeR.options exist
-    if (is.null(getOption('froggeR.options'))) {
-      ui_info('No froggeR.options found. Creating them now...')
-      froggeR::write_options()
-    }
-
-    # Check/create _variables.yml to populate knitted Quarto doc
-    if (!file.exists(file.path(path, '_variables.yml'))) {
-      froggeR::write_variables(path)
-    }
+    # Get or create settings
+    settings <- froggeR_settings(interactive = FALSE)
+    
+    # Create supporting files
+    .write_variables(path, settings)
 
     # Check/create custom.scss
     if (!file.exists(file.path(path, 'custom.scss'))) {

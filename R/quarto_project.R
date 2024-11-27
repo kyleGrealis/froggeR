@@ -86,11 +86,9 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   if (file.exists(default_qmd)) file.remove(default_qmd)
   if (file.exists(default_ignore)) file.remove(default_ignore)
 
-  # Set-up core requirements
-  if (is.null(getOption('froggeR.options'))) {
-    froggeR::write_options()
-  }
-  froggeR::write_variables(project_dir)
+  # Setup core requirements
+  settings <- froggeR_settings(interactive = FALSE)
+  .write_variables(project_dir, settings)
 
   # Create project files
   froggeR::write_ignore(path = project_dir)
