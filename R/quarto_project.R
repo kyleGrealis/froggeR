@@ -39,13 +39,30 @@
 #' \dontrun{
 #' # Create a new Quarto project that uses a custom formatted YAML header and
 #' # all other listed files:
-#' quarto_project('new_project', base_dir = getwd(), default = TRUE)
+#' quarto_project('frog_project', base_dir = getwd(), default = TRUE)
 #' 
 #' # Create a new Quarto project with generic YAML and all other listed files:
-#' quarto_project('new_project_2', base_dir = getwd(), default = FALSE)
+#' quarto_project('frog_project_2', base_dir = getwd(), default = FALSE)
 #' }
 
 quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
+
+  # Validate inputs
+  if (!grepl('^[a-zA-Z0-9_-]+$', name)) {
+    stop(
+      'Invalid project name. Use only letters, numbers, hyphens, and underscores.',
+      '\nExample: "my-project" or "frog_analysis"'
+    )
+  }
+
+  if (!is.logical(default)) {
+    stop('Parameter "default" must be TRUE or FALSE')
+  }
+
+  # Validate base_dir isn't a file path
+  if (file.exists(base_dir) && !dir.exists(base_dir)) {
+    stop('base_dir must be a directory, not a file')
+  }
 
   # Normalize the base directory path
   base_dir <- normalizePath(base_dir, mustWork = TRUE)
@@ -53,76 +70,50 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   # Create the full project path
   project_dir <- file.path(base_dir, name)
 
-  ############################################################################
   # Check if directory exists
   if (dir.exists(project_dir)) {
-    # Exit if directory currently exists
     stop(glue::glue('Directory named "{name}" exists in {base_dir}.')) 
-    return(NULL)
   }
-  ############################################################################
-
   
   # Create the Quarto project
   quarto::quarto_create_project(name, quiet = TRUE)
+  ui_done(paste(name, 'Created a Quarto project directory'))
 
-  # Construct the path to the default .qmd & .gitignore files
+  # Remove default files created by Quarto only if they exist
   default_qmd <- file.path(project_dir, paste0(name, '.qmd'))
-  default_ign <- file.path(project_dir, '.gitignore')
+  default_ignore <- file.path(project_dir, '.gitignore')
+  
+  if (file.exists(default_qmd)) file.remove(default_qmd)
+  if (file.exists(default_ignore)) file.remove(default_ignore)
 
-  # Remove the default .qmd & .gitignore files from quarto::create_quarto_project()
-  # Try to remove the default .qmd file
-  try({
-    if (file.exists(default_qmd)) {
-      file.remove(default_qmd)
-    } else {
-      ui_oops('Default Quarto document not found - continuing anyway')
-    }
-  }, silent = TRUE)
+  # Setup core requirements
+  settings <- froggeR_settings(interactive = FALSE)
+  .write_variables(project_dir, settings)
 
-  # Try to remove the default .gitignore
-  try({
-    if (file.exists(default_ign)) {
-      file.remove(default_ign)
-    } else {
-      ui_oops('Default .gitignore not found - continuing anyway')
-    }
-  }, silent = TRUE)
+  # Create project files
+  froggeR::write_ignore(path = project_dir)
+  froggeR::write_readme(path = project_dir)
+  froggeR::write_rproj(path = project_dir, name = name)
 
-  message('\n')
-  ui_done(paste(name, 'Quarto project directory has been created.'))
+  # If using default template, create SCSS
+  if (default) {
+    froggeR::write_scss(path = project_dir, name = 'custom')
+  }
 
-  # Initialize project with default files:
-  # Create Quarto doc
+  # Create Quarto document
   froggeR::write_quarto(
     filename = name,
     path = project_dir,
     default = default,
-    proj = TRUE
+    is_project = TRUE
   )
-  # Create .gitignore
-  froggeR::write_ignore(
-    path = project_dir
-  )
-  # Create README
-  froggeR::write_readme(
-    path = project_dir
-  )
-  # Create .scss file
-  froggeR::write_scss(
-    path = project_dir,
-    name = 'custom'
-  )
-  # Create .Rproj file
-  froggeR::write_rproj(
-    path = project_dir,
-    name = name
-  )
+
+  ui_done('froggeR project setup complete. Opening in new session...')
 
   # Open project in new window & session:
   rstudioapi::openProject(path = project_dir, newSession = TRUE)
 
   # Return the project directory path invisibly
   invisible(project_dir)
+
 }
-NULL

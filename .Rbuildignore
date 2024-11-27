@@ -8,3 +8,4 @@ PROG_NOTES.md
 ^_pkgdown\.yml$
 ^pkgdown$
 ^\.github$
+.quarto$

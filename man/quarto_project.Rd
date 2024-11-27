@@ -51,9 +51,9 @@ directory.
 \dontrun{
 # Create a new Quarto project that uses a custom formatted YAML header and
 # all other listed files:
-quarto_project('new_project', base_dir = getwd(), default = TRUE)
+quarto_project('frog_project', base_dir = getwd(), default = TRUE)
 
 # Create a new Quarto project with generic YAML and all other listed files:
-quarto_project('new_project_2', base_dir = getwd(), default = FALSE)
+quarto_project('frog_project_2', base_dir = getwd(), default = FALSE)
 }
 }

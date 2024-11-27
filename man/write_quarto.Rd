@@ -4,7 +4,12 @@
 \alias{write_quarto}
 \title{Start a Quarto file with a formatted template header}
 \usage{
-write_quarto(filename = "new", path = getwd(), default = TRUE, proj = FALSE)
+write_quarto(
+  filename = "frogs",
+  path = getwd(),
+  default = TRUE,
+  is_project = FALSE
+)
 }
 \arguments{
 \item{filename}{The name of the file. Do not include '.qmd'}
@@ -13,9 +18,9 @@ write_quarto(filename = "new", path = getwd(), default = TRUE, proj = FALSE)
 current working directory.}
 
 \item{default}{The default is set to TRUE and will create a Quarto template file
-that pulls infomation from the folder/_variables.yml file.}
+that pulls information from the folder/_variables.yml file.}
 
-\item{proj}{Set to \code{TRUE} for Quarto projects (for internal use).}
+\item{is_project}{Set to \code{TRUE} when used within a Quarto project (internal use).}
 }
 \value{
 A Quarto document with formatted YAML and two blank starter sections.
@@ -23,20 +28,19 @@ A Quarto document with formatted YAML and two blank starter sections.
 \description{
 This function creates a new Quarto document with a pre-formatted YAML header. The 
 default template requires a _variables.yml file. If none exists in the project, 
-a prompt is provided to create the file. The _variables.yml allows for a reusable
-custom header that will be applied to all \code{froggeR} default-style Quarto 
-documents.
+it will be created. The _variables.yml allows for a reusable custom header that 
+will be applied to all \code{froggeR} default-style Quarto documents.
 }
 \details{
-When \code{default = TRUE}, the project \code{path} is checked for a SCSS sheet.
-If none is found, a prompt offers to create one.
+When \code{default = TRUE}, all necessary supporting files (SCSS, _variables.yml,
+and _quarto.yml) will be created if they don't exist.
 
 NOTE: Please visit \url{https://quarto.org/docs/output-formats/html-themes.html} to 
 explore more Quarto theming options.
 }
 \examples{
 \dontrun{
-# To create new_doc.qmd:
-write_quarto(filename = "new_doc", path = "path/to/project")
+# To create frogs.qmd:
+write_quarto(filename = "frogs", path = "path/to/project")
 }
 }

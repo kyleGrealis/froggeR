@@ -35,27 +35,15 @@ write_ignore <- function(path = getwd()) {
   path <- normalizePath(path, mustWork = TRUE)
 
   the_ignore_file <- file.path(path, '.gitignore')
-  abort <- FALSE
 
   # path to .gitignore
   gist_path_ignore <- paste0(
     'https://gist.githubusercontent.com/RaymondBalise/1978fb42fc520ca57f670908e111585e/',
-    # this changes as the .gitignore gist is updated
     'raw/e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore'
   )
 
-  # Warn user if .gitignore is found in project
-  if (file.exists(the_ignore_file)) {
-    ui_info('**CAUTION!!**')
-    abort <- ui_nope('A .gitignore has been found in project level directory! Overwrite?')
-  }
-
-  if (!abort) {
-    download.file(gist_path_ignore, the_ignore_file, quiet = TRUE)
-    ui_done('\n.gitignore has been created.\n\n')
-  } else {
-    ui_oops('\n.gitignore was not changed.\n\n')
-  }
+  # Download and create .gitignore
+  download.file(gist_path_ignore, the_ignore_file, quiet = TRUE)
+  ui_done('Created .gitignore file')
 
 }
-NULL

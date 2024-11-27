@@ -30,52 +30,44 @@ write_readme <- function(path = getwd()) {
   if (!dir.exists(path)) {
     # Exit if directory does not exist
     stop("Directory does not exist") 
-    return(NULL)
   } 
 
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
 
-  the_readme_file <- file.path(path, 'README.md')
-  abort <- FALSE
-
-  # Warn user if README is found in project
-  if (file.exists(the_readme_file)) {
+  # Check for existing README
+  if (file.exists(file.path(path, 'README.md'))) {
     ui_info('**CAUTION!!**')
-    abort <- ui_nope('README.md found in project level directory! Overwrite?')
-  }
-
-  if (!abort) {
-
-    # Write README.md file:
-    # Get the correct path to README template in installed package
-    template_path <- system.file("gists/README.md", package = "froggeR")
-    
-    if (template_path == "") {
-      stop("Could not find README.md template in package installation")
+    if (ui_nope('README.md found in project level directory! Overwrite?')) {
+      ui_oops('README.md was not changed')
+      return(invisible(NULL))
     }
-
-    # Write README.md file
-    invisible(file.copy(
-      from = template_path,
-      to = file.path(path, "README.md")
-    ))
-    
-    ui_done('\nREADME.md has been created.\n\n')
-    
-    # Add DATED_PROGRESS_NOTES.md template
-    writeLines(
-      paste0(
-        "# Add project updates here\n", 
-        format(Sys.Date(), "%b %d, %Y"),
-        ": project started"
-      ),
-      con = file.path(paste0(path, "/DATED_PROGRESS_NOTES.md"))
-    )
-    ui_done('\nDATED_PROGRESS_NOTES.md has been created.\n\n')
-
-  } else {
-    ui_oops('\nREADME.md was not changed.\n\n')
   }
+
+  # Get README template path
+  template_path <- system.file("gists/README.md", package = "froggeR")
+  if (template_path == "") {
+    stop("Could not find README.md template in package installation")
+  }
+
+  # Write README.md file
+  invisible(file.copy(
+    from = template_path,
+    to = file.path(path, "README.md")
+  ))
+  ui_done('Created README.md')
+
+  # Add DATED_PROGRESS_NOTES.md template
+  writeLines(
+    paste0(
+      "# Add project updates here\n", 
+      format(Sys.Date(), "%b %d, %Y"),
+      ": project started"
+    ),
+    con = file.path(path, "DATED_PROGRESS_NOTES.md")
+  )
+  ui_done('Created DATED_PROGRESS_NOTES.md')
+
+  return(invisible(NULL))
+
 }
-NULL
