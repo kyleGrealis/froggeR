@@ -6,15 +6,14 @@
 <url><loc>/articles/index.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/reference/froggeR_settings.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/load_data.html</loc></url>
 <url><loc>/reference/quarto_project.html</loc></url>
 <url><loc>/reference/write_ignore.html</loc></url>
-<url><loc>/reference/write_options.html</loc></url>
 <url><loc>/reference/write_quarto.html</loc></url>
 <url><loc>/reference/write_readme.html</loc></url>
 <url><loc>/reference/write_rproj.html</loc></url>
 <url><loc>/reference/write_scss.html</loc></url>
-<url><loc>/reference/write_variables.html</loc></url>
 </urlset>
 
