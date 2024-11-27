@@ -7,8 +7,9 @@ reference:
   desc: "Functions for creating and setting up Quarto projects"
   contents:
   - quarto_project
-  - write_ignore
   - write_quarto
+  - froggeR_settings
+  - write_ignore
   - write_readme
   - write_rproj
   - write_scss
