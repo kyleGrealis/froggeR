@@ -12,8 +12,6 @@ reference:
   - write_readme
   - write_rproj
   - write_scss
-  - write_options
-  - write_variables
 
 - title: "Utilities"
   desc: "Helper functions for data science workflows"
