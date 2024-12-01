@@ -6,9 +6,9 @@ reference:
 - title: "Making a Project"
   desc: "Functions for creating and setting up Quarto projects"
   contents:
+  - froggeR_settings
   - quarto_project
   - write_quarto
-  - froggeR_settings
   - write_ignore
   - write_readme
   - write_rproj
