@@ -8,16 +8,15 @@
 
 ## Why froggeR?
 
-> Leap ahead in your data science journey with froggeR! Streamline your Quarto workflows with reusable templates, catch those pesky project setup bugs, and hop effortlessly through your R analyses - no lily pad hopping required! Create structured projects that'll make you want to croak with joy - your launch pad to amazing data science adventures! 🐸
+> Leap ahead in your data science journey with froggeR! Streamline your Quarto workflows with reusable templates, catch those pesky project setup bugs, and hop effortlessly through your R analyses! Create structured projects that'll make you want to croak with joy! 🐸
 
-Because project setup should be simple and fun! 🐸
+Because project setup should be simple 🐸
 
 - **Jump Right In**: Spend more time on analysis, less time on setup
 - **Consistency**: Maintain uniform document styling and structure across projects
-- **No More Setup Bugs**: Complex configs are un-froggin'-necessary!
+- **No More Setup Bugs**: Complex configs are unnecessary and can reduce efficiency
 - **Safety**: Enhanced data protection with comprehensive `.gitignore` settings
-- **Friendly for the Whole Pod**: Easier team onboarding with structured documentation
-- **Your Project, Your Way**: Use our ribbiting defaults or customize to your needs
+- **Friendly for the Whole Team**: Easier team onboarding with structured documentation
 
 ## Who's it for?
 
@@ -63,10 +62,10 @@ This creates a new Quarto project with:
 
 ### 🔄 Reusable YAML Headers
 
-Maintain consistency across your documents with `write_variables()`:
+Maintain consistency across your documents with `froggeR_settings()`:
 
 ```r
-froggeR::write_variables()
+froggeR::froggeR_settings()
 ```
 
 This interactive function helps you create a `_variables.yml` file containing:
@@ -160,12 +159,6 @@ Uncomment any lines to apply them to your document the next time you render it..
 
 ### 📚 Project Documentation
 
-Create a RStudio project:
-
-```r
-froggeR::write_rproj()
-```
-
 Generate structured README files:
 
 ```r
@@ -184,13 +177,12 @@ Includes sections for:
 
 | Function | Description | Key Benefit |
 |----------|-------------|-------------|
+| `froggeR_settings()` | Manages Quarto document settings | Persistent configuration management |
 | `quarto_project()` | Creates a complete Quarto project structure | One-command project setup |
-| `write_variables()` | Generates reusable YAML variables | Consistent document metadata |
 | `write_quarto()` | Creates templated Quarto documents | Standardized formatting |
 | `write_ignore()` | Sets up enhanced `.gitignore` | Better data security |
 | `write_readme()` | Creates structured README template | Improved project documentation |
 | `write_scss()` | Creates structured SCSS template | Consistent eye-catching reports |
-| `write_rproj()` | Sets up a RStudio project | Improved project workflow |
 
 ## Contributing
 
