@@ -39,13 +39,15 @@ during loading.
 }
 \details{
 The function automatically detects and loads the following file types:
-* .rda/.RData - load
-* .rds - readRDS
-* .sas7bdat - haven::read_sas
-* .csv - readr::read_csv
-* .xlsx - readxl::read_excel
-* .dta - haven::read_stata
-* .sav - haven::read_spss
+\itemize{
+  \item .rda/.RData - load
+  \item .rds - readRDS
+  \item .sas7bdat - haven::read_sas
+  \item .csv - readr::read_csv
+  \item .xlsx - readxl::read_excel
+  \item .dta - haven::read_stata
+  \item .sav - haven::read_spss
+}
 
 File names are converted to valid R object names using make.names().
 }
@@ -63,5 +65,4 @@ my_loader <- function(file) {
 }
 load_data("path/to/files", loader_function = my_loader)
 }
-
 }

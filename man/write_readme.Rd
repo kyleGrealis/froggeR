@@ -12,21 +12,24 @@ working directory.}
 }
 \value{
 A README.md template. Contains sections for project description (study
-name, principle investigator, & author), project setup steps for ease of portability,
-project file descriptions, project directory descriptions, and miscellaneous. 
-
-A \code{DATED_PROGRESS_NOTES.md} is also created to better maintain project status
-and updates.
-
-NOTE: Some documentation remains to provide the user with example descriptions for 
-files & directories. It is highly recommended to keep these sections. This is a 
-modifiable template and should be tailor-fit for your exact purpose.
+name, principal investigator, & author), project setup steps for ease of portability,
+project file descriptions, project directory descriptions, and miscellaneous.
 }
 \description{
 This function is designed to first check for the existence of a README file. If none
 is detected or the user chooses to overwrite the current README, a README template
-is downloaded from \url{https://gist.github.com/kyleGrealis} and written at the 
-project level.
+is loaded from \url{https://gist.github.com/kyleGrealis} and written to the project
+level.
+}
+\details{
+This function handles the creation and/or overwriting of both README.md
+and dated_progress_notes.md files. For each file, if it already exists, the user
+will be prompted whether to overwrite it. The dated_progress_notes.md file will
+be initialized with the current date and a "project started" message.
+
+NOTE: Some documentation remains to provide the user with example descriptions for
+files & directories. It is highly recommended to keep these sections. This is a
+modifiable template and should be tailor-fit for your exact purpose.
 }
 \examples{
 \dontrun{

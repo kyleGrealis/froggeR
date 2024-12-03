@@ -7,28 +7,35 @@
 write_scss(name = "custom", path = getwd())
 }
 \arguments{
-\item{name}{The name of the scss file without extension.}
+\item{name}{The name of the scss file without extension. Default \code{name} is
+"custom".}
 
 \item{path}{The path to the main project level. Defaults to the current
 working directory}
 }
 \value{
-A \code{.scss} file to customize Quarto styling.
+A \code{.scss} file to customize Quarto styling. If the file is not named
+"custom.scss", the function will also attempt to update the Quarto YAML configuration.
 }
 \description{
-This function creates the \code{.scss} file so that any Quarto project can be easily 
-customized with SCSS styling variables, mixins, and rules.
+This function creates the \code{.scss} file so that any Quarto project can be easily
+customized with SCSS styling variables, mixins, and rules. It also updates the
+Quarto YAML configuration to include the new style sheet.
 }
 \details{
 For more information on customizing Quarto documents with SCSS, please refer to
 \url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes} and
 \url{https://quarto.org/docs/output-formats/html-themes-more.html}. If you really
-would like to go down a rabbit hole: 
+would like to go down a rabbit hole:
 \url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
 you with over 1500 lines of SCSS variables!
 }
 \examples{
 \dontrun{
+# Create default custom.scss
 write_scss(name = "custom", path = "path/to/project")
+
+# Add another style sheet
+write_scss(name = "special_theme", path = "path/to/project")
 }
 }
