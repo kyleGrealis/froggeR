@@ -8,7 +8,7 @@
 
 ## Why froggeR?
 
-> Leap ahead in your data science journey with froggeR! Streamline your Quarto workflows with reusable templates, catch those pesky project setup bugs, and hop effortlessly through your R analyses! Create structured projects that'll make you want to croak with joy! 🐸
+> Leap ahead in your data science journey with froggeR! Streamline Quarto workflows, catch setup bugs before they happen, and create structured projects that make sharing and collaboration a breeze. 🐸
 
 Because project setup should be simple 🐸
 
