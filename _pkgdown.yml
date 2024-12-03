@@ -11,7 +11,6 @@ reference:
   - write_quarto
   - write_ignore
   - write_readme
-  - write_rproj
   - write_scss
 
 - title: "Utilities"
