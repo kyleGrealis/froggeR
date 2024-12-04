@@ -11,9 +11,12 @@ write_readme(path = getwd())
 working directory.}
 }
 \value{
-A README.md template. Contains sections for project description (study
-name, principal investigator, & author), project setup steps for ease of portability,
-project file descriptions, project directory descriptions, and miscellaneous.
+A README.md template. Contains sections for:\cr
+* Project description (study name, principal investigator, & author)\cr
+* Project setup steps for ease of portability\cr
+* Project file descriptions\cr
+* Project directory descriptions\cr
+* Miscellaneous
 }
 \description{
 This function is designed to first check for the existence of a README file. If none
@@ -22,14 +25,14 @@ is loaded from \url{https://gist.github.com/kyleGrealis} and written to the proj
 level.
 }
 \details{
-This function handles the creation and/or overwriting of both README.md
-and dated_progress_notes.md files. For each file, if it already exists, the user
-will be prompted whether to overwrite it. The dated_progress_notes.md file will
-be initialized with the current date and a "project started" message.
+This function handles the creation and/or overwriting of both \code{README.md}
+and \code{dated_progress_notes.md} files. For each file, if it already exists, 
+the user will be prompted whether to overwrite it. The \code{dated_progress_notes.md}
+file will be initialized with the current date and a "project started" message.
 
 NOTE: Some documentation remains to provide the user with example descriptions for
-files & directories. It is highly recommended to keep these sections. This is a
-modifiable template and should be tailor-fit for your exact purpose.
+files & directories. It is highly recommended to keep these sections. However, 
+this is a modifiable template and should be tailor-fit for your exact purpose.
 }
 \examples{
 \dontrun{

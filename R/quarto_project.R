@@ -6,28 +6,31 @@
 #' \code{quarto::quarto_create_project()} is replaced with \code{froggeR::write_quarto()}.
 #'
 #' Since this will most likely be a new project directory, \code{froggeR} searches for
-#' the existence of these other files and creates them by default:
-#'
-#'    - \code{_variables.yml}
-#'    - \code{.gitignore}
-#'    - \code{README.md}
-#'    - \code{DATED_PROGRESS_NOTES.md}
-#'    - \code{custom.scss}
-#'    - \code{.Rproj}
+#' the existence of these other files and creates them by default:\cr
+#' * \code{_variables.yml}\cr
+#' * \code{.gitignore}\cr
+#' * \code{README.md}\cr
+#' * \code{dated_progress_notes.md}\cr
+#' * \code{custom.scss}\cr
+#' * \code{.Rproj}
 #'
 #' If these files do not exist, \code{froggeR} will write them to the new project
 #' directory.
 #'
 #' @param name The name of the Quarto project directory and initial \code{.qmd} file.
 #' @param base_dir Base directory where the project should be created. Defaults to
-#' current working directory.
-#' @param default Set to TRUE. This will use the custom YAML within the initial. Change
-#' to \code{FALSE} if you would like the initial Quarto document to have a standard
-#' YAML header.
-#' \code{.qmd} file. See \code{?froggeR::write_quarto()} for more details on
-#' the default setting.
-#' @return A Quarto project with \code{.qmd}, \code{.gitignore}, \code{README.md},
-#' \code{DATED_PROGRESS_NOTES.md}, \code{custom.scss} & \code{.Rproj} files.
+#'   current working directory.
+#' @param default Set to TRUE. This will use the custom YAML within the initial
+#'   \code{.qmd} file. Change to \code{FALSE} if you would like the initial Quarto
+#'   document to have a standard YAML header. See \code{?froggeR::write_quarto()}
+#'   for more details on the default setting.
+#' @return A Quarto project with:\cr
+#' * \code{.qmd}\cr
+#' * \code{.gitignore}\cr
+#' * \code{README.md}\cr
+#' * \code{DATED_PROGRESS_NOTES.md}\cr
+#' * \code{custom.scss}\cr
+#' * \code{.Rproj}
 #'
 #' @export
 #' @examples

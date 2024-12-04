@@ -7,18 +7,21 @@
 #'
 #' @param path The path to the main project level. Defaults to the current
 #' working directory.
-#' @return A README.md template. Contains sections for project description (study
-#' name, principal investigator, & author), project setup steps for ease of portability,
-#' project file descriptions, project directory descriptions, and miscellaneous.
+#' @return A README.md template. Contains sections for:\cr
+#' * Project description (study name, principal investigator, & author)\cr
+#' * Project setup steps for ease of portability\cr
+#' * Project file descriptions\cr
+#' * Project directory descriptions\cr
+#' * Miscellaneous
 #'
-#' @details This function handles the creation and/or overwriting of both README.md
-#' and dated_progress_notes.md files. For each file, if it already exists, the user
-#' will be prompted whether to overwrite it. The dated_progress_notes.md file will
-#' be initialized with the current date and a "project started" message.
+#' @details This function handles the creation and/or overwriting of both \code{README.md}
+#' and \code{dated_progress_notes.md} files. For each file, if it already exists, 
+#' the user will be prompted whether to overwrite it. The \code{dated_progress_notes.md}
+#' file will be initialized with the current date and a "project started" message.
 #'
 #' NOTE: Some documentation remains to provide the user with example descriptions for
-#' files & directories. It is highly recommended to keep these sections. This is a
-#' modifiable template and should be tailor-fit for your exact purpose.
+#' files & directories. It is highly recommended to keep these sections. However, 
+#' this is a modifiable template and should be tailor-fit for your exact purpose.
 #'
 #' @export
 #' @examples

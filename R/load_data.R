@@ -19,16 +19,14 @@
 #'   environment.
 #'
 #' @details
-#' The function automatically detects and loads the following file types:
-#' \itemize{
-#'   \item .rda/.RData - load
-#'   \item .rds - readRDS
-#'   \item .sas7bdat - haven::read_sas
-#'   \item .csv - readr::read_csv
-#'   \item .xlsx - readxl::read_excel
-#'   \item .dta - haven::read_stata
-#'   \item .sav - haven::read_spss
-#' }
+#' The function automatically detects and loads the following file types:\cr
+#' * \code{.rda/.RData} - load\cr
+#' * \code{.rds} - readRDS\cr
+#' * \code{.sas7bdat} - haven::read_sas\cr
+#' * \code{.csv} - readr::read_csv\cr
+#' * \code{.xlsx} - readxl::read_excel\cr
+#' * \code{.dta} - haven::read_stata\cr
+#' * \code{.sav} - haven::read_spss
 #'
 #' File names are converted to valid R object names using make.names().
 #'

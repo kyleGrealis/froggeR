@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_ignore.R
 \name{write_ignore}
 \alias{write_ignore}
-\title{Create an aggressive project .gitignore file}
+\title{Create an aggressive project \code{.gitignore} file}
 \usage{
 write_ignore(path = getwd())
 }
@@ -11,23 +11,21 @@ write_ignore(path = getwd())
 current working directory.}
 }
 \value{
-A .gitignore file with enhanced security rules. The file includes:
-\itemize{
-  \item R data files (.RData, .rda, .rds)
-  \item Common data formats (CSV, Excel, text)
-  \item System and temporary files
-  \item IDE-specific files
-}
+A \code{.gitignore} file with enhanced security rules. The file includes:\cr
+* R data files (.RData, .rda, .rds)\cr
+* Common data formats (CSV, Excel, text)\cr
+* System and temporary files\cr
+* IDE-specific files
 }
 \description{
-This function creates or updates a .gitignore file with enhanced security measures
-designed to help prevent accidental data leaks. The template includes comprehensive
-rules for common data file types and sensitive information.
+This function creates or updates a \code{.gitignore} file with enhanced security 
+measures designed to help prevent accidental data leaks. The template includes 
+comprehensive rules for common data file types and sensitive information.
 }
 \details{
-If a .gitignore file already exists, the user will be prompted before any
+If a \code{.gitignore} file already exists, the user will be prompted before any
 overwriting occurs. The template provides substantial security enhancements
-over basic .gitignore files.
+over basic \code{.gitignore} files.
 
 WARNING: Always consult your organization's data security team before using git
 with any sensitive or protected health information (PHI). This template helps
