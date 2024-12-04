@@ -23,12 +23,11 @@ customized with SCSS styling variables, mixins, and rules. It also updates the
 Quarto YAML configuration to include the new style sheet.
 }
 \details{
-For more information on customizing Quarto documents with SCSS, please refer to
-\url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes} and
-\url{https://quarto.org/docs/output-formats/html-themes-more.html}. If you really
-would like to go down a rabbit hole:
-\url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
-you with over 1500 lines of SCSS variables!
+For more information on customizing Quarto documents with SCSS, please refer to:
+
+- \url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes}
+- \url{https://quarto.org/docs/output-formats/html-themes-more.html}. 
+- \url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss}
 }
 \examples{
 \dontrun{
