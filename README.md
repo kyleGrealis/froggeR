@@ -175,14 +175,14 @@ Includes sections for:
 
 ## Function Reference
 
-| Function | Description | Key Benefit |
-|----------|-------------|-------------|
-| `froggeR_settings()` | Manages Quarto document settings | Persistent configuration management |
-| `quarto_project()` | Creates a complete Quarto project structure | One-command project setup |
-| `write_quarto()` | Creates templated Quarto documents | Standardized formatting |
-| `write_ignore()` | Sets up enhanced `.gitignore` | Better data security |
-| `write_readme()` | Creates structured README template | Improved project documentation |
-| `write_scss()` | Creates structured SCSS template | Consistent eye-catching reports |
+| Function | Description |
+|----------|-------------|
+| `froggeR_settings()` | Manages Quarto document settings with persistent configuration storage |
+| `quarto_project()` | Creates a complete Quarto project structure in one command |
+| `write_quarto()` | Creates templated Quarto documents with standardized formatting |
+| `write_ignore()` | Sets up enhanced `.gitignore` for better data security |
+| `write_readme()` | Creates structured README template for improved documentation |
+| `write_scss()` | Creates structured SCSS template for professional styling |
 
 ## Contributing
 
