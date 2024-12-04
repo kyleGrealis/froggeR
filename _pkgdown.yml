@@ -2,18 +2,28 @@ url: ~
 template:
   bootstrap: 5
 
-reference:
-- title: "Making a Project"
-  desc: "Functions for creating and setting up Quarto projects"
-  contents:
-  - froggeR_settings
-  - quarto_project
-  - write_quarto
-  - write_ignore
-  - write_readme
-  - write_scss
+articles:
+  - title: Get Started
+    navbar: ~
+    contents:
+      - hopping-into-quarto
+  - title: User Guides
+    navbar: Guides
+    contents:
+      - quarto-workflow
+      - customizing-quarto
 
-- title: "Utilities"
-  desc: "Helper functions for data science workflows"
-  contents:
-  - load_data
+reference:
+  - title: "Making a Project"
+    desc: "Functions for creating and setting up Quarto projects"
+    contents:
+      - froggeR_settings
+      - quarto_project
+      - write_quarto
+      - write_ignore
+      - write_readme
+      - write_scss
+  - title: "Utilities"
+    desc: "Helper functions for data science workflows"
+    contents:
+      - load_data

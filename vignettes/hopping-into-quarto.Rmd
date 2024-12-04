@@ -1,0 +1,197 @@
+---
+title: "Hopping into Quarto with froggeR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Hopping into Quarto with froggeR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction 🐸
+
+`froggeR` streamlines Quarto workflows by providing a robust, user-friendly framework for project setup and document creation. This vignette demonstrates how `froggeR` can enhance your productivity while maintaining project consistency.
+
+```r
+# Install from GitHub
+remotes::install_github("kyleGrealis/froggeR")
+```
+
+----
+
+## Core Features
+
+Project setup often involves repetitive tasks that can impede your analysis workflow. `froggeR` addresses this by providing:
+
+* Automated project initialization with [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.html)
+* Configurable document templates via [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.html)
+* Reusable project configurations through [`froggeR_settings()`](https://kylegrealis.github.io/froggeR/reference/froggeR_settings.html)
+* Consistent styling with [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.html)
+* Enhanced version control setup
+
+----
+
+## Quick Start Guide
+
+Create a new Quarto project with a single command:
+
+```r
+froggeR::quarto_project(name = "frogs")
+```
+
+This command initializes a complete project structure with all necessary components:
+
+### Project Components
+
+1. **Quarto Document** (`frogs.qmd`)
+    * Pre-configured YAML header
+    * Professional styling
+    * Ready for immediate use
+
+2. **Style Sheet** (`custom.scss`)
+    * Modern design elements
+    * Customizable components
+    * Clear documentation
+
+3. **Project Configuration**
+    * `.Rproj` for RStudio integration
+    * `_variables.yml` for consistent metadata
+    * `.gitignore` for secure version control
+
+See `vignette("customizing-quarto", package = "froggeR")` for more detailed configuration options.
+
+----
+
+## Customization
+
+### Document Settings
+
+Manage your document settings with the interactive configuration tool (see `?froggeR_settings` for all options):
+
+```r
+# Configure your settings
+froggeR::froggeR_settings()
+
+# Create a new document using your settings
+froggeR::write_quarto(
+  filename = "analysis",
+  default = TRUE  # Use your configured settings
+)
+```
+
+### Visual Styling
+
+Customize your document appearance with SCSS (see `?write_scss` for more examples):
+
+```r
+# Create or modify style sheets
+froggeR::write_scss(name = "custom")
+```
+
+Example SCSS customizations:
+
+```scss
+/*-- scss:defaults --*/
+// Modern color scheme
+$primary: #2c365e;
+$body-bg: #fefefe;
+$link-color: $primary;
+
+/*-- scss:rules --*/
+.title-block {
+  margin-bottom: 2rem;
+  border-bottom: 3px solid $primary;
+}
+```
+
+----
+
+## Advanced Usage
+
+### Project Documentation
+
+Generate comprehensive project documentation:
+
+```r
+# Create structured README
+froggeR::write_readme()
+```
+
+This creates:
+
+* A detailed README.md
+* Progress tracking notes
+* Project structure documentation
+
+### Data Management
+
+Efficiently load multiple data files:
+
+```r
+# Load all supported files from a directory
+froggeR::load_data(
+  directory_path = "project/data",
+  recursive = TRUE  # Include subdirectories
+)
+```
+
+Supported formats include:
+
+* R data files (.rda, .RData, .rds)
+* Statistical software files (.sas7bdat, .dta, .sav)
+* Common data formats (.csv, .xlsx)
+
+----
+
+## Best Practices
+
+For optimal results with `froggeR`:
+
+1. **Project Organization**
+    * Use consistent naming conventions
+    * Maintain clear directory structure
+    * Document project changes
+
+2. **Version Control**
+    * Review `.gitignore` settings
+    * Update progress notes regularly
+    * Maintain README documentation
+
+3. **Styling**
+    * Test SCSS changes before implementation
+    * Document custom styling decisions
+    * Use variables for consistency
+
+----
+
+## Getting Help
+
+Need assistance? Several resources are available:
+
+* Function documentation (e.g., `?write_quarto`)
+* [GitHub repository](https://github.com/kyleGrealis/froggeR)
+* Issue tracker for bug reports and feature requests
+* See `vignette("customizing-quarto", package = "froggeR")` for styling details
+
+----
+
+## Summary
+
+`froggeR` provides a streamlined approach to Quarto project management, offering:
+
+* Efficient project initialization
+* Consistent document styling
+* Secure version control
+* Comprehensive documentation
+
+Happy analyzing! 🐸
+
+---
+
+*Elevating your Quarto workflow with automated excellence*

@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 One of `froggeR`'s core strengths is its ability to maintain consistent settings and styling across multiple projects. This vignette demonstrates how to set up and customize your Quarto documents using `froggeR`'s powerful configuration system.
 
+----
+
 ## Setting Up Reusable Options
 
 ### Initial Configuration
@@ -35,43 +37,50 @@ options(
   froggeR.options = list(
     name = "Your Name",
     email = "your.email@example.com",
-    orcid = "0000-0000-0000-0000",        # Optional
-    url = "https://github.com/username",  # Optional
-    affiliations = "Your Institution",    # Optional
-    toc = "Table of Contents"             # Defaults if empty
+    orcid = "0000-0000-0000-0000",         # Optional
+    url = "https://github.com/username",   # Optional
+    affiliations = "Your Institution",     # Optional
+    toc = "Table of Contents"              # Defaults if empty
   )
 )
 ```
 
-> Leaving values blank will not cause errors, but modify these values carefully.
+> **Note:** Leaving values blank will not cause errors, but modify these values carefully.
 
-These settings flow through your projects in this order:  
-1. `.Rprofile` stores your permanent settings  
-2. `froggeR` reads these when creating new projects  
-3. Settings populate `_variables.yml` in your project  
-4. Quarto documents use these variables automatically  
+These settings flow through your projects in this order:
 
-[IMAGE: man/figures/settings_flow.png]
-*How froggeR manages settings across projects*
+1. `.Rprofile` stores your permanent settings
+2. `froggeR` reads these when creating new projects
+3. Settings populate `_variables.yml` in your project
+4. Quarto documents use these variables automatically
+
+```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects'}
+knitr::include_graphics("man/figures/settings_flow.png")
+```
 
 ### Updating Your Settings
 
 You have two options for updating settings:
 
 1. **Interactive Update**
-   ```r
-   froggeR::froggeR_settings()  # Updates all settings interactively
-   ```
+
+    ```r
+    froggeR::froggeR_settings()  # Updates all settings interactively
+    ```
 
 2. **Manual Update**
-   ```r
-   usethis::edit_r_profile()    # Edit specific settings directly
-   ```
 
-After manual updates:  
-- Save the `.Rprofile` file  
-- Restart your R session  
-- New projects will use updated settings  
+    ```r
+    usethis::edit_r_profile()    # Edit specific settings directly
+    ```
+
+After manual updates:
+
+* Save the `.Rprofile` file
+* Restart your R session
+* New projects will use updated settings
+
+----
 
 ## Document Styling with SCSS
 
@@ -80,18 +89,18 @@ After manual updates:
 The [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.html) function creates a template with three main sections:
 
 1. **Defaults** (`/*-- scss:defaults --*/`)
-   - Basic styling variables
-   - Color schemes
-   - Font settings
+    * Basic styling variables
+    * Color schemes
+    * Font settings
 
 2. **Mixins** (`/*-- scss:mixins --*/`)
-   - Reusable style patterns
-   - Custom style functions
+    * Reusable style patterns
+    * Custom style functions
 
 3. **Rules** (`/*-- scss:rules --*/`)
-   - Specific element styling
-   - Custom classes
-   - Layout adjustments
+    * Specific element styling
+    * Custom classes
+    * Layout adjustments
 
 ### Working with Comments
 
@@ -103,9 +112,10 @@ The SCSS template uses `//` for commented styles. These act like a menu of styli
 // $body-bg: #fefefe;          // Background color
 // $link-color: $primary;        // Inherit from primary
 ```
+
 To activate any style:
 
-1. Remove the // at the start of the line
+1. Remove the `//` at the start of the line
 2. Save the file
 3. Re-render your document
 
@@ -113,8 +123,9 @@ To activate any style:
 
 #### Code Blocks
 
-Before:
-[IMAGE: man/figures/code_block_before.png]
+```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Code block styling - Before'}
+knitr::include_graphics("man/figures/code_block_before.png")
+```
 
 ```scss
 /*-- scss:defaults --*/
@@ -122,15 +133,17 @@ Before:
 // $font-family-monospace: "Source Code Pro", monospace;
 // $code-block-bg: darken($body-bg, 3%);
 ```
-Remove the // to activate:
+
+Remove the `//` to activate:
 
 ```scss
 $font-family-monospace: "Source Code Pro", monospace;
 $code-block-bg: darken($body-bg, 3%);
 ```
 
-After:
-[IMAGE: man/figures/code_block_after.png]
+```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Code block styling - After'}
+knitr::include_graphics("man/figures/code_block_after.png")
+```
 
 #### Theme Colors
 
@@ -138,14 +151,6 @@ The `custom.scss` template includes common color variables:
 
 ```scss
 /*-- scss:defaults --*/
-// Default (inactive):
-// $primary: #2c365e;
-// $body-bg: #fefefe;
-// $link-color: $primary;
-
-Activated with custom colors:
-
-```scss
 $primary: #1a936f;      // Forest green
 $body-bg: #f8f9fa;      // Light gray
 $link-color: $primary;    // Links match primary
@@ -181,9 +186,12 @@ code {
 }
 ```
 
+----
+
 ## Quick Styling Recipes
 
 ### Modern Document Headers
+
 ```scss
 /*-- scss:rules --*/
 .title-block {
@@ -196,6 +204,7 @@ code {
 ```
 
 ### Enhanced Code Blocks
+
 ```scss
 /*-- scss:defaults --*/
 $code-block-bg: #f8f9fa;
@@ -210,6 +219,7 @@ pre {
 ```
 
 ### Professional Links
+
 ```scss
 /*-- scss:rules --*/
 a:not(.nav-link) {
@@ -224,62 +234,72 @@ a:not(.nav-link) {
 }
 ```
 
+----
+
 ## Common Issues and Solutions
 
 ### Styling Problems
 
 1. **Styles Not Applying**
-   - Verify `custom.scss` is listed in YAML under `theme`
-   - Check file location (should be in project root)
-   - Ensure no syntax errors in SCSS
-   - Try clearing Quarto cache
+    * Verify `custom.scss` is listed in YAML under `theme`
+    * Check file location (should be in project root)
+    * Ensure no syntax errors in SCSS
+    * Try clearing Quarto cache
 
 2. **Font Issues**
-   ```yaml
-   format:
-     html:
-       mainfont: "Open Sans"
-       monofont: "Fira Code"
-       theme:
-         - custom.scss
-   ```
-   - Include Google Fonts in YAML
-   - Check font name spelling
-   - Use web-safe fallbacks
+
+    ```yaml
+    format:
+      html:
+        mainfont: "Open Sans"
+        monofont: "Fira Code"
+        theme:
+          - custom.scss
+    ```
+    * Include Google Fonts in YAML
+    * Check font name spelling
+    * Use web-safe fallbacks
 
 3. **Variable Scope**
-   - Define all variables in `scss:defaults`
-   - Reference variables after definition
-   - Use proper SCSS syntax (`$variable`)
+    * Define all variables in `scss:defaults`
+    * Reference variables after definition
+    * Use proper SCSS syntax (`$variable`)
 
 ### Settings Issues
 
 1. **Variables Not Updating**
-   - Restart R session after `.Rprofile` changes
-   - Check `_variables.yml` exists in project
-   - Verify YAML structure in documents
+    * Restart R session after `.Rprofile` changes
+    * Check `_variables.yml` exists in project
+    * Verify YAML structure in documents
 
 2. **Multiple Projects**
-   - Settings apply to new projects only
-   - Existing projects keep their settings
-   - Update `_variables.yml` manually if needed
+    * Settings apply to new projects only
+    * Existing projects keep their settings
+    * Update `_variables.yml` manually if needed
+
+----
 
 ## Additional Resources
 
-For more advanced SCSS customization options, visit:  
-- [Quarto HTML Themes](https://quarto.org/docs/output-formats/html-themes.html#customizing-themes)  
-- [More Theme Options](https://quarto.org/docs/output-formats/html-themes-more.html)  
-- [Bootstrap Variables](https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss)  
+For more advanced SCSS customization options, visit:
+
+* [Quarto HTML Themes](https://quarto.org/docs/output-formats/html-themes.html#customizing-themes)
+* [More Theme Options](https://quarto.org/docs/output-formats/html-themes-more.html)
+* [Bootstrap Variables](https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss)
+
+----
 
 ## Summary
 
-`froggeR` streamlines document customization:  
-1. Set up once with `froggeR_settings()`  
-2. Style with `write_scss()`  
-3. Reuse across all your projects  
-4. Update easily when needed  
+`froggeR` streamlines document customization:
+
+1. Set up once with `froggeR_settings()`
+2. Style with `write_scss()`
+3. Reuse across all your projects
+4. Update easily when needed
 
 Happy styling! 🐸
 
----
+----
+
 *Consistent, professional documents with minimal effort*
