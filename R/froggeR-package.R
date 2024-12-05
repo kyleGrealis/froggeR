@@ -12,7 +12,7 @@
 #' @importFrom rstudioapi openProject
 #' @importFrom stringr str_replace str_to_lower
 #' @importFrom tools file_path_sans_ext file_ext
-#' @importFrom usethis ui_done ui_info ui_yeah
+#' @importFrom usethis ui_done ui_info ui_oops ui_todo ui_yeah
 #' @importFrom utils download.file txtProgressBar setTxtProgressBar
 ## usethis namespace: end
 NULL
