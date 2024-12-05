@@ -10,3 +10,4 @@ PROG_NOTES.md
 ^\.github$
 .quarto$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
