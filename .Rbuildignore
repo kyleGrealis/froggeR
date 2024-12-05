@@ -9,3 +9,4 @@ PROG_NOTES.md
 ^pkgdown$
 ^\.github$
 .quarto$
+^cran-comments\.md$
