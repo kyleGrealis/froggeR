@@ -14,17 +14,18 @@ for non-interactive use by other functions.}
 Invisibly returns the current settings list
 }
 \description{
-Check, display, or update froggeR settings for Quarto documents. Settings are
+Check, display, or initialize froggeR settings for Quarto documents. Settings are
 stored in your \code{.Rprofile} for persistence and made available immediately in the
 current session.
 }
 \details{
 When run interactively, provides a menu to:\cr
 * Check current settings\cr
-* Update settings\cr
+* Initialize settings (first-time setup)\cr
+* Get help updating settings\cr
 * Cancel
 
-When settings are created or updated, they are:\cr
+When settings are created, they are:\cr
 * Stored in your \code{.Rprofile} for persistence across sessions\cr
 * Made available immediately in the current session\cr
 * Used to populate Quarto document variables
