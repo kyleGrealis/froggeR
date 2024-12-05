@@ -103,7 +103,11 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
     is_project = TRUE
   )
   
-  ui_done('froggeR project setup complete. Opening in new session...')
+  ui_done(
+    glue::glue(
+      '{col_green("froggeR")} project setup complete. Opening in new session...'
+    )
+  )
   
   # Open project in new window & session:
   rstudioapi::openProject(path = project_dir, newSession = TRUE)

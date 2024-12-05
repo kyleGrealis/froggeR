@@ -91,20 +91,12 @@ write_scss <- function(name = 'custom', path = getwd()) {
     ui_done(paste0('Created ', name, '.scss'))
     
     # Update YAML after successful file creation only if not custom.scss
-    if (name != "custom") {
+    if (name != 'custom') {
       .update_yaml(name)
     }
     
-    # Display reference links
-    links <- glue::glue(
-      'For more SCSS styling options, visit:
-      - https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
-      - https://quarto.org/docs/output-formats/html-themes-more.html
-      - https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss'
-    )
-    ui_info(links)
   } else {
-    ui_info("Operation cancelled - no file was created or modified.")
+    ui_info('Operation cancelled - no file was created or modified.')
   }
   
   return(invisible(NULL))
@@ -112,62 +104,130 @@ write_scss <- function(name = 'custom', path = getwd()) {
 
 # Helper function for YAML updates
 .update_yaml <- function(name) {
-  # Check if analysis.qmd exists
-  if (!file.exists("analysis.qmd")) {
-    ui_info("No analysis.qmd file found in the current directory.")
+  # Find all .qmd files in current directory (case-insensitive)
+  qmd_files <- list.files(pattern = '\\.qmd$', ignore.case = TRUE)
+  
+  if (length(qmd_files) == 0) {
+    ui_info('No .qmd files found in the current directory.')
     return(invisible(NULL))
   }
   
-  # Read the file content
-  qmd_content <- readr::read_file("analysis.qmd")
+  # Present options to user
+  message('\nFound the following .qmd file(s).\nWould you like to update any?')
+  for (i in seq_along(qmd_files)) {
+    message(glue::glue('{i}. {qmd_files[i]}'))
+  }
+  message(glue::glue('{length(qmd_files) + 1}. I\'m not sure, but show me how.'))
   
-  # Set up original & new YAML content
-  original_yaml <- glue::glue(
-    '
-    format:
-      html:
-        embed-resources: true
-        theme:
-          - default
-          - custom.scss'
-  )
-  new_yaml <- glue::glue(
-    '
-    format:
-      html:
-        embed-resources: true
-        theme:
-          - default
-          - custom.scss
-          - {name}.scss'
-  )
+  # Get user choice
+  choice <- readline(prompt = '#>> ')
   
-  # Check for custom.scss and ensure we're not processing custom.scss
-  if (grepl(original_yaml, qmd_content) && name != "custom") {
-    # Replace and insert new SCSS file with proper indentation
-    updated_content <- stringr::str_replace(
-      qmd_content,
-      original_yaml,
-      new_yaml
-    )
-    
-    # Update the YAML
-    readr::write_file(
-      updated_content,
-      file = "analysis.qmd"
-    )
-    ui_done('The YAML in analysis.qmd has been updated.')
-  } else if (!grepl(original_yaml, qmd_content)) {
-    # Provide console feedback
-    ui_info(glue::glue(
-      'Be sure to update your listed SCSS files in the YAML manually:\n',
+  if (choice == 'q') return(invisible(NULL))
+  
+  choice <- as.numeric(choice)
+  
+  if (choice == length(qmd_files) + 1) {
+    # Show manual update instructions
+    message(glue::glue(
+      '\n\nHere\'s how to update your listed SCSS files in the YAML:\n',
       'format:\n',
       '  html:\n',
       '    embed-resources: true\n',
       '    theme:\n',
       '      - default\n',
       '      - custom.scss\n',
-      '      - {name}.scss       # Add this line\n'
+      '      - {name}.scss       # Add this line\n',
+      '\n'
     ))
+    return(invisible(NULL))
+
+  } else {
+    # Update single file
+    file <- qmd_files[choice]
+    
+    # Read the file content
+    qmd_content <- readr::read_file(file)
+    # print(qmd_content)  # debugging
+    
+    # Set up original YAML content based on platform
+    original_yaml <- 
+      if (.Platform$OS.type == 'windows') {
+        'format:\r\n  html:\r\n    embed-resources: true\r\n    theme:\r\n      - default\r\n      - custom.scss'
+      } else {
+        'format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss'
+      }
+
+    new_yaml <- glue::glue(
+      '
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+      - {name}.scss'
+    )
+    
+    # Check for custom.scss and ensure we're not processing custom.scss
+    if (grepl(original_yaml, qmd_content) && name != 'custom') {
+      # Replace and insert new SCSS file with proper indentation
+      updated_content <- stringr::str_replace(
+        qmd_content,
+        original_yaml,
+        new_yaml
+      )
+
+      # print(str_detect(qmd_content, original_yaml))  # debugging
+      
+      # Preview changes
+      message('\nProposed changes:\n')
+      message(new_yaml)
+      message('\n')
+      
+      # Confirm before writing
+      confirm <- readline(
+        prompt = glue::glue(
+          'Write changes to {file}? (y/n): '
+        )
+      )
+      
+      if (tolower(confirm) == 'y') {
+        # Update the YAML
+        readr::write_file(
+          updated_content,
+          file = file
+        )
+        ui_done(glue::glue('Updated {file}'))
+      } else {
+        ui_todo(
+          glue::glue(
+            '{file} was not changed, but you can update it manaually by following the example above.\n'
+          )
+        )
+      }
+    } else if (!grepl(original_yaml, qmd_content)) {
+      # Provide console feedback for manual update
+      message(glue::glue(
+        '\nCould not automatically update. Please update your YAML manually:\n',
+        'format:\n',
+        '  html:\n',
+        '    embed-resources: true\n',
+        '    theme:\n',
+        '      - default\n',
+        '      - custom.scss\n',
+        '      - {name}.scss       # Add this line\n',
+        '\n'
+      ))
+    }
   }
+
+  # Display reference links
+  links <- glue::glue(
+    'For more SCSS styling options, visit:
+    - https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
+    - https://quarto.org/docs/output-formats/html-themes-more.html
+    - https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss'
+  )
+  ui_info(links)
+  
 }
