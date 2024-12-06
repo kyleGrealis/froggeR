@@ -125,26 +125,28 @@ To activate any style:
 
 ### Basic Customization Examples
 
-#### Code Blocks
+#### Link Color
 
-```{r, echo=FALSE, fig.align='center', fig.cap='Code block styling - Before', out.width='70%'}
-knitr::include_graphics("../man/figures/code_block_before.png")
+Here's an example of changing the default link color from the assigned `$primary` color (blue) to dark green.
+
+```{r, echo=FALSE, fig.align='center', fig.cap='Link color styling - Before', out.width='70%'}
+knitr::include_graphics("../man/figures/link_color_before.png")
 ```
 
 ```scss
 /*-- scss:defaults --*/
 // These lines are inactive (commented out):
-// $font-family-monospace: "Source Code Pro", monospace;
+// $link-color: $primary;
 ```
 
-Remove the `//` to activate:
+Remove the `//` to activate and change `$primary` to `#1e6909`:
 
 ```scss
-$font-family-monospace: "Source Code Pro", monospace;
+$link-color: #1e69090;
 ```
 
-```{r, echo=FALSE, fig.align='center', fig.cap='Code block styling - After', out.width='70%'}
-knitr::include_graphics("../man/figures/code_block_after.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Link color styling - After', out.width='70%'}
+knitr::include_graphics("../man/figures/link_color_after.png")
 ```
 
 #### Theme Colors
@@ -155,7 +157,6 @@ The `custom.scss` template includes common color variables:
 /*-- scss:defaults --*/
 $primary: #1a936f;      // Forest green
 $body-bg: #f8f9fa;      // Light gray
-$link-color: $primary;    // Links match primary
 ```
 
 ### Advanced Customization
