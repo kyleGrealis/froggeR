@@ -54,8 +54,12 @@ These settings flow through your projects in this order:
 3. Settings populate `_variables.yml` in your project
 4. Quarto documents use these variables automatically
 
-```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects'}
-knitr::include_graphics("man/figures/settings_flow.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (.Rprofile)', out.width='70%'}
+knitr::include_graphics("../man/figures/settings_flow.png")
+```
+
+```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (_variables.yml)', out.width='70%'}
+knitr::include_graphics("../man/figures/settings_flow2.png")
 ```
 
 ### Updating Your Settings
@@ -123,26 +127,24 @@ To activate any style:
 
 #### Code Blocks
 
-```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Code block styling - Before'}
-knitr::include_graphics("man/figures/code_block_before.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Code block styling - Before', out.width='70%'}
+knitr::include_graphics("../man/figures/code_block_before.png")
 ```
 
 ```scss
 /*-- scss:defaults --*/
 // These lines are inactive (commented out):
 // $font-family-monospace: "Source Code Pro", monospace;
-// $code-block-bg: darken($body-bg, 3%);
 ```
 
 Remove the `//` to activate:
 
 ```scss
 $font-family-monospace: "Source Code Pro", monospace;
-$code-block-bg: darken($body-bg, 3%);
 ```
 
-```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Code block styling - After'}
-knitr::include_graphics("man/figures/code_block_after.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Code block styling - After', out.width='70%'}
+knitr::include_graphics("../man/figures/code_block_after.png")
 ```
 
 #### Theme Colors
