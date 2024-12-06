@@ -6,7 +6,7 @@ Authors@R:
     person(
         "Kyle", 
         "Grealis", 
-        email = "<kyleGrealis@icloud.com>", 
+        email = "kyleGrealis@icloud.com", 
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-9223-8854")
     )
@@ -21,7 +21,6 @@ Description: Streamlines Quarto workflows by providing tools for consistent proj
     consistent formatting across multiple documents.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5.0)
@@ -47,3 +46,5 @@ Config/build/copy-resources:
     inst/gists/README.md
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://github.com/kyleGrealis/froggeR
+BugReports: https://github.com/kyleGrealis/froggeR/issues

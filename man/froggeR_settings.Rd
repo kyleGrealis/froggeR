@@ -14,24 +14,25 @@ for non-interactive use by other functions.}
 Invisibly returns the current settings list
 }
 \description{
-Check, display, or update froggeR settings for Quarto documents. Settings are
-stored in your .Rprofile for persistence and made available immediately in the
+Check, display, or initialize froggeR settings for Quarto documents. Settings are
+stored in your \code{.Rprofile} for persistence and made available immediately in the
 current session.
 }
 \details{
-When run interactively, provides a menu to:
-1. Check current settings
-2. Update settings
-3. Cancel
+When run interactively, provides a menu to:\cr
+* Check current settings\cr
+* Initialize settings (first-time setup)\cr
+* Get help updating settings\cr
+* Cancel
 
-When settings are created or updated, they are:
-- Stored in your .Rprofile for persistence across sessions
-- Made available immediately in the current session
-- Used to populate Quarto document variables
+When settings are created, they are:\cr
+* Stored in your \code{.Rprofile} for persistence across sessions\cr
+* Made available immediately in the current session\cr
+* Used to populate Quarto document variables
 
-The following is added to your .Rprofile when settings are saved:
-```r
-options(
+The following is added to your \code{.Rprofile} when settings are saved:
+
+\preformatted{options(
   froggeR.options = list(
     name = "Your Name",
     email = "your.email@example.com",
@@ -40,8 +41,7 @@ options(
     affiliations = "Your Institution",  # optional
     toc = "Table of Contents"  # defaults if empty
   )
-)
-```
+)}
 }
 \examples{
 \dontrun{

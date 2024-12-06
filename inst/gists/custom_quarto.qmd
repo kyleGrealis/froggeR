@@ -10,12 +10,12 @@ author:
 abstract: ""
 keywords: "" # add keywords like "research" or "public health"
 number-sections: false
-format: 
-  html: 
+format:
+  html:
     embed-resources: true
-    theme: 
-        - default
-        - custom.scss
+    theme:
+      - default
+      - custom.scss
     toc: true
     toc-title: "{{< var toc >}}"
     toc-location: left
@@ -24,12 +24,11 @@ format:
     code-fold: true
     code-summary: "Show code"
     page-layout: full
-    grid: 
+    grid:
       margin-width: 0px
 editor: source
 ---
 
-<!-- create a horizontal line to separate the header from the content -->
 ---
 
 ## Section 1

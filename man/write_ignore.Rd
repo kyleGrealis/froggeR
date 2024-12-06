@@ -2,32 +2,39 @@
 % Please edit documentation in R/write_ignore.R
 \name{write_ignore}
 \alias{write_ignore}
-\title{Create an aggressive project .gitignore file}
+\title{Create an aggressive project \code{.gitignore} file}
 \usage{
 write_ignore(path = getwd())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to the 
+\item{path}{The path to the main project level. Defaults to the
 current working directory.}
 }
 \value{
-A .gitignore file. This has substanital upgrades from the basic .gitignore in
-that it enhances data security. Some upgrades include ignoring R's data files (i.e.-- 
-.RData, .rda, & .rds) as well as CSV, Excel, and text files. 
-
-NOTE: Please review the contents and add other pertinent file types as appropriate.
-
-WARNING: Check with your organization's data security team before using git with 
-any sensitive and protected health information. The author assumes no liability.
+A \code{.gitignore} file with enhanced security rules. The file includes:\cr
+* R data files (.RData, .rda, .rds)\cr
+* Common data formats (CSV, Excel, text)\cr
+* System and temporary files\cr
+* IDE-specific files
 }
 \description{
-This function is designed to first check for the existence of a .gitignore file. If none
-is detected or the user chooses to overwrite the current .gitignore, a .gitignore
-is downloaded from \url{https://gist.githubusercontent.com/RaymondBalise} and written 
-at the project level.
+This function creates or updates a \code{.gitignore} file with enhanced security 
+measures designed to help prevent accidental data leaks. The template includes 
+comprehensive rules for common data file types and sensitive information.
+}
+\details{
+If a \code{.gitignore} file already exists, the user will be prompted before any
+overwriting occurs. The template provides substantial security enhancements
+over basic \code{.gitignore} files.
+
+WARNING: Always consult your organization's data security team before using git
+with any sensitive or protected health information (PHI). This template helps
+prevent accidental data exposure but should not be considered a complete
+security solution.
 }
 \examples{
 \dontrun{
+# Create new .gitignore
 write_ignore(path = "path/to/project")
 }
 }
