@@ -211,21 +211,24 @@ act like a menu of styling options:</p>
 <h3 id="basic-customization-examples">Basic Customization Examples<a class="anchor" aria-label="anchor" href="#basic-customization-examples"></a>
 </h3>
 <div class="section level4">
-<h4 id="code-blocks">Code Blocks<a class="anchor" aria-label="anchor" href="#code-blocks"></a>
+<h4 id="link-color">Link Color<a class="anchor" aria-label="anchor" href="#link-color"></a>
 </h4>
+<p>Here’s an example of changing the default link color from the
+assigned <code>$primary</code> color (blue) to dark green.</p>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/code_block_before.png" alt="Code block styling - Before" width="70%"><p class="caption">
-Code block styling - Before
+<img src="../reference/figures/link_color_before.png" alt="Link color styling - Before" width="70%"><p class="caption">
+Link color styling - Before
 </p>
 </div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">// These lines are inactive (commented out):</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">// $font-family-monospace: "Source Code Pro", monospace;</span></span></code></pre></div>
-<p>Remove the <code>//</code> to activate:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="va">$font-family-monospace</span><span class="ch">:</span> <span class="st">"Source Code Pro"</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">// $link-color: $primary;</span></span></code></pre></div>
+<p>Remove the <code>//</code> to activate and change
+<code>$primary</code> to <code>#1e6909</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="va">$link-color</span><span class="ch">:</span> <span class="cn">#1e6909</span><span class="dv">0</span><span class="op">;</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/code_block_after.png" alt="Code block styling - After" width="70%"><p class="caption">
-Code block styling - After
+<img src="../reference/figures/link_color_after.png" alt="Link color styling - After" width="70%"><p class="caption">
+Link color styling - After
 </p>
 </div>
 </div>
@@ -236,8 +239,7 @@ Code block styling - After
 variables:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="va">$primary</span><span class="ch">:</span> <span class="cn">#1a936f</span><span class="op">;</span>      <span class="co">// Forest green</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="va">$body-bg</span><span class="ch">:</span> <span class="cn">#f8f9fa</span><span class="op">;</span>      <span class="co">// Light gray</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="va">$link-color</span><span class="ch">:</span> <span class="va">$primary</span><span class="op">;</span>    <span class="co">// Links match primary</span></span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="va">$body-bg</span><span class="ch">:</span> <span class="cn">#f8f9fa</span><span class="op">;</span>      <span class="co">// Light gray</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
