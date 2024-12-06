@@ -1,8 +1,8 @@
 ---
-title: "Hopping into Quarto with froggeR"
+title: "Get Hopping with froggeR"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Hopping into Quarto with froggeR}
+  %\VignetteIndexEntry{Get Hopping with froggeR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

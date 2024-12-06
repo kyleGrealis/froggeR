@@ -135,6 +135,14 @@ The `default = TRUE` template leverages your project's `_variables.yml` settings
 
 ----
 
+## Rendered Output
+
+```{r, echo=FALSE, fig.align='center', fig.cap='Example output of "default" document', out.width='85%'}
+knitr::include_graphics("../man/figures/rendered_doc.png")
+```
+
+----
+
 ## Workflow Integration
 
 ### Project-Level Workflow
