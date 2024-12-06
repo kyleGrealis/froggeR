@@ -30,6 +30,10 @@ Because project setup should be simple 🐸
 
 ----
 
+<img src="man/figures/rendered_doc.png" align="center" width="80%" />
+
+----
+
 ## Installation
 
 You can install `froggeR` from GitHub:
