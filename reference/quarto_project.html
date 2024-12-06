@@ -21,10 +21,19 @@ quarto::quarto_create_project() is replaced with froggeR::write_quarto()."><meta
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/froggeR.html">Get started</a></li>
-<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/hopping-into-quarto.html">Hopping into Quarto with froggeR</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Guides</h6></li>
+    <li><a class="dropdown-item" href="../articles/quarto-workflow.html">Quarto Workflow with froggeR</a></li>
+    <li><a class="dropdown-item" href="../articles/customizing-quarto.html">Customizing Quarto with froggeR</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/kyleGrealis/froggeR/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -33,7 +42,7 @@ quarto::quarto_create_project() is replaced with froggeR::write_quarto()."><meta
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Create a custom Quarto project</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/kyleGrealis/froggeR/blob/main/R/quarto_project.R" class="external-link"><code>R/quarto_project.R</code></a></small>
       <div class="d-none name"><code>quarto_project.Rd</code></div>
     </div>
 
@@ -63,28 +72,32 @@ current working directory.</p></dd>
 
 
 <dt id="arg-default">default<a class="anchor" aria-label="anchor" href="#arg-default"></a></dt>
-<dd><p>Set to TRUE. This will use the custom YAML within the initial. Change
-to <code>FALSE</code> if you would like the initial Quarto document to have a standard
-YAML header.
-<code>.qmd</code> file. See <code>?froggeR::write_quarto()</code> for more details on
-the default setting.</p></dd>
+<dd><p>Set to TRUE. This will use the custom YAML within the initial
+<code>.qmd</code> file. Change to <code>FALSE</code> if you would like the initial Quarto
+document to have a standard YAML header. See <code>?froggeR::write_quarto()</code>
+for more details on the default setting.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A Quarto project with <code>.qmd</code>, <code>.gitignore</code>, <code>README.md</code>,
-<code>DATED_PROGRESS_NOTES.md</code>, <code>custom.scss</code> &amp; <code>.Rproj</code> files.</p>
+    <p>A Quarto project with:<br>
+* <code>.qmd</code><br>
+* <code>.gitignore</code><br>
+* <code>README.md</code><br>
+* <code>DATED_PROGRESS_NOTES.md</code><br>
+* <code>custom.scss</code><br>
+* <code>.Rproj</code></p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Since this will most likely be a new project directory, <code>froggeR</code> searches for
-the existence of these other files and creates them by default:</p>
-<p>- <code>_variables.yml</code></p>
-<p>- <code>.gitignore</code></p>
-<p>- <code>README.md</code></p>
-<p>- <code>DATED_PROGRESS_NOTES.md</code></p>
-<p>- <code>custom.scss</code></p>
-<p>- <code>.Rproj</code></p>
+the existence of these other files and creates them by default:<br>
+* <code>_variables.yml</code><br>
+* <code>.gitignore</code><br>
+* <code>README.md</code><br>
+* <code>dated_progress_notes.md</code><br>
+* <code>custom.scss</code><br>
+* <code>.Rproj</code></p>
 <p>If these files do not exist, <code>froggeR</code> will write them to the new project
 directory.</p>
     </div>

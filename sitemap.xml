@@ -2,10 +2,13 @@
 <url><loc>/404.html</loc></url>
 <url><loc>/LICENSE-text.html</loc></url>
 <url><loc>/LICENSE.html</loc></url>
-<url><loc>/articles/froggeR.html</loc></url>
+<url><loc>/articles/customizing-quarto.html</loc></url>
+<url><loc>/articles/hopping-into-quarto.html</loc></url>
 <url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/quarto-workflow.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
 <url><loc>/reference/froggeR_settings.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/load_data.html</loc></url>
@@ -13,7 +16,6 @@
 <url><loc>/reference/write_ignore.html</loc></url>
 <url><loc>/reference/write_quarto.html</loc></url>
 <url><loc>/reference/write_readme.html</loc></url>
-<url><loc>/reference/write_rproj.html</loc></url>
 <url><loc>/reference/write_scss.html</loc></url>
 </urlset>
 
