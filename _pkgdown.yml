@@ -7,9 +7,6 @@ articles:
     navbar: ~
     contents:
       - hopping-into-quarto
-  - title: User Guides
-    navbar: Guides
-    contents:
       - quarto-workflow
       - customizing-quarto
 
