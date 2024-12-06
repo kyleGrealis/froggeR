@@ -32,8 +32,13 @@ froggeR::quarto_project(name = "frogs")
 
 This single command creates a complete project structure:
 
-```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Project directory structure example'}
-knitr::include_graphics("man/figures/project_structure.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Project initialization example', out.width='70%'}
+knitr::include_graphics("../man/figures/project_init.png")
+```
+
+
+```{r, echo=FALSE, fig.align='center', fig.cap='Project directory structure example', out.width='70%'}
+knitr::include_graphics("../man/figures/project_structure.png")
 ```
 
 Your new project includes:
@@ -72,8 +77,8 @@ Each component serves a specific purpose:
     * Customizable elements
     * Clear documentation
 
-```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Integrated YAML structure example'}
-knitr::include_graphics("man/figures/project_yaml.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Integrated YAML structure example', out.width='70%'}
+knitr::include_graphics("../man/figures/project_yaml.png")
 ```
 
 ----
@@ -122,9 +127,11 @@ froggeR::write_quarto(
     * No external dependencies
     * Quick start for simple docs
 
-```{r, echo=FALSE, eval=FALSE, fig.align='center', fig.cap='Comparison of document types'}
-knitr::include_graphics("man/figures/document_types.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Comparison of document types', out.width='85%'}
+knitr::include_graphics("../man/figures/document_types.png")
 ```
+
+The `default = TRUE` template leverages your project's `_variables.yml` settings, automatically populating author information, styling, and other metadata. This means you can focus immediately on content creation rather than document setup. Conversely, `default = FALSE` provides a minimal template when you need a standalone document without project-specific configurations.
 
 ----
 
