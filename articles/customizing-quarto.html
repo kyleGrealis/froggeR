@@ -121,6 +121,16 @@ but modify these values carefully.</p>
 <li>Settings populate <code>_variables.yml</code> in your project</li>
 <li>Quarto documents use these variables automatically</li>
 </ol>
+<div class="figure" style="text-align: center">
+<img src="../reference/figures/settings_flow.png" alt="How froggeR manages settings across projects (.Rprofile)" width="70%"><p class="caption">
+How froggeR manages settings across projects (.Rprofile)
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="../reference/figures/settings_flow2.png" alt="How froggeR manages settings across projects (_variables.yml)" width="70%"><p class="caption">
+How froggeR manages settings across projects (_variables.yml)
+</p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="updating-your-settings">Updating Your Settings<a class="anchor" aria-label="anchor" href="#updating-your-settings"></a>
@@ -203,13 +213,21 @@ act like a menu of styling options:</p>
 <div class="section level4">
 <h4 id="code-blocks">Code Blocks<a class="anchor" aria-label="anchor" href="#code-blocks"></a>
 </h4>
+<div class="figure" style="text-align: center">
+<img src="../reference/figures/code_block_before.png" alt="Code block styling - Before" width="70%"><p class="caption">
+Code block styling - Before
+</p>
+</div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">// These lines are inactive (commented out):</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">// $font-family-monospace: "Source Code Pro", monospace;</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">// $code-block-bg: darken($body-bg, 3%);</span></span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">// $font-family-monospace: "Source Code Pro", monospace;</span></span></code></pre></div>
 <p>Remove the <code>//</code> to activate:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="va">$font-family-monospace</span><span class="ch">:</span> <span class="st">"Source Code Pro"</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="va">$code-block-bg</span><span class="ch">:</span> <span class="fu">darken(</span><span class="va">$body-bg</span><span class="op">,</span> <span class="dv">3</span><span class="dt">%</span><span class="fu">)</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="va">$font-family-monospace</span><span class="ch">:</span> <span class="st">"Source Code Pro"</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="../reference/figures/code_block_after.png" alt="Code block styling - After" width="70%"><p class="caption">
+Code block styling - After
+</p>
+</div>
 </div>
 <div class="section level4">
 <h4 id="theme-colors">Theme Colors<a class="anchor" aria-label="anchor" href="#theme-colors"></a>
