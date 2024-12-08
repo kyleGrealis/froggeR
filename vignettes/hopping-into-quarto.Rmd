@@ -129,24 +129,6 @@ This creates:
 * Progress tracking notes
 * Project structure documentation
 
-### Data Management
-
-Efficiently load multiple data files:
-
-```r
-# Load all supported files from a directory
-froggeR::load_data(
-  directory_path = "project/data",
-  recursive = TRUE  # Include subdirectories
-)
-```
-
-Supported formats include:
-
-* R data files (.rda, .RData, .rds)
-* Statistical software files (.sas7bdat, .dta, .sav)
-* Common data formats (.csv, .xlsx)
-
 ----
 
 ## Best Practices
