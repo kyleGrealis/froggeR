@@ -25,8 +25,11 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # Create a new temporary directory for the example
+#' temp_dir <- tempdir()
+#' 
 #' # Create new .gitignore
-#' write_ignore(path = "path/to/project")
+#' write_ignore(path = temp_dir)
 #' }
 write_ignore <- function(path = getwd()) {
   # Check if directory exists

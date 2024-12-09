@@ -19,11 +19,14 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # Create a new temporary directory for the example
+#' temp_dir <- tempdir()
+#' 
 #' # Create default custom.scss
-#' write_scss(name = "custom", path = "path/to/project")
+#' write_scss(name = "custom", path = temp_dir)
 #'
 #' # Add another style sheet
-#' write_scss(name = "special_theme", path = "path/to/project")
+#' write_scss(name = "special_theme", path = temp_dir)
 #' }
 write_scss <- function(name = 'custom', path = getwd()) {
   # Check if directory exists

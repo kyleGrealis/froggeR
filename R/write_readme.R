@@ -26,7 +26,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' write_readme(path = "path/to/project")
+#' # Create a new temporary directory for the example
+#' temp_dir <- tempdir()
+#' 
+#' write_readme(path = temp_dir)
 #' }
 write_readme <- function(path = getwd()) {
   # Check if directory exists
