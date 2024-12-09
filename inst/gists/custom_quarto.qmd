@@ -1,7 +1,7 @@
 ---
 title: "Title"
 author: 
-    name: "{{< var author >}}"
+    name: "{{< var name >}}"
     url: "{{< var url >}}"
     email: "{{< var email >}}"
     orcid: "{{< var orcid >}}"
