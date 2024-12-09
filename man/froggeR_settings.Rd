@@ -4,51 +4,62 @@
 \alias{froggeR_settings}
 \title{Manage froggeR settings}
 \usage{
-froggeR_settings(interactive = TRUE)
+froggeR_settings(interactive = TRUE, verbose = TRUE, update_project = FALSE)
 }
 \arguments{
-\item{interactive}{If TRUE (default), provides menu-driven interface. Set to FALSE
-for non-interactive use by other functions.}
+\item{interactive}{If TRUE (default), provides menu-driven interface.}
+
+\item{verbose}{If TRUE (default), display messages. Applies to both interactive and
+non-interactive modes.}
+
+\item{update_project}{If TRUE, updates the _variables.yml file in the current project
+directory (if it exists).}
 }
 \value{
 Invisibly returns the current settings list
 }
 \description{
 Check, display, or initialize froggeR settings for Quarto documents. Settings are
-stored in your \code{.Rprofile} for persistence and made available immediately in the
-current session.
+stored in \code{~/.config/froggeR/config.yml} for persistence throughout 
+\code{froggeR} projects.
 }
 \details{
 When run interactively, provides a menu to:\cr
 * Check current settings\cr
 * Initialize settings (first-time setup)\cr
-* Get help updating settings\cr
-* Cancel
+* Modify existing settings\cr
+* Save and exit\cr
+* Exit without saving
 
 When settings are created, they are:\cr
-* Stored in your \code{.Rprofile} for persistence across sessions\cr
-* Made available immediately in the current session\cr
+* Stored in \code{~/.config/froggeR/config.yml} for persistence across sessions\cr
 * Used to populate Quarto document variables
 
-The following is added to your \code{.Rprofile} when settings are saved:
+The following is added to your \code{config.yml} when settings are saved:
 
-\preformatted{options(
-  froggeR.options = list(
-    name = "Your Name",
-    email = "your.email@example.com",
-    orcid = "0000-0000-0000-0000",  # optional
-    url = "https://github.com/username",  # optional
-    affiliations = "Your Institution",  # optional
-    toc = "Table of Contents"  # defaults if empty
-  )
-)}
+\preformatted{
+  name: Your Name
+  email: your.email@example.com
+  orcid: 0000-0000-0000-0000
+  url: https://github.com/yourUsername
+  affiliations: Your Institution
+  toc: Table of Contents
+}
 }
 \examples{
 \dontrun{
-# Interactive menu for users
-froggeR_settings()
+  # Interactive mode (default)
+  froggeR_settings()
+}
 
-# Get current settings
-settings <- froggeR_settings(interactive = FALSE)
+\donttest{
+  # Non-interactive mode, display current settings
+  settings <- froggeR_settings(interactive = FALSE, verbose = TRUE)
+  print(settings)
+}
+
+\dontrun{
+  # Update project's _variables.yml file
+  froggeR_settings(update_project = TRUE)
 }
 }

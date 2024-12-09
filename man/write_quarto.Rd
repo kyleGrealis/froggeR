@@ -44,10 +44,13 @@ visit \url{https://quarto.org/docs/output-formats/html-themes.html}.
 }
 \examples{
 \dontrun{
+# Create a new temporary directory for the example
+temp_dir <- tempdir()
+
 # Create a new Quarto document with default settings
-write_quarto(filename = "frogs", path = "path/to/project")
+write_quarto(filename = "frogs", path = temp_dir)
 
 # Create a basic Quarto document without custom formatting
-write_quarto(filename = "simple_doc", default = FALSE)
+write_quarto(filename = "simple_doc", path = temp_dir, default = FALSE)
 }
 }

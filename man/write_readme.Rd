@@ -36,6 +36,9 @@ this is a modifiable template and should be tailor-fit for your exact purpose.
 }
 \examples{
 \dontrun{
-write_readme(path = "path/to/project")
+# Create a new temporary directory for the example
+temp_dir <- tempdir()
+
+write_readme(path = temp_dir)
 }
 }
