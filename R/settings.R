@@ -1,237 +1,203 @@
 #' Manage froggeR settings
 #'
 #' Check, display, or initialize froggeR settings for Quarto documents. Settings are
-#' stored in your \code{.Rprofile} for persistence and made available immediately in the
-#' current session.
+#' stored in \code{~/.config/froggeR/config.yml} for persistence throughout 
+#' \code{froggeR} projects.
 #'
 #' When run interactively, provides a menu to:\cr
 #' * Check current settings\cr
 #' * Initialize settings (first-time setup)\cr
-#' * Get help updating settings\cr
-#' * Cancel
+#' * Modify existing settings\cr
+#' * Save and exit\cr
+#' * Exit without saving
 #'
 #' When settings are created, they are:\cr
-#' * Stored in your \code{.Rprofile} for persistence across sessions\cr
-#' * Made available immediately in the current session\cr
+#' * Stored in \code{~/.config/froggeR/config.yml} for persistence across sessions\cr
 #' * Used to populate Quarto document variables
 #'
-#' The following is added to your \code{.Rprofile} when settings are saved:
+#' The following is added to your \code{config.yml} when settings are saved:
 #'
-#' \preformatted{options(
-#'   froggeR.options = list(
-#'     name = "Your Name",
-#'     email = "your.email@example.com",
-#'     orcid = "0000-0000-0000-0000",  # optional
-#'     url = "https://github.com/username",  # optional
-#'     affiliations = "Your Institution",  # optional
-#'     toc = "Table of Contents"  # defaults if empty
-#'   )
-#' )}
+#' \preformatted{
+#'   name: Your Name
+#'   email: your.email@example.com
+#'   orcid: 0000-0000-0000-0000
+#'   url: https://github.com/yourUsername
+#'   affiliations: Your Institution
+#'   toc: Table of Contents
+#' }
 #'
-#' @param interactive If TRUE (default), provides menu-driven interface. Set to FALSE
-#' for non-interactive use by other functions.
+#' @param interactive If TRUE (default), provides menu-driven interface.
+#' @param verbose If TRUE (default), display messages. Applies to both interactive and
+#'  non-interactive modes.
+#' @param update_project If TRUE, updates the _variables.yml file in the current project
+#'  directory (if it exists).
 #' @return Invisibly returns the current settings list
 #'
 #' @export
 #' @examples
 #' \dontrun{
-#' # Interactive menu for users
-#' froggeR_settings()
-#'
-#' # Get current settings
-#' settings <- froggeR_settings(interactive = FALSE)
+#'   # Interactive mode (default)
+#'   froggeR_settings()
 #' }
-froggeR_settings <- function(interactive = TRUE) {
-  # Get current settings if they exist
-  settings <- getOption('froggeR.options')
-  
-  if (interactive) {
-    # Interactive menu for users
-    choice <- utils::menu(
-      c("Check current settings", 
-        "Initialize settings (first-time setup)",
-        "Get help updating settings",
-        "Cancel"),
-      title = glue::glue(
-        'Please select from the following {col_green("froggeR")} settings options:'
-      )
-    )
-    
-    switch(choice,
-      # 1: Display current settings
-      {
-        if (is.null(settings)) {
-          ui_oops(
-            glue::glue(
-              'No {col_green("froggeR")} settings found.'
-            )
-          )
-          return(invisible(NULL))
-        }
-        display_settings(settings)
-      },
-      # 2: Initialize settings
-      {
-        if (!is.null(settings)) {
-          ui_oops('Settings already exist. To update them, use option 3 for guidance.')
-          return(invisible(NULL))
-        }
-        settings <- collect_settings()
-        .write_options(settings)
-        ui_done('Settings initialized successfully!')
-      },
-      # 3: Help updating settings
-      {
-        message('\nTo update your settings:')
-        message(glue::glue('1. Run: {col_blue("usethis::edit_r_profile()")}'))
-        message('2. Carefully edit your settings in the .Rprofile file')
-        message('3. Save and close the file')
-        message('4. Restart your R session')
-        message('\nNeed help? Visit: https://github.com/kyleGrealis/froggeR')
-      },
-      # 4: Cancel
-      {
-        return(invisible(NULL))
-      }
-    )
+#' 
+#' \donttest{
+#'   # Non-interactive mode, display current settings
+#'   settings <- froggeR_settings(interactive = FALSE, verbose = TRUE)
+#'   print(settings)
+#' }
+#' 
+#' \dontrun{
+#'   # Update project's _variables.yml file
+#'   froggeR_settings(update_project = TRUE)
+#' }
+froggeR_settings <- function(interactive = TRUE, verbose = TRUE, update_project = FALSE) {
+
+  # Set configuration path and filename
+  config_path <- rappdirs::user_config_dir('froggeR')
+  config_file <- file.path(config_path, 'config.yml')
+
+  # Read existing settings or create default
+  if (file.exists(config_file)) {
+    settings <- yaml::read_yaml(config_file)
   } else {
-    # Non-interactive mode for internal use
-    if (is.null(settings)) {
-      settings <- collect_settings()
-      .write_options(settings)
-    }
+    settings <- list(
+      name = '',
+      email = '',
+      orcid = '',
+      url = '',
+      affiliations = '',
+      toc = ''
+    )
   }
-  
-  invisible(settings)
-}
 
-# Helper function to collect settings from user
-collect_settings <- function() {
-  list(
-    name = readline('Author name: '),
-    email = readline('Email address: '),
-    orcid = readline('ORCID (optional): '),
-    url = readline('Enter URL (optional): '),
-    affiliations = readline('Affiliation (optional): '),
-    toc = { 
-      toc <- readline('Table of contents title (ENTER for default): ')
-      if (toc == '') 'Table of Contents' else toc
-    }
-  )
-}
-
-# Helper function to display current settings
-display_settings <- function(settings) {
-  ui_info(glue::glue('Current {col_green("froggeR")} settings:'))
-  message(glue::glue(
-'\n
-  name: {settings$name}
-  email: {settings$email}
-  orcid: {settings$orcid}
-  url: {settings$url}
-  affiliations: {settings$affiliations}
-  toc: {settings$toc}
-
-'
-  ))
-}
-
-# Internal function to write settings to .Rprofile
-.write_options <- function(settings) {
-  # Find .Rprofile location
-  rprofile_path <- path.expand('~/.Rprofile')
-  
-  # Backup existing .Rprofile if it exists
-  if (file.exists(rprofile_path)) {
-    backup_path <- paste0(rprofile_path, '.backup')
-    file.copy(rprofile_path, backup_path, overwrite = TRUE)
-    ui_done('Created .Rprofile backup')
-  }
-  
-  # Create content for .Rprofile
-  content <- glue::glue('
-# froggeR Quarto YAML options:
-options(
-  froggeR.options = list(
-    name = "{settings$name}",
-    email = "{settings$email}",
-    orcid = "{settings$orcid}",
-    url = "{settings$url}",
-    affiliations = "{settings$affiliations}",
-    toc = "{settings$toc}"
-  )
-)
-'
+  setting_names <- list(
+    'Name', 'e-mail', 'ORCID', 'URL', 'Affiliation', 'Table of Contents'
   )
   
-  # Read existing content
-  existing_content <- if (file.exists(rprofile_path)) {
-    readLines(rprofile_path)
-  } else {
-    character(0)
-  }
-  
-    # Remove any existing froggeR.options block
-  if (length(existing_content) > 0) {
-    # Find the start of any froggeR blocks
-    comment_lines <- grep("^\\s*#\\s*froggeR\\s+Quarto\\s+YAML\\s+options:", existing_content)
-    options_lines <- grep("^\\s*options\\s*\\(", existing_content)
-    
-    # For each potential block start
-    for (start_line in c(comment_lines, options_lines)) {
-      if (start_line <= length(existing_content)) {
-        # Find the matching closing parenthesis
-        bracket_count <- 0
-        end_line <- start_line
-        
-        # Look for complete block (handles nested parentheses)
-        for (i in start_line:length(existing_content)) {
-          line <- existing_content[i]
-          bracket_count <- bracket_count + 
-            stringr::str_count(line, "\\(") - 
-            stringr::str_count(line, "\\)")
-          
-          if (bracket_count <= 0) {
-            end_line <- i
-            break
+  if (interactive && interactive()) {
+    repeat {
+      if (all(sapply(settings, function(x) x == ''))) {
+        message(sprintf(
+          '\nNo %s settings found. Would you like to configure them now?', 
+          cli::col_green('froggeR')
+        ))
+        if (tolower(readline('Enter "y" for "yes": ')) == 'y') {
+          message('Leave blank for default.')
+          for (i in seq_along(settings)) {
+            settings[[i]] <- readline(sprintf('Enter value for %s: ', setting_names[[i]]))
           }
         }
-        
-        # Remove the block if it contains froggeR settings
-        block_text <- paste(existing_content[start_line:end_line], collapse = " ")
-        if (grepl("froggeR\\.options|name\\s*=|email\\s*=", block_text)) {
-          existing_content <- existing_content[-(start_line:end_line)]
+      } else {
+        message(sprintf('\nCurrent %s settings:', cli::col_green('froggeR')))
+        for (i in seq_along(settings)) {
+          displayed_value <- if(names(settings)[i] == 'toc' && settings[[i]] == '') {
+            'Table of Contents'
+          } else {
+            settings[[i]]
+          }
+          # Display output with padding for longest entry name
+          message(sprintf(
+            '%d. %-*s %s', i, 19, paste0(setting_names[i], ':'), displayed_value
+          ))
         }
       }
+  
+      message(sprintf('\n%s settings menu:', cli::col_green('froggeR')))
+      message('Select an item [1-6] to modify:')
+      message('7. Modify all settings')
+      message('8. Save and exit')
+      message('9. Exit without saving')
+  
+      choice <- as.integer(readline('Enter your selection: '))
+  
+      if (choice >= 1 && choice <= 6) {
+        message('Leave blank for default.')
+        new_value <- 
+          readline(sprintf('Enter new value for %s: ', names(settings)[choice]))
+        if (new_value != '') settings[[choice]] <- new_value
+
+      } else if (choice == 7) {
+        message('Leave blank for default.')
+        for (i in seq_along(settings)) {
+          new_value <- readline(sprintf('Enter new value for %s: ', setting_names[i]))
+          if (new_value != '') settings[[i]] <- new_value
+        }
+
+      } else if (choice == 8) {
+        # Handle when 'toc' is left blank
+        if (settings$toc == '') settings$toc <- 'Table of Contents'
+  
+        dir.create(config_path, showWarnings = FALSE, recursive = TRUE)
+        yaml::write_yaml(settings, config_file)
+        ui_done(sprintf('Settings saved to %s', config_file))
+
+        if (update_project | ui_yeah('Update _variables.yml in current project?')) {
+          variables_file <- file.path(getwd(), '_variables.yml')
+          if (file.exists(variables_file)) {
+            file.copy(from = config_file, to = variables_file, overwrite = TRUE)
+            ui_done('Updated _variables.yml in the current project')
+          } else {
+            ui_oops('No _variables.yml found in the current project')
+          }
+        }
+        break
+
+      } else if (choice == 9) {
+        ui_oops('Exiting without saving.')
+        break
+
+      # Exceptions  
+      } else if (is.na(choice)) {
+        return(NULL)
+      } else {
+        ui_oops('Invalid choice. Please try again.')
+      }
     }
-    
-    # Remove any duplicate closing parentheses
-    existing_content <- existing_content[!grepl("^\\s*\\)\\s*$", existing_content)]
-    
-    # Remove any empty lines at the end
-    while (length(existing_content) > 0 && grepl("^\\s*$", existing_content[length(existing_content)])) {
-      existing_content <- existing_content[-length(existing_content)]
+
+  } else if (verbose) {
+    # End interactive mode
+    if (all(sapply(settings, function(x) x == ''))) {
+      message(sprintf('No %s settings found.', cli::col_green('froggeR')))
+    } else {
+      message(sprintf('Current %s settings:', cli::col_green('froggeR')))
+      for (i in seq_along(settings)) {
+        displayed_value <- if (names(settings)[i] == 'toc' && settings[[i]] == '') {
+          'Table of Contents'
+        } else {
+          settings[[i]]
+        }
+        message(sprintf(
+          '%d. %-*s %s', i, 19, paste0(setting_names[i], ':'), displayed_value
+        ))
+      }
     }
   }
-  
-  # Write updated content
-  writeLines(c(existing_content, content), rprofile_path)
-  
-  # Set options for current session
-  options(froggeR.options = settings)
+
+  # Handle default 'toc' value before returning
+  if (settings$toc == '') settings$toc <- 'Table of Contents'
+
+  invisible(settings)
+
 }
+
 
 # Internal function to write variables.yml
 .write_variables <- function(path, settings) {
-  content <- glue::glue(
-'author: {settings$name}
-email: {settings$email}
-orcid: {settings$orcid}
-url: {settings$url}
-affiliations: {settings$affiliations}
-toc: {settings$toc}'
-  )
-  
-  writeLines(content, file.path(path, '_variables.yml'))
-  ui_done('Created _variables.yml')
+
+  config_path <- rappdirs::user_config_dir('froggeR')
+  config_file <- file.path(config_path, 'config.yml')
+  variables_file <- file.path(path, '_variables.yml')
+
+  if (!file.exists(config_file)) {
+    ui_oops(sprintf(
+      'Config file not found. Run %s first.', cli::col_green('froggeR_settings()')
+    ))
+  }
+
+  if (file.copy(from = config_file, to = variables_file, overwrite = TRUE)) {
+    ui_done('Created _variables.yml')
+  } else {
+    ui_oops('Failed to create _variables.yml')
+  }
+
 }
