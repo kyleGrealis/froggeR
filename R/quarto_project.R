@@ -35,12 +35,17 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Create a new Quarto project that uses a custom formatted YAML header and
-#' # all other listed files:
-#' quarto_project('frog_project', base_dir = getwd(), default = TRUE)
+#' # Create a temporary directory for the example
+#' temp_dir <- tempdir()
+#' 
+#' # Create a new Quarto project with custom formatted YAML header
+#' quarto_project('frog_project', base_dir = temp_dir, default = TRUE)
 #'
-#' # Create a new Quarto project with generic YAML and all other listed files:
-#' quarto_project('frog_project_2', base_dir = getwd(), default = FALSE)
+#' # Create a new Quarto project with generic YAML
+#' quarto_project('frog_project_2', base_dir = temp_dir, default = FALSE)
+#' 
+#' # Clean up
+#' unlink(file.path(temp_dir, c("frog_project", "frog_project_2")), recursive = TRUE)
 #' }
 quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   # Validate inputs
@@ -82,7 +87,7 @@ quarto_project <- function(name, base_dir = getwd(), default = TRUE) {
   if (file.exists(default_ignore)) file.remove(default_ignore)
   
   # Setup core requirements
-  settings <- froggeR_settings(interactive = FALSE)
+  settings <- froggeR_settings(interactive = TRUE, verbose = TRUE, update_project = TRUE)
   .write_variables(project_dir, settings)
   
   # Create project files

@@ -28,11 +28,14 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # Create a new temporary directory for the example
+#' temp_dir <- tempdir()
+#' 
 #' # Create a new Quarto document with default settings
-#' write_quarto(filename = "frogs", path = "path/to/project")
+#' write_quarto(filename = "frogs", path = temp_dir)
 #'
 #' # Create a basic Quarto document without custom formatting
-#' write_quarto(filename = "simple_doc", default = FALSE)
+#' write_quarto(filename = "simple_doc", path = temp_dir, default = FALSE)
 #' }
 write_quarto <- function(
     filename = 'frogs', path = getwd(), default = TRUE, is_project = FALSE
@@ -73,12 +76,13 @@ write_quarto <- function(
   # If using the custom (default) template, ensure all requirements exist
   if (default && !is_project) {
     # Get or create settings
-    settings <- froggeR_settings(interactive = FALSE)
+    settings <- froggeR_settings(
+      interactive = TRUE, verbose = TRUE, update_project = TRUE
+    )
     
     # Only create _variables.yml if it doesn't exist
     if (!file.exists(file.path(path, '_variables.yml'))) {
       .write_variables(path, settings)
-      ui_done('Created _variables.yml')
     }
     
     # Check/create custom.scss
