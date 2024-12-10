@@ -1,44 +1,47 @@
-#' Start a Quarto file with a formatted template header
+#' Create a new Quarto document
 #'
-#' This function creates a new Quarto document with a pre-formatted YAML header. The
-#' default template requires a \code{_variables.yml} file. If none exists in the project,
-#' it will be created. The \code{_variables.yml} allows for a reusable custom header that
-#' will be applied to all \code{froggeR} default-style Quarto documents.
+#' This function creates a new Quarto document (\code{.qmd} file) with either a custom
+#' or standard YAML header. When using a custom header, it integrates with 
+#' \code{_variables.yml} for reusable metadata across documents.
 #'
-#' @param filename The name of the file without the '.qmd' extension. Only letters,
-#' numbers, hyphens, and underscores are allowed.
-#' @param path The path to the main project level. Defaults to the
-#' current working directory.
-#' @param default The default is set to TRUE and will create a Quarto template file
-#' that pulls information from the folder/_variables.yml file.
-#' @param is_project Set to \code{TRUE} when used within a Quarto project (internal use).
+#' @param filename Character string. The name of the file without the '.qmd' extension.
+#'   Only letters, numbers, hyphens, and underscores are allowed.
+#' @param path Character string. The directory where the file will be created. 
+#'   Defaults to the current working directory.
+#' @param custom_yaml Logical. If TRUE (default), creates a Quarto document with a
+#'   custom YAML header using values from '_variables.yml'. If FALSE, creates a
+#'   standard Quarto document with basic YAML headers.
+#' @param is_project Logical. Set to TRUE when used within a Quarto project 
+#'   (internal use).
+#'
+#' @return Invisibly returns NULL after creating the Quarto document.
 #'
 #' @details
-#' When \code{default = TRUE}, the function will create or verify the existence of:\cr
-#' * \code{_variables.yml} - For document metadata\cr
-#' * \code{custom.scss} - For document styling\cr
-#' * \code{_quarto.yml} - For project configuration
+#' When \code{custom_yaml = TRUE} and \code{is_project = FALSE}, the function will:
+#' \itemize{
+#'   \item Create or update \code{_variables.yml} for document metadata
+#'   \item Create \code{custom.scss} for document styling (if it doesn't exist)
+#'   \item Create \code{_quarto.yml} for project configuration (if it doesn't exist)
+#' }
+#' Existing files will not be modified. For Quarto styling options, see
+#' \url{https://quarto.org/docs/output-formats/html-themes.html}.
 #'
-#' If any of these files already exist, they will not be modified. For styling options,
-#' visit \url{https://quarto.org/docs/output-formats/html-themes.html}.
+#' If froggeR settings don't exist and \code{custom_yaml = TRUE}, the function will
+#' prompt the user to create settings using \code{froggeR_settings()}.
 #'
-#' @return Creates a new Quarto document with formatted YAML and two blank starter
-#' sections. Returns \code{invisible(NULL)}.
+#' @seealso \code{\link{quarto_project}}, \code{\link{froggeR_settings}}
 #'
 #' @export
 #' @examples
 #' \dontrun{
-#' # Create a new temporary directory for the example
-#' temp_dir <- tempdir()
-#' 
-#' # Create a new Quarto document with default settings
-#' write_quarto(filename = "frogs", path = temp_dir)
+#'   # Create a new Quarto document with custom YAML
+#'   write_quarto(filename = "frog_analysis", path = tempdir())
 #'
-#' # Create a basic Quarto document without custom formatting
-#' write_quarto(filename = "simple_doc", path = temp_dir, default = FALSE)
+#'   # Create a basic Quarto document with standard YAML
+#'   write_quarto(filename = "frog_analysis_basic", path = tempdir(), custom_yaml = FALSE)
 #' }
 write_quarto <- function(
-    filename = 'frogs', path = getwd(), default = TRUE, is_project = FALSE
+  filename = 'frogs', path = getwd(), custom_yaml = TRUE, is_project = FALSE
 ) {
   # Validate inputs
   if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
@@ -48,8 +51,8 @@ write_quarto <- function(
     )
   }
   
-  if (!is.logical(default) || !is.logical(is_project)) {
-    stop('Parameters "default" and "is_project" must be TRUE or FALSE')
+  if (!is.logical(custom_yaml) || !is.logical(is_project)) {
+    stop('Parameters "custom_yaml" and "is_project" must be TRUE or FALSE')
   }
   
   # Create directory if it doesn't exist
@@ -73,17 +76,12 @@ write_quarto <- function(
     }
   }
   
-  # If using the custom (default) template, ensure all requirements exist
-  if (default && !is_project) {
-    # Get or create settings
-    settings <- froggeR_settings(
-      interactive = TRUE, verbose = TRUE, update_project = TRUE
-    )
-    
-    # Only create _variables.yml if it doesn't exist
-    if (!file.exists(file.path(path, '_variables.yml'))) {
-      .write_variables(path, settings)
-    }
+  # If using the custom (custom_yaml) template, ensure all requirements exist
+  if (custom_yaml && !is_project) {
+    # Setup core requirements
+    settings <- froggeR_settings(update = FALSE)
+    .update_variables_yml(path, settings)
+    .check_settings(settings)
     
     # Check/create custom.scss
     if (!file.exists(file.path(path, 'custom.scss'))) {
@@ -103,8 +101,8 @@ write_quarto <- function(
     }
   }
   
-  # Select template based on default setting
-  if (default) {
+  # Select template based on custom_yaml setting
+  if (custom_yaml) {
     template_path <- system.file('gists/custom_quarto.qmd', package = 'froggeR')
   } else {
     template_path <- system.file('gists/basic_quarto.qmd', package = 'froggeR')
