@@ -39,5 +39,5 @@ Config/build/copy-resources:
     inst/gists/README.md
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://github.com/kyleGrealis/froggeR
+URL: https://kylegrealis.github.io/froggeR/
 BugReports: https://github.com/kyleGrealis/froggeR/issues
