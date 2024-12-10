@@ -1,13 +1,16 @@
 # froggeR 0.2.0
+* Renamed `default` parameter to `custom_yaml` in `quarto_project()` and `write_quarto()` for clarity.
 * Refactored `froggeR_settings()` to use YAML for configuration storage.
-* Changed how settings are stored and retrieved, potentially affecting existing users. Settings are now stored in a `~/.config/froggeR/config.yml` file.
+* Changed how settings are stored and retrieved. Settings are now stored in `~/.config/froggeR/config.yml`.
 * Improved user interaction in `froggeR_settings()` function.
-* Added `update_project` parameter to `froggeR_settings()` to allow updating `_variables.yml` in the current project.
 * Modified `quarto_project()` and `write_quarto()` to use the new YAML-based settings.
-* Updated `.write_variables()` function to directly copy the config file instead of regenerating content.
+* Added `.check_settings()` function to provide user feedback on incomplete settings.
+* Updated `.update_variables_yml()` function to handle both creation and updating of `_variables.yml`.
 * Improved error handling and user feedback in various functions.
-* Updated documentation and examples to reflect new functionality and adhere to CRAN policies.
-* Removed dependencies on `.Rprofile` for storing settings.
+* Removed `load_data()` function and related utilities.
+* Updated documentation and examples to reflect new functionality and improve clarity.
+* Revised README for better explanation of package workflow and features.
+* Updated pkgdown site structure to reflect current package organization.
 
 # froggeR 0.1.0
 
