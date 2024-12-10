@@ -7,26 +7,26 @@
 
 ## Why froggeR?
 
-> Leap ahead in your data science journey with froggeR! Streamline Quarto workflows, catch setup bugs before they happen, and create structured projects that make sharing and collaboration a breeze. 🐸
+> Leap ahead in your data science journey with froggeR! Streamline Quarto workflows, create structured projects, and enhance collaboration with ease. 🐸
 
-Because project setup should be simple 🐸
+froggeR simplifies project setup so you can focus on what matters:
 
-* **Jump Right In**: Spend more time on analysis, less time on setup
-* **Consistency**: Maintain uniform document styling and structure across projects
-* **No More Setup Bugs**: Complex configs are unnecessary and can reduce efficiency
-* **Safety**: Enhanced data protection with comprehensive `.gitignore` settings
-* **Friendly for the Whole Team**: Easier team onboarding with structured documentation
+* **Efficiency**: Minimize setup time, maximize analysis time
+* **Consistency**: Uniform styling and structure across all your projects
+* **Reliability**: Prevent common setup issues before they occur
+* **Security**: Robust `.gitignore` settings for enhanced data protection
+* **Collaboration**: Structured documentation for seamless team onboarding
 
 ----
 
 ## Who's it for?
 
-`froggeR` is especially valuable for R users who:
+froggeR is ideal for R users who:
 
-* Juggle multiple Quarto projects
-* Collaborate with team members
-* Want to focus on analysis, not setup
-* Need a quick way to start new projects
+* Manage multiple Quarto projects
+* Collaborate in team environments
+* Prioritize analysis over setup complexities
+* Need rapid project initialization
 
 ----
 
@@ -36,66 +36,60 @@ Because project setup should be simple 🐸
 
 ## Installation
 
-You can install `froggeR` from GitHub:
-
 ```r
-# install.packages("remotes")
-remotes::install_github('kyleGrealis/froggeR')
+# Install from CRAN... COMING SOON!
+# install.packages("froggeR")
 
-# or the development version
+# Or get the development version
 remotes::install_github('kyleGrealis/froggeR@dev')
 ```
 
 ----
 
-## Key Features
+### 🎯 Streamlined Quarto Project Creation
 
-### 🎯 Enhanced Quarto Project Creation
-
-The `quarto_project()` function supercharges your project setup:
+Initialize a comprehensive Quarto project with a single command:
 
 ```r
 froggeR::quarto_project(
   name = "my_new_project",
-  default = TRUE  # Use custom YAML from _variables.yml
+  custom_yaml = TRUE  # Use custom YAML from _variables.yml
 )
 ```
 
-This creates a new Quarto project with:
-
-* A custom YAML-enabled `.qmd` file
+This creates:
+* A Quarto document with custom YAML
 * A comprehensive `.gitignore`
 * A structured `README.md`
 * A reusable `_variables.yml`
-* A template `custom.scss` style sheet
-* A `.Rproj` file
+* A `custom.scss` style sheet template
+* An RStudio project file (`.Rproj`)
 
-### 🔄 Reusable YAML Headers
+### 🔄 Centralized Settings Management
 
-Maintain consistency across your documents with `froggeR_settings()`:
+Maintain consistent metadata across your documents:
 
 ```r
 froggeR::froggeR_settings()
 ```
 
-This interactive function helps you create a `_variables.yml` file containing:
-
-* Author information
-* Contact details
+Interactively create or update `_variables.yml` with:
+* Author details
+* Contact information
 * Affiliations
-* Project keywords
-* Table of Content preferences
-* And more!
+* Project metadata
+* Document preferences
 
 ### 📝 Templated Quarto Documents
 
-Create new Quarto documents with pre-formatted headers:
+Generate new Quarto documents with pre-formatted headers:
 
 ```r
 froggeR::write_quarto(
   filename = "analysis",
-  default = TRUE  # Use variables from _variables.yml
+  custom_yaml = TRUE  # Use variables from _variables.yml
 )
+```
 ```
 
 ### 🛡️ Enhanced Git Protection
@@ -106,71 +100,39 @@ Set up a comprehensive `.gitignore` for R projects:
 froggeR::write_ignore()
 ```
 
-Features enhanced data security by default:
+Automatically excludes:
+* R data files (`.RData`, `.rda`, `.rds`)
+* Common data formats (CSV, Excel, text files)
+* Sensitive information
 
-* Ignores R data files (`.RData`, `.rda`, `.rds`)
-* Excludes common data formats (CSV, Excel, text files)
-* Protects sensitive information
+### 🌟 Custom Styling Made Easy
 
-### 🌟 Custom Styling
-
-No more worrying about a SCSS template for that custom look and use:
+Generate a SCSS template for custom document styling:
 
 ```r
 froggeR::write_scss()
 ```
 
-Get a formatted styles sheet with examples for:
-
+Provides a formatted stylesheet with:
 * SCSS defaults
 * SCSS mixins
 * SCSS rules
 
-Uncomment any lines to apply them to your document the next time you render it...it's just that easy!
+Customize your document's appearance by uncommenting desired styles.
 
-```
-/*-- scss:defaults --*/
-// Colors
-// $primary: #2c365e;  
-// $body-bg: #fefefe;
-// $link-color: $primary;
-// Fonts
-// $font-family-sans-serif: "Open Sans", sans-serif;
-// $font-family-monospace: "Source Code Pro", monospace;
-//
-//
-/*-- scss:mixins --*/
-//
-//
-/*-- scss:rules --*/
-// Custom theme rules
-// .title-block {{
-//   margin-bottom: 2rem;
-//   border-bottom: 3px solid $primary;
-// }}
-//
-// code {{
-//   color: darken($primary, 10%);
-//   padding: 0.2em 0.4em;
-//   border-radius: 3px;
-// }}
-```
+### 📚 Automated Project Documentation
 
-### 📚 Project Documentation
-
-Generate structured README files:
+Generate a structured README for your project:
 
 ```r
 froggeR::write_readme()
 ```
 
 Includes sections for:
-
-* Project description
+* Project overview
 * Setup instructions
-* File descriptions
-* Directory structure
-* And more!
+* File and directory explanations
+* Contribution guidelines
 
 ----
 
@@ -178,18 +140,18 @@ Includes sections for:
 
 | Function | Description |
 |----------|-------------|
-| `froggeR_settings()` | Configures persistent Quarto document settings |
-| `quarto_project()` | Initializes a complete Quarto project  |
-| `write_quarto()` | Creates documents with consistent formatting |
-| `write_ignore()` | Configures .gitignore for enhanced data security |
-| `write_readme()` | Generates a project README template |
-| `write_scss()` | Provides a professional styling template |
+| `froggeR_settings()` | Manage persistent Quarto document settings |
+| `quarto_project()` | Initialize a complete Quarto project structure |
+| `write_quarto()` | Create consistently formatted Quarto documents |
+| `write_ignore()` | Configure `.gitignore` for enhanced data security |
+| `write_readme()` | Generate a comprehensive project README |
+| `write_scss()` | Create a customizable SCSS styling template |
 
 ----
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+We welcome contributions! For major changes, please open an issue first to discuss your ideas.
 
 ----
 
@@ -199,4 +161,4 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ---
 
-Created by [Kyle Grealis](https://github.com/kyleGrealis)
+Developed by [Kyle Grealis](https://github.com/kyleGrealis)
