@@ -31,7 +31,7 @@ froggeR is ideal for R users who:
 ----
 
 <p align="center">
-  <img src="man/figures/rendered_doc.png" width="80%" alt="Rendered Document Example">
+  <img src="man/figures/rendered_doc.png" width="85%" alt="Rendered Document Example">
 </p>
 
 ----
