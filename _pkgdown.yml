@@ -11,16 +11,18 @@ articles:
       - customizing-quarto
 
 reference:
-  - title: "Making a Project"
-    desc: "Functions for creating and setting up Quarto projects"
+  - title: "Project Setup"
+    desc: "Functions for creating and configuring Quarto projects"
     contents:
-      - froggeR_settings
       - quarto_project
-      - write_quarto
-      - write_ignore
-      - write_readme
-      - write_scss
-  - title: "Utilities"
-    desc: "Helper functions for data science workflows"
+      - froggeR_settings
+  - title: "Document Creation"
+    desc: "Functions for creating and styling Quarto documents"
     contents:
-      - load_data
+      - write_quarto
+      - write_scss
+  - title: "Project Documentation"
+    desc: "Functions for enhancing project documentation and security"
+    contents:
+      - write_readme
+      - write_ignore
