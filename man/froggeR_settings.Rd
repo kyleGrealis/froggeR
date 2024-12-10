@@ -4,62 +4,41 @@
 \alias{froggeR_settings}
 \title{Manage froggeR settings}
 \usage{
-froggeR_settings(interactive = TRUE, verbose = TRUE, update_project = FALSE)
+froggeR_settings(update = TRUE)
 }
 \arguments{
-\item{interactive}{If TRUE (default), provides menu-driven interface.}
-
-\item{verbose}{If TRUE (default), display messages. Applies to both interactive and
-non-interactive modes.}
-
-\item{update_project}{If TRUE, updates the _variables.yml file in the current project
-directory (if it exists).}
+\item{update}{Logical. If TRUE (default), prompts to update existing settings
+or create new ones if none exist.}
 }
 \value{
-Invisibly returns the current settings list
+Invisibly returns the current settings list.
 }
 \description{
-Check, display, or initialize froggeR settings for Quarto documents. Settings are
-stored in \code{~/.config/froggeR/config.yml} for persistence throughout 
-\code{froggeR} projects.
+This function allows you to check, display, or initialize froggeR settings for 
+Quarto documents. Settings are stored in \code{~/.config/froggeR/config.yml} 
+for persistence across froggeR projects.
 }
 \details{
-When run interactively, provides a menu to:\cr
-* Check current settings\cr
-* Initialize settings (first-time setup)\cr
-* Modify existing settings\cr
-* Save and exit\cr
-* Exit without saving
-
-When settings are created, they are:\cr
-* Stored in \code{~/.config/froggeR/config.yml} for persistence across sessions\cr
-* Used to populate Quarto document variables
-
-The following is added to your \code{config.yml} when settings are saved:
-
-\preformatted{
-  name: Your Name
-  email: your.email@example.com
-  orcid: 0000-0000-0000-0000
-  url: https://github.com/yourUsername
-  affiliations: Your Institution
-  toc: Table of Contents
+The function manages the following settings:
+\itemize{
+  \item name: Your Name (required)
+  \item email: your.email@example.com (required)
+  \item orcid: 0000-0000-0000-0000 (optional)
+  \item url: https://github.com/yourUsername (optional)
+  \item affiliations: Your Institution (optional)
+  \item toc: Table of Contents (defaults to this if left empty)
 }
+When run interactively with \code{update = TRUE}, it provides a menu-driven 
+  interface for updating these settings. If settings don't exist, it will 
+  prompt to create them regardless of the \code{update} parameter.
 }
 \examples{
 \dontrun{
-  # Interactive mode (default)
-  froggeR_settings()
-}
+  # Update settings (interactive)
+  froggeR_settings(update = TRUE)
 
-\donttest{
-  # Non-interactive mode, display current settings
-  settings <- froggeR_settings(interactive = FALSE, verbose = TRUE)
+  # Load current settings without updating
+  settings <- froggeR_settings(update = FALSE)
   print(settings)
-}
-
-\dontrun{
-  # Update project's _variables.yml file
-  froggeR_settings(update_project = TRUE)
 }
 }
