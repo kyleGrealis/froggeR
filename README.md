@@ -1,7 +1,3 @@
-```{r, echo = FALSE}
-pkg_version <- as.character(read.dcf('DESCRIPTION')[1, 'Version'])
-```
-
 # froggeR <img src="man/figures/logo.png" align="right" height="130"  alt="" />
 
 
@@ -10,7 +6,7 @@ pkg_version <- as.character(read.dcf('DESCRIPTION')[1, 'Version'])
 [![CRAN status](https://www.r-pkg.org/badges/version/froggeR)](https://CRAN.R-project.org/package=froggeR)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
 
-> froggeR version `r pkg_version`
+> froggeR version: 0.2.1
 
 froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.
 
