@@ -56,13 +56,19 @@ These settings flow through your projects in this order:
 3. Settings populate `_variables.yml` in your project
 4. Quarto documents use these variables automatically
 
-```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (config.yml)', out.width='70%'}
-knitr::include_graphics("../man/figures/config-file.png")
-```
+<div style="text-align: center;">
+  <figure>
+    <img src="../man/figures/config-file.png" alt="How froggeR manages settings across projects (config.yml)" width="70%">
+    <figcaption>How froggeR manages settings across projects (config.yml)</figcaption>
+  </figure>
+</div>
 
-```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (_variables.yml)', out.width='70%'}
-knitr::include_graphics("../man/figures/variable-yml.png")
-```
+<div style="text-align: center;">
+  <figure>
+    <img src="../man/figures/variable-yml.png" alt="How froggeR manages settings within projects (_variables.yml)" width="70%">
+    <figcaption>How froggeR manages settings across projects (_variables.yml)</figcaption>
+  </figure>
+</div>
 
 > **Note:** While you can update these settings at any time, most users find they only need to set them once or very infrequently.
 

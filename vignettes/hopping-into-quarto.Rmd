@@ -146,12 +146,15 @@ For optimal results with `froggeR`:
 ### Common Issues
 
 1. **Q: My YAML isn't rendering correctly in the Quarto document.**
+
    A: Ensure that your `_variables.yml` file is properly formatted. Check for any extra spaces or incorrect indentation.
 
 2. **Q: The SCSS styles aren't applying to my document.**
+
    A: Make sure the SCSS file is properly linked in your YAML header. Check the console for any error messages during rendering.
 
 3. **Q: I'm getting an error when trying to create a new project.**
+
    A: Ensure you have the latest version of froggeR and Quarto installed. Also, check if you have write permissions in the target directory.
 
 ### Tips for Smooth Hopping

@@ -32,14 +32,19 @@ froggeR::quarto_project(name = "frogs")
 
 This single command creates a complete project structure:
 
-```{r, echo=FALSE, fig.align='center', fig.cap='Project initialization example', out.width='70%'}
-knitr::include_graphics("../man/figures/froggeR-init.png")
-```
+<div style="text-align: center;">
+  <figure>
+    <img src="../man/figures/froggeR-init.png" alt="Project initialization example" width="70%">
+    <figcaption>Project initialization example</figcaption>
+  </figure>
+</div>
 
-
-```{r, echo=FALSE, fig.align='center', fig.cap='Project directory structure example', out.width='70%'}
-knitr::include_graphics("../man/figures/new-froggeR-session.png")
-```
+<div style="text-align: center;">
+  <figure>
+    <img src="../man/figures/new-froggeR-session.png" alt="Project directory structure example" width="70%">
+    <figcaption>Project directory structure example</figcaption>
+  </figure>
+</div>
 
 Your new project includes:
 
