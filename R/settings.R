@@ -84,8 +84,8 @@ froggeR_settings <- function(update = TRUE) {
   # Clean names for display
   setting_names <- list('Name', 'e-mail', 'ORCID', 'URL', 'Affiliation')
 
+  message('Leave blank if you do not wish to change that entry.')
   for (i in seq_along(setting_names)) {
-    message('Leave blank if you do not wish to change that entry.')
     if (settings[[i]] == ''){
       prompt <- sprintf('Enter value for %s: ', setting_names[[i]])
     } else {
