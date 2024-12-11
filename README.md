@@ -42,7 +42,7 @@ Install froggeR and create your first project in minutes:
 # install.packages("froggeR")
 
 # Or get the development version
-remotes::install_github('kyleGrealis/froggeR@dev')
+remotes::install_github('kyleGrealis/froggeR')
 
 # Create your first froggeR project
 froggeR::quarto_project('frogs')
