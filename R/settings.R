@@ -47,6 +47,19 @@ froggeR_settings <- function(update = TRUE) {
       answer <- tolower(readline('Update or create _variables.yml? [y/n] '))
       if (answer == 'y') .update_variables_yml(settings = settings)
     }
+  } else {
+    cat("Current froggeR settings:\n")
+    display_names <- c(
+      'Name', 'e-mail', 'ORCID', 'URL', 'Affiliation', 'Table of Contents'
+    )
+    max_name_length <- max(nchar(display_names))
+    
+    for (i in seq_along(settings)) {
+      name <- display_names[i]
+      value <- settings[[i]]
+      padding <- paste(rep(" ", max_name_length - nchar(name)), collapse = "")
+      cat(sprintf("%s:%s %s\n", name, padding, value))
+    }
   }
   invisible(settings)
 }
