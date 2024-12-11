@@ -1,3 +1,16 @@
+# froggeR 0.2.1
+
+## Enhancements
+* Improved `write_scss()` function for more streamlined YAML updates in Quarto documents.
+* Enhanced user feedback in `froggeR_settings()` function, providing clearer output of current settings.
+* Refined error handling and user guidance in various functions for a smoother user experience.
+* Updated vignettes with more comprehensive examples and clearer explanations of froggeR workflows.
+
+## Documentation
+* Expanded and clarified documentation for key functions.
+* Added more detailed examples in function documentation to illustrate various use cases.
+* Updated README with additional information on package usage and benefits.
+
 # froggeR 0.2.0
 * Renamed `default` parameter to `custom_yaml` in `quarto_project()` and `write_quarto()` for clarity.
 * Refactored `froggeR_settings()` to use YAML for configuration storage.

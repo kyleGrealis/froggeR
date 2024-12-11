@@ -74,18 +74,8 @@ write_readme <- function(path = getwd()) {
     ": project started"
   )
   
-  if (file.exists(file.path(path, 'dated_progress_notes.md'))) {
-    ui_info('**CAUTION!!**')
-    if (ui_yeah('dated_progress_notes.md found in project level directory! Would you like to overwrite it?')) {
-      writeLines(
-        progress_notes_content,
-        con = file.path(path, "dated_progress_notes.md")
-      )
-      ui_done("dated_progress_notes.md has been overwritten with the template.")
-    } else {
-      ui_info("Keeping existing dated_progress_notes.md")
-    }
-  } else {
+  # Only create dated_progress_notes.md on README or project initialization
+  if (!file.exists(file.path(path, 'dated_progress_notes.md'))) {
     writeLines(
       progress_notes_content,
       con = file.path(path, "dated_progress_notes.md")

@@ -119,7 +119,7 @@ write_quarto <- function(
   if (!file.copy(from = template_path, to = the_quarto_file, overwrite = TRUE)) {
     stop("Failed to create Quarto file")
   }
-  ui_done(sprintf('Created %.qmd %s', filename, description))
+  ui_done(sprintf('Created %s.qmd %s', filename, description))
   
   return(invisible(NULL))
 }

@@ -122,7 +122,8 @@ write_scss <- function(name = 'custom', path = getwd()) {
   for (i in seq_along(qmd_files)) {
     message(sprintf('%d. %s', i, qmd_files[i]))
   }
-  message(sprintf('%d. I\'m not sure, but show me how.'), length(qmd_files) + 1)
+  files_length_plus_one <- length(qmd_files) + 1
+  message(sprintf('%d. I\'m not sure, but show me how.', files_length_plus_one))
   
   # Get user choice
   choice <- readline(prompt = '#>> ')
@@ -131,7 +132,7 @@ write_scss <- function(name = 'custom', path = getwd()) {
   
   choice <- as.numeric(choice)
   
-  if (choice == length(qmd_files) + 1) {
+  if (choice == files_length_plus_one) {
     # Show manual update instructions
     message(glue::glue(
       '\n\nHere\'s how to update your listed SCSS files in the YAML:\n',
@@ -173,7 +174,7 @@ format:
       - {name}.scss'
     )
     
-    # Check for custom.scss and ensure we're not processing custom.scss
+        # Check for custom.scss and ensure we're not processing custom.scss
     if (grepl(original_yaml, qmd_content) && name != 'custom') {
       # Replace and insert new SCSS file with proper indentation
       updated_content <- stringr::str_replace(
@@ -182,34 +183,32 @@ format:
         new_yaml
       )
 
-      # print(str_detect(qmd_content, original_yaml))  # debugging
-      
-      # Preview changes
-      message('\nProposed changes:\n')
-      message(new_yaml)
-      message('\n')
-      
-      # Confirm before writing
-      confirm <- readline(prompt = sprintf('Write changes to %s? (y/n): ', file))
-      
-      if (tolower(confirm) == 'y') {
-        # Update the YAML
+      # Attempt to write changes
+      tryCatch({
         readr::write_file(
           updated_content,
           file = file
         )
         ui_done(sprintf('Updated %s', file))
-      } else {
-        ui_todo(
-          sprintf(
-            '%s was not changed, but you can update it manaually by following the example above.\n', file
-          )
-        )
-      }
+      }, error = function(e) {
+        ui_todo(sprintf(
+          'Could not update %s. Please update your YAML manually:\n', file
+        ))
+        message(glue::glue(
+          'format:\n',
+          '  html:\n',
+          '    embed-resources: true\n',
+          '    theme:\n',
+          '      - default\n',
+          '      - custom.scss\n',
+          '      - {name}.scss       # Add this line\n',
+          '\n'
+        ))
+      })
     } else if (!grepl(original_yaml, qmd_content)) {
       # Provide console feedback for manual update
+      ui_todo('Could not automatically update. Please update your YAML manually:')
       message(glue::glue(
-        '\nCould not automatically update. Please update your YAML manually:\n',
         'format:\n',
         '  html:\n',
         '    embed-resources: true\n',
@@ -224,7 +223,7 @@ format:
 
   # Display reference links
   links <- glue::glue(
-    'For more SCSS styling options, visit:
+    '\nFor more SCSS styling options, visit:
     - https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
     - https://quarto.org/docs/output-formats/html-themes-more.html
     - https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss'
