@@ -18,7 +18,7 @@ A \code{.scss} file to customize Quarto styling. If the file is not named
 "custom.scss", the function will also attempt to update the Quarto YAML configuration.
 }
 \description{
-This function creates the \code{.scss} file so that any Quarto project can be easily
+This function creates the \code{.scss} file so that any Quarto project can easily be
 customized with SCSS styling variables, mixins, and rules. It also updates the
 Quarto YAML configuration to include the new style sheet.
 }

@@ -1,6 +1,6 @@
 #' Create a Quarto SCSS file
 #'
-#' This function creates the \code{.scss} file so that any Quarto project can be easily
+#' This function creates the \code{.scss} file so that any Quarto project can easily be
 #' customized with SCSS styling variables, mixins, and rules. It also updates the
 #' Quarto YAML configuration to include the new style sheet.
 #'
@@ -66,28 +66,30 @@ write_scss <- function(name = 'custom', path = getwd()) {
   # Only proceed if user confirmed
   if (proceed) {
     # Define SCSS content
-    content <- glue::glue(
-      '/*-- scss:defaults --*/
-      // Colors
-      // $primary: #2c365e;  
-      // $body-bg: #fefefe;
-      // $link-color: $primary;
-      // Fonts
-      // $font-family-sans-serif: "Open Sans", sans-serif;
-      // $font-family-monospace: "Source Code Pro", monospace;\n\n
-      /*-- scss:mixins --*/\n\n
-      /*-- scss:rules --*/
-      // Custom theme rules
-      // .title-block {{
-      //   margin-bottom: 2rem;
-      //   border-bottom: 3px solid $primary;
-      // }}
-      // code {{
-      //   color: darken($primary, 10%);
-      //   padding: 0.2em 0.4em;
-      //   border-radius: 3px;
-      // }}'
-    )
+    content <- sprintf('
+/*-- scss:defaults --*/
+// Colors
+// $primary: #2c365e;  
+// $body-bg: #fefefe;
+// $link-color: $primary;
+// Fonts
+// $font-family-sans-serif: "Open Sans", sans-serif;
+// $font-family-monospace: "Source Code Pro", monospace;
+
+/*-- scss:mixins --*/
+
+/*-- scss:rules --*/
+// Custom theme rules
+// .title-block {
+//   margin-bottom: 2rem;
+//   border-bottom: 3px solid $primary;
+// }
+// code {
+//   color: darken($primary, 10%%);
+//   padding: 0.2em 0.4em;
+//   border-radius: 3px;
+// }
+')
     
     # Write SCSS file
     writeLines(content, the_scss_file)
@@ -118,9 +120,9 @@ write_scss <- function(name = 'custom', path = getwd()) {
   # Present options to user
   message('\nFound the following .qmd file(s).\nWould you like to update any?')
   for (i in seq_along(qmd_files)) {
-    message(glue::glue('{i}. {qmd_files[i]}'))
+    message(sprintf('%d. %s', i, qmd_files[i]))
   }
-  message(glue::glue('{length(qmd_files) + 1}. I\'m not sure, but show me how.'))
+  message(sprintf('%d. I\'m not sure, but show me how.'), length(qmd_files) + 1)
   
   # Get user choice
   choice <- readline(prompt = '#>> ')
@@ -188,11 +190,7 @@ format:
       message('\n')
       
       # Confirm before writing
-      confirm <- readline(
-        prompt = glue::glue(
-          'Write changes to {file}? (y/n): '
-        )
-      )
+      confirm <- readline(prompt = sprintf('Write changes to %s? (y/n): ', file))
       
       if (tolower(confirm) == 'y') {
         # Update the YAML
@@ -200,11 +198,11 @@ format:
           updated_content,
           file = file
         )
-        ui_done(glue::glue('Updated {file}'))
+        ui_done(sprintf('Updated %s', file))
       } else {
         ui_todo(
-          glue::glue(
-            '{file} was not changed, but you can update it manaually by following the example above.\n'
+          sprintf(
+            '%s was not changed, but you can update it manaually by following the example above.\n', file
           )
         )
       }

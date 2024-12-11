@@ -63,7 +63,7 @@ quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
   
   # Check if directory exists
   if (dir.exists(project_dir)) {
-    stop(glue::glue('Directory named "{name}" exists in {base_dir}.'))
+    stop(sprintf('Directory named "%s" exists in %s.', name, base_dir))
   }
   
   # Create the Quarto project
@@ -96,12 +96,12 @@ quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
     filename = name,
     path = project_dir,
     custom_yaml = custom_yaml,
-    is_project = TRUE
+    initialize_project = TRUE
   )
   
   ui_done(
-    glue::glue(
-      '{col_green("froggeR")} project setup complete. Opening in new session...'
+    sprintf(
+      '%s project setup complete. Opening in new session...', col_green('froggeR')
     )
   )
   
@@ -135,8 +135,8 @@ quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
   }
   
   # Define .Rproj content
-  content <- glue::glue(
-'Version: 1.0
+  content <- sprintf('
+Version: 1.0
 RestoreWorkspace: Default
 SaveWorkspace: Default
 AlwaysSaveHistory: Default
@@ -147,8 +147,8 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 AutoAppendNewline: Yes
-StripTrailingWhitespace: Yes'
-  )
+StripTrailingWhitespace: Yes
+')
   
   # Write .Rproj file
   writeLines(content, the_rproj_file)
