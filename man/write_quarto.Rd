@@ -8,7 +8,7 @@ write_quarto(
   filename = "frogs",
   path = getwd(),
   custom_yaml = TRUE,
-  is_project = FALSE
+  initialize_project = FALSE
 )
 }
 \arguments{
@@ -22,7 +22,7 @@ Defaults to the current working directory.}
 custom YAML header using values from '_variables.yml'. If FALSE, creates a
 standard Quarto document with basic YAML headers.}
 
-\item{is_project}{Logical. Set to TRUE when used within a Quarto project 
+\item{initialize_project}{Logical. Set to TRUE when used within a Quarto project 
 (internal use).}
 }
 \value{
@@ -34,7 +34,8 @@ or standard YAML header. When using a custom header, it integrates with
 \code{_variables.yml} for reusable metadata across documents.
 }
 \details{
-When \code{custom_yaml = TRUE} and \code{is_project = FALSE}, the function will:
+When \code{custom_yaml = TRUE} and \code{initialize_project = FALSE}, 
+ the function will:
 \itemize{
   \item Create or update \code{_variables.yml} for document metadata
   \item Create \code{custom.scss} for document styling (if it doesn't exist)

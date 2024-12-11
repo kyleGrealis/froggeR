@@ -11,13 +11,14 @@
 #' @param custom_yaml Logical. If TRUE (default), creates a Quarto document with a
 #'   custom YAML header using values from '_variables.yml'. If FALSE, creates a
 #'   standard Quarto document with basic YAML headers.
-#' @param is_project Logical. Set to TRUE when used within a Quarto project 
+#' @param initialize_project Logical. Set to TRUE when used within a Quarto project 
 #'   (internal use).
 #'
 #' @return Invisibly returns NULL after creating the Quarto document.
 #'
 #' @details
-#' When \code{custom_yaml = TRUE} and \code{is_project = FALSE}, the function will:
+#' When \code{custom_yaml = TRUE} and \code{initialize_project = FALSE}, 
+#'  the function will:
 #' \itemize{
 #'   \item Create or update \code{_variables.yml} for document metadata
 #'   \item Create \code{custom.scss} for document styling (if it doesn't exist)
@@ -41,7 +42,7 @@
 #'   write_quarto(filename = "frog_analysis_basic", path = tempdir(), custom_yaml = FALSE)
 #' }
 write_quarto <- function(
-  filename = 'frogs', path = getwd(), custom_yaml = TRUE, is_project = FALSE
+  filename = 'frogs', path = getwd(), custom_yaml = TRUE, initialize_project = FALSE
 ) {
   # Validate inputs
   if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
@@ -51,8 +52,8 @@ write_quarto <- function(
     )
   }
   
-  if (!is.logical(custom_yaml) || !is.logical(is_project)) {
-    stop('Parameters "custom_yaml" and "is_project" must be TRUE or FALSE')
+  if (!is.logical(custom_yaml) || !is.logical(initialize_project)) {
+    stop('Parameters "custom_yaml" and "initialize_project" must be TRUE or FALSE')
   }
   
   # Create directory if it doesn't exist
@@ -70,14 +71,14 @@ write_quarto <- function(
   # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {
     ui_info('**CAUTION!!**')
-    if (!ui_yeah(glue::glue('{filename}.qmd found in provided path! Would you like to overwrite it?'))) {
+    if (!ui_yeah(sprintf('%s.qmd found in provided path! Would you like to overwrite it?', filename))) {
       ui_info("Keeping existing Quarto file")
       return(invisible(NULL))
     }
   }
   
   # If using the custom (custom_yaml) template, ensure all requirements exist
-  if (custom_yaml && !is_project) {
+  if (custom_yaml && !initialize_project) {
     # Setup core requirements
     settings <- froggeR_settings(update = FALSE)
     .update_variables_yml(path, settings)
@@ -104,8 +105,10 @@ write_quarto <- function(
   # Select template based on custom_yaml setting
   if (custom_yaml) {
     template_path <- system.file('gists/custom_quarto.qmd', package = 'froggeR')
+    description <- 'with custom YAML'
   } else {
     template_path <- system.file('gists/basic_quarto.qmd', package = 'froggeR')
+    description <- ''
   }
   
   if (template_path == "") {
@@ -116,7 +119,7 @@ write_quarto <- function(
   if (!file.copy(from = template_path, to = the_quarto_file, overwrite = TRUE)) {
     stop("Failed to create Quarto file")
   }
-  ui_done(glue::glue('Created {filename}.qmd'))
+  ui_done(sprintf('Created %.qmd %s', filename, description))
   
   return(invisible(NULL))
 }
