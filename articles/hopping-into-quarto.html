@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,13 +90,13 @@ productivity while maintaining project consistency.</p>
 <p>Project setup often involves repetitive tasks that can impede your
 analysis workflow. <code>froggeR</code> addresses this by providing:</p>
 <ul>
-<li>Automated project initialization with <a href="https://kylegrealis.github.io/froggeR/reference/quarto_project.html" class="external-link"><code>quarto_project()</code></a>
+<li>Automated project initialization with <a href="https://kylegrealis.github.io/froggeR/reference/quarto_project.html"><code>quarto_project()</code></a>
 </li>
-<li>Configurable document templates via <a href="https://kylegrealis.github.io/froggeR/reference/write_quarto.html" class="external-link"><code>write_quarto()</code></a>
+<li>Configurable document templates via <a href="https://kylegrealis.github.io/froggeR/reference/write_quarto.html"><code>write_quarto()</code></a>
 </li>
-<li>Reusable project configurations through <a href="https://kylegrealis.github.io/froggeR/reference/froggeR_settings.html" class="external-link"><code>froggeR_settings()</code></a>
+<li>Reusable project configurations through <a href="https://kylegrealis.github.io/froggeR/reference/froggeR_settings.html"><code>froggeR_settings()</code></a>
 </li>
-<li>Consistent styling with <a href="https://kylegrealis.github.io/froggeR/reference/write_scss.html" class="external-link"><code>write_scss()</code></a>
+<li>Consistent styling with <a href="https://kylegrealis.github.io/froggeR/reference/write_scss.html"><code>write_scss()</code></a>
 </li>
 <li>Enhanced version control setup</li>
 </ul>
@@ -162,29 +162,25 @@ for more detailed configuration options.</p>
 <span><span class="co"># Create a new document using your settings</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
 <span>  filename <span class="op">=</span> <span class="st">"analysis"</span>,</span>
-<span>  default <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use your configured settings</span></span>
+<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use your configured settings</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visual-styling">Visual Styling<a class="anchor" aria-label="anchor" href="#visual-styling"></a>
 </h3>
-<p>Customize your document appearance with SCSS (see
-<code><a href="../reference/write_scss.html">?write_scss</a></code> for more examples):</p>
+<p>Customize your document appearance with SCSS:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create or modify style sheets</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_scss.html">write_scss</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span><span class="op">)</span></span></code></pre></div>
-<p>Example SCSS customizations:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode scss"><code class="sourceCode scss"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">// Modern color scheme</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="va">$primary</span><span class="ch">:</span> <span class="cn">#2c365e</span><span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">$body-bg</span><span class="ch">:</span> <span class="cn">#fefefe</span><span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="va">$link-color</span><span class="ch">:</span> <span class="va">$primary</span><span class="op">;</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">/*-- scss:rules --*/</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">.title-block</span> {</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="kw">margin-bottom</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">rem</span><span class="op">;</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  <span class="kw">border-bottom</span><span class="ch">:</span> <span class="dv">3</span><span class="dt">px</span> <span class="dv">solid</span> <span class="va">$primary</span><span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>}</span></code></pre></div>
+<p>This creates a <code>custom.scss</code> file with commented-out
+examples. Uncomment and modify these to customize your document’s
+appearance. For more information on Quarto styling, refer to:</p>
+<ul>
+<li><a href="https://quarto.org/docs/output-formats/html-themes.html" class="external-link">Quarto
+HTML Themes</a></li>
+<li><a href="https://quarto.org/docs/output-formats/html-themes.html#customizing-themes" class="external-link">Customizing
+Quarto Themes</a></li>
+</ul>
 <hr>
 </div>
 </div>
@@ -195,7 +191,7 @@ for more detailed configuration options.</p>
 <h3 id="project-documentation">Project Documentation<a class="anchor" aria-label="anchor" href="#project-documentation"></a>
 </h3>
 <p>Generate comprehensive project documentation:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create structured README</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This creates:</p>
@@ -203,23 +199,6 @@ for more detailed configuration options.</p>
 <li>A detailed README.md</li>
 <li>Progress tracking notes</li>
 <li>Project structure documentation</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="data-management">Data Management<a class="anchor" aria-label="anchor" href="#data-management"></a>
-</h3>
-<p>Efficiently load multiple data files:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load all supported files from a directory</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/load_data.html">load_data</a></span><span class="op">(</span></span>
-<span>  directory_path <span class="op">=</span> <span class="st">"project/data"</span>,</span>
-<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Include subdirectories</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>Supported formats include:</p>
-<ul>
-<li>R data files (.rda, .RData, .rds)</li>
-<li>Statistical software files (.sas7bdat, .dta, .sav)</li>
-<li>Common data formats (.csv, .xlsx)</li>
 </ul>
 <hr>
 </div>
@@ -257,6 +236,50 @@ for more detailed configuration options.</p>
 <hr>
 </div>
 <div class="section level2">
+<h2 id="troubleshooting-and-faqs">Troubleshooting and FAQs<a class="anchor" aria-label="anchor" href="#troubleshooting-and-faqs"></a>
+</h2>
+<div class="section level3">
+<h3 id="common-issues">Common Issues<a class="anchor" aria-label="anchor" href="#common-issues"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Q: My YAML isn’t rendering correctly in the Quarto
+document.</strong></p>
+<p>A: Ensure that your <code>_variables.yml</code> file is properly
+formatted. Check for any extra spaces or incorrect indentation.</p>
+</li>
+<li>
+<p><strong>Q: The SCSS styles aren’t applying to my
+document.</strong></p>
+<p>A: Make sure the SCSS file is properly linked in your YAML header.
+Check the console for any error messages during rendering.</p>
+</li>
+<li>
+<p><strong>Q: I’m getting an error when trying to create a new
+project.</strong></p>
+<p>A: Ensure you have the latest version of froggeR and Quarto
+installed. Also, check if you have write permissions in the target
+directory.</p>
+</li>
+</ol>
+</div>
+<div class="section level3">
+<h3 id="tips-for-smooth-hopping">Tips for Smooth Hopping<a class="anchor" aria-label="anchor" href="#tips-for-smooth-hopping"></a>
+</h3>
+<ul>
+<li>Always review the generated files after project creation to ensure
+everything is set up as expected.</li>
+<li>When customizing SCSS, make small changes and render frequently to
+see the effects.</li>
+<li>Keep your froggeR settings up-to-date, especially when working
+across multiple projects.</li>
+</ul>
+<p>For more specific issues, consult the documentation or reach out
+through the GitHub issue tracker.</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
 <h2 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
 </h2>
 <p>Need assistance? Several resources are available:</p>
@@ -268,6 +291,30 @@ repository</a></li>
 <li>See <code><a href="../articles/customizing-quarto.html">vignette("customizing-quarto", package = "froggeR")</a></code>
 for styling details</li>
 </ul>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="future-developments">Future Developments<a class="anchor" aria-label="anchor" href="#future-developments"></a>
+</h2>
+<p>froggeR is continuously evolving to meet the needs of the R and
+Quarto community. Some exciting features on our roadmap include:</p>
+<ul>
+<li>
+<strong>Quarto Dashboard Integration</strong>: Streamlined creation
+and management of interactive Quarto dashboards.</li>
+<li>
+<strong>Enhanced Version Control Integration</strong>: More robust
+Git integration features.</li>
+<li>
+<strong>Expanded Customization Options</strong>: Additional
+templates and styling options for diverse project needs.</li>
+<li>
+<strong>Collaborative Tools</strong>: Features to enhance team
+workflows and project sharing.</li>
+</ul>
+<p>Stay tuned to our GitHub repository for updates and new releases. We
+welcome feature requests and feedback from our user community to help
+shape the future of froggeR!</p>
 <hr>
 </div>
 <div class="section level2">
