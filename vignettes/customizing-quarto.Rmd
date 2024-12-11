@@ -30,59 +30,55 @@ The [`froggeR_settings()`](https://kylegrealis.github.io/froggeR/reference/frogg
 froggeR::froggeR_settings()
 ```
 
-This creates entries in your `.Rprofile` that persist across R sessions:
+This creates a configuration file at `~/.config/froggeR/config.yml` that persists across R sessions:
 
-```r
-options(
-  froggeR.options = list(
-    name = "Your Name",
-    email = "your.email@example.com",
-    orcid = "0000-0000-0000-0000",         # Optional
-    url = "https://github.com/username",   # Optional
-    affiliations = "Your Institution",     # Optional
-    toc = "Table of Contents"              # Defaults if empty
-  )
-)
+```yaml
+name: Your Name
+email: your.email@example.com
+orcid: 0000-0000-0000-0000         # Optional
+url: https://github.com/username   # Optional
+affiliations: Your Institution     # Optional
+toc: Table of Contents             # Defaults if empty
 ```
 
 > **Note:** Leaving values blank will not cause errors, but modify these values carefully.
 
+To view your current settings without modifying them, use:
+
+```r
+froggeR::froggeR_settings(update = FALSE)
+```
+
 These settings flow through your projects in this order:
 
-1. `.Rprofile` stores your permanent settings
+1. `config.yml` stores your permanent settings (exact location depends on your OS)
 2. `froggeR` reads these when creating new projects
 3. Settings populate `_variables.yml` in your project
 4. Quarto documents use these variables automatically
 
-```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (.Rprofile)', out.width='70%'}
-knitr::include_graphics("../man/figures/settings_flow.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (config.yml)', out.width='70%'}
+knitr::include_graphics("../man/figures/config-file.png")
 ```
 
 ```{r, echo=FALSE, fig.align='center', fig.cap='How froggeR manages settings across projects (_variables.yml)', out.width='70%'}
-knitr::include_graphics("../man/figures/settings_flow2.png")
+knitr::include_graphics("../man/figures/variable-yml.png")
 ```
 
-### Updating Your Settings
+> **Note:** While you can update these settings at any time, most users find they only need to set them once or very infrequently.
 
-You have two options for updating settings:
+### Using Custom Variables in Quarto Documents
 
-1. **Interactive Update**
+froggeR allows you to use variables from your `_variables.yml` file directly in your Quarto documents:
 
-    ```r
-    froggeR::froggeR_settings()  # Updates all settings interactively
-    ```
+```yaml
+---
+title: "My Document"
+author: "{{< var author >}}"
+date: "{{< var date >}}"
+---
+```
 
-2. **Manual Update**
-
-    ```r
-    usethis::edit_r_profile()    # Edit specific settings directly
-    ```
-
-After manual updates:
-
-* Save the `.Rprofile` file
-* Restart your R session
-* New projects will use updated settings
+This ensures consistency across all your project documents and makes updates easier to manage.
 
 ----
 
@@ -122,6 +118,30 @@ To activate any style:
 1. Remove the `//` at the start of the line
 2. Save the file
 3. Re-render your document
+
+### Working with Multiple SCSS Files
+
+froggeR allows you to create and manage multiple SCSS files for different styling needs:
+
+```r
+froggeR::write_scss(name = "modern_theme")
+froggeR::write_scss(name = "presentation_theme")
+```
+
+To use a specific SCSS file in your Quarto document, update the YAML header:
+
+```yaml
+---
+title: "My Document"
+format:
+  html:
+    theme:
+      - default
+      - modern_theme.scss  # Or presentation_theme.scss
+---
+```
+
+> froggeR will attempt to automate the revision of your YAML header. Don't be dismayed -- we'll provide you with feedback if this is unsuccessful and provide an example like the code block above to walk you through each step.
 
 ### Basic Customization Examples
 
@@ -241,6 +261,18 @@ a:not(.nav-link) {
 
 ## Common Issues and Solutions
 
+### Settings Issues
+
+1. **Variables Not Updating**
+    * Restart R session after `config.yml` changes
+    * Check `_variables.yml` exists in project
+    * Verify YAML structure in documents
+
+2. **Multiple Projects**
+    * Settings apply to new projects only
+    * Existing projects keep their settings
+    * Update `_variables.yml` manually if needed
+
 ### Styling Problems
 
 1. **Styles Not Applying**
@@ -268,17 +300,12 @@ a:not(.nav-link) {
     * Reference variables after definition
     * Use proper SCSS syntax (`$variable`)
 
-### Settings Issues
+### SCSS File Management
 
-1. **Variables Not Updating**
-    * Restart R session after `.Rprofile` changes
-    * Check `_variables.yml` exists in project
-    * Verify YAML structure in documents
-
-2. **Multiple Projects**
-    * Settings apply to new projects only
-    * Existing projects keep their settings
-    * Update `_variables.yml` manually if needed
+1. **Project Creation vs. Individual Documents**
+    * `quarto_project()` automatically creates `custom.scss`
+    * `write_quarto()` uses existing `custom.scss` if available
+    * For standalone documents, manually create SCSS with `write_scss()`
 
 ----
 

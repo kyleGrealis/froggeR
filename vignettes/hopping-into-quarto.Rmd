@@ -81,34 +81,23 @@ froggeR::froggeR_settings()
 # Create a new document using your settings
 froggeR::write_quarto(
   filename = "analysis",
-  default = TRUE  # Use your configured settings
+  custom_yaml = TRUE  # Use your configured settings
 )
 ```
 
 ### Visual Styling
 
-Customize your document appearance with SCSS (see `?write_scss` for more examples):
+Customize your document appearance with SCSS:
 
 ```r
 # Create or modify style sheets
 froggeR::write_scss(name = "custom")
 ```
 
-Example SCSS customizations:
+This creates a `custom.scss` file with commented-out examples. Uncomment and modify these to customize your document's appearance. For more information on Quarto styling, refer to:
 
-```scss
-/*-- scss:defaults --*/
-// Modern color scheme
-$primary: #2c365e;
-$body-bg: #fefefe;
-$link-color: $primary;
-
-/*-- scss:rules --*/
-.title-block {
-  margin-bottom: 2rem;
-  border-bottom: 3px solid $primary;
-}
-```
+- [Quarto HTML Themes](https://quarto.org/docs/output-formats/html-themes.html)
+- [Customizing Quarto Themes](https://quarto.org/docs/output-formats/html-themes.html#customizing-themes)
 
 ----
 
@@ -152,6 +141,29 @@ For optimal results with `froggeR`:
 
 ----
 
+## Troubleshooting and FAQs
+
+### Common Issues
+
+1. **Q: My YAML isn't rendering correctly in the Quarto document.**
+   A: Ensure that your `_variables.yml` file is properly formatted. Check for any extra spaces or incorrect indentation.
+
+2. **Q: The SCSS styles aren't applying to my document.**
+   A: Make sure the SCSS file is properly linked in your YAML header. Check the console for any error messages during rendering.
+
+3. **Q: I'm getting an error when trying to create a new project.**
+   A: Ensure you have the latest version of froggeR and Quarto installed. Also, check if you have write permissions in the target directory.
+
+### Tips for Smooth Hopping
+
+- Always review the generated files after project creation to ensure everything is set up as expected.
+- When customizing SCSS, make small changes and render frequently to see the effects.
+- Keep your froggeR settings up-to-date, especially when working across multiple projects.
+
+For more specific issues, consult the documentation or reach out through the GitHub issue tracker.
+
+----
+
 ## Getting Help
 
 Need assistance? Several resources are available:
@@ -160,6 +172,19 @@ Need assistance? Several resources are available:
 * [GitHub repository](https://github.com/kyleGrealis/froggeR)
 * Issue tracker for bug reports and feature requests
 * See `vignette("customizing-quarto", package = "froggeR")` for styling details
+
+----
+
+## Future Developments
+
+froggeR is continuously evolving to meet the needs of the R and Quarto community. Some exciting features on our roadmap include:
+
+- **Quarto Dashboard Integration**: Streamlined creation and management of interactive Quarto dashboards.
+- **Enhanced Version Control Integration**: More robust Git integration features.
+- **Expanded Customization Options**: Additional templates and styling options for diverse project needs.
+- **Collaborative Tools**: Features to enhance team workflows and project sharing.
+
+Stay tuned to our GitHub repository for updates and new releases. We welcome feature requests and feedback from our user community to help shape the future of froggeR!
 
 ----
 

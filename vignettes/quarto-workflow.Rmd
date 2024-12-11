@@ -33,12 +33,12 @@ froggeR::quarto_project(name = "frogs")
 This single command creates a complete project structure:
 
 ```{r, echo=FALSE, fig.align='center', fig.cap='Project initialization example', out.width='70%'}
-knitr::include_graphics("../man/figures/project_init.png")
+knitr::include_graphics("../man/figures/froggeR-init.png")
 ```
 
 
 ```{r, echo=FALSE, fig.align='center', fig.cap='Project directory structure example', out.width='70%'}
-knitr::include_graphics("../man/figures/project_structure.png")
+knitr::include_graphics("../man/figures/new-froggeR-session.png")
 ```
 
 Your new project includes:
@@ -70,7 +70,7 @@ Each component serves a specific purpose:
     affiliations: Your Institution
     ```
 
-> **Note:** These values come from your `froggeR_settings()`
+> **Note:** These values come from your `froggeR_settings()`. You can customize these settings by running `froggeR::froggeR_settings()` interactively. This function allows you to update author details, contact information, affiliations, and other document preferences. For more details, see `?froggeR_settings`.
 
 3. **Style Sheet** (`custom.scss`)
     * Professional defaults
@@ -78,7 +78,7 @@ Each component serves a specific purpose:
     * Clear documentation
 
 ```{r, echo=FALSE, fig.align='center', fig.cap='Integrated YAML structure example', out.width='70%'}
-knitr::include_graphics("../man/figures/project_yaml.png")
+knitr::include_graphics("../man/figures/variable-yml.png")
 ```
 
 ----
@@ -92,7 +92,7 @@ Create a new Quarto document in an existing project:
 ```r
 froggeR::write_quarto(
   filename = "frog_analysis",
-  default = TRUE  # Use settings from _variables.yml
+  custom_yaml = TRUE  # Use settings from _variables.yml
 )
 ```
 
@@ -109,7 +109,7 @@ For documents without project settings and requiring manual changes to the docum
 ```r
 froggeR::write_quarto(
   filename = "frog_standalone",
-  default = FALSE  # Basic Quarto template
+  custom_yaml = FALSE  # Basic Quarto template
 )
 ```
 
@@ -117,28 +117,28 @@ froggeR::write_quarto(
 
 `write_quarto()` supports two main workflows:
 
-1. **Project Documents** (`default = TRUE`)
+1. **Project Documents** (`custom_yaml = TRUE`)
     * Use project settings
     * Include custom styling
     * Maintain consistency
 
-2. **Standalone Documents** (`default = FALSE`)
+2. **Standalone Documents** (`custom_yaml = FALSE`)
     * Basic Quarto template
     * No external dependencies
     * Quick start for simple docs
 
 ```{r, echo=FALSE, fig.align='center', fig.cap='Comparison of document types', out.width='85%'}
-knitr::include_graphics("../man/figures/document_types.png")
+knitr::include_graphics("../man/figures/yaml-comparison.png")
 ```
 
-The `default = TRUE` template leverages your project's `_variables.yml` settings, automatically populating author information, styling, and other metadata. This means you can focus immediately on content creation rather than document setup. Conversely, `default = FALSE` provides a minimal template when you need a standalone document without project-specific configurations.
+The `custom_yaml = TRUE` template leverages your project's `_variables.yml` settings, automatically populating author information, styling, and other metadata. This means you can focus immediately on content creation rather than document setup. Conversely, `custom_yaml = FALSE` provides a minimal template when you need a standalone document without project-specific configurations.
 
 ----
 
 ## Rendered Output
 
-```{r, echo=FALSE, fig.align='center', fig.cap='Example output of default document', out.width='85%'}
-knitr::include_graphics("../man/figures/rendered_doc.png")
+```{r, echo=FALSE, fig.align='center', fig.cap='Example output of custom_yaml document', out.width='85%'}
+knitr::include_graphics("../man/figures/custom-yaml-rendered.png")
 ```
 
 ----
@@ -172,12 +172,12 @@ Best practices for project organization:
     # Add analysis documents
     froggeR::write_quarto(
       filename = "data_prep",
-      default = TRUE
+      custom_yaml = TRUE
     )
     
     froggeR::write_quarto(
       filename = "analysis",
-      default = TRUE
+      custom_yaml = TRUE
     )
     ```
 
@@ -232,7 +232,7 @@ Customize your project structure:
 ```r
 froggeR::quarto_project(
   name = "advanced_frogs",
-  default = TRUE  # Include all styling options
+  initialize_project = TRUE  # Include all styling options
 )
 ```
 
