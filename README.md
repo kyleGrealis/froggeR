@@ -193,7 +193,7 @@ We're constantly improving froggeR. Upcoming features include:
 
 ## Contributing
 
-We welcome contributions! For major changes, please open an issue first to discuss your ideas.
+We're open to suggestions! If you have ideas for new features, please open an issue on our GitHub repository.
 
 ----
 
