@@ -25,7 +25,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   # Update settings (interactive)
 #'   froggeR_settings(update = TRUE)
 #'
