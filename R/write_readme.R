@@ -25,7 +25,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Create a new temporary directory for the example
 #' temp_dir <- tempdir()
 #' 
