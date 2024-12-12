@@ -11,7 +11,7 @@ Authors@R:
         comment = c(ORCID = "0000-0002-9223-8854")
     )
 Maintainer: Kyle Grealis <kyleGrealis@icloud.com>
-Description: Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables reusability through custom YAML variables, automated project structure creation, and standardized templates. Features include enhanced project initialization, templated Quarto documents, comprehensive .gitignore settings, custom SCSS styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents.
+Description: Streamlines 'Quarto' workflows by providing tools for consistent project setup and documentation. Enables reusability through custom YAML variables, automated project structure creation, and standardized templates. Features include enhanced project initialization, templated 'Quarto' documents, comprehensive .gitignore settings, custom SCSS styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.3.2
