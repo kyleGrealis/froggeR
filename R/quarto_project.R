@@ -30,7 +30,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   # Create a new Quarto project with custom formatted YAML header
 #'   quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
 #'
