@@ -34,7 +34,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   # Create a new Quarto document with custom YAML
 #'   write_quarto(filename = "frog_analysis", path = tempdir())
 #'
