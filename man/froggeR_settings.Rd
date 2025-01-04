@@ -4,11 +4,13 @@
 \alias{froggeR_settings}
 \title{Manage froggeR settings}
 \usage{
-froggeR_settings(update = TRUE)
+froggeR_settings(update = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{update}{Logical. If TRUE (default), prompts to update existing settings
 or create new ones if none exist.}
+
+\item{verbose}{Logical. If TRUE (default), settings output is printed to the console.}
 }
 \value{
 Invisibly returns the current settings list.
@@ -33,12 +35,12 @@ When run interactively with \code{update = TRUE}, it provides a menu-driven
   prompt to create them regardless of the \code{update} parameter.
 }
 \examples{
-\dontrun{
-  # Update settings (interactive)
-  froggeR_settings(update = TRUE)
+# Update settings interactively with console feedback
+froggeR_settings(update = TRUE, verbose = TRUE)
 
-  # Load current settings without updating
-  settings <- froggeR_settings(update = FALSE)
-  print(settings)
-}
+# Save settings without updating and print console output
+settings <- froggeR_settings(update = FALSE, verbose = TRUE)
+
+# Save settings without updating and suppress console output
+settings <- froggeR_settings(update = FALSE, verbose = FALSE)
 }

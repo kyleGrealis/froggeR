@@ -6,6 +6,7 @@
 #'
 #' @param update Logical. If TRUE (default), prompts to update existing settings
 #'   or create new ones if none exist.
+#' @param verbose Logical. If TRUE (default), settings output is printed to the console.
 #'
 #' @return Invisibly returns the current settings list.
 #'
@@ -25,30 +26,40 @@
 #'
 #' @export
 #' @examples
-#' \donttest{
-#'   # Update settings (interactive)
-#'   froggeR_settings(update = TRUE)
-#'
-#'   # Load current settings without updating
-#'   settings <- froggeR_settings(update = FALSE)
-#'   print(settings)
-#' }
-froggeR_settings <- function(update = TRUE) {
+#' # Update settings interactively with console feedback
+#' froggeR_settings(update = TRUE, verbose = TRUE)
+#' 
+#' # Save settings without updating and print console output
+#' settings <- froggeR_settings(update = FALSE, verbose = TRUE)
+#' 
+#' # Save settings without updating and suppress console output
+#' settings <- froggeR_settings(update = FALSE, verbose = FALSE)
+
+froggeR_settings <- function(update = TRUE, verbose = TRUE) {
+
+  # Argument validation
+  if (!is.logical(update) || length(update) != 1) {
+    stop('"update" must be a single logical value')
+  }
+  if (!is.logical(verbose) || length(verbose) != 1) {
+    stop('"verbose" must be a single logical value')
+  }
+
   settings <- .load_settings()
 
   if (is.null(settings) || update) {
     results <- .update_settings(settings)
     settings <- results$settings
 
-    if (results$changed) {
+    if (results$changed && verbose) {
       ui_done(sprintf('%s settings updated', col_green('froggeR')))
     }
-    if (update) {
+    if (update && verbose) {
       answer <- tolower(readline('Update or create _variables.yml? [y/n] '))
-      if (answer == 'y') .update_variables_yml(settings = settings)
+      if (answer == 'y') .update_variables_yml(settings = settings, verbose = verbose)
     }
-  } else {
-    message("Current froggeR settings:\n")
+  } else if (verbose) {
+    message(sprintf("\nCurrent %s settings:\n", col_green('froggeR')))
     display_names <- c(
       'Name', 'e-mail', 'ORCID', 'URL', 'Affiliation', 'Table of Contents'
     )
@@ -58,8 +69,9 @@ froggeR_settings <- function(update = TRUE) {
       name <- display_names[i]
       value <- settings[[i]]
       padding <- paste(rep(" ", max_name_length - nchar(name)), collapse = "")
-      message(sprintf("%s:%s %s\n", name, padding, value))
+      message(sprintf("%s:%s %s", name, padding, value))
     }
+    message('\n')
   }
   invisible(settings)
 }
@@ -74,6 +86,11 @@ froggeR_settings <- function(update = TRUE) {
   if (file.exists(config_file)) {
     tryCatch({
       settings <- yaml::read_yaml(config_file)
+      # The settings$toc may be loaded with an empty string. The default is to fill
+      #   the settings$toc with "Table of Contents":
+      if (!is.null(settings) && is.null(settings$toc) || settings$toc == "") {
+        settings$toc <- 'Table of Contents'
+      }
       return(settings)
     }, error = function(e) {
       warning('Error loading settings file. Using default settings.')
@@ -84,6 +101,7 @@ froggeR_settings <- function(update = TRUE) {
   }
 }
 
+# Update the settings, if interactive
 .update_settings <- function(settings = NULL) {
   if (is.null(settings)) {
     settings <- list(
@@ -94,20 +112,19 @@ froggeR_settings <- function(update = TRUE) {
   }
   original_settings <- settings
 
+  message(sprintf("\nUpdating %s settings!", col_green('froggeR')))
+  ui_info('Leave blank if you do not wish to change that entry.')
+
   # Clean names for display
   setting_names <- list('Name', 'e-mail', 'ORCID', 'URL', 'Affiliation')
-
-  message('Leave blank if you do not wish to change that entry.')
   for (i in seq_along(setting_names)) {
-    if (settings[[i]] == ''){
-      prompt <- sprintf('Enter value for %s: ', setting_names[[i]])
+    prompt <- if (settings[[i]] == ''){
+      sprintf('Enter value for %s: ', setting_names[[i]])
     } else {
-      prompt <- sprintf(
-        'Enter new value for %s [%s]: ', setting_names[[i]], settings[[i]]
-      )
+      sprintf('Enter new value for %s [%s]: ', setting_names[[i]], settings[[i]])
     }
     
-    new_value <- readline(prompt)
+    new_value <- if(interactive()) readline(prompt) else ''
     if (new_value != '') settings[[i]] <- new_value
   }
 
@@ -120,6 +137,8 @@ froggeR_settings <- function(update = TRUE) {
   list(settings = settings, changed = settings_were_changed)
 }
 
+
+# Save the settings in a YAML format in the user's config path
 .save_settings <- function(settings) {
   config_path <- rappdirs::user_config_dir('froggeR')
   config_file <- file.path(config_path, 'config.yml')
@@ -129,16 +148,24 @@ froggeR_settings <- function(update = TRUE) {
   invisible(settings)
 }
 
-.update_variables_yml <- function(path = getwd(), settings) {
-  variables_file <- file.path(path, '_variables.yml')
+.update_variables_yml <- function(settings, verbose = TRUE) {
+
+  # Ensure here::here() resolves to a valid directory
+  variables_file <- tryCatch({
+    file.path(here::here(), '_variables.yml')
+  }, error = function(e) {
+    stop("Could not resolve project root with here::here(). Ensure you are in a valid project structure.")
+  })
   
   file_existed <- file.exists(variables_file)
   yaml::write_yaml(settings, variables_file)
 
-  if (file_existed) {
-    ui_done('Updated _variables.yml')
-  } else {
-    ui_done('Created _variables.yml')
+  if (verbose) {
+    if (file_existed) {
+      ui_done('Updated _variables.yml')
+    } else {
+      ui_done('Created _variables.yml')
+    }
   }
 }
 
