@@ -1,40 +1,36 @@
 #' Create a project README file
 #'
-#' This function is designed to first check for the existence of a README file. If none
-#' is detected or the user chooses to overwrite the current README, a README template
-#' is loaded from \url{https://gist.github.com/kyleGrealis} and written to the project
-#' level.
+#' This function streamlines project documentation by creating and managing a README.md
+#' file. It provides interactive prompts for existing files and maintains consistent 
+#' project documentation structure.
 #'
-#' @param path The path to the main project level. Defaults to the current
-#' working directory.
-#' @return A README.md template. Contains sections for:\cr
-#' * Project description (study name, principal investigator, & author)\cr
-#' * Project setup steps for ease of portability\cr
-#' * Project file descriptions\cr
-#' * Project directory descriptions\cr
-#' * Miscellaneous
+#' @param path The destination directory for the README file. Defaults to the current 
+#' project's base directory (ie, value of \code{here::here()}).
+#' @return Creates a comprehensive README template for project documentation.
 #'
-#' @details This function handles the creation and/or overwriting of both \code{README.md}
-#' and \code{dated_progress_notes.md} files. For each file, if it already exists, 
-#' the user will be prompted whether to overwrite it. The \code{dated_progress_notes.md}
-#' file will be initialized with the current date and a "project started" message.
+#' @details
+#' The README.md template includes structured sections for:
+#' \itemize{
+#'   \item Project description (study name, principal investigator, author)
+#'   \item Project setup steps for reproducibility
+#'   \item File and directory descriptions
+#'   \item Miscellaneous project notes
+#' }
 #'
-#' NOTE: Some documentation remains to provide the user with example descriptions for
-#' files & directories. It is highly recommended to keep these sections. However, 
-#' this is a modifiable template and should be tailor-fit for your exact purpose.
+#' If the README file already exists, the function will stop and warn the user. The 
+#' templates include example documentation that can be modified to suit project needs.
 #'
 #' @export
 #' @examples
-#' \donttest{
-#' # Create a new temporary directory for the example
-#' temp_dir <- tempdir()
-#' 
-#' write_readme(path = temp_dir)
-#' }
-write_readme <- function(path = getwd()) {
-  # Check if directory exists
-  if (!dir.exists(path)) {
-    stop("Directory does not exist")
+#' # Create new README in temporary directory
+#' tmp <- tempdir()
+#' write_readme(path = tmp)
+ 
+write_readme <- function(path = here::here()) {
+  
+  # Validate path
+  if (is.null(path) || !dir.exists(path)) {
+    stop("Invalid `path`. Please enter a valid project directory.")
   }
   
   # Normalize the path for consistency
@@ -43,45 +39,24 @@ write_readme <- function(path = getwd()) {
   # Get README template path first (fail fast)
   readme_path <- system.file("gists/README.md", package = "froggeR")
   if (readme_path == "") {
-    stop("Could not find README.md template in package installation")
+    stop("Could not find README template in package installation")
   }
   
   # Handle README creation/overwrite
   if (file.exists(file.path(path, 'README.md'))) {
-    ui_info('**CAUTION!!**')
-    if (ui_yeah('README.md found in project level directory! Would you like to overwrite it?')) {
-      invisible(file.copy(
-        from = readme_path,
-        to = file.path(path, "README.md"),
-        overwrite = TRUE
-      ))
-      ui_done("README.md has been overwritten with the template.")
-    } else {
-      ui_info("Keeping existing README.md")
-    }
-  } else {
-    invisible(file.copy(
-      from = readme_path,
-      to = file.path(path, "README.md")
-    ))
-    ui_done("A README.md template has been created.")
-  }
-  
-  # Handle dated_progress_notes.md creation/overwrite
-  progress_notes_content <- paste0(
-    "# Add project updates here\n",
-    format(Sys.Date(), "%b %d, %Y"),
-    ": project started"
-  )
-  
-  # Only create dated_progress_notes.md on README or project initialization
-  if (!file.exists(file.path(path, 'dated_progress_notes.md'))) {
-    writeLines(
-      progress_notes_content,
-      con = file.path(path, "dated_progress_notes.md")
+    stop(
+      'A README.md has been found in the specified directory! If you would like to ',
+      'proceed, remove the existing README and rerun this function.'
     )
-    ui_done("A dated_progress_notes.md template has been created.")
   }
+
+  invisible(file.copy(
+    from = readme_path,
+    to = file.path(path, "README.md"),
+    overwrite = TRUE
+  ))
+  ui_done("Created README.md")
   
-  return(invisible(NULL))
+  return(invisible(file.path(path, "README.md")))
+
 }

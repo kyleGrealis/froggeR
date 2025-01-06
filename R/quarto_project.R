@@ -1,4 +1,4 @@
-#' Create a custom Quarto project
+#' Create a Custom Quarto Project
 #'
 #' This function creates a new Quarto project directory with additional froggeR 
 #' features. It first calls \code{quarto::quarto_create_project()} to set up the 
@@ -7,7 +7,8 @@
 #' @param name Character string. The name of the Quarto project directory and 
 #'   initial \code{.qmd} file.
 #' @param base_dir Character string. Base directory where the project should be created.
-#'   Defaults to the current working directory.
+#'   Defaults to the current project's base directory (i.e., value of 
+#'   \code{here::here()}).
 #' @param custom_yaml Logical. If TRUE (default), uses a custom YAML header in the initial
 #'   \code{.qmd} file, populated with values from '_variables.yml'. If FALSE, uses
 #'   Quarto's standard YAML header.
@@ -17,7 +18,8 @@
 #' @details
 #' This function creates a Quarto project with the following enhancements:
 #' \itemize{
-#'   \item \code{_variables.yml}: Stores reusable YAML variables (if \code{custom_yaml = TRUE})
+#'   \item \code{_variables.yml}: Stores reusable YAML variables (if \code{custom_yaml =
+#'  TRUE})
 #'   \item \code{.gitignore}: Enhanced settings for R projects
 #'   \item \code{README.md}: Template README file
 #'   \item \code{dated_progress_notes.md}: For project progress tracking
@@ -28,16 +30,16 @@
 #'
 #' @seealso \code{\link{write_quarto}}, \code{\link{froggeR_settings}}
 #'
-#' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   # Create a new Quarto project with custom formatted YAML header
 #'   quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
 #'
 #'   # Create a new Quarto project with standard Quarto YAML
 #'   quarto_project('frogs_standard', base_dir = tempdir(), custom_yaml = FALSE)
 #' }
-quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
+#' @export
+quarto_project <- function(name, base_dir = here::here(), custom_yaml = TRUE) {
   # Validate inputs
   if (!grepl('^[a-zA-Z0-9_-]+$', name)) {
     stop(
@@ -68,7 +70,7 @@ quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
   
   # Create the Quarto project
   quarto::quarto_create_project(name, quiet = TRUE)
-  ui_done(paste(name, 'Created a Quarto project directory'))
+  ui_done(sprintf('Created Quarto project directory: %s', name))
   
   # Remove default files created by Quarto only if they exist
   default_qmd <- file.path(project_dir, paste0(name, '.qmd'))
@@ -77,27 +79,29 @@ quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
   if (file.exists(default_ignore)) file.remove(default_ignore)
   
   # Setup core requirements
-  settings <- froggeR_settings(update = FALSE)
-  .update_variables_yml(project_dir, settings)
-  .check_settings(settings)
-  
-  # Create project files
-  froggeR::write_ignore(path = project_dir)
-  froggeR::write_readme(path = project_dir)
-  .write_rproj(name = name, path = project_dir)
+  settings <- froggeR_settings(update = FALSE, verbose = FALSE)
+  if (!is.null(settings) && custom_yaml) .check_settings(settings)
 
   # If using custom_yaml template, create SCSS
   if (custom_yaml) {
     froggeR::write_scss(path = project_dir, name = 'custom')
   }
   
+  # Create project files
+  froggeR::write_ignore(path = project_dir)
+  froggeR::write_readme(path = project_dir)
+  froggeR::write_notes(path = project_dir)
+
   # Create Quarto document
   froggeR::write_quarto(
     filename = name,
     path = project_dir,
     custom_yaml = custom_yaml,
-    initialize_project = TRUE
+    initialize_proj = TRUE
   )
+
+  # Start & open the project
+  .write_rproj(name = name, path = project_dir)
   
   ui_done(
     sprintf(
@@ -110,49 +114,4 @@ quarto_project <- function(name, base_dir = getwd(), custom_yaml = TRUE) {
   
   # Return the project directory path invisibly
   invisible(project_dir)
-}
-
-# Internal helper function for creating .Rproj files
-.write_rproj <- function(name, path = getwd()) {
-  # Check if directory exists
-  if (!dir.exists(path)) {
-    stop("Directory does not exist")
-  }
-  
-  # Normalize the path for consistency
-  path <- normalizePath(path, mustWork = TRUE)
-  
-  # Define the target file path
-  the_rproj_file <- file.path(path, paste0(name, '.Rproj'))
-  
-  # Check for existing .Rproj
-  if (file.exists(the_rproj_file)) {
-    ui_info('**CAUTION!!**')
-    if (!ui_yeah('.Rproj found in project level directory! Would you like to overwrite it?')) {
-      ui_info("Keeping existing .Rproj")
-      return(invisible(NULL))
-    }
-  }
-  
-  # Define .Rproj content
-  content <- sprintf('
-Version: 1.0
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
-NumSpacesForTab: 2
-Encoding: UTF-8
-RnwWeave: Sweave
-LaTeX: pdfLaTeX
-AutoAppendNewline: Yes
-StripTrailingWhitespace: Yes
-')
-  
-  # Write .Rproj file
-  writeLines(content, the_rproj_file)
-  ui_done(paste0('Created ', name, '.Rproj'))
-  
-  return(invisible(NULL))
 }
