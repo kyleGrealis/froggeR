@@ -2,60 +2,53 @@
 % Please edit documentation in R/write_quarto.R
 \name{write_quarto}
 \alias{write_quarto}
-\title{Create a new Quarto document}
+\title{Create a New Quarto Document}
 \usage{
 write_quarto(
   filename = "frogs",
-  path = getwd(),
+  path = here::here(),
   custom_yaml = TRUE,
-  initialize_project = FALSE
+  initialize_proj = FALSE
 )
 }
 \arguments{
 \item{filename}{Character string. The name of the file without the '.qmd' extension.
 Only letters, numbers, hyphens, and underscores are allowed.}
 
-\item{path}{Character string. The directory where the file will be created. 
-Defaults to the current working directory.}
+\item{path}{Character string. Directory where the file will be created. Defaults to
+the current project's base directory.}
 
 \item{custom_yaml}{Logical. If TRUE (default), creates a Quarto document with a
-custom YAML header using values from '_variables.yml'. If FALSE, creates a
-standard Quarto document with basic YAML headers.}
+custom YAML header using values from `_variables.yml`. If FALSE, creates a
+standard Quarto document.}
 
-\item{initialize_project}{Logical. Set to TRUE when used within a Quarto project 
-(internal use).}
+\item{initialize_proj}{Logical. TRUE only if starting a 
+\code{froggeR::quarto_project()}.}
 }
 \value{
 Invisibly returns NULL after creating the Quarto document.
 }
 \description{
-This function creates a new Quarto document (\code{.qmd} file) with either a custom
+This function creates a new Quarto document (.qmd file) with either a custom
 or standard YAML header. When using a custom header, it integrates with 
-\code{_variables.yml} for reusable metadata across documents.
+`froggeR_settings` for reusable metadata across documents.
 }
 \details{
-When \code{custom_yaml = TRUE} and \code{initialize_project = FALSE}, 
- the function will:
-\itemize{
-  \item Create or update \code{_variables.yml} for document metadata
-  \item Create \code{custom.scss} for document styling (if it doesn't exist)
-  \item Create \code{_quarto.yml} for project configuration (if it doesn't exist)
-}
-Existing files will not be modified. For Quarto styling options, see
-\url{https://quarto.org/docs/output-formats/html-themes.html}.
+When `custom_yaml = TRUE`, the function will:
+- Check for `froggeR_settings`.
+- Create or update `_variables.yml` for document metadata.
+- Create auxiliary files (`custom.scss`, `_quarto.yml`) if they don't already exist.
 
-If froggeR settings don't exist and \code{custom_yaml = TRUE}, the function will
-prompt the user to create settings using \code{froggeR_settings()}.
+If `froggeR_settings` are missing, the function warns the user and provides 
+guidance to set them up for reusable metadata. A standard YAML document will still 
+be created.
 }
 \examples{
-\dontrun{
-  # Create a new Quarto document with custom YAML
-  write_quarto(filename = "frog_analysis", path = tempdir())
+\donttest{
+# Create a new Quarto document with custom YAML
+write_quarto(filename = "frog_analysis", path = tempdir())
 
-  # Create a basic Quarto document with standard YAML
-  write_quarto(filename = "frog_analysis_basic", path = tempdir(), custom_yaml = FALSE)
+# Create a basic Quarto document with standard YAML
+write_quarto(filename = "frog_analysis_basic", path = tempdir(), custom_yaml = FALSE)
 }
-}
-\seealso{
-\code{\link{quarto_project}}, \code{\link{froggeR_settings}}
 }

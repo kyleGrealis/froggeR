@@ -2,7 +2,7 @@
 % Please edit documentation in R/settings.R
 \name{froggeR_settings}
 \alias{froggeR_settings}
-\title{Manage froggeR settings}
+\title{Manage froggeR Settings}
 \usage{
 froggeR_settings(update = TRUE, verbose = TRUE)
 }
@@ -16,25 +16,25 @@ or create new ones if none exist.}
 Invisibly returns the current settings list.
 }
 \description{
-This function allows you to check, display, or initialize froggeR settings for 
-Quarto documents. Settings are stored in \code{~/.config/froggeR/config.yml} 
-for persistence across froggeR projects.
+This function allows you to check, display, or initialize froggeR settings for
+Quarto documents. Settings are stored in `~/.config/froggeR/config.yml` for
+persistence across froggeR projects.
 }
 \details{
 The function manages the following settings:
-\itemize{
-  \item name: Your Name (required)
-  \item email: your.email@example.com (required)
-  \item orcid: 0000-0000-0000-0000 (optional)
-  \item url: https://github.com/yourUsername (optional)
-  \item affiliations: Your Institution (optional)
-  \item toc: Table of Contents (defaults to this if left empty)
-}
-When run interactively with \code{update = TRUE}, it provides a menu-driven 
-  interface for updating these settings. If settings don't exist, it will 
-  prompt to create them regardless of the \code{update} parameter.
+- `name`: Your Name (required)
+- `email`: your.email@example.com (required)
+- `orcid`: 0000-0000-0000-0000 (optional)
+- `url`: https://github.com/yourUsername (optional)
+- `affiliations`: Your Institution (optional)
+- `toc`: Table of Contents (defaults to this if left empty)
+
+When run interactively with `update = TRUE`, it provides a menu-driven interface
+for updating these settings. If settings don't exist, it will prompt to create them
+regardless of the `update` parameter.
 }
 \examples{
+\donttest{
 # Update settings interactively with console feedback
 froggeR_settings(update = TRUE, verbose = TRUE)
 
@@ -43,4 +43,6 @@ settings <- froggeR_settings(update = FALSE, verbose = TRUE)
 
 # Save settings without updating and suppress console output
 settings <- froggeR_settings(update = FALSE, verbose = FALSE)
+}
+
 }

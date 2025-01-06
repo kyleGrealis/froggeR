@@ -2,16 +2,17 @@
 % Please edit documentation in R/quarto_project.R
 \name{quarto_project}
 \alias{quarto_project}
-\title{Create a custom Quarto project}
+\title{Create a Custom Quarto Project}
 \usage{
-quarto_project(name, base_dir = getwd(), custom_yaml = TRUE)
+quarto_project(name, base_dir = here::here(), custom_yaml = TRUE)
 }
 \arguments{
 \item{name}{Character string. The name of the Quarto project directory and 
 initial \code{.qmd} file.}
 
 \item{base_dir}{Character string. Base directory where the project should be created.
-Defaults to the current working directory.}
+Defaults to the current project's base directory (i.e., value of 
+\code{here::here()}).}
 
 \item{custom_yaml}{Logical. If TRUE (default), uses a custom YAML header in the initial
 \code{.qmd} file, populated with values from '_variables.yml'. If FALSE, uses
@@ -28,7 +29,8 @@ basic structure, then enhances it with froggeR-specific files and settings.
 \details{
 This function creates a Quarto project with the following enhancements:
 \itemize{
-  \item \code{_variables.yml}: Stores reusable YAML variables (if \code{custom_yaml = TRUE})
+  \item \code{_variables.yml}: Stores reusable YAML variables (if \code{custom_yaml =
+ TRUE})
   \item \code{.gitignore}: Enhanced settings for R projects
   \item \code{README.md}: Template README file
   \item \code{dated_progress_notes.md}: For project progress tracking

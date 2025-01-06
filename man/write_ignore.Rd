@@ -4,11 +4,11 @@
 \alias{write_ignore}
 \title{Create an aggressive project \code{.gitignore} file}
 \usage{
-write_ignore(path = getwd())
+write_ignore(path = here::here())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to the
-current working directory.}
+\item{path}{The path to the main project level. Defaults to the current project's base
+directory (ie, value of \code{here::here()}).}
 }
 \value{
 A \code{.gitignore} file with enhanced security rules. The file includes:\cr
@@ -33,11 +33,9 @@ prevent accidental data exposure but should not be considered a complete
 security solution.
 }
 \examples{
-\dontrun{
-# Create a new temporary directory for the example
-temp_dir <- tempdir()
-
+\donttest{
 # Create new .gitignore
-write_ignore(path = temp_dir)
+write_ignore(path = tempdir())
 }
+
 }
