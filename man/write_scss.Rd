@@ -29,11 +29,7 @@ The function includes a robust YAML handling mechanism that:
   \item Provides instructions for adding SCSS files to Quarto YAML
 }
 
-For more information on customizing Quarto documents with SCSS, please refer to
-\url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes},
-\url{https://quarto.org/docs/output-formats/html-themes-more.html}, and
-\url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
-you with over 1500 lines of SCSS variables.
+See "Customizing Quarto with froggeR" vignette for more help.
 }
 \examples{
 \donttest{
