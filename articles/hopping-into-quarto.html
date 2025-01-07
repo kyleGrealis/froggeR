@@ -73,7 +73,7 @@
     
     
 <div class="section level2">
-<h2 id="introduction">Introduction 🐸<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p><code>froggeR</code> streamlines Quarto workflows by providing a
 robust, user-friendly framework for project setup and document creation.
@@ -170,8 +170,9 @@ for more detailed configuration options.</p>
 </h3>
 <p>Customize your document appearance with SCSS:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create or modify style sheets</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_scss.html">write_scss</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_scss.html">write_scss</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span><span class="op">)</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_notes.html">write_notes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This creates a <code>custom.scss</code> file with commented-out
 examples. Uncomment and modify these to customize your document’s
 appearance. For more information on Quarto styling, refer to:</p>
@@ -252,7 +253,13 @@ formatted. Check for any extra spaces or incorrect indentation.</p>
 <p><strong>Q: The SCSS styles aren’t applying to my
 document.</strong></p>
 <p>A: Make sure the SCSS file is properly linked in your YAML header.
-Check the console for any error messages during rendering.</p>
+Remember, the order of the styles sheets matters. During the
+initialization of
+<code>froggeR::write_quarto(custom_yaml = TRUE)</code>, the
+<code>custom.scss</code> will override anything set in the
+<code>default</code> styling. The same applies if another SCSS sheet is
+added – it will override all SCSS files listed above it. Check the
+console for any error messages during rendering.</p>
 </li>
 <li>
 <p><strong>Q: I’m getting an error when trying to create a new
@@ -264,7 +271,7 @@ directory.</p>
 </ol>
 </div>
 <div class="section level3">
-<h3 id="tips-for-smooth-hopping">Tips for Smooth Hopping<a class="anchor" aria-label="anchor" href="#tips-for-smooth-hopping"></a>
+<h3 id="tips-for-smoother-projects">Tips for Smoother Projects<a class="anchor" aria-label="anchor" href="#tips-for-smoother-projects"></a>
 </h3>
 <ul>
 <li>Always review the generated files after project creation to ensure

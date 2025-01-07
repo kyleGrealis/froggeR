@@ -73,7 +73,7 @@
     
     
 <div class="section level2">
-<h2 id="introduction">Introduction 🐸<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>One of <code>froggeR</code>’s core strengths is its ability to
 maintain consistent settings and styling across multiple projects. This
@@ -216,8 +216,9 @@ header:</p>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> modern_theme.scss</span><span class="co">  # Or presentation_theme.scss</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> custom.scss</span><span class="co">        # Added during project </span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> modern_theme.scss</span><span class="co">  # Or presentation_theme.scss</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <blockquote>
 <p>froggeR will attempt to automate the revision of your YAML header.
 Don’t be dismayed – we’ll provide you with feedback if this is
@@ -360,67 +361,6 @@ variables:</p>
 </ul>
 </li>
 </ol>
-</div>
-<div class="section level3">
-<h3 id="styling-problems">Styling Problems<a class="anchor" aria-label="anchor" href="#styling-problems"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>
-<p><strong>Styles Not Applying</strong></p>
-<ul>
-<li>Verify <code>custom.scss</code> is listed in YAML under
-<code>theme</code>
-</li>
-<li>Check file location (should be in project root)</li>
-<li>Ensure no syntax errors in SCSS</li>
-<li>Try clearing Quarto cache</li>
-</ul>
-</li>
-<li>
-<p><strong>Font Issues</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="at">    </span><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> </span><span class="st">"Open Sans"</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="at">    </span><span class="fu">monofont</span><span class="kw">:</span><span class="at"> </span><span class="st">"Fira Code"</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> custom.scss</span></span></code></pre></div>
-<ul>
-<li>Include Google Fonts in YAML</li>
-<li>Check font name spelling</li>
-<li>Use web-safe fallbacks</li>
-</ul>
-</li>
-<li>
-<p><strong>Variable Scope</strong></p>
-<ul>
-<li>Define all variables in <code>scss:defaults</code>
-</li>
-<li>Reference variables after definition</li>
-<li>Use proper SCSS syntax (<code>$variable</code>)</li>
-</ul>
-</li>
-</ol>
-</div>
-<div class="section level3">
-<h3 id="scss-file-management">SCSS File Management<a class="anchor" aria-label="anchor" href="#scss-file-management"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Project Creation vs. Individual Documents</strong>
-<ul>
-<li>
-<code><a href="../reference/quarto_project.html">quarto_project()</a></code> automatically creates
-<code>custom.scss</code>
-</li>
-<li>
-<code><a href="../reference/write_quarto.html">write_quarto()</a></code> uses existing <code>custom.scss</code>
-if available</li>
-<li>For standalone documents, manually create SCSS with
-<code><a href="../reference/write_scss.html">write_scss()</a></code>
-</li>
-</ul>
-</li>
-</ol>
 <hr>
 </div>
 </div>
@@ -429,12 +369,9 @@ if available</li>
 </h2>
 <p>For more advanced SCSS customization options, visit:</p>
 <ul>
-<li><a href="https://quarto.org/docs/output-formats/html-themes.html#customizing-themes" class="external-link">Quarto
-HTML Themes</a></li>
-<li><a href="https://quarto.org/docs/output-formats/html-themes-more.html" class="external-link">More
-Theme Options</a></li>
-<li><a href="https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss" class="external-link">Bootstrap
-Variables</a></li>
+<li><a href="https://quarto.org/docs/output-formats/html-themes.html#customizing-themes" target="_blank" class="external-link">Quarto HTML Themes</a></li>
+<li><a href="https://quarto.org/docs/output-formats/html-themes-more.html" target="_blank" class="external-link">More Theme Options</a></li>
+<li><a href="https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss" target="_blank" class="external-link">Bootstrap Variables</a></li>
 </ul>
 <hr>
 </div>
