@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Introduction 🐸
+## Introduction
 
 `froggeR` streamlines Quarto workflows by providing a robust, user-friendly framework for project setup and document creation. This vignette demonstrates how `froggeR` can enhance your productivity while maintaining project consistency.
 
@@ -90,8 +90,9 @@ froggeR::write_quarto(
 Customize your document appearance with SCSS:
 
 ```r
-# Create or modify style sheets
 froggeR::write_scss(name = "custom")
+froggeR::write_notes()
+froggeR::write_readme()
 ```
 
 This creates a `custom.scss` file with commented-out examples. Uncomment and modify these to customize your document's appearance. For more information on Quarto styling, refer to:
@@ -151,13 +152,13 @@ For optimal results with `froggeR`:
 
 2. **Q: The SCSS styles aren't applying to my document.**
 
-   A: Make sure the SCSS file is properly linked in your YAML header. Check the console for any error messages during rendering.
+   A: Make sure the SCSS file is properly linked in your YAML header. Remember, the order of the styles sheets matters. During the initialization of `froggeR::write_quarto(custom_yaml = TRUE)`, the `custom.scss` will override anything set in the `default` styling. The same applies if another SCSS sheet is added -- it will override all SCSS files listed above it. Check the console for any error messages during rendering.
 
 3. **Q: I'm getting an error when trying to create a new project.**
 
    A: Ensure you have the latest version of froggeR and Quarto installed. Also, check if you have write permissions in the target directory.
 
-### Tips for Smooth Hopping
+### Tips for Smoother Projects
 
 - Always review the generated files after project creation to ensure everything is set up as expected.
 - When customizing SCSS, make small changes and render frequently to see the effects.

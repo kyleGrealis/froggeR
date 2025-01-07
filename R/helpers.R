@@ -73,15 +73,11 @@ ensure_auxiliary_files <- function(path) {
   # Handle custom.scss
   if (!file.exists(scss_path)) {
     write_scss(path = path, name = 'custom')
-  } else {
-    ui_info("'custom.scss' already exists. No changes made.")
   }
 
   # Handle _quarto.yml
   if (!file.exists(quarto_yml_path)) {
     writeLines("project:\n  title: \"Quarto Project\"", quarto_yml_path)
     ui_done("Created '_quarto.yml'")
-  } else {
-    ui_info("'_quarto.yml' already exists. No changes made.")
   }
 }

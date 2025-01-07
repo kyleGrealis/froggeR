@@ -83,6 +83,7 @@ froggeR::quarto_project(
 ```
 
 This creates:
+
 * A Quarto document with custom YAML
 * A comprehensive `.gitignore`
 * A structured `README.md`
@@ -100,6 +101,7 @@ froggeR::froggeR_settings()
 
 Interactively create or update metadata that is reusable across Quarto projects & 
 documents with:
+
 * Author details
 * Contact information
 * Affiliations
@@ -126,6 +128,7 @@ froggeR::write_ignore()
 ```
 
 Automatically excludes:
+
 * R data files (`.RData`, `.rda`, `.rds`)
 * Common data formats (CSV, Excel, text files)
 * Sensitive information
@@ -139,6 +142,7 @@ froggeR::write_scss()
 ```
 
 Provides a formatted stylesheet with:
+
 * SCSS defaults
 * SCSS mixins
 * SCSS rules
@@ -154,6 +158,7 @@ froggeR::write_readme()
 ```
 
 Includes sections for:
+
 * Project overview
 * Setup instructions
 * File and directory explanations

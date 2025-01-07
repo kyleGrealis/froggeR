@@ -1,12 +1,13 @@
 ---
 title: "Title"
 author: 
-    name: "{{< var name >}}"
-    url: "{{< var url >}}"
-    email: "{{< var email >}}"
-    orcid: "{{< var orcid >}}"
-    roles: "{{< var roles >}}"
-    affiliations: "{{< var affiliations >}}"
+  name: "{{< var name >}}"
+  url: "{{< var url >}}"
+  email: "{{< var email >}}"
+  orcid: "{{< var orcid >}}"
+  roles: "{{< var roles >}}"
+  affiliations: "{{< var affiliations >}}"
+date: last-modified
 abstract: ""
 keywords: "" # add keywords like "research" or "public health"
 number-sections: false

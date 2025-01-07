@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Introduction 🐸
+## Introduction
 
 One of `froggeR`'s core strengths is its ability to maintain consistent settings and styling across multiple projects. This vignette demonstrates how to set up and customize your Quarto documents using `froggeR`'s powerful configuration system.
 
@@ -143,6 +143,7 @@ format:
   html:
     theme:
       - default
+      - custom.scss        # Added during project 
       - modern_theme.scss  # Or presentation_theme.scss
 ---
 ```
@@ -279,49 +280,15 @@ a:not(.nav-link) {
     * Existing projects keep their settings
     * Update `_variables.yml` manually if needed
 
-### Styling Problems
-
-1. **Styles Not Applying**
-    * Verify `custom.scss` is listed in YAML under `theme`
-    * Check file location (should be in project root)
-    * Ensure no syntax errors in SCSS
-    * Try clearing Quarto cache
-
-2. **Font Issues**
-
-    ```yaml
-    format:
-      html:
-        mainfont: "Open Sans"
-        monofont: "Fira Code"
-        theme:
-          - custom.scss
-    ```
-    * Include Google Fonts in YAML
-    * Check font name spelling
-    * Use web-safe fallbacks
-
-3. **Variable Scope**
-    * Define all variables in `scss:defaults`
-    * Reference variables after definition
-    * Use proper SCSS syntax (`$variable`)
-
-### SCSS File Management
-
-1. **Project Creation vs. Individual Documents**
-    * `quarto_project()` automatically creates `custom.scss`
-    * `write_quarto()` uses existing `custom.scss` if available
-    * For standalone documents, manually create SCSS with `write_scss()`
-
 ----
 
 ## Additional Resources
 
 For more advanced SCSS customization options, visit:
 
-* [Quarto HTML Themes](https://quarto.org/docs/output-formats/html-themes.html#customizing-themes)
-* [More Theme Options](https://quarto.org/docs/output-formats/html-themes-more.html)
-* [Bootstrap Variables](https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss)
+* [Quarto HTML Themes](https://quarto.org/docs/output-formats/html-themes.html#customizing-themes){target="_blank"}
+* [More Theme Options](https://quarto.org/docs/output-formats/html-themes-more.html){target="_blank"}
+* [Bootstrap Variables](https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss){target="_blank"}
 
 ----
 
