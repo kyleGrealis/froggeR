@@ -1,6 +1,7 @@
-# Load required libraries
-library(testthat)
-library(withr)
+test_that("validates write_scss path", {
+  expect_error(write_scss(path = NULL), "Invalid `path`.")
+  expect_error(write_scss(path = " "), "Invalid `path`.")
+})
 
 test_that("write_scss creates the SCSS file correctly", {
   

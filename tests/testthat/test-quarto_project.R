@@ -10,7 +10,8 @@ test_that("quarto_project creates directory structure", {
   proj_path <- file.path(temp_dir, project_name)
   
   # Clean up any leftovers from previous tests
-  if (dir.exists(proj_path)) unlink(proj_path, recursive = TRUE)
+  unlink(proj_path, recursive = TRUE, force = TRUE)
+  # if (dir.exists(proj_path)) unlink(proj_path, recursive = TRUE)
   
   # Create the directory first to avoid file writing errors
   dir.create(proj_path, recursive = TRUE)
@@ -25,7 +26,7 @@ test_that("quarto_project creates directory structure", {
   expect_true(dir.exists(proj_path))
   
   # Clean up after test
-  unlink(proj_path, recursive = TRUE)
+  unlink(proj_path, recursive = TRUE, force = TRUE)
 })
 
 test_that("quarto_project handles errors", {
@@ -33,6 +34,6 @@ test_that("quarto_project handles errors", {
   skip_if_not(nzchar(Sys.which("quarto")), "Quarto not available")
   
   # Test simple error cases
-  expect_error(quarto_project(""))     # Empty string
-  expect_error(quarto_project(" "))    # Just whitespace
+  expect_error(quarto_project(""), "Invalid project name")     # Empty string
+  expect_error(quarto_project(" "), "Invalid project name")    # Just whitespace
 })
