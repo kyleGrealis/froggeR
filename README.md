@@ -6,7 +6,7 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/froggeR)](https://CRAN.R-project.org/package=froggeR)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
 
-> froggeR version: 0.2.1
+> froggeR version: 0.2.2
 
 froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.
 
@@ -98,7 +98,8 @@ Maintain consistent metadata across your documents:
 froggeR::froggeR_settings()
 ```
 
-Interactively create or update `_variables.yml` with:
+Interactively create or update metadata that is reusable across Quarto projects & 
+documents with:
 * Author details
 * Contact information
 * Affiliations
@@ -111,10 +112,9 @@ Generate new Quarto documents with pre-formatted headers:
 
 ```r
 froggeR::write_quarto(
-  filename = 'analysis',
+  filename = 'frogs',
   custom_yaml = TRUE  # Use variables from _variables.yml
 )
-```
 ```
 
 ### 🛡️ Enhanced Git Protection
@@ -188,8 +188,10 @@ We're constantly improving froggeR. Upcoming features include:
 | `froggeR_settings()` | Manage persistent Quarto document settings |
 | `quarto_project()` | Initialize a complete Quarto project structure |
 | `write_quarto()` | Create consistently formatted Quarto documents |
+| `write_variables()` | Re-use metadata across projects & documents |
 | `write_ignore()` | Configure `.gitignore` for enhanced data security |
 | `write_readme()` | Generate a comprehensive project README |
+| `write_notes()` | Create a dated progress notes template |
 | `write_scss()` | Create a customizable SCSS styling template |
 
 ----

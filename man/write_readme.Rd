@@ -4,41 +4,34 @@
 \alias{write_readme}
 \title{Create a project README file}
 \usage{
-write_readme(path = getwd())
+write_readme(path = here::here())
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to the current
-working directory.}
+\item{path}{The destination directory for the README file. Defaults to the current 
+project's base directory (ie, value of \code{here::here()}).}
 }
 \value{
-A README.md template. Contains sections for:\cr
-* Project description (study name, principal investigator, & author)\cr
-* Project setup steps for ease of portability\cr
-* Project file descriptions\cr
-* Project directory descriptions\cr
-* Miscellaneous
+Creates a comprehensive README template for project documentation.
 }
 \description{
-This function is designed to first check for the existence of a README file. If none
-is detected or the user chooses to overwrite the current README, a README template
-is loaded from \url{https://gist.github.com/kyleGrealis} and written to the project
-level.
+This function streamlines project documentation by creating and managing a README.md
+file. It provides interactive prompts for existing files and maintains consistent 
+project documentation structure.
 }
 \details{
-This function handles the creation and/or overwriting of both \code{README.md}
-and \code{dated_progress_notes.md} files. For each file, if it already exists, 
-the user will be prompted whether to overwrite it. The \code{dated_progress_notes.md}
-file will be initialized with the current date and a "project started" message.
+The README.md template includes structured sections for:
+\itemize{
+  \item Project description (study name, principal investigator, author)
+  \item Project setup steps for reproducibility
+  \item File and directory descriptions
+  \item Miscellaneous project notes
+}
 
-NOTE: Some documentation remains to provide the user with example descriptions for
-files & directories. It is highly recommended to keep these sections. However, 
-this is a modifiable template and should be tailor-fit for your exact purpose.
+If the README file already exists, the function will stop and warn the user. The 
+templates include example documentation that can be modified to suit project needs.
 }
 \examples{
-\dontrun{
-# Create a new temporary directory for the example
-temp_dir <- tempdir()
-
-write_readme(path = temp_dir)
-}
+# Create new README in temporary directory
+tmp <- tempdir()
+write_readme(path = tmp)
 }

@@ -1,3 +1,37 @@
+# froggeR 0.2.2
+
+## Enhancements
+* **`quarto_project()`**:
+  - Streamlined integration with auxiliary functions for creating project-level files.
+  - Improved error handling and user feedback when creating Quarto projects.
+  - Ensured proper connection to `write_variables()` for managing `_variables.yml`.
+
+* **`write_quarto()`**:
+  - Enhanced functionality to automatically call `write_variables()` for `_variables.yml` creation.
+  - Added clearer messaging for users when froggeR settings are missing, guiding them to set up metadata.
+
+* **`write_variables()`**:
+  - Introduced as a new function to create and manage `_variables.yml` files in a modular way.
+  - Handles automatic population of YAML metadata using froggeR settings.
+
+* **Improved User Feedback**:
+  - Refined messaging across functions for consistency and clarity, including updated `ui_done` and `ui_info` outputs.
+
+## Bug Fixes
+* Resolved CRAN `check()` errors related to undefined global variables in examples.
+* Fixed issues where `_variables.yml` creation would fail under specific directory conditions.
+
+## Documentation
+* Enhanced roxygen documentation for `write_quarto()`, `quarto_project()`, and `write_variables()` with detailed examples and explanations.
+* Updated vignettes to demonstrate the modular design and improved workflows.
+
+## Internal Changes
+* Consolidated helper functions into `helpers.R` for better maintainability and organization.
+* Improved modularity of settings and file management functions to align with best practices.
+
+🎉 With version 0.2.2, froggeR introduces more robust Quarto project management, making metadata handling and customization easier and more intuitive for users.
+
+
 # froggeR 0.2.1
 
 ## Enhancements

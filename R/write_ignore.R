@@ -4,8 +4,8 @@
 #' measures designed to help prevent accidental data leaks. The template includes 
 #' comprehensive rules for common data file types and sensitive information.
 #'
-#' @param path The path to the main project level. Defaults to the
-#' current working directory.
+#' @param path The path to the main project level. Defaults to the current project's base
+#'   directory (ie, value of \code{here::here()}).
 #' @return A \code{.gitignore} file with enhanced security rules. The file includes:\cr
 #' * R data files (.RData, .rda, .rds)\cr
 #' * Common data formats (CSV, Excel, text)\cr
@@ -24,17 +24,21 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
-#' # Create a new temporary directory for the example
-#' temp_dir <- tempdir()
+#' \donttest{
+#' tmp_dir <- tempdir()
+#' unlink(file.path(tmp_dir, ".gitignore"))
 #' 
 #' # Create new .gitignore
-#' write_ignore(path = temp_dir)
+#' write_ignore(path = tmp_dir)
+#' unlink(file.path(tmp_dir, ".gitignore"))  # Clean up after test
 #' }
-write_ignore <- function(path = getwd()) {
-  # Check if directory exists
-  if (!dir.exists(path)) {
-    stop("Directory does not exist")
+
+
+write_ignore <- function(path = here::here()) {
+ 
+  # Validate path
+  if (is.null(path) || !dir.exists(path)) {
+    stop("Invalid `path`. Please enter a valid project directory.")
   }
   
   # Normalize the path for consistency
@@ -45,29 +49,16 @@ write_ignore <- function(path = getwd()) {
   
   # Check for existing .gitignore
   if (file.exists(the_ignore_file)) {
-    ui_info('**CAUTION!!**')
-    if (ui_yeah('.gitignore found in project level directory! Would you like to overwrite it?')) {
-      # Download and create .gitignore
-      tryCatch({
-        download.file(
-          url = paste0(
-            'https://gist.githubusercontent.com/RaymondBalise/',
-            '1978fb42fc520ca57f670908e111585e/',
-            'raw/e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore'
-          ),
-          destfile = the_ignore_file,
-          quiet = TRUE
-        )
-        ui_done('.gitignore has been overwritten with enhanced security rules.')
-      },
-      error = function(e) {
-        stop("Failed to download .gitignore template. Please check your internet connection.")
-      })
+    if (interactive()) {
+      ui_info('**CAUTION!!**')
+      proceed <- ui_yeah('.gitignore found in project level directory! Would you like to overwrite it?')
     } else {
-      ui_info("Keeping existing .gitignore")
+      stop('A .gitignore has been found in the project.')
     }
-  } else {
-    # Download and create new .gitignore
+  }
+
+  if (!(file.exists(the_ignore_file)) || proceed) {
+    # Download and create .gitignore
     tryCatch({
       download.file(
         url = paste0(
@@ -78,12 +69,14 @@ write_ignore <- function(path = getwd()) {
         destfile = the_ignore_file,
         quiet = TRUE
       )
-      ui_done('A new .gitignore file has been created with enhanced security rules.')
+      ui_done('Created .gitignore with enhanced security rules.')
     },
     error = function(e) {
       stop("Failed to download .gitignore template. Please check your internet connection.")
     })
+  } else {
+    ui_oops("No changes to .gitignore")
   }
   
-  return(invisible(NULL))
+  return(invisible(the_ignore_file))
 }
