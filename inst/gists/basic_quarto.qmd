@@ -16,7 +16,7 @@ format:
     embed-resources: true
     theme:
       - default
-      - custom.scss
+      # - custom.scss     # Uncomment if needed
     toc: true
     toc-title: "Table of Contents"
     toc-location: left
