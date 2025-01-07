@@ -29,9 +29,11 @@ reference:
     desc: "Functions for creating and styling Quarto documents"
     contents:
       - write_quarto
+      - write_variables
       - write_scss
   - title: "Project Documentation"
     desc: "Functions for enhancing project documentation and security"
     contents:
       - write_readme
+      - write_notes
       - write_ignore
