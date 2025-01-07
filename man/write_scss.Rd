@@ -37,10 +37,16 @@ you with over 1500 lines of SCSS variables.
 }
 \examples{
 \donttest{
-  # Create the default custom.scss in a temporary directory
-  write_scss(name = "custom", path = tempdir())
+# Ensure no conflicting files exist
+unlink(file.path(tempdir(), "custom.scss"))
 
-  # Add another SCSS file and update YAML in the temporary directory
-  write_scss(name = "special_theme", path = tempdir())
+# Create the default custom.scss in a temporary directory
+write_scss(name = "custom", path = tempdir())
+
+# Ensure no conflicting files exist for another SCSS file
+unlink(file.path(tempdir(), "theme_special.scss"))
+
+# Add another SCSS file in the temporary directory
+write_scss(name = "theme_special", path = tempdir())
 }
 }

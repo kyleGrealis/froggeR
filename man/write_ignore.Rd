@@ -34,8 +34,11 @@ security solution.
 }
 \examples{
 \donttest{
-# Create new .gitignore
-write_ignore(path = tempdir())
-}
+tmp_dir <- tempdir()
+unlink(file.path(tmp_dir, ".gitignore"))
 
+# Create new .gitignore
+write_ignore(path = tmp_dir)
+unlink(file.path(tmp_dir, ".gitignore"))  # Clean up after test
+}
 }

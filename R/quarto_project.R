@@ -32,11 +32,11 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Create a new Quarto project with custom formatted YAML header
-#'   quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
+#' # Create a new Quarto project with custom formatted YAML header
+#' quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
 #'
-#'   # Create a new Quarto project with standard Quarto YAML
-#'   quarto_project('frogs_standard', base_dir = tempdir(), custom_yaml = FALSE)
+#' # Create a new Quarto project with standard Quarto YAML
+#' quarto_project('frogs_standard', base_dir = tempdir(), custom_yaml = FALSE)
 #' }
 #' @export
 quarto_project <- function(name, base_dir = here::here(), custom_yaml = TRUE) {
@@ -69,7 +69,8 @@ quarto_project <- function(name, base_dir = here::here(), custom_yaml = TRUE) {
   }
   
   # Create the Quarto project
-  quarto::quarto_create_project(name, quiet = TRUE)
+  frog_prompt <- if (interactive()) FALSE else TRUE
+  quarto::quarto_create_project(name, quiet = TRUE, no_prompt = frog_prompt)
   ui_done(sprintf('Created Quarto project directory: %s', name))
   
   # Remove default files created by Quarto only if they exist

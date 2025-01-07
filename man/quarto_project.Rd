@@ -41,11 +41,11 @@ If froggeR settings don't exist, it will prompt to create them.
 }
 \examples{
 \dontrun{
-  # Create a new Quarto project with custom formatted YAML header
-  quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
+# Create a new Quarto project with custom formatted YAML header
+quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
 
-  # Create a new Quarto project with standard Quarto YAML
-  quarto_project('frogs_standard', base_dir = tempdir(), custom_yaml = FALSE)
+# Create a new Quarto project with standard Quarto YAML
+quarto_project('frogs_standard', base_dir = tempdir(), custom_yaml = FALSE)
 }
 }
 \seealso{
