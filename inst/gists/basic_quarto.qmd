@@ -1,12 +1,13 @@
 ---
 title: "Title"
 author:
-    name: "First Last"
-    url: "" # i.e.,  GitHub or company URL (optional)
-    email: ""
-    orcid: ""  # add your ORCID (optional)
-    roles: ""  # aut, cre, cont (optional)
+  name: "First Last"
+  url: "" # i.e.,  GitHub or company URL (optional)
+  email: ""
+  orcid: ""  # add your ORCID (optional)
+  roles: ""  # aut, cre, cont (optional)
     affiliations: ""
+date: last-modified
 abstract: ""
 keywords: "" # add keywords like "research" or "public health" 
 number-sections: false
