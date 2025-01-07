@@ -55,6 +55,7 @@ Your new project includes:
 | `frogs.Rproj` | RStudio project file |
 | `_variables.yml` | Reusable document settings |
 | `custom.scss` | Style sheet template |
+| `dated_progress_notes.md` | Project documentation |
 | `README.md` | Project documentation |
 | `.gitignore` | Enhanced security settings |
 
@@ -66,6 +67,7 @@ Each component serves a specific purpose:
     * Pre-configured YAML header
     * Links to your styling
     * Ready for content
+
 
 2. **Project Settings** (`_variables.yml`)
 
@@ -181,7 +183,7 @@ Best practices for project organization:
     )
     
     froggeR::write_quarto(
-      filename = "analysis",
+      filename = "frogs",
       custom_yaml = TRUE
     )
     ```
@@ -195,6 +197,7 @@ Best practices for project organization:
     ├── analysis.qmd
     ├── _variables.yml
     ├── custom.scss
+    ├── dated_progress_notes.md
     └── README.md
     ```
 
