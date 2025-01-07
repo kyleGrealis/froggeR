@@ -10,7 +10,7 @@
 #'   \item Provides instructions for adding SCSS files to Quarto YAML
 #' }
 #'
-#' See "Customizing Quarto with froggeR" vignette for more help.
+#' See \code{vignette("customizing-quarto", package = "froggeR")} vignette for more help.
 #'
 #' @param name The name of the scss file without extension. Default \code{name} is
 #' "custom".

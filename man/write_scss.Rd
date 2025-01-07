@@ -29,7 +29,7 @@ The function includes a robust YAML handling mechanism that:
   \item Provides instructions for adding SCSS files to Quarto YAML
 }
 
-See "Customizing Quarto with froggeR" vignette for more help.
+See \code{vignette("customizing-quarto", package = "froggeR")} vignette for more help.
 }
 \examples{
 \donttest{
