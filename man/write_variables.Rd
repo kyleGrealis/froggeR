@@ -2,32 +2,28 @@
 % Please edit documentation in R/write_variables.R
 \name{write_variables}
 \alias{write_variables}
-\title{Write Variables YAML for Quarto Projects}
+\title{Write Variables YAML for 'Quarto' Projects}
 \usage{
-write_variables(path = here::here(), settings = NULL)
+write_variables(path, .initialize_proj = FALSE)
 }
 \arguments{
-\item{path}{Character string. Path to the Quarto project directory where the
-`_variables.yml` file should be created or updated. Defaults to `here::here()`.}
+\item{path}{Character string. Path to the project directory.}
 
-\item{settings}{A named list of settings to populate the `_variables.yml` file.
-Defaults to the current froggeR settings if not provided.}
+\item{.initialize_proj}{Logical. TRUE only if starting a 
+\code{froggeR::quarto_project()}.}
 }
 \value{
 Invisibly returns `NULL` after creating or updating the `_variables.yml` file.
 }
 \description{
 This function creates or updates the `_variables.yml` file in a Quarto project
-directory using froggeR settings.
+directory using froggeR settings, if they exist in the config path.
 }
 \details{
-If no settings are provided, the function will attempt to use the current froggeR
-settings. If settings are missing or incomplete, the resulting `_variables.yml`
-may require manual updates before the Quarto project can knit properly.
+The function will attempt to use the current froggeR settings from the config path. If
+no global configurations exist, a template `_variables.yml` will be created.
 }
 \examples{
-\donttest{
-# Create or update _variables.yml using default froggeR settings
 write_variables(path = tempdir())
-}
+
 }
