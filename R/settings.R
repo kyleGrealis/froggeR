@@ -1,153 +1,210 @@
-#' Manage froggeR Settings
+#' Manage 'froggeR' Settings
 #'
-#' This function allows you to check, display, or initialize froggeR settings for
-#' Quarto documents. Settings are stored in `~/.config/froggeR/config.yml` for
-#' persistence across froggeR projects.
+#' This function provides useful instructions and information regarding `froggeR`
+#'  settings. 
+#' 
+#' @details This function can only run in an interactive environment. Choose to:
+#' - Check for the existence of project- and global-level configuration files 
+#' - Display current project-level settings
+#' - Feedback for updating settings
+#' - Instructions how to reuse settings across multiple `froggeR` Quarto projects.
 #'
-#' @param update Logical. If TRUE (default), prompts to update existing settings
-#'   or create new ones if none exist.
-#' @param verbose Logical. If TRUE (default), settings output is printed to the console.
-#'
-#' @return Invisibly returns the current settings list.
-#'
-#' @details
-#' The function manages the following settings:
-#' - `name`: Your Name (required)
-#' - `email`: your.email@example.com (required)
-#' - `orcid`: 0000-0000-0000-0000 (optional)
-#' - `url`: https://github.com/yourUsername (optional)
-#' - `affiliations`: Your Institution (optional)
-#' - `toc`: Table of Contents (defaults to this if left empty)
-#'
-#' When run interactively with `update = TRUE`, it provides a menu-driven interface
-#' for updating these settings. If settings don't exist, it will prompt to create them
-#' regardless of the `update` parameter.
+#' @return No return value; called for side-effects.
 #'
 #' @examples
-#' \donttest{
-#' # Update settings interactively with console feedback
-#' froggeR_settings(update = TRUE, verbose = TRUE)
-#'
-#' # Save settings without updating and print console output
-#' settings <- froggeR_settings(update = FALSE, verbose = TRUE)
-#'
-#' # Save settings without updating and suppress console output
-#' settings <- froggeR_settings(update = FALSE, verbose = FALSE)
-#' }
-#'
+#' # Only run in an interactive environment
+#' if (interactive()) froggeR::settings()
+#' 
 #' @export
-froggeR_settings <- function(update = TRUE, verbose = TRUE) {
-  # Validate arguments
-  if (!is.logical(update) || length(update) != 1) {
-    stop("`update` must be a single logical value.")
-  }
-  if (!is.logical(verbose) || length(verbose) != 1) {
-    stop("`verbose` must be a single logical value.")
-  }
+settings <- function() {
 
-  # Load existing settings
-  settings <- .load_settings()
+  if (!interactive()) { stop('Must be run in interactive session. Exiting...')}
 
-  # Update settings if requested or if none exist
-  if (is.null(settings) || update) {
-    results <- .update_settings(settings)
-    settings <- results$settings
+  frog <- utils::menu(
+    choices = c(
+      'Check for config files', 
+      'Display current settings', 
+      'Show how to update settings',
+      'Show how to reuse settings across projects',
+      'More information about settings'
+    ),
+    title = sprintf('\n%s settings options:', col_green('froggeR'))
+  )
 
-    if (results$changed && verbose) {
-      ui_done(sprintf("%s settings updated successfully.", col_green("froggeR")))
-    }
-  }
-
-  # Display current settings if verbose
-  if (verbose && !is.null(settings)) {
-    .display_settings(settings)
-  }
-
-  invisible(settings)
-}
-
-# Helper: Load Settings ---------------------------------------------------
-.load_settings <- function() {
+  # Project-level settings
+  settings_file <- file.path(here::here(), '_variables.yml')
+  # Global froggeR settings
   config_path <- rappdirs::user_config_dir("froggeR")
   config_file <- file.path(config_path, "config.yml")
 
-  if (file.exists(config_file)) {
-    tryCatch({
-      settings <- yaml::read_yaml(config_file)
-      settings$toc <- settings$toc %||% "Table of Contents"
-      return(settings)
-    }, error = function(e) {
-      warning("Error loading settings. Returning NULL.")
-      return(NULL)
-    })
+  # Do they exist?
+  project_settings <- file.exists(settings_file)
+  froggeR_settings <- file.exists(config_file)
+
+  switch(
+    frog,
+    .check(config_file, project_settings, froggeR_settings),
+    .display(project_settings),
+    .update(settings_file),
+    .reuse(config_file, project_settings, froggeR_settings),
+    .more_info()
+  )
+
+  return(invisible(NULL))
+}
+
+# Helpers: ---------------------------------------------------
+
+#' Console output function
+#' 
+#' Internal helper to provide info about project-level settings
+#' @noRd
+.yes_settings <- function() {
+  ui_done('Project-level settings file (`_variables.yml`) found in current directory.')
+}
+
+#' Console output function
+#' 
+#' Internal helper to provide info about project-level settings
+#' @noRd
+.no_settings <- function() {
+  ui_oops('No project-level settings file (`_variables.yml`) found.')
+}
+
+#' Console output function
+#' 
+#' Internal helper to provide info about creating project-level settings
+#' @noRd
+.how_to <- function() {
+  ui_info('Run `froggeR::write_variables()` to create project-level settings.')
+}
+
+
+#' Check for existence of configuration files
+#' 
+#' Internal helper to verify presence of project and global settings files.
+#' @param config_file Path to global config file
+#' @param project_settings Logical indicating if project settings exist
+#' @param froggeR_settings Logical indicating if global settings exist
+#' @noRd
+.check <- function(config_file, project_settings, froggeR_settings) {
+
+  if (project_settings && froggeR_settings) {
+    # Has both project and froggeR settings
+    .yes_settings()
+    ui_done(sprintf('Global %s settings found at: %s', col_green('froggeR'), config_file))
+    ui_info('You are currently using project- and global-level settings.')
+
+  } else if (project_settings && !froggeR_settings) {
+    # Has only project settings
+    .yes_settings()
+    ui_oops(sprintf('No global %s config file found', col_green('froggeR')))
+
+  } else if (froggeR_settings && !project_settings) {
+    # Has only froggeR settings
+    .no_settings()
+    ui_info(sprintf(
+      'However, a %s config file was found at: %s', col_green('froggeR'), config_file
+    ))
+
   } else {
-    return(NULL)
+    ui_oops('No project-level or global settings file found.')
+    .how_to()
   }
 }
 
-# Helper: Update Settings -------------------------------------------------
-.update_settings <- function(settings = NULL) {
-  # Initialize settings if none exist
-  if (is.null(settings)) {
-    settings <- list(
-      name = '', email = '', orcid = '', url = '', affiliations = '',
-      # Set as default
-      toc = 'Table of Contents'
+#' Check for ability to display project-level configuration file
+#' 
+#' Internal helper to display contents of project settings file.
+#' @param project_settings Logical indicating if project settings exist
+#' @noRd
+.display <- function(project_settings) {
+  if (project_settings) {
+    message('\nYour `_variables.yml` contents:\n')
+    cat(readLines(here::here('_variables.yml')), sep = '\n')
+  } else {
+    .no_settings()
+  }
+}
+
+#' Check for ability to update project-level configuration file
+#' 
+#' Internal helper to update project settings file.
+#' @param settings_file Path of project settings file (`_variables.yml`)
+#' @noRd
+.update <- function(settings_file) {
+  if (file.exists(settings_file)) {
+    .yes_settings()
+    ui_info('Open the `_variables.yml` file to update project-level settings.')
+  } else {
+    .no_settings()
+    .how_to()
+  }
+}
+
+#' Check for ability to reuse configuration files
+#' 
+#' Internal helper to verify reusability of project and global settings files.
+#' @param config_file Path to global config file
+#' @param project_settings Logical indicating if project settings exist
+#' @param froggeR_settings Logical indicating if global settings exist
+#' @noRd
+.reuse <- function(config_file, project_settings, froggeR_settings) {
+
+  if (project_settings && froggeR_settings) {
+    # Has both project and froggeR settings
+    .yes_settings()
+    ui_done(sprintf('Global %s settings found at: %s', col_green('froggeR'), config_file))
+    ui_info('You are currently using project- and global-level settings.')
+
+  } else if (project_settings && !froggeR_settings) {
+    # Has only project settings
+    .yes_settings()
+    ui_info(
+      sprintf(
+        'To reuse your current project-level settings (`_variables.yml`) for your next %s Quarto project, save the settings file to a special configurations folder. You can do that now by copying and pasting to the console:\n\nfile.copy(from = here::here("_variables.yml"), to = "%s")',
+        col_green('froggeR'),
+        config_file
+      )
+    )
+    message(
+      sprintf(      
+        '\n\nYour personalized configurations will automatically be used during your next %s Quarto project.',
+        col_green('froggeR')
+      )
+    )
+
+  } else if (froggeR_settings && !project_settings) {
+    # Has only froggeR settings
+    ui_info(
+      sprintf(
+        'To reuse your global %s YAML settings (name, email, etc.) in your current project path (%s), copy and paste this into your console:\n\nfile.copy(from = "%s", to = here::here("_variables.yml"))',
+        col_green('froggeR'), here::here(), config_file
+      )
+    )
+
+  } else {
+    # Neither settings found
+    ui_info(
+      sprintf(
+        'First, run `froggeR::write_variables() to create project-level settings. Then, to reuse them in your next %s Quarto project, save the settings file to a special configurations folder. You can do that by copying and pasting to the console:\n\nfile.copy(from = here::here("_variables.yml")), to = "%s")',
+        col_green('froggeR'),
+        config_file
+      )
+    )
+    message(
+      sprintf(      
+        '\nFinally, your personalized configurations will automatically be used during your next %s Quarto project.',
+        col_green('froggeR')
+      )
     )
   }
-  original_settings <- settings
-
-  # Clean names for display
-  setting_names <- list('Name', 'e-mail', 'ORCID', 'URL', 'Affiliation')
-
-  message(sprintf("Updating %s settings. Leave blank to keep current values.", col_green("froggeR")))
-
-  # Prompt user to update each setting
-  for (i in seq_along(setting_names)) {
-    if (settings[[i]] == ''){
-      prompt <- sprintf('Enter value for %s: ', setting_names[[i]])
-    } else {
-      prompt <- sprintf(
-        'Enter new value for %s [%s]: ', setting_names[[i]], settings[[i]]
-      )
-    }
-    
-    new_value <- readline(prompt)
-    if (new_value != '') settings[[i]] <- new_value
-  }
-
-  # Handle when toc is left blank
-  if (settings$toc == '') settings$toc <- 'Table of Contents'
-
-  # Save settings if they were changed
-  if (!identical(settings, original_settings)) {
-    .save_settings(settings)
-    return(list(settings = settings, changed = TRUE))
-  }
-
-  list(settings = settings, changed = FALSE)
 }
 
-# Helper: Save Settings ---------------------------------------------------
-.save_settings <- function(settings) {
-  config_path <- rappdirs::user_config_dir("froggeR")
-  config_file <- file.path(config_path, "config.yml")
-
-  dir.create(config_path, showWarnings = FALSE, recursive = TRUE)
-  yaml::write_yaml(settings, config_file)
-}
-
-# Helper: Display Settings ------------------------------------------------
-.display_settings <- function(settings) {
-  display_names <- c("Name", "email", "ORCID", "URL", "Affiliations", "Table of Contents")
-  max_name_length <- max(nchar(display_names))
-
-  message(sprintf("\nCurrent %s settings:\n", col_green("froggeR")))
-  for (i in seq_along(settings)) {
-    name <- display_names[i]
-    value <- settings[[i]]
-    padding <- paste(rep(" ", max_name_length - nchar(name)), collapse = "")
-    message(sprintf("%s:%s %s", name, padding, value))
-  }
-  message("\n")
+#' Console output function
+#' 
+#' Internal helper to provide info about using `froggeR` settings
+#' @noRd
+.more_info <- function() {
+  ui_info('Run `vignette(package = "froggeR")` to find out how to effectively use settings across multiple projects.')
 }
