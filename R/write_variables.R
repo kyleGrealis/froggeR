@@ -11,10 +11,20 @@
 #' no global configurations exist, a template `_variables.yml` will be created.
 #'
 #' @examples
-#' write_variables(path = tempdir())
+#' # Create a temporary directory for testing
+#' tmp_dir <- tempdir()
+#' 
+#' # Write the _variables.yml file
+#' write_ignore(path = tmp_dir)
+#' 
+#' # Confirm the file was created (optional, for user confirmation)
+#' file.exists(file.path(tmp_dir, "_variables.yml"))
+#' 
+#' # Clean up: Remove the created file
+#' unlink(file.path(tmp_dir, "_variables.yml"))
 #' 
 #' @export
-write_variables <- function(path, .initialize_proj = FALSE) {
+write_variables <- function(path = here::here(), .initialize_proj = FALSE) {
 
   # Validate path
   if (is.null(path) || is.na(path) || !dir.exists(path)) {
@@ -27,7 +37,7 @@ write_variables <- function(path, .initialize_proj = FALSE) {
   # Set up full destination file path
   the_variables_file <- file.path(path, '_variables.yml')
 
-  # Handle _variables.yml creation/overwrite
+  # Handle _variables.yml creation
   if (file.exists(the_variables_file)) {
     stop('_variables.yml already exists in the specified path.')
   }
@@ -38,13 +48,15 @@ write_variables <- function(path, .initialize_proj = FALSE) {
   # Does it exist?
   froggeR_settings <- file.exists(config_file)
 
-  # Write the config file based on template
+  # Write the config file based on template: if there's a .config/froggeR file,
+  # use that or else use the template found here in the package
   template_path <- if (froggeR_settings) {
     config_file
   } else {
     system.file('gists/config.yml', package = 'froggeR')
   }
 
+  # Display message if using the .config/froggeR/config.yml file
   if (froggeR_settings) {
     ui_info(sprintf('Copying existing %s settings...', col_green('froggeR')))
   }
@@ -60,3 +72,4 @@ write_variables <- function(path, .initialize_proj = FALSE) {
 
   return(invisible(NULL))
 }
+
