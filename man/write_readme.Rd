@@ -4,19 +4,19 @@
 \alias{write_readme}
 \title{Create a project README file}
 \usage{
-write_readme(path = here::here())
+write_readme(path = here::here(), .initialize_proj = FALSE)
 }
 \arguments{
-\item{path}{The destination directory for the README file. Defaults to the current 
-project's base directory (ie, value of \code{here::here()}).}
+\item{path}{Character string. Path to the project directory.}
+
+\item{.initialize_proj}{Logical. TRUE only if starting a 
+\code{froggeR::quarto_project()}.}
 }
 \value{
 Creates a comprehensive README template for project documentation.
 }
 \description{
-This function streamlines project documentation by creating and managing a README.md
-file. It provides interactive prompts for existing files and maintains consistent 
-project documentation structure.
+This function streamlines project documentation by a README.md file.
 }
 \details{
 The README.md template includes structured sections for:
@@ -26,12 +26,18 @@ The README.md template includes structured sections for:
   \item File and directory descriptions
   \item Miscellaneous project notes
 }
-
-If the README file already exists, the function will stop and warn the user. The 
-templates include example documentation that can be modified to suit project needs.
 }
 \examples{
-# Create new README in temporary directory
-tmp <- tempdir()
-write_readme(path = tmp)
+# Create a temporary directory for testing
+tmp_dir <- tempdir()
+
+# Write the README file
+write_readme(path = tmp_dir)
+
+# Confirm the file was created (optional, for user confirmation)
+file.exists(file.path(tmp_dir, "README.md"))
+
+# Clean up: Remove the created file
+unlink(file.path(tmp_dir, "README.md"))
+
 }

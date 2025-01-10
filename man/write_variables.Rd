@@ -4,7 +4,7 @@
 \alias{write_variables}
 \title{Write Variables YAML for 'Quarto' Projects}
 \usage{
-write_variables(path, .initialize_proj = FALSE)
+write_variables(path = here::here(), .initialize_proj = FALSE)
 }
 \arguments{
 \item{path}{Character string. Path to the project directory.}
@@ -24,6 +24,16 @@ The function will attempt to use the current froggeR settings from the config pa
 no global configurations exist, a template `_variables.yml` will be created.
 }
 \examples{
-write_variables(path = tempdir())
+# Create a temporary directory for testing
+tmp_dir <- tempdir()
+
+# Write the _variables.yml file
+write_ignore(path = tmp_dir)
+
+# Confirm the file was created (optional, for user confirmation)
+file.exists(file.path(tmp_dir, "_variables.yml"))
+
+# Clean up: Remove the created file
+unlink(file.path(tmp_dir, "_variables.yml"))
 
 }
