@@ -12,7 +12,7 @@
 #' @importFrom rstudioapi openProject
 #' @importFrom stringr str_replace str_to_lower
 #' @importFrom usethis ui_done ui_info ui_oops ui_todo ui_yeah
-#' @importFrom utils download.file
+#' @importFrom utils download.file menu
 #' @importFrom yaml read_yaml write_yaml
 ## usethis namespace: end
 NULL

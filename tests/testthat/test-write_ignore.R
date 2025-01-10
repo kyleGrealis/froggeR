@@ -1,31 +1,47 @@
-test_that("validates write_ignore path", {
-  expect_error(write_ignore(path = NULL), "Invalid `path`.")
+test_that("write_ignore fails with bad path", {
+  expect_error(write_ignore(path = "bad_path"), "Invalid `path`.")
   expect_error(write_ignore(path = " "), "Invalid `path`.")
+  expect_error(write_ignore(path = NULL), "Invalid `path`.")
 })
 
-test_that("write_ignore creates enhanced .gitignore file correctly", {
+test_that("write_ignore creates the .gitignore file correctly", {
   tmp_dir <- tempdir()
-  unlink(file.path(tmp_dir, ".gitignore"))
-  
-  the_ignore_path <- file.path(tmp_dir, ".gitignore")
-  
-  # Ensure the file doesn't exist before the test
-  unlink(the_ignore_path)
-  if (file.exists(the_ignore_path)) file.remove(the_ignore_path)
-  
-  # Create the file
-  write_ignore(path = tmp_dir)
-  expect_true(file.exists(the_ignore_path))
-  
-  # # Check content
-  content <- suppressWarnings(readLines(the_ignore_path))
-  expect_true("# History files" %in% content)  # beginning of .gitignore
-  expect_true("# Quarto" %in% content)         # at the end of .gitignore
-  
-  # Test no overwrite
-  if (interactive()) expect_error(write_ignore(path = tmp_dir), "found in project")
-  
-  # Cleanup after test
-  unlink(the_ignore_path)
-  if (file.exists(the_ignore_path)) file.remove(the_ignore_path)
+  ignore_file <- file.path(tmp_dir, ".gitignore")
+  # Remove any prior instances
+  unlink(ignore_file)
+  write_ignore(tmp_dir, .initialize_proj = FALSE)
+  expect_true(file.exists(ignore_file))
+  # Clean up
+  unlink(ignore_file)
+  expect_false(file.exists(ignore_file))
+})
+
+test_that('write_ignore creates content correctly', {
+  tmp_dir <- tempdir()
+  ignore_file <- file.path(tmp_dir, ".gitignore")
+  # Remove any prior instances
+  unlink(ignore_file)
+  suppressMessages(write_ignore(tmp_dir, .initialize_proj = TRUE))
+  # Check content
+  file_content <- readLines(ignore_file)
+  expect_true("# History files" %in% file_content)
+  expect_true(".Renviron" %in% file_content)
+  expect_true("# R data" %in% file_content)
+  expect_true("/.quarto/" %in% file_content)
+  # Clean up
+  unlink(ignore_file)
+  expect_false(file.exists(ignore_file))
+})
+
+test_that('write_ignore recognizes overwrite error', {
+  tmp_dir <- tempdir()
+  ignore_file <- file.path(tmp_dir, ".gitignore")
+  # Remove any prior instances
+  unlink(ignore_file)
+  suppressMessages(write_ignore(tmp_dir, .initialize_proj = TRUE))
+  # Test for error
+  expect_error(write_ignore(tmp_dir, .initialize_proj = TRUE), 'already exists')
+  # Clean up
+  unlink(ignore_file)
+  expect_false(file.exists(ignore_file))
 })

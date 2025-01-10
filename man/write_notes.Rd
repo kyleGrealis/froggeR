@@ -4,19 +4,20 @@
 \alias{write_notes}
 \title{Create a project README file}
 \usage{
-write_notes(path = here::here())
+write_notes(path = here::here(), .initialize_proj = FALSE)
 }
 \arguments{
-\item{path}{The destination directory for the progress notes file. Defaults to the 
-current project's base directory (ie, value of \code{here::here()}).}
+\item{path}{Character string. Path to the project directory.}
+
+\item{.initialize_proj}{Logical. TRUE only if starting a 
+\code{froggeR::quarto_project()}.}
 }
 \value{
-Creates a chronological project progress notes tracker
+CA chronological project progress notes tracker.
 }
 \description{
-This function streamlines project documentation by creating and managing both README.md
-and dated_progress_notes.md files. It provides interactive prompts for existing files
-and maintains consistent project documentation structure.
+This function streamlines project documentation by creating a dated progress notes 
+file.
 }
 \details{
 The dated_progress_notes.md file is initialized with the current date and is designed
@@ -24,7 +25,16 @@ to help track project milestones chronologically. If the progress notes file alr
 exists, the function will stop and warn the user.
 }
 \examples{
-# Create new progress note file in temporary directory
-tmp <- tempdir()
-write_notes(path = tmp)
+# Create a temporary directory for testing
+tmp_dir <- tempdir()
+
+# Write the progress notes file
+write_notes(path = tmp_dir)
+
+# Confirm the file was created (optional, for user confirmation)
+file.exists(file.path(tmp_dir, "dated_progress_notes.md"))
+
+# Clean up: Remove the created file
+unlink(file.path(tmp_dir, "dated_progress_notes.md"))
+
 }

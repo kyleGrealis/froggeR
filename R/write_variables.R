@@ -1,46 +1,75 @@
-#' Write Variables YAML for Quarto Projects
+#' Write Variables YAML for 'Quarto' Projects
 #'
 #' This function creates or updates the `_variables.yml` file in a Quarto project
-#' directory using froggeR settings.
+#' directory using froggeR settings, if they exist in the config path.
 #'
-#' @param path Character string. Path to the Quarto project directory where the
-#'   `_variables.yml` file should be created or updated. Defaults to `here::here()`.
-#' @param settings A named list of settings to populate the `_variables.yml` file.
-#'   Defaults to the current froggeR settings if not provided.
+#' @inheritParams write_ignore
 #'
 #' @return Invisibly returns `NULL` after creating or updating the `_variables.yml` file.
 #' @details
-#' If no settings are provided, the function will attempt to use the current froggeR
-#' settings. If settings are missing or incomplete, the resulting `_variables.yml`
-#' may require manual updates before the Quarto project can knit properly.
+#' The function will attempt to use the current froggeR settings from the config path. If
+#' no global configurations exist, a template `_variables.yml` will be created.
 #'
 #' @examples
-#' \donttest{
-#' # Create or update _variables.yml using default froggeR settings
-#' write_variables(path = tempdir())
-#' }
+#' # Create a temporary directory for testing
+#' tmp_dir <- tempdir()
+#' 
+#' # Write the _variables.yml file
+#' write_ignore(path = tmp_dir)
+#' 
+#' # Confirm the file was created (optional, for user confirmation)
+#' file.exists(file.path(tmp_dir, "_variables.yml"))
+#' 
+#' # Clean up: Remove the created file
+#' unlink(file.path(tmp_dir, "_variables.yml"))
+#' 
 #' @export
-write_variables <- function(path = here::here(), settings = NULL) {
+write_variables <- function(path = here::here(), .initialize_proj = FALSE) {
+
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please provide a valid directory.")
+  if (is.null(path) || is.na(path) || !dir.exists(path)) {
+    stop("Invalid `path`. Please enter a valid project directory.")
   }
 
-  # Load current settings if none are provided
-  if (is.null(settings)) {
-    settings <- froggeR_settings(update = FALSE, verbose = FALSE)
+  # Normalize the path for consistency
+  path <- normalizePath(path, mustWork = TRUE)
+
+  # Set up full destination file path
+  the_variables_file <- file.path(path, '_variables.yml')
+
+  # Handle _variables.yml creation
+  if (file.exists(the_variables_file)) {
+    stop('_variables.yml already exists in the specified path.')
   }
 
-  if (is.null(settings)) {
-    stop("No settings available. Run `froggeR_settings()` to create them.")
+  # Global froggeR settings
+  config_path <- rappdirs::user_config_dir("froggeR")
+  config_file <- file.path(config_path, "config.yml")
+  # Does it exist?
+  froggeR_settings <- file.exists(config_file)
+
+  # Write the config file based on template: if there's a .config/froggeR file,
+  # use that or else use the template found here in the package
+  template_path <- if (froggeR_settings) {
+    config_file
+  } else {
+    system.file('gists/config.yml', package = 'froggeR')
   }
 
-  # Write the YAML file
-  variables_file <- file.path(path, "_variables.yml")
-  yaml::write_yaml(settings, variables_file)
-  ui_done(sprintf(
-    "Created _variables.yml with current %s settings.", col_green('froggeR')
-  ))
+  # Display message if using the .config/froggeR/config.yml file
+  if (froggeR_settings) {
+    ui_info(sprintf('Copying existing %s settings...', col_green('froggeR')))
+  }
 
-  invisible(NULL)
+  if (template_path == "") {
+    stop("Could not find config template in package installation")
+  }
+
+  file.copy(from = template_path, to = the_variables_file, overwrite = FALSE)
+  ui_done("Created _variables.yml")
+
+  if (!.initialize_proj) usethis::edit_file(the_variables_file)
+
+  return(invisible(NULL))
 }
+

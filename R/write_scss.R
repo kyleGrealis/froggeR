@@ -1,128 +1,59 @@
-#' Create a Quarto SCSS file
+#' Create a 'Quarto' SCSS file
 #'
-#' This function creates the \code{.scss} file so that any Quarto project can be easily
+#' This function creates the \code{.scss} file so that any 'Quarto' project can be easily
 #' customized with SCSS styling variables, mixins, and rules.
 #'
+#' @inheritParams write_ignore
+#' 
+#' @return A SCSS file to customize 'Quarto' styling.
 #' @details
-#' The function includes a robust YAML handling mechanism that:
-#' \itemize{
-#'   \item Safely adds new project-level SCSS files without disrupting existing ones
-#'   \item Provides instructions for adding SCSS files to Quarto YAML
-#' }
+#' The function includes a robust YAML handling mechanism that safely adds new SCSS file.
 #'
 #' See \code{vignette("customizing-quarto", package = "froggeR")} vignette for more help.
 #'
-#' @param name The name of the scss file without extension. Default \code{name} is
-#' "custom".
-#' @param path The destination directory for the SCSS file. Defaults to the current 
-#' project's base directory (ie, value of \code{here::here()}).
-#' 
-#' @return A \code{.scss} file to customize Quarto styling. If \code{name} is not
-#' "custom", the function will also attempt to update the Quarto document's YAML to
-#' include the new SCSS file while preserving any existing SCSS configurations.
-#'
-#' @export
 #' @examples
-#' \donttest{
-#' # Ensure no conflicting files exist
-#' unlink(file.path(tempdir(), "custom.scss"))
+#' # Create a temporary directory for testing
+#' tmp_dir <- tempdir()
 #' 
-#' # Create the default custom.scss in a temporary directory
-#' write_scss(name = "custom", path = tempdir())
-#'
-#' # Ensure no conflicting files exist for another SCSS file
-#' unlink(file.path(tempdir(), "theme_special.scss"))
+#' # Write the SCSS file
+#' write_scss(path = tmp_dir)
 #' 
-#' # Add another SCSS file in the temporary directory
-#' write_scss(name = "theme_special", path = tempdir())
-#' }
+#' # Confirm the file was created (optional, for user confirmation)
+#' file.exists(file.path(tmp_dir, "custom.scss"))
+#' 
+#' # Clean up: Remove the created file
+#' unlink(file.path(tmp_dir, "custom.scss"))
+#' 
+#' @export
+write_scss <- function(path = here::here(), .initialize_proj = FALSE) {
 
-
-write_scss <- function(name = "custom", path = here::here()) {
-  
-  # Argument validation
-  if (!is.character(name) || length(name) != 1 || name == "") {
-    stop("Invalid `name`. Please provide a valid name for the SCSS file.")
+  # Validate path
+  if (is.null(path) || is.na(path) || !dir.exists(path)) {
+    stop("Invalid `path`. Please enter a valid project directory.")
   }
-  if (tolower(name) %in% c("default", "quarto", "html")) {
-    stop("Invalid `name`. Please avoid using reserved names like 'default', 'quarto', or 'html'.")
-  }
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please ensure the directory exists and is accessible.")
-  }
-
-  # Set SCSS file name
-  name <- tools::file_path_sans_ext(name)
   
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
-  
-  # Define the target file path
-  the_scss_file <- file.path(path, paste0(name, ".scss"))
 
-  # Check existing .scss files
+  # Set up full destination file path
+  the_scss_file <- file.path(path, "custom.scss")
+
+  # Handle custom.scss creation
   if (file.exists(the_scss_file)) {
-    stop(paste0('A file named "', name, '.scss" already exists!'))
+    stop('A SCSS file already exists in the specified path.')
+  }
+  
+  # Get scss template path
+  template_path <- system.file("gists/custom.scss", package = "froggeR")
+  if (template_path == "") {
+    stop("Could not find SCSS template in package installation")
   }
 
-  # Write the SCSS file
-  scss_template <- .generate_scss_template()
-  writeLines(scss_template, the_scss_file)
+  file.copy(from = template_path, to = the_scss_file, overwrite = FALSE)
+  ui_done("Created custom.scss")
 
-
-  if (interactive()) {
-    ui_done(paste0("Created ", name, ".scss"))
-    if (name != "custom") { .update_yaml_message(name) }
-    # ui_info(sprintf(
-    #   'Run %s for more information on SCSS styling', col_green('`?froggeR::write_scss')
-    # ))
-  }
-
+  if (!.initialize_proj) usethis::edit_file(the_scss_file)
+  
   return(invisible(the_scss_file))
 
-}
-
-# Helper functions
-.generate_scss_template <- function() {
-  glue::glue(
-    '/*-- scss:defaults --*/
-    // Colors
-    // $primary: #2c365e;
-    // $body-bg: #fefefe;
-    // $link-color: $primary;
-    // Fonts
-    // $font-family-sans-serif: "Open Sans", sans-serif;
-    // $font-family-monospace: "Source Code Pro", monospace;\n\n
-    /*-- scss:mixins --*/\n\n
-    /*-- scss:rules --*/
-    // Custom theme rules
-    // .title-block {{
-    //   margin-bottom: 2rem;
-    //   border-bottom: 3px solid $primary;
-    // }}
-    // code {{
-    //   color: darken($primary, 10%);
-    //   padding: 0.2em 0.4em;
-    //   border-radius: 3px;
-    // }}'
-  )
-}
-
-.update_yaml_message <- function(name) {
-
-  new_yaml <- glue::glue(
-"
-format:
-  html:
-    embed-resources: true
-    theme:
-      - default
-      - custom.scss
-      - {name}.scss     # Add this line"
-  )
-  
-  ui_info(glue::glue(
-    "\nUpdate your Quarto document YAML to include the new SCSS file:\n",
-    new_yaml
-  ))
 }

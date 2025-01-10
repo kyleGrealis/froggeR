@@ -1,11 +1,13 @@
-#' Create an aggressive project \code{.gitignore} file
+#' Create an enhanced \code{.gitignore} file
 #'
-#' This function creates or updates a \code{.gitignore} file with enhanced security 
+#' This function creates a \code{.gitignore} file with enhanced security 
 #' measures designed to help prevent accidental data leaks. The template includes 
 #' comprehensive rules for common data file types and sensitive information.
 #'
-#' @param path The path to the main project level. Defaults to the current project's base
-#'   directory (ie, value of \code{here::here()}).
+#' @param path Character string. Path to the project directory.
+#' @param .initialize_proj Logical. TRUE only if starting a 
+#'  \code{froggeR::quarto_project()}.
+#' 
 #' @return A \code{.gitignore} file with enhanced security rules. The file includes:\cr
 #' * R data files (.RData, .rda, .rds)\cr
 #' * Common data formats (CSV, Excel, text)\cr
@@ -22,61 +24,48 @@
 #' prevent accidental data exposure but should not be considered a complete
 #' security solution.
 #'
-#' @export
 #' @examples
-#' \donttest{
+#' # Create a temporary directory for testing
 #' tmp_dir <- tempdir()
+#' 
+#' # Write the .gitignore file
+#' write_ignore(path = tmp_dir)
+#' 
+#' # Confirm the file was created (optional, for user confirmation)
+#' file.exists(file.path(tmp_dir, ".gitignore"))
+#' 
+#' # Clean up: Remove the created file
 #' unlink(file.path(tmp_dir, ".gitignore"))
 #' 
-#' # Create new .gitignore
-#' write_ignore(path = tmp_dir)
-#' unlink(file.path(tmp_dir, ".gitignore"))  # Clean up after test
-#' }
+#' @export
+write_ignore <- function(path = here::here(), .initialize_proj = FALSE) {
 
-
-write_ignore <- function(path = here::here()) {
- 
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
+  if (is.null(path) || is.na(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
   }
   
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
-  
-  # Define the target file path
-  the_ignore_file <- file.path(path, '.gitignore')
-  
-  # Check for existing .gitignore
+
+  # Set up full destination file path
+  the_ignore_file <- file.path(path, ".gitignore")
+
+  # Handle ignore creation/overwrite
   if (file.exists(the_ignore_file)) {
-    if (interactive()) {
-      ui_info('**CAUTION!!**')
-      proceed <- ui_yeah('.gitignore found in project level directory! Would you like to overwrite it?')
-    } else {
-      stop('A .gitignore has been found in the project.')
-    }
+    stop('A .gitignore file already exists in the specified path.' )
+  }
+  
+  # Get .gitignore template path
+  template_path <- system.file("gists/gitignore", package = "froggeR")
+  if (template_path == "") {
+    stop("Could not find .gitignore template in package installation")
   }
 
-  if (!(file.exists(the_ignore_file)) || proceed) {
-    # Download and create .gitignore
-    tryCatch({
-      download.file(
-        url = paste0(
-          'https://gist.githubusercontent.com/RaymondBalise/',
-          '1978fb42fc520ca57f670908e111585e/',
-          'raw/e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore'
-        ),
-        destfile = the_ignore_file,
-        quiet = TRUE
-      )
-      ui_done('Created .gitignore with enhanced security rules.')
-    },
-    error = function(e) {
-      stop("Failed to download .gitignore template. Please check your internet connection.")
-    })
-  } else {
-    ui_oops("No changes to .gitignore")
-  }
+  file.copy(from = template_path, to = the_ignore_file, overwrite = FALSE)
+  ui_done("Created .gitignore")
+
+  if (!.initialize_proj) usethis::edit_file(the_ignore_file)
   
   return(invisible(the_ignore_file))
 }

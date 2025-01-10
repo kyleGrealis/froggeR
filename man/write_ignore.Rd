@@ -2,13 +2,15 @@
 % Please edit documentation in R/write_ignore.R
 \name{write_ignore}
 \alias{write_ignore}
-\title{Create an aggressive project \code{.gitignore} file}
+\title{Create an enhanced \code{.gitignore} file}
 \usage{
-write_ignore(path = here::here())
+write_ignore(path = here::here(), .initialize_proj = FALSE)
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to the current project's base
-directory (ie, value of \code{here::here()}).}
+\item{path}{Character string. Path to the project directory.}
+
+\item{.initialize_proj}{Logical. TRUE only if starting a 
+\code{froggeR::quarto_project()}.}
 }
 \value{
 A \code{.gitignore} file with enhanced security rules. The file includes:\cr
@@ -18,7 +20,7 @@ A \code{.gitignore} file with enhanced security rules. The file includes:\cr
 * IDE-specific files
 }
 \description{
-This function creates or updates a \code{.gitignore} file with enhanced security 
+This function creates a \code{.gitignore} file with enhanced security 
 measures designed to help prevent accidental data leaks. The template includes 
 comprehensive rules for common data file types and sensitive information.
 }
@@ -33,12 +35,16 @@ prevent accidental data exposure but should not be considered a complete
 security solution.
 }
 \examples{
-\donttest{
+# Create a temporary directory for testing
 tmp_dir <- tempdir()
+
+# Write the .gitignore file
+write_ignore(path = tmp_dir)
+
+# Confirm the file was created (optional, for user confirmation)
+file.exists(file.path(tmp_dir, ".gitignore"))
+
+# Clean up: Remove the created file
 unlink(file.path(tmp_dir, ".gitignore"))
 
-# Create new .gitignore
-write_ignore(path = tmp_dir)
-unlink(file.path(tmp_dir, ".gitignore"))  # Clean up after test
-}
 }
