@@ -1,3 +1,23 @@
+# froggeR 0.3.0
+
+## Enhancements
+* The `settings()` function replaces `froggeR_settings` and provides a menu-driven interface. User's can now check, view, & get instructions to use Quarto metadata within and across projects. Learn how to apply user-specific metadata from the global config file, or store local project metadata for reuse on future froggeR Quarto projects.
+* The suite of `write_*` functions open the created files for immediate viewing & editing (in interactive sessions).
+* Revised console feedback so users are always informed about how froggeR is helping streamline your project.
+
+## Bug Fixes 
+* *None*
+
+## Documentation
+* Fixed roxygen documentation for `@examples` by using `tempdir()` when executing functions.
+* Used `@inheretParams` across supplemental functions (README, notes, ignore, SCSS, variables).
+
+## Internal Changes
+* Removed abililty to change metadata from the console. Instructions are now provided and, for `write_variables()`, the config file is opened in the interactive session.
+* Separated `write_readme`; now includes `write_notes` for a project-level progress notes template.
+* If any document to be created from the `write_*` functions exists in the project, froggeR will now stop and provide a useful message *instead* of offering to overwrite from the console. This reduces annoying feedback & interaction and encourages the user to make deliberate decions.
+
+
 # froggeR 0.2.2
 
 ## Enhancements
