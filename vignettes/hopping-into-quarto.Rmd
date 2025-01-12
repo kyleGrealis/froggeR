@@ -77,11 +77,11 @@ This command initializes a complete project structure with all necessary compone
     * `_variables.yml` for consistent metadata
     * `.gitignore` for secure version control
 
-When you start your first Quarto project with `froggeR`, you're choosing fast & efficient templating over tedious replication of project documents. `froggeR` provides the ability to create project-level metadata (stored in a `_variables.yml` file). This metadata populates certain fields in your Quarto document's YAML. For example, a `froggeR` Quarto document with the custom template displays "name" in the YAML as `name: "{{< var name >}}"`. However, when you render the document, the "name" value in the `_variables.yml` file populates this area and your actual name is displayed in the output. 
+When you start your first Quarto project with `froggeR`, you're choosing fast & efficient templating over tedious replication of project documents. `froggeR` provides the ability to create project-level metadata (stored in a `_variables.yml` file). This metadata populates certain fields in your Quarto document's YAML. For example, a `froggeR` Quarto document with the custom template displays "name" in the YAML as `name: "{{{< var name >}}}"`. However, when you render the document, the "name" value in the `_variables.yml` file populates this area and your actual name is displayed in the output. 
 
 Now, this may seem arbitrary or too simplistic. Sure, but what if you would like to add an email hyperlink to your documents because your share the rendered HTML documents with your colleagues? That's simple -- just ensure that the "email" field has a value and that too will be displayed in the document too. The same applies for adding a personal or company URL, your ORCID link, a school or organization, or even a custom title for the table of contents. Since the `_variables.yml` file is composed of `key:value` pairs, fill in whichever values you would like to use, leave blank which ones you'd rather not, or *add* new `key:value` pairs.
 
-> NOTE: It is strongly discouraged to delete any lines in the `_variables.yml` file as those are linked directly to the Quarto document. Either be sure to remove the `key:value` in the variables file **and** remove the `{{{ var [variable you want removed] }}}` from the Quarto template, or simply **just leave the value empty in the variables file**.
+> **Note**: It is strongly discouraged to delete any lines in the `_variables.yml` file as those are linked directly to the Quarto document. Either be sure to remove the `key:value` in the variables file **and** remove the `{{{ var [variable you want removed] }}}` from the Quarto template, or simply **just leave the value empty in the variables file**.
 
 See `vignette("customizing-quarto", package = "froggeR")` for more detailed configuration options.
 
@@ -126,7 +126,32 @@ If you would then like to reuse this file in future projects, run `froggeR::sett
 file.copy(from = here::here("_variables.yml"), to = "~/.config/froggeR/config.yml")
 ```
 
-This will output `[1] TRUE` to the console indicating that the file copy worked. **Congratulations!** You've just made your next Quarto project with `froggeR` even easier! But how? Well, let's have a little fun: delete the `_variables.yml` in your local project you just created. Don't worry... we'll make it reappear, but this time you will not need to reinput the value fields. Once again, run `froggeR::write_variables()` and voila! You should see your saved config file that matches the one you just deleted... and it's already filled in!
+This will output `[1] TRUE` to the console indicating that the file copy worked. 
+
+These settings flow through your projects in this order:
+
+1. `config.yml` stores your permanent settings (exact location depends on your OS)
+2. `froggeR` reads these when creating new projects
+3. Settings populate `_variables.yml` in your project
+4. Quarto documents use these variables automatically
+
+<div style="text-align: center;">
+  <figure>
+    <img src="../man/figures/config-file.png" alt="How froggeR manages settings across projects (config.yml)" width="70%">
+    <figcaption>How froggeR manages settings across projects (config.yml)</figcaption>
+  </figure>
+</div>
+
+<div style="text-align: center;">
+  <figure>
+    <img src="../man/figures/variables-yml.png" alt="How froggeR manages settings within projects (_variables.yml)" width="70%">
+    <figcaption>How froggeR manages settings across projects (_variables.yml)</figcaption>
+  </figure>
+</div>
+
+> **Note:** While you can update these settings at any time, most users find they only need to set them once or very infrequently.
+
+**Congratulations!** You've just made your next Quarto project with `froggeR` even easier! But how? Well, let's have a little fun: delete the `_variables.yml` in your local project you just created. Don't worry... we'll make it reappear, but this time you will not need to reinput the value fields. Once again, run `froggeR::write_variables()` and voila! You should see your saved config file that matches the one you just deleted... and it's already filled in!
 
 This is `froggeR`'s main benefit: making Quarto documents and projects easier the next time too. Later we'll see how `froggeR::quarto_project()` will pull this information the next time while setting up the entire project structure. You can skip ahead to the <Quarto Workflow with froggeR> vignette, if you like.
 
@@ -162,7 +187,7 @@ The `_variables.yml` metadata file is very versatile. You can include more `key:
   </figure>
 </div>
 
-> NOTE: Wrap hyperlinks in quotes in the metadata file or the rendered output and link acts funky. Ask me how I know ;)
+> **Note**: Wrap hyperlinks in quotes in the metadata file or the rendered output and link acts funky. Ask me how I know ;)
 
 I'm sure you can envision many more ways to use metadata to your advantage. This isn't a "`froggeR`-thing"... the great team working on [Quarto](https://quarto.org) is to thank!
 

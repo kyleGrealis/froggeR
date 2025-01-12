@@ -16,71 +16,19 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-One of `froggeR`'s core strengths is its ability to maintain consistent settings and styling across multiple projects. This vignette demonstrates how to set up and customize your Quarto documents using `froggeR`'s powerful configuration system.
+One of `froggeR`'s core strengths is its ability to maintain consistent settings and styling across multiple projects. This vignette demonstrates how to set up and customize your Quarto documents using `froggeR`'s SCSS document.
 
 ----
 
-## Setting Up Reusable Options
-
-### Initial Configuration
-
-The [`froggeR_settings()`](https://kylegrealis.github.io/froggeR/reference/froggeR_settings.html) function manages your document settings through an interactive interface. This is typically a one-time setup that benefits all future projects:
-
-```r
-froggeR::froggeR_settings()
-```
-
-This creates a configuration file at `~/.config/froggeR/config.yml` that persists across R sessions:
-
-```yaml
-name: Your Name
-email: your.email@example.com
-orcid: 0000-0000-0000-0000         # Optional
-url: https://github.com/username   # Optional
-affiliations: Your Institution     # Optional
-toc: Table of Contents             # Defaults if empty
-```
-
-> **Note:** Leaving values blank will not cause errors, but modify these values carefully.
-
-To view your current settings without modifying them, use:
-
-```r
-froggeR::froggeR_settings(update = FALSE)
-```
-
-These settings flow through your projects in this order:
-
-1. `config.yml` stores your permanent settings (exact location depends on your OS)
-2. `froggeR` reads these when creating new projects
-3. Settings populate `_variables.yml` in your project
-4. Quarto documents use these variables automatically
-
-<div style="text-align: center;">
-  <figure>
-    <img src="../man/figures/config-file.png" alt="How froggeR manages settings across projects (config.yml)" width="70%">
-    <figcaption>How froggeR manages settings across projects (config.yml)</figcaption>
-  </figure>
-</div>
-
-<div style="text-align: center;">
-  <figure>
-    <img src="../man/figures/variable-yml.png" alt="How froggeR manages settings within projects (_variables.yml)" width="70%">
-    <figcaption>How froggeR manages settings across projects (_variables.yml)</figcaption>
-  </figure>
-</div>
-
-> **Note:** While you can update these settings at any time, most users find they only need to set them once or very infrequently.
-
-### Using Custom Variables in Quarto Documents
+## Using Custom Variables in Quarto Documents
 
 froggeR allows you to use variables from your `_variables.yml` file directly in your Quarto documents:
 
 ```yaml
 ---
 title: "My Document"
-author: "{{< var author >}}"
-date: "{{< var date >}}"
+author: "{{{< var author >}}}"
+date: "{{{< var date >}}}"
 ---
 ```
 
@@ -127,14 +75,7 @@ To activate any style:
 
 ### Working with Multiple SCSS Files
 
-froggeR allows you to create and manage multiple SCSS files for different styling needs:
-
-```r
-froggeR::write_scss(name = "modern_theme")
-froggeR::write_scss(name = "presentation_theme")
-```
-
-To use a specific SCSS file in your Quarto document, update the YAML header:
+To multiple or a organization-specific SCSS file in your Quarto document, update the YAML header:
 
 ```yaml
 ---
@@ -144,11 +85,11 @@ format:
     theme:
       - default
       - custom.scss        # Added during project 
-      - modern_theme.scss  # Or presentation_theme.scss
+      - your-other.scss    # The new one you're adding
 ---
 ```
 
-> froggeR will attempt to automate the revision of your YAML header. Don't be dismayed -- we'll provide you with feedback if this is unsuccessful and provide an example like the code block above to walk you through each step.
+> **Note**: Order matters! Any style(s) set in `custom.scss` override Quarto's defaults, and `your-other.scss` overrides the previous two. If your document isn't rendering as you believe it should, check the files. If you have a border style set in `custom.scss` but the output file isn't correct, there's a good possibility that there's something set in `your-other.scss` causing conflicts. Resolve the issue and re-render. :)
 
 ### Basic Customization Examples
 
@@ -296,7 +237,7 @@ For more advanced SCSS customization options, visit:
 
 `froggeR` streamlines document customization:
 
-1. Set up once with `froggeR_settings()`
+1. Set up once with `settings()`
 2. Style with `write_scss()`
 3. Reuse across all your projects
 4. Update easily when needed
