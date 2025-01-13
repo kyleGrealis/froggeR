@@ -268,7 +268,7 @@ Modify individual documents while maintaining project consistency:
     ```yaml
     ---
     title: "Analysis Results"
-    author: "{{{< var author >}}}"
+    author: "{{< var author >}}"
     date: last-modified
     format:
       html:

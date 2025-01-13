@@ -77,11 +77,11 @@ This command initializes a complete project structure with all necessary compone
     * `_variables.yml` for consistent metadata
     * `.gitignore` for secure version control
 
-When you start your first Quarto project with `froggeR`, you're choosing fast & efficient templating over tedious replication of project documents. `froggeR` provides the ability to create project-level metadata (stored in a `_variables.yml` file). This metadata populates certain fields in your Quarto document's YAML. For example, a `froggeR` Quarto document with the custom template displays "name" in the YAML as `name: "{{{< var name >}}}"`. However, when you render the document, the "name" value in the `_variables.yml` file populates this area and your actual name is displayed in the output. 
+When you start your first Quarto project with `froggeR`, you're choosing fast & efficient templating over tedious replication of project documents. `froggeR` provides the ability to create project-level metadata (stored in a `_variables.yml` file). This metadata populates certain fields in your Quarto document's YAML. For example, a `froggeR` Quarto document with the custom template displays "name" in the YAML as `name: "{{< var name >}}"`. However, when you render the document, the "name" value in the `_variables.yml` file populates this area and your actual name is displayed in the output. 
 
 Now, this may seem arbitrary or too simplistic. Sure, but what if you would like to add an email hyperlink to your documents because your share the rendered HTML documents with your colleagues? That's simple -- just ensure that the "email" field has a value and that too will be displayed in the document too. The same applies for adding a personal or company URL, your ORCID link, a school or organization, or even a custom title for the table of contents. Since the `_variables.yml` file is composed of `key:value` pairs, fill in whichever values you would like to use, leave blank which ones you'd rather not, or *add* new `key:value` pairs.
 
-> **Note**: It is strongly discouraged to delete any lines in the `_variables.yml` file as those are linked directly to the Quarto document. Either be sure to remove the `key:value` in the variables file **and** remove the `{{{ var [variable you want removed] }}}` from the Quarto template, or simply **just leave the value empty in the variables file**.
+> **Note**: It is strongly discouraged to delete any lines in the `_variables.yml` file as those are linked directly to the Quarto document. Either be sure to remove the `key:value` in the variables file **and** remove the `{{ var [variable you want removed] }}` from the Quarto template, or simply **just leave the value empty in the variables file**.
 
 See `vignette("customizing-quarto", package = "froggeR")` for more detailed configuration options.
 
@@ -174,7 +174,7 @@ The template will open:
   </figure>
 </div>
 
-If you're not familiar with this new structure in the YAML, that's ok. This is where the values from `_variables.yml` in the project links to the rendered document. The `{{{< var name >}}}` syntax imports the `name` value from the *var*iables metadata file. If you were to now make a second or third `froggeR::write_quarto()` document in this project, you will not need to manually enter your name and other details. These values will be automatically entered when you render the documents.
+If you're not familiar with this new structure in the YAML, that's ok. This is where the values from `_variables.yml` in the project links to the rendered document. The `{{< var name >}}` syntax imports the `name` value from the *var*iables metadata file. If you were to now make a second or third `froggeR::write_quarto()` document in this project, you will not need to manually enter your name and other details. These values will be automatically entered when you render the documents.
 
 The `_variables.yml` metadata file is very versatile. You can include more `key:value` pairs to either the project- or global-level file(s) and those values will be accessible in any current or future documents. Imagine you had a second URL that you plan to use more than a few times in your Quarto document, and maybe you just don't want to type the long syntax over and over? Great, store it in the `_variables.yml` file... like this!
 

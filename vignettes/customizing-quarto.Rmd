@@ -27,8 +27,8 @@ froggeR allows you to use variables from your `_variables.yml` file directly in 
 ```yaml
 ---
 title: "My Document"
-author: "{{{< var author >}}}"
-date: "{{{< var date >}}}"
+author: "{{< var author >}}"
+date: "{{< var date >}}"
 ---
 ```
 
