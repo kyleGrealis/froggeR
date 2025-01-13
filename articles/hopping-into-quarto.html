@@ -164,7 +164,7 @@ create project-level metadata (stored in a <code>_variables.yml</code>
 file). This metadata populates certain fields in your Quarto document’s
 YAML. For example, a <code>froggeR</code> Quarto document with the
 custom template displays “name” in the YAML as
-<code>name: "{{{&lt; var name &gt;}}}"</code>. However, when you render
+<code>name: "{{&lt; var name &gt;}}"</code>. However, when you render
 the document, the “name” value in the <code>_variables.yml</code> file
 populates this area and your actual name is displayed in the output.</p>
 <p>Now, this may seem arbitrary or too simplistic. Sure, but what if you
@@ -182,7 +182,7 @@ or <em>add</em> new <code>key:value</code> pairs.</p>
 in the <code>_variables.yml</code> file as those are linked directly to
 the Quarto document. Either be sure to remove the <code>key:value</code>
 in the variables file <strong>and</strong> remove the
-<code>{{{ var [variable you want removed] }}}</code> from the Quarto
+<code>{{ var [variable you want removed] }}</code> from the Quarto
 template, or simply <strong>just leave the value empty in the variables
 file</strong>.</p>
 </blockquote>
@@ -288,12 +288,12 @@ Custom YAML template
 <p>If you’re not familiar with this new structure in the YAML, that’s
 ok. This is where the values from <code>_variables.yml</code> in the
 project links to the rendered document. The
-<code>{{{&lt; var name &gt;}}}</code> syntax imports the
-<code>name</code> value from the <em>var</em>iables metadata file. If
-you were to now make a second or third
-<code><a href="../reference/write_quarto.html">froggeR::write_quarto()</a></code> document in this project, you will
-not need to manually enter your name and other details. These values
-will be automatically entered when you render the documents.</p>
+<code>{{&lt; var name &gt;}}</code> syntax imports the <code>name</code>
+value from the <em>var</em>iables metadata file. If you were to now make
+a second or third <code><a href="../reference/write_quarto.html">froggeR::write_quarto()</a></code> document in this
+project, you will not need to manually enter your name and other
+details. These values will be automatically entered when you render the
+documents.</p>
 <p>The <code>_variables.yml</code> metadata file is very versatile. You
 can include more <code>key:value</code> pairs to either the project- or
 global-level file(s) and those values will be accessible in any current
