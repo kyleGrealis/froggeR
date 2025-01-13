@@ -93,7 +93,7 @@ See `vignette("customizing-quarto", package = "froggeR")` for more detailed conf
 
 Manage your document settings with the interactive configuration tool (see `?froggeR::settings` for all options):
 
-```r
+```{r, eval=FALSE}
 # Check, display, or update your settings
 froggeR::settings()
 ```
@@ -107,7 +107,7 @@ froggeR::settings()
 
 To create and open the `_variables.yml` file for immediate customization, run:
 
-```r
+```{r, eval=FALSE}
 # Create project-level metadata
 froggeR::write_variables()
 ```
@@ -122,9 +122,7 @@ You will then see the file open with hints provided on how to fill in and use. R
 
 If you would then like to reuse this file in future projects, run `froggeR::settings()` then choose option 4 "Show how to reuse settings across projects". An easier way is to just copy this to your console to save the `_variables.yml` in a system-level `froggeR` configuration file:
 
-```r
-file.copy(from = here::here("_variables.yml"), to = "~/.config/froggeR/config.yml")
-```
+`file.copy(from = here::here("_variables.yml"), to = "~/.config/froggeR/config.yml")`
 
 This will output `[1] TRUE` to the console indicating that the file copy worked. 
 
@@ -159,7 +157,7 @@ This is `froggeR`'s main benefit: making Quarto documents and projects easier th
 
 To further the leverage the power of project metadata, select a Quarto template with `custom_yaml = TRUE` (this is the default argument) and choose any name you'd like.
 
-```r
+```{r, eval=FALSE}
 # Create a new document using your settings
 froggeR::write_quarto(
   filename = "analysis",
@@ -195,7 +193,7 @@ I'm sure you can envision many more ways to use metadata to your advantage. This
 
 Customize your document appearance with SCSS:
 
-```r
+```{r, eval=FALSE}
 froggeR::write_scss()
 ```
 
@@ -212,7 +210,7 @@ This creates a `custom.scss` file with commented-out examples. Uncomment and mod
 
 Generate comprehensive project documentation:
 
-```r
+```{r, eval=FALSE}
 froggeR::write_readme()
 froggeR::write_notes()
 ```

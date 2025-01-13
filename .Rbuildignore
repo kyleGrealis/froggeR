@@ -11,3 +11,4 @@ PROG_NOTES.md
 .quarto$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+..Rcheck$

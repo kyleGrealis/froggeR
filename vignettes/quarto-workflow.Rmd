@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 The quickest way to start a new Quarto project:
 
-```r
+```{r, eval=FALSE}
 froggeR::quarto_project(name = "frogs")
 ```
 
@@ -98,7 +98,7 @@ Each component serves a specific purpose:
 
 Create a new Quarto document in an existing project:
 
-```r
+```{r, eval=FALSE}
 froggeR::write_quarto(
   filename = "frog_analysis",
   custom_yaml = TRUE  # Use settings from _variables.yml
@@ -115,7 +115,7 @@ This creates `frog_analysis.qmd` with:
 
 For documents without project settings and requiring manual changes to the document YAML:
 
-```r
+```{r, eval=FALSE}
 froggeR::write_quarto(
   filename = "frog_standalone",
   custom_yaml = FALSE  # Basic Quarto template
@@ -160,7 +160,7 @@ Best practices for project organization:
 
 1. **Initial Setup**
 
-    ```r
+    ```{r, eval=FALSE}
     # Create new project
     froggeR::quarto_project(name = "frogs")
     ```
@@ -178,7 +178,7 @@ Best practices for project organization:
 
 2. **Additional Documents**
 
-    ```r
+    ```{r, eval=FALSE}
     # Add analysis documents
     froggeR::write_quarto(
       filename = "data_prep",
@@ -240,13 +240,13 @@ Common `.gitignore` patterns:
 
 Customize your project structure:
 
-```r
+```{r, eval=FALSE}
 froggeR::quarto_project(name = "advanced_frogs")
 ```
 
 Then add specialized documents:
 
-```r
+```{r, eval=FALSE}
 # Data preparation
 froggeR::write_quarto(filename = "01_data_prep")
 
