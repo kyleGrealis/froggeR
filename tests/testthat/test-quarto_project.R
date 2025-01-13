@@ -33,7 +33,11 @@ test_that("quarto_project handles errors", {
   # Again, skip if no Quarto
   skip_if_not(nzchar(Sys.which("quarto")), "Quarto not available")
   
-  # Test simple error cases
-  expect_error(quarto_project(""), "Invalid project name")     # Empty string
-  expect_error(quarto_project(" "), "Invalid project name")    # Just whitespace
+  if (quarto::quarto_version() >= "1.4") {
+    # Test simple error cases
+    expect_error(quarto_project(""), "Invalid project name")     # Empty string
+    expect_error(quarto_project(" "), "Invalid project name")    # Just whitespace
+  } else {
+    expect_error(quarto_project(""), "version")
+  }
 })
