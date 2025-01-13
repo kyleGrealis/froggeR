@@ -29,7 +29,7 @@ test_that("quarto_project creates directory structure", {
   unlink(proj_path, recursive = TRUE, force = TRUE)
 })
 
-test_that("quarto_project handles errors", {
+test_that("quarto_project handles Quarto version & errors", {
   # Again, skip if no Quarto
   skip_if_not(nzchar(Sys.which("quarto")), "Quarto not available")
   
