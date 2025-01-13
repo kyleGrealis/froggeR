@@ -17,8 +17,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Enhance Quarto Project Workflows and Standards">
-<meta name="description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables reusability through custom YAML variables, automated project structure creation, and standardized templates. Features include enhanced project initialization, templated Quarto documents, comprehensive .gitignore settings, custom SCSS styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
-<meta property="og:description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables reusability through custom YAML variables, automated project structure creation, and standardized templates. Features include enhanced project initialization, templated Quarto documents, comprehensive .gitignore settings, custom SCSS styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
+<meta name="description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
+<meta property="og:description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
 <meta property="og:image" content="https://kylegrealis.github.io/froggeR/logo.svg">
 </head>
 <body>
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
 </div>
 <p><a href="https://github.com/kyleGrealis/froggeR" class="external-link"><img src="https://img.shields.io/badge/R--CMD--check-passing-brightgreen" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a> <a href="https://CRAN.R-project.org/package=froggeR" class="external-link"><img src="https://www.r-pkg.org/badges/version/froggeR" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=froggeR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/froggeR" alt="CRAN downloads"></a></p>
 <blockquote>
-<p>froggeR version: 0.2.2</p>
+<p>froggeR version: 0.3.0</p>
 </blockquote>
 <p>froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.</p>
 <div class="section level2">
@@ -147,15 +147,14 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">'my_new_project'</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use custom YAML from _variables.yml</span></span>
+<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use custom YAML values from _variables.yml</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>This creates:</p>
 <ul>
 <li>A Quarto document with custom YAML</li>
 <li>A comprehensive <code>.gitignore</code>
 </li>
-<li>A structured <code>README.md</code>
-</li>
+<li>Structured <code>README.md</code> &amp; progress notes templates</li>
 <li>A reusable <code>_variables.yml</code>
 </li>
 <li>A <code>custom.scss</code> style sheet template</li>
@@ -167,7 +166,7 @@
 </h3>
 <p>Maintain consistent metadata across your documents:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/froggeR_settings.html">froggeR_settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Interactively create or update metadata that is reusable across Quarto projects &amp; documents with:</p>
 <ul>
 <li>Author details</li>
@@ -180,10 +179,10 @@
 <div class="section level3">
 <h3 id="id_-templated-quarto-documents">📝 Templated Quarto Documents<a class="anchor" aria-label="anchor" href="#id_-templated-quarto-documents"></a>
 </h3>
-<p>Generate new Quarto documents with pre-formatted headers:</p>
+<p>Quickly generate new Quarto documents with pre-formatted headers:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="st">'frogs'</span>,</span>
+<span>  filename <span class="op">=</span> <span class="st">'data_cleaning'</span>,</span>
 <span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use variables from _variables.yml</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -254,45 +253,56 @@
 <h2 id="function-reference">Function Reference<a class="anchor" aria-label="anchor" href="#function-reference"></a>
 </h2>
 <table class="table">
+<colgroup>
+<col width="43%">
+<col width="56%">
+</colgroup>
 <thead><tr class="header">
 <th>Function</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code><a href="reference/froggeR_settings.html">froggeR_settings()</a></code></td>
-<td>Manage persistent Quarto document settings</td>
+<td><code><a href="reference/settings.html">settings()</a></code></td>
+<td>Manage persistent Quarto document metadata</td>
 </tr>
 <tr class="even">
 <td><code><a href="reference/quarto_project.html">quarto_project()</a></code></td>
 <td>Initialize a complete Quarto project structure</td>
 </tr>
 <tr class="odd">
-<td><code><a href="reference/write_quarto.html">write_quarto()</a></code></td>
+<td>
+<code><a href="reference/write_quarto.html">write_quarto()</a></code>*</td>
 <td>Create consistently formatted Quarto documents</td>
 </tr>
 <tr class="even">
-<td><code><a href="reference/write_variables.html">write_variables()</a></code></td>
+<td>
+<code><a href="reference/write_variables.html">write_variables()</a></code>*</td>
 <td>Re-use metadata across projects &amp; documents</td>
 </tr>
 <tr class="odd">
-<td><code><a href="reference/write_ignore.html">write_ignore()</a></code></td>
+<td>
+<code><a href="reference/write_ignore.html">write_ignore()</a></code>*</td>
 <td>Configure <code>.gitignore</code> for enhanced data security</td>
 </tr>
 <tr class="even">
-<td><code><a href="reference/write_readme.html">write_readme()</a></code></td>
+<td>
+<code><a href="reference/write_readme.html">write_readme()</a></code>*</td>
 <td>Generate a comprehensive project README</td>
 </tr>
 <tr class="odd">
-<td><code><a href="reference/write_notes.html">write_notes()</a></code></td>
+<td>
+<code><a href="reference/write_notes.html">write_notes()</a></code>*</td>
 <td>Create a dated progress notes template</td>
 </tr>
 <tr class="even">
-<td><code><a href="reference/write_scss.html">write_scss()</a></code></td>
+<td>
+<code><a href="reference/write_scss.html">write_scss()</a></code>*</td>
 <td>Create a customizable SCSS styling template</td>
 </tr>
 </tbody>
 </table>
+<p>* <em>These functions are included with <code><a href="reference/quarto_project.html">quarto_project()</a></code></em></p>
 <hr>
 </div>
 <div class="section level2">

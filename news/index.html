@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +34,33 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/kyleGrealis/froggeR/blob/v0.3.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/kyleGrealis/froggeR/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.0" id="frogger-030">froggeR 0.3.0<a class="anchor" aria-label="anchor" href="#frogger-030"></a></h2>
+<div class="section level3">
+<h3 id="enhancements-0-3-0">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-0-3-0"></a></h3>
+<ul><li>The <code><a href="../reference/settings.html">settings()</a></code> function replaces <code>froggeR_settings</code> and provides a menu-driven interface. User’s can now check, view, &amp; get instructions to use Quarto metadata within and across projects. Learn how to apply user-specific metadata from the global config file, or store local project metadata for reuse on future froggeR Quarto projects.</li>
+<li>The suite of <code>write_*</code> functions open the created files for immediate viewing &amp; editing (in interactive sessions).</li>
+<li>Revised console feedback so users are always informed about how froggeR is helping streamline your project.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-3-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-0"></a></h3>
+<ul><li><em>None</em></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-3-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-3-0"></a></h3>
+<ul><li>Fixed roxygen documentation for <code>@examples</code> by using <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> when executing functions.</li>
+<li>Used <code>@inheretParams</code> across supplemental functions (README, notes, ignore, SCSS, variables).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-changes-0-3-0">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-3-0"></a></h3>
+<ul><li>Removed abililty to change metadata from the console. Instructions are now provided and, for <code><a href="../reference/write_variables.html">write_variables()</a></code>, the config file is opened in the interactive session.</li>
+<li>Separated <code>write_readme</code>; now includes <code>write_notes</code> for a project-level progress notes template.</li>
+<li>If any document to be created from the <code>write_*</code> functions exists in the project, froggeR will now stop and provide a useful message <em>instead</em> of offering to overwrite from the console. This reduces annoying feedback &amp; interaction and encourages the user to make deliberate decions.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.2" id="frogger-022">froggeR 0.2.2<a class="anchor" aria-label="anchor" href="#frogger-022"></a></h2>
 <div class="section level3">
@@ -84,7 +108,7 @@
 <div class="section level3">
 <h3 id="enhancements-0-2-1">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-0-2-1"></a></h3>
 <ul><li>Improved <code><a href="../reference/write_scss.html">write_scss()</a></code> function for more streamlined YAML updates in Quarto documents.</li>
-<li>Enhanced user feedback in <code><a href="../reference/froggeR_settings.html">froggeR_settings()</a></code> function, providing clearer output of current settings.</li>
+<li>Enhanced user feedback in <code>froggeR_settings()</code> function, providing clearer output of current settings.</li>
 <li>Refined error handling and user guidance in various functions for a smoother user experience.</li>
 <li>Updated vignettes with more comprehensive examples and clearer explanations of froggeR workflows.</li>
 </ul></div>
@@ -98,9 +122,9 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="frogger-020">froggeR 0.2.0<a class="anchor" aria-label="anchor" href="#frogger-020"></a></h2>
 <ul><li>Renamed <code>default</code> parameter to <code>custom_yaml</code> in <code><a href="../reference/quarto_project.html">quarto_project()</a></code> and <code><a href="../reference/write_quarto.html">write_quarto()</a></code> for clarity.</li>
-<li>Refactored <code><a href="../reference/froggeR_settings.html">froggeR_settings()</a></code> to use YAML for configuration storage.</li>
+<li>Refactored <code>froggeR_settings()</code> to use YAML for configuration storage.</li>
 <li>Changed how settings are stored and retrieved. Settings are now stored in <code>~/.config/froggeR/config.yml</code>.</li>
-<li>Improved user interaction in <code><a href="../reference/froggeR_settings.html">froggeR_settings()</a></code> function.</li>
+<li>Improved user interaction in <code>froggeR_settings()</code> function.</li>
 <li>Modified <code><a href="../reference/quarto_project.html">quarto_project()</a></code> and <code><a href="../reference/write_quarto.html">write_quarto()</a></code> to use the new YAML-based settings.</li>
 <li>Added <code>.check_settings()</code> function to provide user feedback on incomplete settings.</li>
 <li>Updated <code>.update_variables_yml()</code> function to handle both creation and updating of <code>_variables.yml</code>.</li>
@@ -120,7 +144,7 @@
 <li>Built-in .gitignore configuration</li>
 <li>Project documentation templates</li>
 </ul></li>
-<li>Added interactive YAML configuration via <code><a href="../reference/froggeR_settings.html">froggeR_settings()</a></code>
+<li>Added interactive YAML configuration via <code>froggeR_settings()</code>
 <ul><li>Author information management</li>
 <li>Contact details setup</li>
 <li>Project metadata configuration</li>

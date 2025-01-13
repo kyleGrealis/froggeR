@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Get Hopping with froggeR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/kyleGrealis/froggeR/blob/v0.3.0/vignettes/hopping-into-quarto.Rmd" class="external-link"><code>vignettes/hopping-into-quarto.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/kyleGrealis/froggeR/blob/main/vignettes/hopping-into-quarto.Rmd" class="external-link"><code>vignettes/hopping-into-quarto.Rmd</code></a></small>
       <div class="d-none name"><code>hopping-into-quarto.Rmd</code></div>
     </div>
 
@@ -92,21 +92,36 @@ analysis workflow. <code>froggeR</code> addresses this by providing:</p>
 <ul>
 <li>Automated project initialization with <a href="https://kylegrealis.github.io/froggeR/reference/quarto_project.html"><code>quarto_project()</code></a>
 </li>
-<li>Configurable document templates via <a href="https://kylegrealis.github.io/froggeR/reference/write_quarto.html"><code>write_quarto()</code></a>
+<li>Reusable project configurations through <a href="https://kylegrealis.github.io/froggeR/reference/froggeR_settings.html"><code>settings()</code></a>
 </li>
-<li>Reusable project configurations through <a href="https://kylegrealis.github.io/froggeR/reference/froggeR_settings.html"><code>froggeR_settings()</code></a>
+<li>Configurable document templates via <a href="https://kylegrealis.github.io/froggeR/reference/write_quarto.html"><code>write_quarto()</code></a>
 </li>
 <li>Consistent styling with <a href="https://kylegrealis.github.io/froggeR/reference/write_scss.html"><code>write_scss()</code></a>
 </li>
 <li>Enhanced version control setup</li>
+<li>Easily add project documentation templates to any existing project,
+even those not initialized by <code>froggeR</code>.</li>
 </ul>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="spoiler-alert">SPOILER ALERT!!<a class="anchor" aria-label="anchor" href="#spoiler-alert"></a>
+</h2>
+<p>All of the components listed below are available when you begin your
+Quarto projects with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Save time on building a project structure, formatting, and trying to
+redo that super awesome YAML you did a few weeks back. Start with
+<code>froggeR</code> now and get yourself dialed in for all future
+projects!</p>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="quick-start-guide">Quick Start Guide<a class="anchor" aria-label="anchor" href="#quick-start-guide"></a>
 </h2>
 <p>Create a new Quarto project with a single command:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"frogs"</span><span class="op">)</span></span></code></pre></div>
 <p>This command initializes a complete project structure with all
 necessary components:</p>
@@ -142,6 +157,35 @@ necessary components:</p>
 </ul>
 </li>
 </ol>
+<p>When you start your first Quarto project with <code>froggeR</code>,
+you’re choosing fast &amp; efficient templating over tedious replication
+of project documents. <code>froggeR</code> provides the ability to
+create project-level metadata (stored in a <code>_variables.yml</code>
+file). This metadata populates certain fields in your Quarto document’s
+YAML. For example, a <code>froggeR</code> Quarto document with the
+custom template displays “name” in the YAML as
+<code>name: "{{{&lt; var name &gt;}}}"</code>. However, when you render
+the document, the “name” value in the <code>_variables.yml</code> file
+populates this area and your actual name is displayed in the output.</p>
+<p>Now, this may seem arbitrary or too simplistic. Sure, but what if you
+would like to add an email hyperlink to your documents because your
+share the rendered HTML documents with your colleagues? That’s simple –
+just ensure that the “email” field has a value and that too will be
+displayed in the document too. The same applies for adding a personal or
+company URL, your ORCID link, a school or organization, or even a custom
+title for the table of contents. Since the <code>_variables.yml</code>
+file is composed of <code>key:value</code> pairs, fill in whichever
+values you would like to use, leave blank which ones you’d rather not,
+or <em>add</em> new <code>key:value</code> pairs.</p>
+<blockquote>
+<p><strong>Note</strong>: It is strongly discouraged to delete any lines
+in the <code>_variables.yml</code> file as those are linked directly to
+the Quarto document. Either be sure to remove the <code>key:value</code>
+in the variables file <strong>and</strong> remove the
+<code>{{{ var [variable you want removed] }}}</code> from the Quarto
+template, or simply <strong>just leave the value empty in the variables
+file</strong>.</p>
+</blockquote>
 <p>See <code><a href="../articles/customizing-quarto.html">vignette("customizing-quarto", package = "froggeR")</a></code>
 for more detailed configuration options.</p>
 <hr>
@@ -154,25 +198,128 @@ for more detailed configuration options.</p>
 <h3 id="document-settings">Document Settings<a class="anchor" aria-label="anchor" href="#document-settings"></a>
 </h3>
 <p>Manage your document settings with the interactive configuration tool
-(see <code><a href="../reference/froggeR_settings.html">?froggeR_settings</a></code> for all options):</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Configure your settings</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/froggeR_settings.html">froggeR_settings</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create a new document using your settings</span></span>
+(see <code><a href="../reference/settings.html">?froggeR::settings</a></code> for all options):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Check, display, or update your settings</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div style="text-align: center;">
+<figure><img src="../reference/figures/settings-options.png" alt="froggeR settings menu" width="70%"><figcaption>
+froggeR settings menu
+</figcaption></figure>
+</div>
+<p>To create and open the <code>_variables.yml</code> file for immediate
+customization, run:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create project-level metadata</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_variables.html">write_variables</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>You will then see the file open with hints provided on how to fill in
+and use. Remember, it’s better (and safer) to leave fields blank than to
+delete them… but you can remove the first two comment lines.</p>
+<div style="text-align: center;">
+<figure><img src="../reference/figures/variables-init.png" alt="empty variables file" width="70%"><figcaption>
+Project variables file
+</figcaption></figure>
+</div>
+<p>If you would then like to reuse this file in future projects, run
+<code><a href="../reference/settings.html">froggeR::settings()</a></code> then choose option 4 “Show how to reuse
+settings across projects”. An easier way is to just copy this to your
+console to save the <code>_variables.yml</code> in a system-level
+<code>froggeR</code> configuration file:</p>
+<p><code>file.copy(from = here::here("_variables.yml"), to = "~/.config/froggeR/config.yml")</code></p>
+<p>This will output <code>[1] TRUE</code> to the console indicating that
+the file copy worked.</p>
+<p>These settings flow through your projects in this order:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>config.yml</code> stores your permanent settings (exact
+location depends on your OS)</li>
+<li>
+<code>froggeR</code> reads these when creating new projects</li>
+<li>Settings populate <code>_variables.yml</code> in your project</li>
+<li>Quarto documents use these variables automatically</li>
+</ol>
+<div style="text-align: center;">
+<figure><img src="../reference/figures/config-file.png" alt="How froggeR manages settings across projects (config.yml)" width="70%"><figcaption>
+How froggeR manages settings across projects (config.yml)
+</figcaption></figure>
+</div>
+<div style="text-align: center;">
+<figure><img src="../reference/figures/variables-yml.png" alt="How froggeR manages settings within projects (_variables.yml)" width="70%"><figcaption>
+How froggeR manages settings across projects (_variables.yml)
+</figcaption></figure>
+</div>
+<blockquote>
+<p><strong>Note:</strong> While you can update these settings at any
+time, most users find they only need to set them once or very
+infrequently.</p>
+</blockquote>
+<p><strong>Congratulations!</strong> You’ve just made your next Quarto
+project with <code>froggeR</code> even easier! But how? Well, let’s have
+a little fun: delete the <code>_variables.yml</code> in your local
+project you just created. Don’t worry… we’ll make it reappear, but this
+time you will not need to reinput the value fields. Once again, run
+<code><a href="../reference/write_variables.html">froggeR::write_variables()</a></code> and voila! You should see your
+saved config file that matches the one you just deleted… and it’s
+already filled in!</p>
+<p>This is <code>froggeR</code>’s main benefit: making Quarto documents
+and projects easier the next time too. Later we’ll see how
+<code><a href="../reference/quarto_project.html">froggeR::quarto_project()</a></code> will pull this information the
+next time while setting up the entire project structure. You can skip
+ahead to the <quarto workflow with frogger> vignette, if you like.</quarto></p>
+</div>
+<div class="section level3">
+<h3 id="create-a-quarto-document-with-a-custom-yaml">Create a Quarto document with a custom YAML<a class="anchor" aria-label="anchor" href="#create-a-quarto-document-with-a-custom-yaml"></a>
+</h3>
+<p>To further the leverage the power of project metadata, select a
+Quarto template with <code>custom_yaml = TRUE</code> (this is the
+default argument) and choose any name you’d like.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a new document using your settings</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
 <span>  filename <span class="op">=</span> <span class="st">"analysis"</span>,</span>
 <span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use your configured settings</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>The template will open:</p>
+<div style="text-align: center;">
+<figure><img src="../reference/figures/custom-yaml-init.png" alt="custom yaml template" width="70%"><figcaption>
+Custom YAML template
+</figcaption></figure>
+</div>
+<p>If you’re not familiar with this new structure in the YAML, that’s
+ok. This is where the values from <code>_variables.yml</code> in the
+project links to the rendered document. The
+<code>{{{&lt; var name &gt;}}}</code> syntax imports the
+<code>name</code> value from the <em>var</em>iables metadata file. If
+you were to now make a second or third
+<code><a href="../reference/write_quarto.html">froggeR::write_quarto()</a></code> document in this project, you will
+not need to manually enter your name and other details. These values
+will be automatically entered when you render the documents.</p>
+<p>The <code>_variables.yml</code> metadata file is very versatile. You
+can include more <code>key:value</code> pairs to either the project- or
+global-level file(s) and those values will be accessible in any current
+or future documents. Imagine you had a second URL that you plan to use
+more than a few times in your Quarto document, and maybe you just don’t
+want to type the long syntax over and over? Great, store it in the
+<code>_variables.yml</code> file… like this!</p>
+<div style="text-align: center;">
+<figure><img src="../reference/figures/key-value.png" alt="more key:value pairs" width="70%"><figcaption>
+Adding more key:values to project metadata
+</figcaption></figure>
+</div>
+<blockquote>
+<p><strong>Note</strong>: Wrap hyperlinks in quotes in the metadata file
+or the rendered output and link acts funky. Ask me how I know ;)</p>
+</blockquote>
+<p>I’m sure you can envision many more ways to use metadata to your
+advantage. This isn’t a “<code>froggeR</code>-thing”… the great team
+working on <a href="https://quarto.org" class="external-link">Quarto</a> is to thank!</p>
 </div>
 <div class="section level3">
 <h3 id="visual-styling">Visual Styling<a class="anchor" aria-label="anchor" href="#visual-styling"></a>
 </h3>
 <p>Customize your document appearance with SCSS:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_scss.html">write_scss</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span><span class="op">)</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_notes.html">write_notes</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_scss.html">write_scss</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This creates a <code>custom.scss</code> file with commented-out
 examples. Uncomment and modify these to customize your document’s
 appearance. For more information on Quarto styling, refer to:</p>
@@ -192,15 +339,18 @@ Quarto Themes</a></li>
 <h3 id="project-documentation">Project Documentation<a class="anchor" aria-label="anchor" href="#project-documentation"></a>
 </h3>
 <p>Generate comprehensive project documentation:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create structured README</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This creates:</p>
-<ul>
-<li>A detailed README.md</li>
-<li>Progress tracking notes</li>
-<li>Project structure documentation</li>
-</ul>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_notes.html">write_notes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The README template was designed for academia in mind (notice the
+references to “PI”, or principle investigator, within the file), but is
+adaptable to meet your needs. There are sections for explaining how to
+use your project, what the directories and files contain, and created so
+you can focus more on creating content.</p>
+<p>We’ve included a <code>dated_progress_notes.md</code> file. A study
+with sample size <em>N=1</em> has demonstrated that this has really
+helped <del>me</del> the study participant refresh memory after a few
+weeks away from a project.</p>
 <hr>
 </div>
 </div>
@@ -209,6 +359,16 @@ Quarto Themes</a></li>
 </h2>
 <p>For optimal results with <code>froggeR</code>:</p>
 <ol style="list-style-type: decimal">
+<li>
+<strong>Use metadata in your projects</strong>
+<ul>
+<li>Follow guide to save your metadata in the configuration file</li>
+<li>Initialize projects with <code><a href="../reference/quarto_project.html">quarto_project()</a></code> or
+<code><a href="../reference/write_quarto.html">write_quarto()</a></code>
+</li>
+<li>Review Quarto documentation to really open up your projects</li>
+</ul>
+</li>
 <li>
 <strong>Project Organization</strong>
 <ul>
