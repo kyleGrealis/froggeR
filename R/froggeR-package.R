@@ -6,7 +6,7 @@
 #' @importFrom cli col_blue col_green
 #' @importFrom glue glue
 #' @importFrom here here
-#' @importFrom quarto quarto_create_project
+#' @importFrom quarto quarto_create_project quarto_version
 #' @importFrom rappdirs user_config_dir
 #' @importFrom readr read_file write_file
 #' @importFrom rstudioapi openProject
