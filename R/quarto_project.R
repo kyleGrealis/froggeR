@@ -29,22 +29,24 @@
 #' @seealso \code{\link{write_quarto}}, \code{\link{settings}}
 #'
 #' @examples
-#' # Create a temporary directory for testing
-#' tmp_dir <- tempdir()
+#' if (quarto::quarto_version() >= "1.4") {
+#'   # Create a temporary directory for testing
+#'   tmp_dir <- tempdir()
 #' 
-#' # Create the Quarto project with custom YAML & associated files
-#' quarto_project("frogs", path = tempdir(), custom_yaml = TRUE)
+#'   # Create the Quarto project with custom YAML & associated files
+#'   quarto_project("frogs", path = tempdir(), custom_yaml = TRUE)
 #' 
-#' # Confirms files were created (optional, for user confirmation)
-#' file.exists(file.path(tmp_dir, "frogs.rproj"))  # Rproj file
-#' file.exists(file.path(tmp_dir, "frog.qmd"))     # Quarto doc
-#' file.exists(file.path(tmp_dir, "_quarto.yml"))  # project YAML file
+#'   # Confirms files were created (optional, for user confirmation)
+#'   file.exists(file.path(tmp_dir, "frogs.rproj"))  # Rproj file
+#'   file.exists(file.path(tmp_dir, "frog.qmd"))     # Quarto doc
+#'   file.exists(file.path(tmp_dir, "_quarto.yml"))  # project YAML file
 #' 
-#' # Create a new Quarto project with standard Quarto YAML
-#' # quarto_project('frogs_standard', path = tempdir(), custom_yaml = FALSE)
+#'   # Create a new Quarto project with standard Quarto YAML
+#'   # quarto_project('frogs_standard', path = tempdir(), custom_yaml = FALSE)
 #' 
-#' # Clean up: Remove the created temp directory and all files
-#' unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+#'   # Clean up: Remove the created temp directory and all files
+#'   unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+#' }
 #'
 #' @export
 quarto_project <- function(name, path = here::here(), custom_yaml = TRUE) {
