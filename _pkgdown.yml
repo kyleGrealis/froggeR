@@ -24,7 +24,7 @@ reference:
     desc: "Functions for creating and configuring Quarto projects"
     contents:
       - quarto_project
-      - froggeR_settings
+      - settings
   - title: "Document Creation"
     desc: "Functions for creating and styling Quarto documents"
     contents:

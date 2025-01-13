@@ -2,52 +2,62 @@
 % Please edit documentation in R/quarto_project.R
 \name{quarto_project}
 \alias{quarto_project}
-\title{Create a Custom Quarto Project}
+\title{Create a Custom 'Quarto' Project}
 \usage{
-quarto_project(name, base_dir = here::here(), custom_yaml = TRUE)
+quarto_project(name, path = here::here(), custom_yaml = TRUE)
 }
 \arguments{
-\item{name}{Character string. The name of the Quarto project directory and 
+\item{name}{Character string. The name of the 'Quarto' project directory and 
 initial \code{.qmd} file.}
 
-\item{base_dir}{Character string. Base directory where the project should be created.
-Defaults to the current project's base directory (i.e., value of 
-\code{here::here()}).}
+\item{path}{Character string. Path to the project directory.}
 
 \item{custom_yaml}{Logical. If TRUE (default), uses a custom YAML header in the initial
-\code{.qmd} file, populated with values from '_variables.yml'. If FALSE, uses
-Quarto's standard YAML header.}
+\code{.qmd} file, populated with values from '_variables.yml'. If FALSE, uses a
+standard YAML header.}
 }
 \value{
 Invisibly returns the path to the created project directory.
 }
 \description{
-This function creates a new Quarto project directory with additional froggeR 
+This function creates a new 'Quarto' project directory with additional froggeR 
 features. It first calls \code{quarto::quarto_create_project()} to set up the 
 basic structure, then enhances it with froggeR-specific files and settings.
 }
 \details{
-This function creates a Quarto project with the following enhancements:
+This function creates a 'Quarto' project with the following enhancements:
 \itemize{
   \item \code{_variables.yml}: Stores reusable YAML variables (if \code{custom_yaml =
  TRUE})
   \item \code{.gitignore}: Enhanced settings for R projects
   \item \code{README.md}: Template README file
   \item \code{dated_progress_notes.md}: For project progress tracking
-  \item \code{custom.scss}: Custom Quarto styling (if \code{custom_yaml = TRUE})
+  \item \code{custom.scss}: Custom 'Quarto' styling (if \code{custom_yaml = TRUE})
   \item \code{.Rproj}: RStudio project file
 }
 If froggeR settings don't exist, it will prompt to create them.
 }
 \examples{
-\dontrun{
-# Create a new Quarto project with custom formatted YAML header
-quarto_project('frogs', base_dir = tempdir(), custom_yaml = TRUE)
+if (quarto::quarto_version() >= "1.4") {
+  # Create a temporary directory for testing
+  tmp_dir <- tempdir()
 
-# Create a new Quarto project with standard Quarto YAML
-quarto_project('frogs_standard', base_dir = tempdir(), custom_yaml = FALSE)
+  # Create the Quarto project with custom YAML & associated files
+  quarto_project("frogs", path = tempdir(), custom_yaml = TRUE)
+
+  # Confirms files were created (optional, for user confirmation)
+  file.exists(file.path(tmp_dir, "frogs.rproj"))  # Rproj file
+  file.exists(file.path(tmp_dir, "frog.qmd"))     # Quarto doc
+  file.exists(file.path(tmp_dir, "_quarto.yml"))  # project YAML file
+
+  # Create a new Quarto project with standard Quarto YAML
+  # quarto_project('frogs_standard', path = tempdir(), custom_yaml = FALSE)
+
+  # Clean up: Remove the created temp directory and all files
+  unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
 }
+
 }
 \seealso{
-\code{\link{write_quarto}}, \code{\link{froggeR_settings}}
+\code{\link{write_quarto}}, \code{\link{settings}}
 }

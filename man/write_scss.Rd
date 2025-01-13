@@ -2,47 +2,39 @@
 % Please edit documentation in R/write_scss.R
 \name{write_scss}
 \alias{write_scss}
-\title{Create a Quarto SCSS file}
+\title{Create a 'Quarto' SCSS file}
 \usage{
-write_scss(name = "custom", path = here::here())
+write_scss(path = here::here(), .initialize_proj = FALSE)
 }
 \arguments{
-\item{name}{The name of the scss file without extension. Default \code{name} is
-"custom".}
+\item{path}{Character string. Path to the project directory.}
 
-\item{path}{The destination directory for the SCSS file. Defaults to the current 
-project's base directory (ie, value of \code{here::here()}).}
+\item{.initialize_proj}{Logical. TRUE only if starting a 
+\code{froggeR::quarto_project()}.}
 }
 \value{
-A \code{.scss} file to customize Quarto styling. If \code{name} is not
-"custom", the function will also attempt to update the Quarto document's YAML to
-include the new SCSS file while preserving any existing SCSS configurations.
+A SCSS file to customize 'Quarto' styling.
 }
 \description{
-This function creates the \code{.scss} file so that any Quarto project can be easily
+This function creates the \code{.scss} file so that any 'Quarto' project can be easily
 customized with SCSS styling variables, mixins, and rules.
 }
 \details{
-The function includes a robust YAML handling mechanism that:
-\itemize{
-  \item Safely adds new project-level SCSS files without disrupting existing ones
-  \item Provides instructions for adding SCSS files to Quarto YAML
-}
+The function includes a robust YAML handling mechanism that safely adds new SCSS file.
 
 See \code{vignette("customizing-quarto", package = "froggeR")} vignette for more help.
 }
 \examples{
-\donttest{
-# Ensure no conflicting files exist
-unlink(file.path(tempdir(), "custom.scss"))
+# Create a temporary directory for testing
+tmp_dir <- tempdir()
 
-# Create the default custom.scss in a temporary directory
-write_scss(name = "custom", path = tempdir())
+# Write the SCSS file
+write_scss(path = tmp_dir)
 
-# Ensure no conflicting files exist for another SCSS file
-unlink(file.path(tempdir(), "theme_special.scss"))
+# Confirm the file was created (optional, for user confirmation)
+file.exists(file.path(tmp_dir, "custom.scss"))
 
-# Add another SCSS file in the temporary directory
-write_scss(name = "theme_special", path = tempdir())
-}
+# Clean up: Remove the created file
+unlink(file.path(tmp_dir, "custom.scss"))
+
 }

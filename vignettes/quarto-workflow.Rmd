@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Introduction 🐸
+## Introduction
 
 `froggeR` streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
 
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 The quickest way to start a new Quarto project:
 
-```r
+```{r, eval=FALSE}
 froggeR::quarto_project(name = "frogs")
 ```
 
@@ -77,16 +77,18 @@ Each component serves a specific purpose:
     affiliations: Your Institution
     ```
 
-> **Note:** These values come from your `froggeR_settings()`. You can customize these settings by running `froggeR::froggeR_settings()` interactively. This function allows you to update author details, contact information, affiliations, and other document preferences. For more details, see `?froggeR_settings`.
+    <div style="text-align: center;">
+      <figure>
+        <img src="../man/figures/variables-yml.png" alt="variables dot yml" width="70%">
+        <figcaption>Project metadata</figcaption>
+      </figure>
+    </div>
+
 
 3. **Style Sheet** (`custom.scss`)
     * Professional defaults
     * Customizable elements
     * Clear documentation
-
-```{r, echo=FALSE, fig.align='center', fig.cap='Integrated YAML structure example', out.width='70%'}
-knitr::include_graphics("../man/figures/variable-yml.png")
-```
 
 ----
 
@@ -96,7 +98,7 @@ knitr::include_graphics("../man/figures/variable-yml.png")
 
 Create a new Quarto document in an existing project:
 
-```r
+```{r, eval=FALSE}
 froggeR::write_quarto(
   filename = "frog_analysis",
   custom_yaml = TRUE  # Use settings from _variables.yml
@@ -113,7 +115,7 @@ This creates `frog_analysis.qmd` with:
 
 For documents without project settings and requiring manual changes to the document YAML:
 
-```r
+```{r, eval=FALSE}
 froggeR::write_quarto(
   filename = "frog_standalone",
   custom_yaml = FALSE  # Basic Quarto template
@@ -158,7 +160,7 @@ Best practices for project organization:
 
 1. **Initial Setup**
 
-    ```r
+    ```{r, eval=FALSE}
     # Create new project
     froggeR::quarto_project(name = "frogs")
     ```
@@ -171,11 +173,12 @@ Best practices for project organization:
     | `output/` | Analysis results | Figures, tables, exports |
     | `R/` | Custom functions | R scripts, utilities |
     | `docs/` | Documentation | Additional guides, notes |
-    | `*.qmd` | Analysis documents | Main content and code |
+    | `*.qmd`\** | Analysis documents | Main content and code |
+    \** *This is provided from `froggeR::quarto_project()`. All others need to be created.*
 
 2. **Additional Documents**
 
-    ```r
+    ```{r, eval=FALSE}
     # Add analysis documents
     froggeR::write_quarto(
       filename = "data_prep",
@@ -237,16 +240,13 @@ Common `.gitignore` patterns:
 
 Customize your project structure:
 
-```r
-froggeR::quarto_project(
-  name = "advanced_frogs",
-  initialize_project = TRUE  # Include all styling options
-)
+```{r, eval=FALSE}
+froggeR::quarto_project(name = "advanced_frogs")
 ```
 
 Then add specialized documents:
 
-```r
+```{r, eval=FALSE}
 # Data preparation
 froggeR::write_quarto(filename = "01_data_prep")
 
@@ -268,7 +268,7 @@ Modify individual documents while maintaining project consistency:
     ```yaml
     ---
     title: "Analysis Results"
-    author: "{{< var author >}}"
+    author: "{{{< var author >}}}"
     date: last-modified
     format:
       html:
@@ -278,7 +278,7 @@ Modify individual documents while maintaining project consistency:
     ```
 
 2. **Style Variations**
-    * Create additional SCSS files
+    * Uncomment chosen lines in the `custom.scss` file (provided)
     * Modify existing styles
     * Add document-specific rules
 
@@ -311,7 +311,7 @@ For more information on:
 
 * Quarto documents: `vignette("customizing-quarto", package = "froggeR")`
 * Project styling: See `?write_scss`
-* Settings management: See `?froggeR_settings`
+* Settings management: See `?settings`
 
 ----
 

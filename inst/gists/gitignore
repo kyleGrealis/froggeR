@@ -154,12 +154,3 @@ _bookdown_files/
 /_site/
 .quarto/
 _site/
-
-# project-level
-PROG_NOTES.md
-froggeR.Rproj
-inst/doc
-/doc/
-/Meta/
-docs
-cran-comments.md

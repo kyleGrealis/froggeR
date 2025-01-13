@@ -6,7 +6,7 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/froggeR)](https://CRAN.R-project.org/package=froggeR)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
 
-> froggeR version: 0.2.2
+> froggeR version: 0.3.0
 
 froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.
 
@@ -78,7 +78,7 @@ Initialize a comprehensive Quarto project with a single command:
 ```r
 froggeR::quarto_project(
   name = 'my_new_project',
-  custom_yaml = TRUE  # Use custom YAML from _variables.yml
+  custom_yaml = TRUE  # Use custom YAML values from _variables.yml
 )
 ```
 
@@ -86,7 +86,7 @@ This creates:
 
 * A Quarto document with custom YAML
 * A comprehensive `.gitignore`
-* A structured `README.md`
+* Structured `README.md` & progress notes templates
 * A reusable `_variables.yml`
 * A `custom.scss` style sheet template
 * An RStudio project file (`.Rproj`)
@@ -96,7 +96,7 @@ This creates:
 Maintain consistent metadata across your documents:
 
 ```r
-froggeR::froggeR_settings()
+froggeR::settings()
 ```
 
 Interactively create or update metadata that is reusable across Quarto projects & 
@@ -110,11 +110,11 @@ documents with:
 
 ### 📝 Templated Quarto Documents
 
-Generate new Quarto documents with pre-formatted headers:
+Quickly generate new Quarto documents with pre-formatted headers:
 
 ```r
 froggeR::write_quarto(
-  filename = 'frogs',
+  filename = 'data_cleaning',
   custom_yaml = TRUE  # Use variables from _variables.yml
 )
 ```
@@ -190,14 +190,15 @@ We're constantly improving froggeR. Upcoming features include:
 
 | Function | Description |
 |----------|-------------|
-| `froggeR_settings()` | Manage persistent Quarto document settings |
-| `quarto_project()` | Initialize a complete Quarto project structure |
-| `write_quarto()` | Create consistently formatted Quarto documents |
-| `write_variables()` | Re-use metadata across projects & documents |
-| `write_ignore()` | Configure `.gitignore` for enhanced data security |
-| `write_readme()` | Generate a comprehensive project README |
-| `write_notes()` | Create a dated progress notes template |
-| `write_scss()` | Create a customizable SCSS styling template |
+| `settings()` | Manage persistent Quarto document metadata |
+|  `quarto_project()` | Initialize a complete Quarto project structure |
+| `write_quarto()`\* | Create consistently formatted Quarto documents |
+| `write_variables()`\* | Re-use metadata across projects & documents |
+| `write_ignore()`\* | Configure `.gitignore` for enhanced data security |
+| `write_readme()`\* | Generate a comprehensive project README |
+| `write_notes()`\* | Create a dated progress notes template |
+| `write_scss()`\* | Create a customizable SCSS styling template |
+\* *These functions are included with `quarto_project()`*
 
 ----
 
