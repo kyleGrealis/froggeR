@@ -49,7 +49,7 @@
 #' @export
 quarto_project <- function(name, path = here::here(), custom_yaml = TRUE) {
 
-  quarto_version <- as.numeric(quarto::quarto_version())
+  quarto_version <- quarto::quarto_version()
   if (quarto_version < "1.4") stop("You need a more updated version of Quarto to make projects. See http://quarto.org/docs/download to upgrade.")
   
   # Validate path
