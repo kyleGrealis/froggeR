@@ -41,8 +41,8 @@ froggeR simplifies project setup so you can focus on what matters:
 Install froggeR and create your first project in minutes:
 
 ```r
-# Install from CRAN... COMING SOON!
-# install.packages("froggeR")
+# Install from CRAN... JUST APPROVED Jan. 15!
+install.packages("froggeR")
 
 # Or get the development version
 remotes::install_github('kyleGrealis/froggeR')
