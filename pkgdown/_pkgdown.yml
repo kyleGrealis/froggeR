@@ -1,6 +1,11 @@
 url: https://kylegrealis.github.io/froggeR/
 template:
   bootstrap: 5
+  light-switch: true
+  bslib:
+    font-size: 0.9rem
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
 
 navbar:
   structure:
