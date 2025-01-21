@@ -94,7 +94,7 @@ Each component serves a specific purpose:
 
 ## Individual Document Creation
 
-### Basic Document
+### Custom Document
 
 Create a new Quarto document in an existing project:
 
@@ -111,7 +111,7 @@ This creates `frog_analysis.qmd` with:
 * Two starter sections
 * Links to project styling
 
-### Custom Documents
+### Basic Documents
 
 For documents without project settings and requiring manual changes to the document YAML:
 
@@ -186,7 +186,7 @@ Best practices for project organization:
     )
     
     froggeR::write_quarto(
-      filename = "frogs",
+      filename = "analysis",
       custom_yaml = TRUE
     )
     ```
