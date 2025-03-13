@@ -36,18 +36,18 @@ write_notes <- function(path = here::here(), .initialize_proj = FALSE) {
   path <- normalizePath(path, mustWork = TRUE)
 
   # Set up the full destination file path
-  the_notes_file <- file.path(path, 'dated_progress_notes.md')
+  the_notes_file <- file.path(path, "dated_progress_notes.md")
 
   # Handle notes creation
   if (file.exists(the_notes_file)) {
-    stop('A dated_progress_notes.md already exists in the specified path.')
+    stop("A dated_progress_notes.md already exists in the specified path.")
   }
   
   # Write content
   progress_notes_content <- paste0(
-    "# Add project updates here\n",
+    "# Project updates\n\n* ",
     format(Sys.Date(), "%b %d, %Y"),
-    ": project started\n"
+    ": project started"
   )
   
   writeLines(progress_notes_content, con = the_notes_file)
