@@ -29,7 +29,12 @@
 #' Internal helper to provide info about creating project-level settings
 #' @noRd
 .how_to <- function() {
-  ui_info('Run `froggeR::write_variables()` to create project-level settings.')
+  ui_info(
+    sprintf(
+      'Run %s to create project-level settings.',
+      col_green('froggeR::write_variables()')
+    )
+  )
 }
 
 
@@ -124,9 +129,9 @@
     .yes_settings()
     ui_info(
       sprintf(
-        'To reuse your current project-level settings (`_variables.yml`) for your next %s Quarto project, save the settings file to a special configurations folder. You can do that now by copying and pasting to the console:\n\nfile.copy(from = here::here("_variables.yml"), to = "%s")',
+        'To reuse your current project-level settings (`_variables.yml`) for your next %s Quarto project, save the settings file to a special configurations folder. Run %s',
         col_green('froggeR'),
-        config_file
+        col_green('froggeR::save_variables()')
       )
     )
     message(
@@ -140,8 +145,8 @@
     # Has only froggeR settings
     ui_info(
       sprintf(
-        'To reuse your global %s YAML settings (name, email, etc.) in your current project path (%s), copy and paste this into your console:\n\nfile.copy(from = "%s", to = here::here("_variables.yml"))',
-        col_green('froggeR'), here::here(), config_file
+        'To reuse your global %s YAML settings (name, email, etc.) in your current project path (%s), run %s',
+        col_green('froggeR'), here::here(), col_green('froggeR::save_variables()')
       )
     )
 
@@ -149,15 +154,9 @@
     # Neither settings found
     ui_info(
       sprintf(
-        'First, run `froggeR::write_variables() to create project-level settings. Then, to reuse them in your next %s Quarto project, save the settings file to a special configurations folder. You can do that by copying and pasting to the console:\n\nfile.copy(from = here::here("_variables.yml")), to = "%s")',
+        'Run `froggeR::write_variables() to create project-level settings.\nTo reuse them in your next %s Quarto project, run %s',
         col_green('froggeR'),
-        config_file
-      )
-    )
-    message(
-      sprintf(      
-        '\nFinally, your personalized configurations will automatically be used during your next %s Quarto project.',
-        col_green('froggeR')
+        col_green('froggeR::save_variables()')
       )
     )
   }
