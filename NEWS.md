@@ -12,6 +12,9 @@
 ## Documentation
 * `save_variables()` documentation added to README
 
+## Internal Changes
+* Fixed tests for `write_notes()` and `write_readme()` to reflect updated content.
+
 
 # froggeR 0.3.0
 
