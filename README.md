@@ -194,6 +194,7 @@ We're constantly improving froggeR. Upcoming features include:
 |  `quarto_project()` | Initialize a complete Quarto project structure |
 | `write_quarto()`\* | Create consistently formatted Quarto documents |
 | `write_variables()`\* | Re-use metadata across projects & documents |
+| `save_variables()` | Save current `_variables.yml` to system-level configs |
 | `write_ignore()`\* | Configure `.gitignore` for enhanced data security |
 | `write_readme()`\* | Generate a comprehensive project README |
 | `write_notes()`\* | Create a dated progress notes template |
