@@ -4,8 +4,6 @@
 #' Quarto project. This provides a safety catch to prevent unintended overwrite if the 
 #' system-level configuration file exists.
 #'
-#' @inheritParams write_ignore
-#'
 #' @return Invisibly returns `NULL` after creating system-level configuration file.
 #' @details
 #' The function will attempt to create a system-level configuration file from the current
