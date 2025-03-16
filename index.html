@@ -19,7 +19,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Enhance Quarto Project Workflows and Standards">
 <meta name="description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
 <meta property="og:description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
-<meta property="og:image" content="https://kylegrealis.github.io/froggeR/logo.svg">
+<meta property="og:image" content="https://azimuth-project.tech/froggeR/logo.svg">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
 </div>
 <p><a href="https://github.com/kyleGrealis/froggeR" class="external-link"><img src="https://img.shields.io/badge/R--CMD--check-passing-brightgreen" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a> <a href="https://CRAN.R-project.org/package=froggeR" class="external-link"><img src="https://www.r-pkg.org/badges/version/froggeR" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=froggeR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/froggeR" alt="CRAN downloads"></a></p>
 <blockquote>
-<p>froggeR version: 0.3.0</p>
+<p>froggeR version: 0.4.0</p>
 </blockquote>
 <p>froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.</p>
 <div class="section level2">
@@ -281,21 +281,25 @@
 <td>Re-use metadata across projects &amp; documents</td>
 </tr>
 <tr class="odd">
+<td><code><a href="reference/save_variables.html">save_variables()</a></code></td>
+<td>Save current <code>_variables.yml</code> to system-level configs</td>
+</tr>
+<tr class="even">
 <td>
 <code><a href="reference/write_ignore.html">write_ignore()</a></code>*</td>
 <td>Configure <code>.gitignore</code> for enhanced data security</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>
 <code><a href="reference/write_readme.html">write_readme()</a></code>*</td>
 <td>Generate a comprehensive project README</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>
 <code><a href="reference/write_notes.html">write_notes()</a></code>*</td>
 <td>Create a dated progress notes template</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>
 <code><a href="reference/write_scss.html">write_scss()</a></code>*</td>
 <td>Create a customizable SCSS styling template</td>

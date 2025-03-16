@@ -5,7 +5,7 @@ articles:
   customizing-quarto: customizing-quarto.html
   hopping-into-quarto: hopping-into-quarto.html
   quarto-workflow: quarto-workflow.html
-last_built: 2025-01-21T21:25Z
+last_built: 2025-03-16T17:50Z
 urls:
-  reference: https://kylegrealis.github.io/froggeR/reference
-  article: https://kylegrealis.github.io/froggeR/articles
+  reference: https://azimuth-project.tech/froggeR/reference
+  article: https://azimuth-project.tech/froggeR/articles
