@@ -1,3 +1,21 @@
+# froggeR 0.4.0
+
+## Enhancements
+* NEW: `save_variables()` is a new function to store the current project-level `_variables.yml` to the system configuration file path. It offers to overwrite if the system config exists.
+* Simplified Quarto templates by removing unnecessary commenting throughout the YAML.
+* Added section for including multiple authors in Quarto YAML files.
+* Simplified README in favor of a more lightweight template.
+
+## Bug Fixes
+* Corrected indentation error for `affiliations` in the standard, non-custom Quarto template. Created rendering error.
+
+## Documentation
+* `save_variables()` documentation added to README
+
+## Internal Changes
+* Fixed tests for `write_notes()` and `write_readme()` to reflect updated content.
+
+
 # froggeR 0.3.0
 
 ## Enhancements

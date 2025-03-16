@@ -1,15 +1,21 @@
 ---
 title: "Title"
 author: 
-  name: "{{< var name >}}"
-  url: "{{< var url >}}"
-  email: "{{< var email >}}"
-  orcid: "{{< var orcid >}}"
-  roles: "{{< var roles >}}"
-  affiliations: "{{< var affiliations >}}"
+  - name: "{{< var name >}}"
+    url: "{{< var url >}}"
+    email: "{{< var email >}}"
+    orcid: "{{< var orcid >}}"
+    roles: "{{< var roles >}}"
+    affiliations: "{{< var affiliations >}}"
+  # - name: Second Author
+  #   url: ""
+  #   email: ""
+  #   orcid: ""
+  #   roles: ""
+  #   affiliations: ""
 date: last-modified
 abstract: ""
-keywords: "" # add keywords like "research" or "public health"
+keywords: ""
 number-sections: false
 format:
   html:
@@ -34,16 +40,9 @@ editor: source
 
 ## Section 1
 
-Content...
-
 ```{r}
-# some code
+#| label: setup
+# library(...)
 ```
-
----
-
-## Section 2
-
-More content...
 
 ---

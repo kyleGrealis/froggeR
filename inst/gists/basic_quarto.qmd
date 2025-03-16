@@ -1,22 +1,24 @@
 ---
 title: "Title"
 author:
-  name: "First Last"
-  url: "" # i.e.,  GitHub or company URL (optional)
-  email: ""
-  orcid: ""  # add your ORCID (optional)
-  roles: ""  # aut, cre, cont (optional)
+  - name: First Last
+    url: ""
+    email: ""
     affiliations: ""
+  # - name: Second Author
+  #   url: ""
+  #   email: ""
+  #   affiliations: ""
 date: last-modified
 abstract: ""
-keywords: "" # add keywords like "research" or "public health" 
+keywords: ""
 number-sections: false
 format:
   html:
     embed-resources: true
     theme:
       - default
-      # - custom.scss     # Uncomment if needed
+      # - custom.scss
     toc: true
     toc-title: "Table of Contents"
     toc-location: left
@@ -34,16 +36,9 @@ editor: source
 
 ## Section 1
 
-Content...
-
 ```{r}
-# some code
+#| label: setup
+# library(...)
 ```
-
----
-
-## Section 2
-
-More content...
 
 ---

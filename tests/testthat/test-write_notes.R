@@ -24,7 +24,7 @@ test_that('write_notes creates content correctly', {
   suppressMessages(write_notes(tmp_dir, .initialize_proj = TRUE))
   # Check content
   file_content <- readLines(notes_file)
-  expect_true("# Add project updates here" %in% file_content)
+  expect_true("# Project updates" %in% file_content)
   expect_true(any(grepl(": project started$", file_content)))
   # Clean up
   unlink(notes_file)

@@ -24,9 +24,9 @@ test_that('write_readme creates content correctly', {
   suppressMessages(write_readme(tmp_dir, .initialize_proj = TRUE))
   # Check content
   file_content <- readLines(readme_file)
-  expect_true(any(grepl("Code Authors", file_content)))
+  expect_true(any(grepl("Code Author", file_content)))
   expect_true(any(grepl("## Directories", file_content)))
-  expect_true(any(grepl("Miscellaneous", file_content)))
+  expect_true(any(grepl("File Descriptions", file_content)))
   # Clean up
   unlink(readme_file)
   expect_false(file.exists(readme_file))

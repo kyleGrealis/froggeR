@@ -11,17 +11,12 @@
 #' no global configurations exist, a template `_variables.yml` will be created.
 #'
 #' @examples
-#' # Create a temporary directory for testing
-#' tmp_dir <- tempdir()
 #' 
 #' # Write the _variables.yml file
-#' write_ignore(path = tmp_dir)
-#' 
-#' # Confirm the file was created (optional, for user confirmation)
-#' file.exists(file.path(tmp_dir, "_variables.yml"))
-#' 
-#' # Clean up: Remove the created file
-#' unlink(file.path(tmp_dir, "_variables.yml"))
+#' if (interactive()) {
+#'   temp_dir <- tempdir()
+#'   write_variables(temp_dir)
+#' }
 #' 
 #' @export
 write_variables <- function(path = here::here(), .initialize_proj = FALSE) {

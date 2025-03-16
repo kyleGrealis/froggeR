@@ -1,9 +1,9 @@
 # You do not need to use quotes around values.
 # You may edit any value or leave it blank.
 name: 
-email:                 # Optional
-orcid:                 # Optional
-url:                   # Optional. Hint: begin with https://
-affiliations:          # Optional. School, employer, etc.
+email: 
+orcid: 
+url: #https://example.com
+affiliations: 
 toc: Table of Contents
 
