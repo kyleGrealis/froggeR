@@ -3,6 +3,7 @@
 export(quarto_project)
 export(save_variables)
 export(settings)
+export(write_brand)
 export(write_ignore)
 export(write_notes)
 export(write_quarto)
