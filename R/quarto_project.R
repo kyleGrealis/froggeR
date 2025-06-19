@@ -94,7 +94,7 @@ quarto_project <- function(name, path = here::here(), custom_yaml = TRUE) {
   if (file.exists(default_ignore)) file.remove(default_ignore)
   
   ########################################################################
-  ## .initialize_proj = TRUE stops the file from opening upon craetion  ##
+  ## .initialize_proj = TRUE stops the file from opening upon creation  ##
   ## since all of the new files are written to a new project location.  ##
   ## If they were to be opened immediately, they would NOT open in the  ##
   ## chosen project directory                                           ##
@@ -102,6 +102,7 @@ quarto_project <- function(name, path = here::here(), custom_yaml = TRUE) {
   # If using custom_yaml template, create _variables.yml & custom.scss
   if (custom_yaml) {
     froggeR::write_variables(path = project_dir, .initialize_proj = TRUE)
+    froggeR::write_brand(path = project_dir, .initialize_proj = TRUE)
     froggeR::write_scss(path = project_dir, .initialize_proj = TRUE)
   }
   
