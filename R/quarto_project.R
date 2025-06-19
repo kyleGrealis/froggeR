@@ -29,7 +29,7 @@
 #' @seealso \code{\link{write_quarto}}, \code{\link{settings}}
 #'
 #' @examples
-#' if (quarto::quarto_version() >= "1.4") {
+#' if (quarto::quarto_version() >= "1.6") {
 #'   # Create a temporary directory for testing
 #'   tmp_dir <- tempdir()
 #' 
@@ -52,7 +52,7 @@
 quarto_project <- function(name, path = here::here(), custom_yaml = TRUE) {
 
   quarto_version <- quarto::quarto_version()
-  if (quarto_version < "1.4") stop("You need a more updated version of Quarto to make projects. See http://quarto.org/docs/download to upgrade.")
+  if (quarto_version < "1.6") stop("You need Quarto version 1.6 or greater to use froggeR Quarto projects. See http://quarto.org/docs/download to upgrade.")
   
   # Validate path
   if (is.null(path) || is.na(path) || !dir.exists(path)) {
