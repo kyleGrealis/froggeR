@@ -45,9 +45,9 @@ write_brand <- function(path = here::here(), .initialize_proj = FALSE) {
   # Write the config file based on template: if there's a .config/froggeR file,
   # use that or else use the template found here in the package
   template_path <- if (froggeR_brand) {
-    brand_file
     # Display message if using the .config/froggeR/_brand.yml file
     ui_info(sprintf('Copying existing %s settings...', col_green('froggeR')))
+    brand_file
   } else {
     system.file('gists/brand.yml', package = 'froggeR')
   }
