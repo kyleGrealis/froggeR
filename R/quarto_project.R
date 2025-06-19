@@ -29,9 +29,7 @@
 #' @seealso \code{\link{write_quarto}}, \code{\link{settings}}
 #'
 #' @examples
-#' if (quarto::quarto_version() >= "1.6") {
-#'   # Create a temporary directory for testing
-#'   tmp_dir <- tempdir()
+#' if (interactive() && quarto::quarto_version() >= "1.6") {
 #' 
 #'   # Create the Quarto project with custom YAML & associated files
 #'   quarto_project("frogs", path = tempdir(), custom_yaml = TRUE)
@@ -44,8 +42,6 @@
 #'   # Create a new Quarto project with standard Quarto YAML
 #'   # quarto_project('frogs_standard', path = tempdir(), custom_yaml = FALSE)
 #' 
-#'   # Clean up: Remove the created temp directory and all files
-#'   unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
 #' }
 #'
 #' @export
