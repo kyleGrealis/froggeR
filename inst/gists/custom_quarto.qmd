@@ -1,48 +1,33 @@
 ---
-title: "Title"
-author: 
-  - name: "{{< var name >}}"
-    url: "{{< var url >}}"
-    email: "{{< var email >}}"
-    orcid: "{{< var orcid >}}"
-    roles: "{{< var roles >}}"
-    affiliations: "{{< var affiliations >}}"
-  # - name: Second Author
-  #   url: ""
-  #   email: ""
-  #   orcid: ""
-  #   roles: ""
-  #   affiliations: ""
+title: ""
 date: last-modified
-abstract: ""
-keywords: ""
-number-sections: false
-format:
-  html:
-    embed-resources: true
-    theme:
-      - default
-      - custom.scss
-    toc: true
-    toc-title: "{{< var toc >}}"
-    toc-location: left
-    code-tools: true
-    code-copy: true
-    code-fold: true
-    code-summary: "Show code"
-    page-layout: full
-    grid:
-      margin-width: 0px
-editor: source
 ---
 
 ---
 
-## Section 1
+{{< brand logo large >}}
+
+## Section {#sec-one}
 
 ```{r}
 #| label: setup
-# library(...)
+#| eval: true
+suppressPackageStartupMessages(library(tidyverse))
+mtcars |> 
+  filter(cyl >= 6) |> 
+  head()
 ```
 
----
+## The saga continues {#sec-the-saga}
+
+Let's add a [link here](https://example.com)
+
+::: {.column-margin}
+Hey, from the side!
+:::
+
+And now adding a section link to @sec-the-saga.
+
+As described by @grealis, something `happened`.
+
+[This will appear on the side as an "aside" in the margin without a footnote.]{.aside}

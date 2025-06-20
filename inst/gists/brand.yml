@@ -4,7 +4,7 @@
 #     home: https://example.com
 
 # logo:
-#   large: use a path location or add a URL
+#   large: logos/logo-1.png   # use a path location or add a URL
 #   medium:
 #   small:
 
