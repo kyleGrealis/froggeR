@@ -20,25 +20,28 @@
 #' default template will be supplied instead.
 #'
 #' @examples
-#' # Create a temporary directory for testing
-#' tmp_dir <- tempdir()
-#' 
-#' # Write the Quarto & associated files for a custom YAML with reusable metadata
-#' write_quarto(path = tempdir(), filename = "frog_analysis")
-#'
-#' # Write the Quarto file with a template requiring more DIY
-#' write_quarto(path = tempdir(), filename = "frog_analysis_basic", custom_yaml = FALSE)
-#' 
-#' # Confirm the file was created (optional, for user confirmation)
-#' file.exists(file.path(tmp_dir, "frog_analysis.qmd"))
-#' file.exists(file.path(tmp_dir, "frog_analysis_basic.qmd"))
-#' 
-#' # Clean up: Remove the created file
-#' unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+#' if (interactive()) {
+#'   # Create a temporary directory for testing
+#'   tmp_dir <- tempdir()
+#'   
+#'   # Write the Quarto & associated files for a custom YAML with reusable metadata
+#'   write_quarto(path = tempdir(), filename = "analysis")
+#'  
+#'   # Write the Quarto file with a template requiring more DIY
+#'   write_quarto(path = tempdir(), filename = "analysis_basic", custom_yaml = FALSE)
+#'   
+#'   # Confirm the file was created (optional, for user confirmation)
+#'   file.exists(file.path(tmp_dir, "analysis.qmd"))
+#'   file.exists(file.path(tmp_dir, "analysis_basic.qmd"))
+#'   
+#'   # Clean up: Remove the created file
+#'   unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+#' }
 #' 
 #' @export
 write_quarto <- function(
-  filename = 'frogs', path = here::here(), custom_yaml = TRUE, .initialize_proj = FALSE
+  filename = "Untitled-1", path = here::here(), 
+  custom_yaml = TRUE, .initialize_proj = FALSE
 ) {
   
   # Validate path
