@@ -35,7 +35,6 @@
 #'   quarto_project("frogs", path = tempdir(), custom_yaml = TRUE)
 #' 
 #'   # Confirms files were created (optional, for user confirmation)
-#'   file.exists(file.path(tmp_dir, "frogs.rproj"))  # Rproj file
 #'   file.exists(file.path(tmp_dir, "frog.qmd"))     # Quarto doc
 #'   file.exists(file.path(tmp_dir, "_quarto.yml"))  # project YAML file
 #' 
@@ -116,8 +115,6 @@ quarto_project <- function(name, path = here::here(), custom_yaml = TRUE) {
   )
 
   # Start & open the project
-  .write_rproj(name = name, path = project_dir)
-  
   ui_done(
     sprintf(
       '%s project setup complete. Opening in new session...', col_green('froggeR')

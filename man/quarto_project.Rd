@@ -44,7 +44,6 @@ if (interactive() && quarto::quarto_version() >= "1.6") {
   quarto_project("frogs", path = tempdir(), custom_yaml = TRUE)
 
   # Confirms files were created (optional, for user confirmation)
-  file.exists(file.path(tmp_dir, "frogs.rproj"))  # Rproj file
   file.exists(file.path(tmp_dir, "frog.qmd"))     # Quarto doc
   file.exists(file.path(tmp_dir, "_quarto.yml"))  # project YAML file
 
