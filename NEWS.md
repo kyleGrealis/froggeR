@@ -2,7 +2,9 @@
 
 ## Enhancements
 * 2 new Quarto brand YAML functions have been added: `write_brand()` & `save_brand()`. These functions allow users to add project `_brand.yml` file and save the current `_brand.yml` to where your machine stores configuration files.
-* Revised Quarto template YAML -- this seems to be a contant work in progress. Weighing the value of including defaults versus a more minimalistic approach. 
+* Modified SCSS template placeholders -- some of these are now easier to manage in the `_brand.yml` file. Added tweaks for ORCID logo issue when rendering with branding on Windows.
+* Revised Quarto template YAML -- this seems to be a contant work in progress. Weighing the value of including defaults versus a more minimalistic approach.
+* Removed creation of `.Rproj` file in `quarto_project()`.
 
 ## Bug Fixes
 * Corrected logic flow in `write_variables()` that caused unintentional stoppage.
