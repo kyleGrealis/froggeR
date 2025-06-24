@@ -50,7 +50,7 @@ write_brand <- function(
   # use that or else use the template found here in the package
   template_path <- if (froggeR_brand) {
     # Display message if using the .config/froggeR/_brand.yml file
-    ui_info(sprintf('Copying existing %s settings...', col_green('froggeR')))
+    ui_info(sprintf('Copying existing %s brand settings...', col_green('froggeR')))
     brand_file
   } else {
     system.file('gists/brand.yml', package = 'froggeR')
@@ -73,12 +73,15 @@ write_brand <- function(
 
   # Handle logos creation
   if (restore_logos) {
+    # Logos desination path
+    logos_dest <- file.path(path, "logos")
+
     if (dir.exists("logos")) {
       ui_oops("Logos directory already exists in this project. Skipping...")
     } else if(!logos_dir) {
       ui_info("No config level 'logos' directory was found. Skipping...")
     } else {
-      fs::dir_copy(frogger_logos, "logos")
+      fs::dir_copy(frogger_logos, logos_dest)
       ui_done(sprintf('Copying existing %s logos.', col_green('froggeR')))
     }
   }
