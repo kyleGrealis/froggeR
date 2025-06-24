@@ -26,7 +26,7 @@ test_that('write_scss creates content correctly', {
   file_content <- readLines(scss_file)
   expect_true("/*-- scss:defaults --*/" %in% file_content)
   expect_true("// $primary: #2c365e;" %in% file_content)
-  expect_true("// $font-family-sans-serif: \"Open Sans\", sans-serif;" %in% file_content)
+  expect_true("#title-block-header.quarto-title-block.default .quarto-title-author-orcid img {" %in% file_content)
   # Clean up
   unlink(scss_file)
   expect_false(file.exists(scss_file))
