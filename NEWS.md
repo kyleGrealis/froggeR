@@ -1,4 +1,4 @@
-# froggeR 0.4.1
+# froggeR 0.5.0
 
 ## Enhancements
 * 2 new Quarto brand YAML functions have been added: `write_brand()` & `save_brand()`. These functions allow users to add project `_brand.yml` file and save the current `_brand.yml` to where your machine stores configuration files. There are added arguments to save & restore your brand logos (saved as `logos/` directory).
