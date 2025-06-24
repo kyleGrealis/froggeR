@@ -1,5 +1,8 @@
 # froggeR 0.5.0
 
+## BREAKING!!
+* `write_quarto()` argument `custom_yaml` has been replaced with `example`, defaulting to TRUE. The Quarto file templates have been reworked to use Quarto brand structure. This simplifies the YAML within the document, but may require changes to the project `_quarto.yml` and `_brand.yml` files.
+
 ## Enhancements
 * 2 new Quarto brand YAML functions have been added: `write_brand()` & `save_brand()`. These functions allow users to add project `_brand.yml` file and save the current `_brand.yml` to where your machine stores configuration files. There are added arguments to save & restore your brand logos (saved as `logos/` directory).
 * Modified SCSS template placeholders -- some of these are now easier to manage in the `_brand.yml` file. Added tweaks for ORCID logo issue when rendering with branding on Windows.
