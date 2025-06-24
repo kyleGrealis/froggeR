@@ -4,7 +4,10 @@
 \alias{save_brand}
 \title{Save brand YAML for 'Quarto' Projects}
 \usage{
-save_brand()
+save_brand(save_logos = TRUE)
+}
+\arguments{
+\item{save_logos}{Logical. Save brand logos from `logos` directory. Default is `TRUE`.}
 }
 \value{
 Invisibly returns `NULL` after creating system-level configuration file.

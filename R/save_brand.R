@@ -3,6 +3,8 @@
 #' This function saves the current `_brand.yml` file from an existing froggeR
 #' Quarto project. This provides a safety catch to prevent unintended overwrite if the
 #' system-level configuration file exists.
+#' 
+#' @param save_logos Logical. Save brand logos from `logos` directory. Default is `TRUE`.
 #'
 #' @return Invisibly returns `NULL` after creating system-level configuration file.
 #' @details
@@ -16,7 +18,7 @@
 #' if (interactive()) save_brand()
 #'
 #' @export
-save_brand <- function() {
+save_brand <- function(save_logos = TRUE) {
   # Normalize the path for consistency
   path <- normalizePath(here::here(), mustWork = TRUE)
 
@@ -49,18 +51,48 @@ save_brand <- function() {
   if (system_settings) {
     if (ui_yeah(overwrite_prompt)) {
       file.copy(from = the_brand_file, to = brand_file, overwrite = TRUE)
+      ui_info(sprintf('Copying project %s settings...', col_green('froggeR')))
+      ui_done(sprintf("Saved _brand.yml to system configuration: \n%s", brand_file))
     } else {
       ui_oops('No changes were made.')
     }
   } else {
     file.copy(from = the_brand_file, to = brand_file, overwrite = FALSE)
+    ui_info(sprintf('Copying project %s settings...', col_green('froggeR')))
+    ui_done(sprintf("Saved _brand.yml to system configuration: \n%s", brand_file))
   }
 
-  ui_info(sprintf('Copying project %s settings...', col_green('froggeR')))
-  ui_done(sprintf(
-    "Saved _brand.yml to system configuration: \n%s",
-    brand_file
-  ))
+  # Quarto brand logos directory
+  # Does local directory exist?
+  logos_dir <- dir.exists("logos")
+  # No logos directory prompt
+  no_local_logos <- "No project-level 'logos' directory was found. Skipping..."
+  # Does the froggeR logos directory exist?
+  frogger_logos <- dir.exists(file.path(config_path, "logos"))
+  # Overwrite config logos prompt
+  config_logos_overwrite <- sprintf(
+    "A system-level %s configuration was found. Overwrite??",
+    col_green("froggeR logos")
+  )
 
+  # Save the local logos directory to froggeR configs
+  if (save_logos) {
+    # No logos directory
+    if (!logos_dir) {
+      ui_oops(no_local_logos)
+    } else if (frogger_logos) {
+      # Local & config exists -- ask to overwrite
+      if (ui_yeah(config_logos_overwrite)) {
+        fs::dir_copy("logos", file.path(config_path, "logos"), overwrite = TRUE)
+        ui_done("Saved logos directory to system configuration")
+      } else {
+        ui_oops("Logos directory not copied.")
+      }
+    } else {
+      fs::dir_copy("logos", file.path(config_path, "logos"), overwrite = TRUE)
+      ui_done("Saved logos directory to system configuration")
+    }
+  }
+  
   return(invisible(NULL))
 }

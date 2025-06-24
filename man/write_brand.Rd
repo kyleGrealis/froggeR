@@ -4,10 +4,17 @@
 \alias{write_brand}
 \title{Write Brand YAML for 'Quarto' Projects}
 \usage{
-write_brand(path = here::here(), .initialize_proj = FALSE)
+write_brand(
+  path = here::here(),
+  restore_logos = TRUE,
+  .initialize_proj = FALSE
+)
 }
 \arguments{
 \item{path}{Character string. Path to the project directory.}
+
+\item{restore_logos}{Logical. Restore logo content from system configuration.
+Default is `TRUE`.}
 
 \item{.initialize_proj}{Logical. TRUE only if starting a 
 \code{froggeR::quarto_project()}.}

@@ -4,6 +4,8 @@
 #' directory if they exist in the config path.
 #'
 #' @inheritParams write_ignore
+#' @param restore_logos Logical. Restore logo content from system configuration.
+#' Default is `TRUE`.
 #'
 #' @return Invisibly returns `NULL` after creating or updating the `_brand.yml` file.
 #' @details
@@ -19,7 +21,9 @@
 #' }
 #'
 #' @export
-write_brand <- function(path = here::here(), .initialize_proj = FALSE) {
+write_brand <- function(
+  path = here::here(), restore_logos = TRUE, .initialize_proj = FALSE
+) {
   # Validate path
   if (is.null(path) || is.na(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
@@ -33,7 +37,7 @@ write_brand <- function(path = here::here(), .initialize_proj = FALSE) {
 
   # Handle _brand.yml creation
   if (file.exists(the_branding_file)) {
-    stop('_brand.yml already exists in the specified path.')
+    stop('_brand.yml already exists in this project.')
   }
 
   # Global froggeR settings
@@ -60,6 +64,24 @@ write_brand <- function(path = here::here(), .initialize_proj = FALSE) {
   ui_done("Created _brand.yml")
 
   if (!.initialize_proj) usethis::edit_file(the_branding_file)
+  
+  # Restore from logos directory or create it
+  # Global froggeR logos
+  frogger_logos <- file.path(config_path, "logos")
+  # Does it exist?
+  logos_dir <- dir.exists(frogger_logos)
+
+  # Handle logos creation
+  if (restore_logos) {
+    if (dir.exists("logos")) {
+      ui_oops("Logos directory already exists in this project. Skipping...")
+    } else if(!logos_dir) {
+      ui_info("No config level 'logos' directory was found. Skipping...")
+    } else {
+      fs::dir_copy(frogger_logos, "logos")
+      ui_done(sprintf('Copying existing %s logos.', col_green('froggeR')))
+    }
+  }
 
   return(invisible(NULL))
 }
