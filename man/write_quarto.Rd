@@ -5,9 +5,9 @@
 \title{Create a New 'Quarto' Document}
 \usage{
 write_quarto(
-  filename = "frogs",
+  filename = "Untitled-1",
   path = here::here(),
-  custom_yaml = TRUE,
+  example = FALSE,
   .initialize_proj = FALSE
 )
 }
@@ -17,9 +17,9 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 
 \item{path}{Character string. Path to the project directory.}
 
-\item{custom_yaml}{Logical. If TRUE (default), creates a 'Quarto' document with a
-custom YAML header using values from `_variables.yml`. If FALSE, creates a
-standard 'Quarto' document.}
+\item{example}{Logical. If TRUE, creates a Quarto document with a default to 
+position the brand logo and examples of within-document cross-referencing, links,
+and references.}
 
 \item{.initialize_proj}{Logical. TRUE only if starting a 
 \code{froggeR::quarto_project()}.}
@@ -32,27 +32,23 @@ This function creates a new 'Quarto' document (.qmd file) with either a custom
 or standard YAML header. When using a custom header, it integrates with 
 `froggeR::settings()` for reusable metadata across documents.
 }
-\details{
-When `custom_yaml = TRUE`, the function will check if  `_variables.yml` exists. This
-file is needed to supply Quarto document metadata in the `path` project. The user will
-be prompted with help if they don't already exist, and a Quarto document with the 
-default template will be supplied instead.
-}
 \examples{
-# Create a temporary directory for testing
-tmp_dir <- tempdir()
-
-# Write the Quarto & associated files for a custom YAML with reusable metadata
-write_quarto(path = tempdir(), filename = "frog_analysis")
-
-# Write the Quarto file with a template requiring more DIY
-write_quarto(path = tempdir(), filename = "frog_analysis_basic", custom_yaml = FALSE)
-
-# Confirm the file was created (optional, for user confirmation)
-file.exists(file.path(tmp_dir, "frog_analysis.qmd"))
-file.exists(file.path(tmp_dir, "frog_analysis_basic.qmd"))
-
-# Clean up: Remove the created file
-unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+if (interactive()) {
+  # Create a temporary directory for testing
+  tmp_dir <- tempdir()
+  
+  # Write the Quarto & associated files for a custom YAML with reusable metadata
+  write_quarto(path = tempdir(), filename = "analysis")
+ 
+  # Write the Quarto file with a template requiring more DIY
+  write_quarto(path = tempdir(), filename = "analysis_basic", example = FALSE)
+  
+  # Confirm the file was created (optional, for user confirmation)
+  file.exists(file.path(tmp_dir, "analysis.qmd"))
+  file.exists(file.path(tmp_dir, "analysis_basic.qmd"))
+  
+  # Clean up: Remove the created file
+  unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+}
 
 }

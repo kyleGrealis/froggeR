@@ -1,0 +1,32 @@
+# meta:
+#   name: Company Name
+#   link:
+#     home: https://example.com
+
+# logo:
+#   large: logos/logo-1.png   # use a path location or add a URL
+#   medium:
+#   small:
+
+# color: 
+#   palette:
+#     green: "#005030"
+#     orange: "#f47321"
+#     gray: "#f9f9f9"
+
+# typography: 
+#   fonts:
+#     - family: Comic Sans
+#       source: bunny # or google or path to font file
+#     - family: Fira Code
+#       source: bunny
+  
+#   base: Comic Sans
+#   headings:
+#     color: green
+#   monospace: Fira Code
+#   monospace-inline: 
+#     color: green
+#     background-color: gray
+#   link: 
+#     color: green

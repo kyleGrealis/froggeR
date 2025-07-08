@@ -1,0 +1,45 @@
+project:
+  title: ""
+  type: default
+
+author:
+  - name: "{{< var name >}}"
+    url: "{{< var url >}}"
+    email: "{{< var email >}}"
+    orcid: "{{< var orcid >}}"
+    roles: "{{< var roles >}}"
+    affiliations: "{{< var affiliations >}}"
+    corresponding: true
+
+abstract: ""
+
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - _brand.yml
+      - custom.scss
+    toc: true
+    toc-location: left
+    code-tools: true
+    code-copy: true
+    code-fold: true
+    code-summary: "Show the code"
+    page-layout: article
+    link-external-newwindow: true
+
+  # Other formats
+  # docx: default
+  # pdf: default
+
+# Uncomment to add browser tab favicon
+# include-in-header:
+#   text: |
+#     <link rel="shortcut icon" href=""/>
+
+number-sections: false
+
+bibliography: references.bib
+
+editor: source

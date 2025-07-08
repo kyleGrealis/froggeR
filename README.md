@@ -6,7 +6,7 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/froggeR)](https://CRAN.R-project.org/package=froggeR)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
 
-> froggeR version: 0.4.0
+> froggeR version: 0.5.0
 
 froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.
 
@@ -30,6 +30,7 @@ froggeR simplifies project setup so you can focus on what matters:
 
 * One-command Quarto project initialization
 * Centralized settings management for consistent metadata
+* Quickly create, save, and reuse metadata & Quarto branding
 * Automated creation of essential project files (README, .gitignore, etc.)
 * Custom YAML and SCSS templating for unique document styling
 * Interactive setup process for user-specific configurations
@@ -57,6 +58,7 @@ froggeR::quarto_project('frogs')
 froggeR is ideal for R users who:
 
 * Manage multiple Quarto projects
+* Find themselves rewriting the same YAML & project structure repeatedly
 * Collaborate in team environments
 * Prioritize analysis over setup complexities
 * Need rapid project initialization
@@ -76,10 +78,7 @@ froggeR is ideal for R users who:
 Initialize a comprehensive Quarto project with a single command:
 
 ```r
-froggeR::quarto_project(
-  name = 'my_new_project',
-  custom_yaml = TRUE  # Use custom YAML values from _variables.yml
-)
+froggeR::quarto_project(name = 'my_new_project')
 ```
 
 This creates:
@@ -87,9 +86,9 @@ This creates:
 * A Quarto document with custom YAML
 * A comprehensive `.gitignore`
 * Structured `README.md` & progress notes templates
-* A reusable `_variables.yml`
+* Reusable `_variables.yml` & `_brand.yml` files
 * A `custom.scss` style sheet template
-* An RStudio project file (`.Rproj`)
+* A `references.bib` for citations
 
 ### 🔄 Centralized Settings Management
 
@@ -115,7 +114,7 @@ Quickly generate new Quarto documents with pre-formatted headers:
 ```r
 froggeR::write_quarto(
   filename = 'data_cleaning',
-  custom_yaml = TRUE  # Use variables from _variables.yml
+  example = TRUE  # Add tool templates
 )
 ```
 
@@ -195,6 +194,8 @@ We're constantly improving froggeR. Upcoming features include:
 | `write_quarto()`\* | Create consistently formatted Quarto documents |
 | `write_variables()`\* | Re-use metadata across projects & documents |
 | `save_variables()` | Save current `_variables.yml` to system-level configs |
+| `save_brand()` | Save current `_brand.yml` to system-level configs |
+| `write_brand()` | Create project-level `_brand.yml` configs |
 | `write_ignore()`\* | Configure `.gitignore` for enhanced data security |
 | `write_readme()`\* | Generate a comprehensive project README |
 | `write_notes()`\* | Create a dated progress notes template |

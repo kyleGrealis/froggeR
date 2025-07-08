@@ -28,7 +28,6 @@ test_that("write_variables creates content correctly", {
   expect_true(any(grepl('^email: ', file_content)))
   expect_true(any(grepl('^orcid: ', file_content)))
   expect_true(any(grepl('^url: ', file_content)))
-  expect_true(any(grepl(': Table of Contents$', file_content)))
   # Clean up
   unlink(variables_file)
   expect_false(file.exists(variables_file))

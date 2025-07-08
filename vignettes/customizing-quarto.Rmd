@@ -16,13 +16,13 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-One of `froggeR`'s core strengths is its ability to maintain consistent settings and styling across multiple projects. This vignette demonstrates how to set up and customize your Quarto documents using `froggeR`'s SCSS document.
+One of froggeR's core strengths is its ability to maintain consistent settings and styling across multiple projects. This vignette demonstrates how to set up and customize your Quarto documents using froggeR's SCSS document.
 
 ----
 
 ## Using Custom Variables in Quarto Documents
 
-froggeR allows you to use variables from your `_variables.yml` file directly in your Quarto documents:
+froggeR allows you to use variables from your `_variables.yml` file directly in your `_quarto.yml` or Quarto documents:
 
 ```yaml
 ---
@@ -75,7 +75,7 @@ To activate any style:
 
 ### Working with Multiple SCSS Files
 
-To multiple or a organization-specific SCSS file in your Quarto document, update the YAML header:
+To multiple or a organization-specific SCSS file in your Quarto document, update the YAML header. Be advised that modifying the *document*-level YAML (i.e., the YAML for the .qmd file) will override any options set in `_quarto.yml` & `_variables.yml`.
 
 ```yaml
 ---
@@ -235,7 +235,7 @@ For more advanced SCSS customization options, visit:
 
 ## Summary
 
-`froggeR` streamlines document customization:
+froggeR streamlines document customization:
 
 1. Set up once with `settings()`
 2. Style with `write_scss()`

@@ -31,11 +31,13 @@ reference:
       - quarto_project
       - settings
       - save_variables
+      - save_brand
   - title: "Document Creation"
     desc: "Functions for creating and styling Quarto documents"
     contents:
       - write_quarto
       - write_variables
+      - write_brand
       - write_scss
   - title: "Project Documentation"
     desc: "Functions for enhancing project documentation and security"

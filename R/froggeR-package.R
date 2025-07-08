@@ -4,6 +4,7 @@
 
 ## usethis namespace: start
 #' @importFrom cli col_blue col_green
+#' @importFrom fs dir_copy
 #' @importFrom glue glue
 #' @importFrom here here
 #' @importFrom quarto quarto_create_project quarto_version

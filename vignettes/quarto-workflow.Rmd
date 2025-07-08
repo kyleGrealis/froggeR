@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`froggeR` streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://azimuth-project.tech/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://azimuth-project.tech/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
+froggeR streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://azimuth-project.tech/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://azimuth-project.tech/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
 
 ----
 
@@ -26,47 +26,51 @@ knitr::opts_chunk$set(
 
 The quickest way to start a new Quarto project:
 
-```{r, eval=FALSE}
-froggeR::quarto_project(name = "frogs")
+```r
+>> froggeR::quarto_project(name = "frogs")
+This will create a new Quarto default project as a folder named frogs in
+/home/kyle.
+Do you want to proceed (Y/n)? 
+Y
+✔ Created Quarto project directory: frogs
+✔ Created _quarto.yml
+ℹ Copying existing froggeR settings...
+✔ Created _variables.yml
+ℹ Copying existing froggeR brand settings...
+✔ Created _brand.yml
+✔ Copying existing froggeR logos.
+✔ Created custom.scss
+✔ Created .gitignore
+✔ Created README.md
+✔ Created dated_progress_notes.md
+✔ Created frogs.qmd with examples
+✔ Created references.bib
+✔ froggeR project setup complete. Opening in new session...
 ```
 
 This single command creates a complete project structure:
-
-<div style="text-align: center;">
-  <figure>
-    <img src="../man/figures/froggeR-init.png" alt="Project initialization example" width="70%">
-    <figcaption>Project initialization example</figcaption>
-  </figure>
-</div>
-
-<div style="text-align: center;">
-  <figure>
-    <img src="../man/figures/new-froggeR-session.png" alt="Project directory structure example" width="70%">
-    <figcaption>Project directory structure example</figcaption>
-  </figure>
-</div>
-
-Your new project includes:
 
 | Component | Description |
 |-----------|-------------|
 | `frogs/` | Main project directory |
 | `frogs.qmd` | Main Quarto document |
-| `frogs.Rproj` | RStudio project file |
+| `_quarto.yml` | Reusable project settings |
 | `_variables.yml` | Reusable document settings |
+| `_brand.yml` | Reusable brand style settings |
 | `custom.scss` | Style sheet template |
 | `dated_progress_notes.md` | Project documentation |
 | `README.md` | Project documentation |
 | `.gitignore` | Enhanced security settings |
+| `references.bib` | Example citation template |
 
 ### Understanding Project Components
 
 Each component serves a specific purpose:
 
-1. **Quarto Document** (`frogs.qmd`)
-    * Pre-configured YAML header
-    * Links to your styling
-    * Ready for content
+1. **Quarto Document** (`_quarto.yml`)
+    * Pre-configured YAML to import `_variables.yml`
+    * Links to styling files
+    * Familiar format toggles
 
 
 2. **Project Settings** (`_variables.yml`)
@@ -85,7 +89,14 @@ Each component serves a specific purpose:
     </div>
 
 
-3. **Style Sheet** (`custom.scss`)
+3. **Brand Settings** (*new* for froggeR v0.5.0; `_brand.yml`)
+    * Preconfigured branding file
+    * Examples for adding logo, color, & typography
+    * Save your personal or team art in the `logos/` directory
+    * **Add a consistent style** across your Quarto documents
+
+
+4. **Style Sheet** (`custom.scss`)
     * Professional defaults
     * Customizable elements
     * Clear documentation
@@ -94,53 +105,7 @@ Each component serves a specific purpose:
 
 ## Individual Document Creation
 
-### Custom Document
-
-Create a new Quarto document in an existing project:
-
-```{r, eval=FALSE}
-froggeR::write_quarto(
-  filename = "frog_analysis",
-  custom_yaml = TRUE  # Use settings from _variables.yml
-)
-```
-
-This creates `frog_analysis.qmd` with:
-
-* Formatted YAML header
-* Two starter sections
-* Links to project styling
-
-### Basic Documents
-
-For documents without project settings and requiring manual changes to the document YAML:
-
-```{r, eval=FALSE}
-froggeR::write_quarto(
-  filename = "frog_standalone",
-  custom_yaml = FALSE  # Basic Quarto template
-)
-```
-
-### Document Types
-
-`write_quarto()` supports two main workflows:
-
-1. **Project Documents** (`custom_yaml = TRUE`)
-    * Use project settings
-    * Include custom styling
-    * Maintain consistency
-
-2. **Standalone Documents** (`custom_yaml = FALSE`)
-    * Basic Quarto template
-    * No external dependencies
-    * Quick start for simple docs
-
-```{r, echo=FALSE, fig.align='center', fig.cap='Comparison of document types', out.width='85%'}
-knitr::include_graphics("../man/figures/yaml-comparison.png")
-```
-
-The `custom_yaml = TRUE` template leverages your project's `_variables.yml` settings, automatically populating author information, styling, and other metadata. This means you can focus immediately on content creation rather than document setup. Conversely, `custom_yaml = FALSE` provides a minimal template when you need a standalone document without project-specific configurations.
+Create a new Quarto document in an existing project: `froggeR::write_quarto()`. Use the `example = TRUE` to incorporate template cross-referencing, hyperlinks, and other useful Quarto writing tools.
 
 ----
 
@@ -149,6 +114,8 @@ The `custom_yaml = TRUE` template leverages your project's `_variables.yml` sett
 ```{r, echo=FALSE, fig.align='center', fig.cap='Example output of custom_yaml document', out.width='85%'}
 knitr::include_graphics("../man/figures/custom-yaml-rendered.png")
 ```
+
+> **Note**: This example uses a froggeR version pre-0.5.0 though the main heading will render the same... you get the point ;)
 
 ----
 
@@ -170,6 +137,7 @@ Best practices for project organization:
     | Directory/File | Purpose | Contents |
     |----------------|---------|-----------|
     | `data/` | Raw data storage | Input files, datasets |
+    | `logos/` | Brand logos | Storing Quarto brand art |
     | `output/` | Analysis results | Figures, tables, exports |
     | `R/` | Custom functions | R scripts, utilities |
     | `docs/` | Documentation | Additional guides, notes |
@@ -181,13 +149,11 @@ Best practices for project organization:
     ```{r, eval=FALSE}
     # Add analysis documents
     froggeR::write_quarto(
-      filename = "data_prep",
-      custom_yaml = TRUE
+      filename = "data_prep"
     )
     
     froggeR::write_quarto(
-      filename = "analysis",
-      custom_yaml = TRUE
+      filename = "analysis"
     )
     ```
 
@@ -198,9 +164,12 @@ Best practices for project organization:
     ├── frogs.qmd
     ├── data_prep.qmd
     ├── analysis.qmd
+    ├── _brand.yml
+    ├── _quarto.yml
     ├── _variables.yml
     ├── custom.scss
     ├── dated_progress_notes.md
+    ├── references.bib
     └── README.md
     ```
 
@@ -241,7 +210,7 @@ Common `.gitignore` patterns:
 Customize your project structure:
 
 ```{r, eval=FALSE}
-froggeR::quarto_project(name = "advanced_frogs")
+froggeR::quarto_project(name = "my_project")
 ```
 
 Then add specialized documents:
@@ -257,11 +226,11 @@ froggeR::write_quarto(filename = "02_analysis")
 froggeR::write_quarto(filename = "03_results")
 ```
 
-> **Note:** When working in a `froggeR` project, `write_quarto()` automatically uses your project's `_variables.yml` settings by default, ensuring consistent styling and metadata across all documents.
+> **Note:** When working in a froggeR project, `write_quarto()` automatically uses your project's `_variables.yml` settings by default, ensuring consistent styling and metadata across all documents.
 
 ### Document Customization
 
-Modify individual documents while maintaining project consistency:
+Modify individual documents while maintaining project consistency. In other words, the *document*-level YAML structure takes precedence and will override *project*-level settings found in `_variables.yml` and `_quarto.yml`.
 
 1. **YAML Additions**
 
@@ -294,7 +263,7 @@ Common issues and solutions:
     * Ensure valid project name
 
 2. **Document Problems**
-    * Confirm `_variables.yml` exists
+    * Confirm `_variables.yml` & `_quarto.yml` exist
     * Check YAML syntax
     * Verify file locations
 
@@ -317,7 +286,7 @@ For more information on:
 
 ## Summary
 
-`froggeR`'s project workflow provides:
+froggeR's project workflow provides:
 
 * Efficient project initialization
 * Consistent document creation

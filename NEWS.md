@@ -1,3 +1,20 @@
+# froggeR 0.5.0
+
+## BREAKING!!
+* `write_quarto()` argument `custom_yaml` has been replaced with `example`, defaulting to TRUE. The Quarto file templates have been reworked to use Quarto brand structure. This simplifies the YAML within the document, but may require changes to the project `_quarto.yml` and `_brand.yml` files.
+
+## Enhancements
+* 2 new Quarto brand YAML functions have been added: `write_brand()` & `save_brand()`. These functions allow users to add project `_brand.yml` file and save the current `_brand.yml` to where your machine stores configuration files. There are added arguments to save & restore your brand logos (saved as `logos/` directory).
+* Modified SCSS template placeholders -- some of these are now easier to manage in the `_brand.yml` file. Added tweaks for ORCID logo issue when rendering with branding on Windows.
+* Revised Quarto template YAML -- this seems to be a contant work in progress. Weighing the value of including defaults versus a more minimalistic approach.
+* Removed creation of `.Rproj` file in `quarto_project()`.
+
+## Bug Fixes
+* Corrected logic flow in `write_variables()` that caused unintentional stoppage.
+
+
+---
+
 # froggeR 0.4.0
 
 ## Enhancements
@@ -15,6 +32,8 @@
 ## Internal Changes
 * Fixed tests for `write_notes()` and `write_readme()` to reflect updated content.
 
+
+---
 
 # froggeR 0.3.0
 
@@ -35,6 +54,8 @@
 * Separated `write_readme`; now includes `write_notes` for a project-level progress notes template.
 * If any document to be created from the `write_*` functions exists in the project, froggeR will now stop and provide a useful message *instead* of offering to overwrite from the console. This reduces annoying feedback & interaction and encourages the user to make deliberate decions.
 
+
+---
 
 # froggeR 0.2.2
 
@@ -69,6 +90,8 @@
 
 🎉 With version 0.2.2, froggeR introduces more robust Quarto project management, making metadata handling and customization easier and more intuitive for users.
 
+
+---
 
 # froggeR 0.2.1
 

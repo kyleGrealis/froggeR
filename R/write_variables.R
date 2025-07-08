@@ -11,16 +11,15 @@
 #' no global configurations exist, a template `_variables.yml` will be created.
 #'
 #' @examples
-#' 
+#'
 #' # Write the _variables.yml file
 #' if (interactive()) {
 #'   temp_dir <- tempdir()
 #'   write_variables(temp_dir)
 #' }
-#' 
+#'
 #' @export
 write_variables <- function(path = here::here(), .initialize_proj = FALSE) {
-
   # Validate path
   if (is.null(path) || is.na(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
@@ -46,14 +45,11 @@ write_variables <- function(path = here::here(), .initialize_proj = FALSE) {
   # Write the config file based on template: if there's a .config/froggeR file,
   # use that or else use the template found here in the package
   template_path <- if (froggeR_settings) {
+    # Display message if using the .config/froggeR/config.yml file
+    ui_info(sprintf('Copying existing %s settings...', col_green('froggeR')))
     config_file
   } else {
     system.file('gists/config.yml', package = 'froggeR')
-  }
-
-  # Display message if using the .config/froggeR/config.yml file
-  if (froggeR_settings) {
-    ui_info(sprintf('Copying existing %s settings...', col_green('froggeR')))
   }
 
   if (template_path == "") {
@@ -67,4 +63,3 @@ write_variables <- function(path = here::here(), .initialize_proj = FALSE) {
 
   return(invisible(NULL))
 }
-
