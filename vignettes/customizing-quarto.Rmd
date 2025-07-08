@@ -3,9 +3,16 @@ title: "Customizing Quarto with froggeR"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customizing Quarto with froggeR}
-  %\VignetteEngine{quarto::html}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 ## Introduction
 

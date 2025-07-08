@@ -3,9 +3,16 @@ title: "Get Hopping with froggeR"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get Hopping with froggeR}
-  %\VignetteEngine{quarto::html}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 ## Introduction
 
@@ -108,9 +115,7 @@ See `vignette("customizing-quarto", package = "froggeR")` for more detailed conf
 
 ### Document Settings
 
-::: {.callout-tip title="Quick tip!"}
-You may choose to setup your froggeR metadata before creating your first project.
-:::
+> You may choose to setup your froggeR metadata before creating your first project.
 
 Manage your document settings with the interactive configuration tool (see `?froggeR::settings` for all options):
 
