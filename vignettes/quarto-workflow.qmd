@@ -7,16 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 ## Introduction
 
-`froggeR` streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://azimuth-project.tech/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://azimuth-project.tech/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
+froggeR streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://azimuth-project.tech/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://azimuth-project.tech/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
 
 ----
 
@@ -226,7 +219,7 @@ froggeR::write_quarto(filename = "02_analysis")
 froggeR::write_quarto(filename = "03_results")
 ```
 
-> **Note:** When working in a `froggeR` project, `write_quarto()` automatically uses your project's `_variables.yml` settings by default, ensuring consistent styling and metadata across all documents.
+> **Note:** When working in a froggeR project, `write_quarto()` automatically uses your project's `_variables.yml` settings by default, ensuring consistent styling and metadata across all documents.
 
 ### Document Customization
 
@@ -286,7 +279,7 @@ For more information on:
 
 ## Summary
 
-`froggeR`'s project workflow provides:
+froggeR's project workflow provides:
 
 * Efficient project initialization
 * Consistent document creation
