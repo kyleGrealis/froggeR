@@ -1,11 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   customizing-quarto: customizing-quarto.html
   hopping-into-quarto: hopping-into-quarto.html
   quarto-workflow: quarto-workflow.html
-last_built: 2025-03-16T17:50Z
+last_built: 2025-07-08T15:37Z
 urls:
   reference: https://azimuth-project.tech/froggeR/reference
   article: https://azimuth-project.tech/froggeR/articles

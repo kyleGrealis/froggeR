@@ -6,19 +6,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Enhance Quarto Project Workflows and Standards • froggeR</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Enhance Quarto Project Workflows and Standards">
-<meta name="description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
-<meta property="og:description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. There are many valuable resources providing in-depth explanations of customizing Quarto templates and theme styling by the Posit team: &lt;https://quarto.org/docs/output-formats/html-themes.html#customizing-themes&gt; &amp; &lt;https://quarto.org/docs/output-formats/html-themes-more.html&gt;, and at the Bootstrap community's GitHub at &lt;https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss&gt;.">
+<meta name="description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, inclusion of Quarto brand functionality, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents.">
+<meta property="og:description" content="Streamlines Quarto workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted Quarto documents, inclusion of Quarto brand functionality, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents.">
 <meta property="og:image" content="https://azimuth-project.tech/froggeR/logo.svg">
 </head>
 <body>
@@ -29,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +67,7 @@
 </div>
 <p><a href="https://github.com/kyleGrealis/froggeR" class="external-link"><img src="https://img.shields.io/badge/R--CMD--check-passing-brightgreen" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a> <a href="https://CRAN.R-project.org/package=froggeR" class="external-link"><img src="https://www.r-pkg.org/badges/version/froggeR" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=froggeR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/froggeR" alt="CRAN downloads"></a></p>
 <blockquote>
-<p>froggeR version: 0.4.0</p>
+<p>froggeR version: 0.5.0</p>
 </blockquote>
 <p>froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.</p>
 <div class="section level2">
@@ -102,6 +101,7 @@
 <ul>
 <li>One-command Quarto project initialization</li>
 <li>Centralized settings management for consistent metadata</li>
+<li>Quickly create, save, and reuse metadata &amp; Quarto branding</li>
 <li>Automated creation of essential project files (README, .gitignore, etc.)</li>
 <li>Custom YAML and SCSS templating for unique document styling</li>
 <li>Interactive setup process for user-specific configurations</li>
@@ -129,6 +129,7 @@
 <p>froggeR is ideal for R users who:</p>
 <ul>
 <li>Manage multiple Quarto projects</li>
+<li>Find themselves rewriting the same YAML &amp; project structure repeatedly</li>
 <li>Collaborate in team environments</li>
 <li>Prioritize analysis over setup complexities</li>
 <li>Need rapid project initialization</li>
@@ -145,20 +146,16 @@
 </h3>
 <p>Initialize a comprehensive Quarto project with a single command:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span></span>
-<span>  name <span class="op">=</span> <span class="st">'my_new_project'</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use custom YAML values from _variables.yml</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">'my_new_project'</span><span class="op">)</span></span></code></pre></div>
 <p>This creates:</p>
 <ul>
 <li>A Quarto document with custom YAML</li>
 <li>A comprehensive <code>.gitignore</code>
 </li>
 <li>Structured <code>README.md</code> &amp; progress notes templates</li>
-<li>A reusable <code>_variables.yml</code>
-</li>
+<li>Reusable <code>_variables.yml</code> &amp; <code>_brand.yml</code> files</li>
 <li>A <code>custom.scss</code> style sheet template</li>
-<li>An RStudio project file (<code>.Rproj</code>)</li>
+<li>A <code>references.bib</code> for citations</li>
 </ul>
 </div>
 <div class="section level3">
@@ -183,7 +180,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
 <span>  filename <span class="op">=</span> <span class="st">'data_cleaning'</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use variables from _variables.yml</span></span>
+<span>  example <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Add tool templates</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -285,6 +282,14 @@
 <td>Save current <code>_variables.yml</code> to system-level configs</td>
 </tr>
 <tr class="even">
+<td><code><a href="reference/save_brand.html">save_brand()</a></code></td>
+<td>Save current <code>_brand.yml</code> to system-level configs</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/write_brand.html">write_brand()</a></code></td>
+<td>Create project-level <code>_brand.yml</code> configs</td>
+</tr>
+<tr class="even">
 <td>
 <code><a href="reference/write_ignore.html">write_ignore()</a></code>*</td>
 <td>Configure <code>.gitignore</code> for enhanced data security</td>
@@ -351,7 +356,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Kyle Grealis <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9223-8854" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Kyle Grealis <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9223-8854" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -366,7 +371,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

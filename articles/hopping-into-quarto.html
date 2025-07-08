@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Get Hopping with froggeR • froggeR</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,24 +74,28 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p><code>froggeR</code> streamlines Quarto workflows by providing a
-robust, user-friendly framework for project setup and document creation.
-This vignette demonstrates how <code>froggeR</code> can enhance your
+<p>froggeR streamlines Quarto workflows by providing a robust,
+user-friendly framework for project setup and document creation.
+Leverage Quarto branding within your projects with froggeR’s added
+functionality. This vignette demonstrates how froggeR can enhance your
 productivity while maintaining project consistency.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install from GitHub</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kyleGrealis/froggeR"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"kyleGrealis/froggeR"</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="core-features">Core Features<a class="anchor" aria-label="anchor" href="#core-features"></a>
 </h2>
 <p>Project setup often involves repetitive tasks that can impede your
-analysis workflow. <code>froggeR</code> addresses this by providing:</p>
+analysis workflow. froggeR addresses this by providing:</p>
 <ul>
 <li>Automated project initialization with <a href="https://azimuth-project.tech/froggeR/reference/quarto_project.html"><code>quarto_project()</code></a>
 </li>
 <li>Reusable project configurations through <a href="https://azimuth-project.tech/froggeR/reference/froggeR_settings.html"><code>settings()</code></a>
+</li>
+<li>Replicate Quarto project brand styling with <a href="https://azimuth-project.tech/froggeR/reference/write_brand.html"><code>write_brand()</code></a>
+and <a href="https://azimuth-project.tech/froggeR/reference/save_brand.html"><code>save_brand()</code></a>
 </li>
 <li>Configurable document templates via <a href="https://azimuth-project.tech/froggeR/reference/write_quarto.html"><code>write_quarto()</code></a>
 </li>
@@ -100,7 +103,7 @@ analysis workflow. <code>froggeR</code> addresses this by providing:</p>
 </li>
 <li>Enhanced version control setup</li>
 <li>Easily add project documentation templates to any existing project,
-even those not initialized by <code>froggeR</code>.</li>
+even those not initialized by froggeR.</li>
 </ul>
 <hr>
 </div>
@@ -111,18 +114,34 @@ even those not initialized by <code>froggeR</code>.</li>
 Quarto projects with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Save time on building a project structure, formatting, and trying to
-redo that super awesome YAML you did a few weeks back. Start with
-<code>froggeR</code> now and get yourself dialed in for all future
-projects!</p>
+<p>Save time on building a project structure, formatting, branding, and
+trying to redo that super awesome YAML you did a few weeks back. Start
+with froggeR now and get yourself dialed in for all future projects!</p>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="quick-start-guide">Quick Start Guide<a class="anchor" aria-label="anchor" href="#quick-start-guide"></a>
 </h2>
 <p>Create a new Quarto project with a single command:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"frogs"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;</span> froggeR<span class="sc">::</span><span class="fu">quarto_project</span>(<span class="at">name =</span> <span class="st">"frogs"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>This will create a new Quarto default project as a folder named frogs <span class="cf">in</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="sc">/</span>home<span class="sc">/</span>kyle.</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>Do you want to <span class="fu">proceed</span> (Y<span class="sc">/</span>n)? </span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>Y</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>✔ Created Quarto project directory<span class="sc">:</span> frogs</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>✔ Created _quarto.yml</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>ℹ Copying existing froggeR settings...</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>✔ Created _variables.yml</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>ℹ Copying existing froggeR brand settings...</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>✔ Created _brand.yml</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>✔ Copying existing froggeR logos.</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>✔ Created custom.scss</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>✔ Created .gitignore</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>✔ Created README.md</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>✔ Created dated_progress_notes.md</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>✔ Created frogs.qmd with examples</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>✔ Created references.bib</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>✔ froggeR project setup complete. Opening <span class="cf">in</span> new session...</span></code></pre></div>
 <p>This command initializes a complete project structure with all
 necessary components:</p>
 <div class="section level3">
@@ -130,15 +149,16 @@ necessary components:</p>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Quarto Document</strong> (<code>frogs.qmd</code>)
+<strong>Quarto Document</strong>
 <ul>
 <li>Pre-configured YAML header</li>
-<li>Professional styling</li>
-<li>Ready for immediate use</li>
+<li>Examples for adding brand logo, HTML in-document cross-references,
+and HTML links</li>
+<li>Example for adding citations and references</li>
 </ul>
 </li>
 <li>
-<strong>Style Sheet</strong> (<code>custom.scss</code>)
+<strong>Style Sheet</strong>
 <ul>
 <li>Modern design elements</li>
 <li>Customizable components</li>
@@ -149,42 +169,55 @@ necessary components:</p>
 <strong>Project Configuration</strong>
 <ul>
 <li>
-<code>.Rproj</code> for RStudio integration</li>
+<code>_quarto.yml</code> that is enhanced to simplify individual
+Quarto file YAML by centralizing document options. These can be changed
+on a per-document basis as well.</li>
 <li>
-<code>_variables.yml</code> for consistent metadata</li>
+<code>_variables.yml</code> for consistent user metadata</li>
+<li>
+<code>_brand.yml</code> for consistent project branding
+metadata</li>
 <li>
 <code>.gitignore</code> for secure version control</li>
 </ul>
 </li>
 </ol>
-<p>When you start your first Quarto project with <code>froggeR</code>,
-you’re choosing fast &amp; efficient templating over tedious replication
-of project documents. <code>froggeR</code> provides the ability to
-create project-level metadata (stored in a <code>_variables.yml</code>
-file). This metadata populates certain fields in your Quarto document’s
-YAML. For example, a <code>froggeR</code> Quarto document with the
-custom template displays “name” in the YAML as
-<code>name: "{{&lt; var name &gt;}}"</code>. However, when you render
-the document, the “name” value in the <code>_variables.yml</code> file
-populates this area and your actual name is displayed in the output.</p>
-<p>Now, this may seem arbitrary or too simplistic. Sure, but what if you
-would like to add an email hyperlink to your documents because your
-share the rendered HTML documents with your colleagues? That’s simple –
-just ensure that the “email” field has a value and that too will be
-displayed in the document too. The same applies for adding a personal or
-company URL, your ORCID link, a school or organization, or even a custom
-title for the table of contents. Since the <code>_variables.yml</code>
-file is composed of <code>key:value</code> pairs, fill in whichever
-values you would like to use, leave blank which ones you’d rather not,
-or <em>add</em> new <code>key:value</code> pairs.</p>
+<p>When you start your first Quarto project with froggeR, you’re
+choosing fast &amp; efficient templating over tedious replication of
+project documents. froggeR provides the ability to create project-level
+metadata (stored in <code>_quarto.yml</code>,
+<code>_variables.yml</code>, and <code>_brand.yml</code> files). This
+metadata allows users to reproduce a consistent structure &amp; style
+across many Quarto projects. The <code>_quarto.yml</code> file serves as
+a central project structure file where you can set project-level Quarto
+document defaults such as toggling familiar rendering settings (i.e.,
+<code>format</code> options, <code>code-tools</code>,
+<code>page-layout</code>).</p>
+<p>You can then reuse personal metadata by modifying the
+<code>_variables.yml</code> file. These values are then used by
+<code>_quarto.yml</code> where the <code>name</code> value in
+<code>_variables.yml</code> is pulled into the project YAML as
+<code>name: "{{&lt; var name &gt;}}"</code>. When you render the
+document, your actual name is displayed in the output. Adding your
+email, a personal or company URL, or your ORCID is just the same – the
+<code>_variables.yml</code> file is composed of <code>key:value</code>
+pairs. You can also create &amp; use variables if you follow the
+format.</p>
+<p>Now, this may seem like a lot of work for a basic Quarto project. You
+may be correct since the first project will take an extra few minutes of
+populating the <code>_variables.yml</code> file with your information
+and adjusting the <code>_quarto.yml</code> for project-level settings.
+However, once you <code><a href="../reference/save_variables.html">froggeR::save_variables()</a></code>, all of this
+work will be replicated immediately the <em>next</em> time you use
+froggeR to create your Quarto projects!</p>
+<p>I’m sure you can envision many more ways to use metadata to your
+advantage. This isn’t a “froggeR-thing”… the great team working on <a href="https://quarto.org" class="external-link">Quarto</a> is to thank!</p>
 <blockquote>
-<p><strong>Note</strong>: It is strongly discouraged to delete any lines
-in the <code>_variables.yml</code> file as those are linked directly to
-the Quarto document. Either be sure to remove the <code>key:value</code>
-in the variables file <strong>and</strong> remove the
-<code>{{ var [variable you want removed] }}</code> from the Quarto
-template, or simply <strong>just leave the value empty in the variables
-file</strong>.</p>
+<p><strong>Note</strong>: Deleting key:value pairs in the
+<code>_variables.yml</code> file requires you to also remove the
+corresponding fields in the <code>_quarto.yml</code>. It is recommended
+to comment out or leave blank the fields in <code>_variables.yml</code>
+that are not needed.</p>
 </blockquote>
 <p>See <code><a href="../articles/customizing-quarto.html">vignette("customizing-quarto", package = "froggeR")</a></code>
 for more detailed configuration options.</p>
@@ -197,16 +230,27 @@ for more detailed configuration options.</p>
 <div class="section level3">
 <h3 id="document-settings">Document Settings<a class="anchor" aria-label="anchor" href="#document-settings"></a>
 </h3>
+<blockquote>
+<p>You may choose to setup your froggeR metadata before creating your
+first project.</p>
+</blockquote>
 <p>Manage your document settings with the interactive configuration tool
 (see <code><a href="../reference/settings.html">?froggeR::settings</a></code> for all options):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Check, display, or update your settings</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div style="text-align: center;">
-<figure><img src="../reference/figures/settings-options.png" alt="froggeR settings menu" width="70%"><figcaption>
-froggeR settings menu
-</figcaption></figure>
-</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Check, display, or update your settings</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;</span> froggeR<span class="sc">::</span><span class="fu">settings</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>froggeR settings options<span class="sc">:</span> </span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span> Check <span class="cf">for</span> config files</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span> Display current settings</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span> Show how to update settings</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="dv">4</span><span class="sc">:</span> Show how to reuse settings across projects</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="dv">5</span><span class="sc">:</span> More information about settings</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>Selection<span class="sc">:</span> </span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="dv">1</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>ℹ Run froggeR<span class="sc">::</span><span class="fu">write_variables</span>() to create project<span class="sc">-</span>level settings.</span></code></pre></div>
 <p>To create and open the <code>_variables.yml</code> file for immediate
 customization, run:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -215,26 +259,25 @@ customization, run:</p>
 <p>You will then see the file open with hints provided on how to fill in
 and use. Remember, it’s better (and safer) to leave fields blank than to
 delete them… but you can remove the first two comment lines.</p>
-<div style="text-align: center;">
-<figure><img src="../reference/figures/variables-init.png" alt="empty variables file" width="70%"><figcaption>
-Project variables file
-</figcaption></figure>
-</div>
-<p>If you would then like to reuse this file in future projects, run
-<code><a href="../reference/settings.html">froggeR::settings()</a></code> then choose option 4 “Show how to reuse
-settings across projects”. An easier way is to just copy this to your
-console to save the <code>_variables.yml</code> in a system-level
-<code>froggeR</code> configuration file:</p>
-<p><code>file.copy(from = here::here("_variables.yml"), to = "~/.config/froggeR/config.yml")</code></p>
-<p>This will output <code>[1] TRUE</code> to the console indicating that
-the file copy worked.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># You do not need to use quotes around values.</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># You may edit any value or leave it blank.</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>name<span class="sc">:</span> </span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>email<span class="sc">:</span> </span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>orcid<span class="sc">:</span> </span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>url<span class="sc">:</span> <span class="co">#https://example.com</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>affiliations<span class="sc">:</span> </span></code></pre></div>
+<p>Save this file then run <code><a href="../reference/save_variables.html">froggeR::save_variables()</a></code> to
+store this configuration file in your operating system’s (OS)
+configuration file location (i.e., in Linux, this is
+<code>$HOME/.config/froggeR/config.yml</code>). This reinforce’s
+froggeR’s goal to increase your effeciency now and for future
+projects.</p>
 <p>These settings flow through your projects in this order:</p>
 <ol style="list-style-type: decimal">
 <li>
 <code>config.yml</code> stores your permanent settings (exact
 location depends on your OS)</li>
-<li>
-<code>froggeR</code> reads these when creating new projects</li>
+<li>froggeR reads these when creating new projects</li>
 <li>Settings populate <code>_variables.yml</code> in your project</li>
 <li>Quarto documents use these variables automatically</li>
 </ol>
@@ -243,90 +286,39 @@ location depends on your OS)</li>
 How froggeR manages settings across projects (config.yml)
 </figcaption></figure>
 </div>
-<div style="text-align: center;">
-<figure><img src="../reference/figures/variables-yml.png" alt="How froggeR manages settings within projects (_variables.yml)" width="70%"><figcaption>
-How froggeR manages settings across projects (_variables.yml)
-</figcaption></figure>
-</div>
 <blockquote>
 <p><strong>Note:</strong> While you can update these settings at any
 time, most users find they only need to set them once or very
 infrequently.</p>
 </blockquote>
 <p><strong>Congratulations!</strong> You’ve just made your next Quarto
-project with <code>froggeR</code> even easier! But how? Well, let’s have
-a little fun: delete the <code>_variables.yml</code> in your local
-project you just created. Don’t worry… we’ll make it reappear, but this
-time you will not need to reinput the value fields. Once again, run
-<code><a href="../reference/write_variables.html">froggeR::write_variables()</a></code> and voila! You should see your
-saved config file that matches the one you just deleted… and it’s
-already filled in!</p>
-<p>This is <code>froggeR</code>’s main benefit: making Quarto documents
-and projects easier the next time too. Later we’ll see how
+project with froggeR even easier! But how? Well, let’s have a little
+fun: delete the <code>_variables.yml</code> in your
+<strong>local</strong> project you just created. Don’t worry… we’ll make
+it reappear, but this time you will not need to reinput the value
+fields. Once again, run <code><a href="../reference/write_variables.html">froggeR::write_variables()</a></code> and
+voila! You should see your saved config file that matches the one you
+just deleted… and it’s already filled in!</p>
+<p>This is froggeR’s main benefit: making Quarto documents and projects
+easier the next time too. Later we’ll see how
 <code><a href="../reference/quarto_project.html">froggeR::quarto_project()</a></code> will pull this information the
 next time while setting up the entire project structure. You can skip
 ahead to the <quarto workflow with frogger> vignette, if you like.</quarto></p>
 </div>
 <div class="section level3">
-<h3 id="save-settings">Save Settings<a class="anchor" aria-label="anchor" href="#save-settings"></a>
+<h3 id="create-a-quarto-document-with-examples">Create a Quarto document with examples<a class="anchor" aria-label="anchor" href="#create-a-quarto-document-with-examples"></a>
 </h3>
-<p><strong>New for froggeR v.0.4.0</strong>: use the
-<code><a href="../reference/save_variables.html">save_variables()</a></code> function to add your current project’s
-<code>_variables.yml</code> to the system configuration file. This
-increased functionality was much-needed. Instead of you the user
-searching out where to find the configuration file buried in your
-operating system’s path, we’ve employed a quick technique to find that
-file, ensure that you would like to overwrite the file for future use,
-or create it if it doesn’t already exist. This reinforce’s
-<code>froggeR</code>’s goal to increase your effeciency now and for
-future projects.</p>
-</div>
-<div class="section level3">
-<h3 id="create-a-quarto-document-with-a-custom-yaml">Create a Quarto document with a custom YAML<a class="anchor" aria-label="anchor" href="#create-a-quarto-document-with-a-custom-yaml"></a>
-</h3>
-<p>To further the leverage the power of project metadata, select a
-Quarto template with <code>custom_yaml = TRUE</code> (this is the
-default argument) and choose any name you’d like.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create a new document using your settings</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="st">"analysis"</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use your configured settings</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<p>Quickly create a Quarto document that includes examples for adding
+your brand logo, section and other within-document cross-references,
+hyperlinks, and references with
+<code>froggeR::write_quarto(example = TRUE)</code>. This opens a new
+file with the default name of “Untitled-1.qmd”.</p>
 <p>The template will open:</p>
 <div style="text-align: center;">
-<figure><img src="../reference/figures/custom-yaml-init.png" alt="custom yaml template" width="70%"><figcaption>
-Custom YAML template
+<figure><img src="../reference/figures/write-quarto-example.png" alt="Quarto template with examples" width="70%"><figcaption>
+Quarto template with examples
 </figcaption></figure>
 </div>
-<p>If you’re not familiar with this new structure in the YAML, that’s
-ok. This is where the values from <code>_variables.yml</code> in the
-project links to the rendered document. The
-<code>{{&lt; var name &gt;}}</code> syntax imports the <code>name</code>
-value from the <em>var</em>iables metadata file. If you were to now make
-a second or third <code><a href="../reference/write_quarto.html">froggeR::write_quarto()</a></code> document in this
-project, you will not need to manually enter your name and other
-details. These values will be automatically entered when you render the
-documents.</p>
-<p>The <code>_variables.yml</code> metadata file is very versatile. You
-can include more <code>key:value</code> pairs to either the project- or
-global-level file(s) and those values will be accessible in any current
-or future documents. Imagine you had a second URL that you plan to use
-more than a few times in your Quarto document, and maybe you just don’t
-want to type the long syntax over and over? Great, store it in the
-<code>_variables.yml</code> file… like this!</p>
-<div style="text-align: center;">
-<figure><img src="../reference/figures/key-value.png" alt="more key:value pairs" width="70%"><figcaption>
-Adding more key:values to project metadata
-</figcaption></figure>
-</div>
-<blockquote>
-<p><strong>Note</strong>: Wrap hyperlinks in quotes in the metadata file
-or the rendered output and link acts funky. Ask me how I know ;)</p>
-</blockquote>
-<p>I’m sure you can envision many more ways to use metadata to your
-advantage. This isn’t a “<code>froggeR</code>-thing”… the great team
-working on <a href="https://quarto.org" class="external-link">Quarto</a> is to thank!</p>
 </div>
 <div class="section level3">
 <h3 id="visual-styling">Visual Styling<a class="anchor" aria-label="anchor" href="#visual-styling"></a>
@@ -371,7 +363,7 @@ weeks away from a project.</p>
 <div class="section level2">
 <h2 id="best-practices">Best Practices<a class="anchor" aria-label="anchor" href="#best-practices"></a>
 </h2>
-<p>For optimal results with <code>froggeR</code>:</p>
+<p>For optimal results with froggeR:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Use metadata in your projects</strong>
@@ -501,8 +493,8 @@ shape the future of froggeR!</p>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p><code>froggeR</code> provides a streamlined approach to Quarto
-project management, offering:</p>
+<p>froggeR provides a streamlined approach to Quarto project management,
+offering:</p>
 <ul>
 <li>Efficient project initialization</li>
 <li>Consistent document styling</li>
@@ -524,7 +516,7 @@ project management, offering:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

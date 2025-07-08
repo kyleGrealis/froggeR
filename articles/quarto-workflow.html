@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Quarto Workflow with froggeR • froggeR</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,8 +74,8 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p><code>froggeR</code> streamlines your Quarto workflow by providing
-two powerful functions: <a href="https://azimuth-project.tech/froggeR/reference/quarto_project.html"><code>quarto_project()</code></a>
+<p>froggeR streamlines your Quarto workflow by providing two powerful
+functions: <a href="https://azimuth-project.tech/froggeR/reference/quarto_project.html"><code>quarto_project()</code></a>
 for complete project initialization and <a href="https://azimuth-project.tech/froggeR/reference/write_quarto.html"><code>write_quarto()</code></a>
 for individual document creation. This vignette demonstrates how to use
 these functions effectively and how they work together.</p>
@@ -89,20 +88,26 @@ these functions effectively and how they work together.</p>
 <h3 id="complete-project-setup">Complete Project Setup<a class="anchor" aria-label="anchor" href="#complete-project-setup"></a>
 </h3>
 <p>The quickest way to start a new Quarto project:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"frogs"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;</span> froggeR<span class="sc">::</span><span class="fu">quarto_project</span>(<span class="at">name =</span> <span class="st">"frogs"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>This will create a new Quarto default project as a folder named frogs <span class="cf">in</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="sc">/</span>home<span class="sc">/</span>kyle.</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>Do you want to <span class="fu">proceed</span> (Y<span class="sc">/</span>n)? </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>Y</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>✔ Created Quarto project directory<span class="sc">:</span> frogs</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>✔ Created _quarto.yml</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>ℹ Copying existing froggeR settings...</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>✔ Created _variables.yml</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>ℹ Copying existing froggeR brand settings...</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>✔ Created _brand.yml</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>✔ Copying existing froggeR logos.</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>✔ Created custom.scss</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>✔ Created .gitignore</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>✔ Created README.md</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>✔ Created dated_progress_notes.md</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>✔ Created frogs.qmd with examples</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>✔ Created references.bib</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>✔ froggeR project setup complete. Opening <span class="cf">in</span> new session...</span></code></pre></div>
 <p>This single command creates a complete project structure:</p>
-<div style="text-align: center;">
-<figure><img src="../reference/figures/froggeR-init.png" alt="Project initialization example" width="70%"><figcaption>
-Project initialization example
-</figcaption></figure>
-</div>
-<div style="text-align: center;">
-<figure><img src="../reference/figures/new-froggeR-session.png" alt="Project directory structure example" width="70%"><figcaption>
-Project directory structure example
-</figcaption></figure>
-</div>
-<p>Your new project includes:</p>
 <table class="table">
 <thead><tr class="header">
 <th>Component</th>
@@ -118,28 +123,36 @@ Project directory structure example
 <td>Main Quarto document</td>
 </tr>
 <tr class="odd">
-<td><code>frogs.Rproj</code></td>
-<td>RStudio project file</td>
+<td><code>_quarto.yml</code></td>
+<td>Reusable project settings</td>
 </tr>
 <tr class="even">
 <td><code>_variables.yml</code></td>
 <td>Reusable document settings</td>
 </tr>
 <tr class="odd">
+<td><code>_brand.yml</code></td>
+<td>Reusable brand style settings</td>
+</tr>
+<tr class="even">
 <td><code>custom.scss</code></td>
 <td>Style sheet template</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>dated_progress_notes.md</code></td>
 <td>Project documentation</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>README.md</code></td>
 <td>Project documentation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>.gitignore</code></td>
 <td>Enhanced security settings</td>
+</tr>
+<tr class="even">
+<td><code>references.bib</code></td>
+<td>Example citation template</td>
 </tr>
 </tbody>
 </table>
@@ -150,11 +163,12 @@ Project directory structure example
 <p>Each component serves a specific purpose:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Quarto Document</strong> (<code>frogs.qmd</code>)</p>
+<p><strong>Quarto Document</strong> (<code>_quarto.yml</code>)</p>
 <ul>
-<li>Pre-configured YAML header</li>
-<li>Links to your styling</li>
-<li>Ready for content</li>
+<li>Pre-configured YAML to import <code>_variables.yml</code>
+</li>
+<li>Links to styling files</li>
+<li>Familiar format toggles</li>
 </ul>
 </li>
 <li>
@@ -168,6 +182,19 @@ Project directory structure example
 Project metadata
 </figcaption></figure>
 </div>
+</li>
+<li>
+<p><strong>Brand Settings</strong> (<em>new</em> for froggeR v0.5.0;
+<code>_brand.yml</code>)</p>
+<ul>
+<li>Preconfigured branding file</li>
+<li>Examples for adding logo, color, &amp; typography</li>
+<li>Save your personal or team art in the <code>logos/</code>
+directory</li>
+<li>
+<strong>Add a consistent style</strong> across your Quarto
+documents</li>
+</ul>
 </li>
 <li>
 <p><strong>Style Sheet</strong> (<code>custom.scss</code>)</p>
@@ -184,69 +211,11 @@ Project metadata
 <div class="section level2">
 <h2 id="individual-document-creation">Individual Document Creation<a class="anchor" aria-label="anchor" href="#individual-document-creation"></a>
 </h2>
-<div class="section level3">
-<h3 id="custom-document">Custom Document<a class="anchor" aria-label="anchor" href="#custom-document"></a>
-</h3>
-<p>Create a new Quarto document in an existing project:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="st">"frog_analysis"</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Use settings from _variables.yml</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>This creates <code>frog_analysis.qmd</code> with:</p>
-<ul>
-<li>Formatted YAML header</li>
-<li>Two starter sections</li>
-<li>Links to project styling</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="basic-documents">Basic Documents<a class="anchor" aria-label="anchor" href="#basic-documents"></a>
-</h3>
-<p>For documents without project settings and requiring manual changes
-to the document YAML:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="st">"frog_standalone"</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">FALSE</span>  <span class="co"># Basic Quarto template</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="document-types">Document Types<a class="anchor" aria-label="anchor" href="#document-types"></a>
-</h3>
-<p><code><a href="../reference/write_quarto.html">write_quarto()</a></code> supports two main workflows:</p>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Project Documents</strong> (<code>custom_yaml = TRUE</code>)
-<ul>
-<li>Use project settings</li>
-<li>Include custom styling</li>
-<li>Maintain consistency</li>
-</ul>
-</li>
-<li>
-<strong>Standalone Documents</strong>
-(<code>custom_yaml = FALSE</code>)
-<ul>
-<li>Basic Quarto template</li>
-<li>No external dependencies</li>
-<li>Quick start for simple docs</li>
-</ul>
-</li>
-</ol>
-<div class="figure" style="text-align: center">
-<img src="../reference/figures/yaml-comparison.png" alt="Comparison of document types" width="85%"><p class="caption">
-Comparison of document types
-</p>
-</div>
-<p>The <code>custom_yaml = TRUE</code> template leverages your project’s
-<code>_variables.yml</code> settings, automatically populating author
-information, styling, and other metadata. This means you can focus
-immediately on content creation rather than document setup. Conversely,
-<code>custom_yaml = FALSE</code> provides a minimal template when you
-need a standalone document without project-specific configurations.</p>
+<p>Create a new Quarto document in an existing project:
+<code><a href="../reference/write_quarto.html">froggeR::write_quarto()</a></code>. Use the
+<code>example = TRUE</code> to incorporate template cross-referencing,
+hyperlinks, and other useful Quarto writing tools.</p>
 <hr>
-</div>
 </div>
 <div class="section level2">
 <h2 id="rendered-output">Rendered Output<a class="anchor" aria-label="anchor" href="#rendered-output"></a>
@@ -256,6 +225,10 @@ need a standalone document without project-specific configurations.</p>
 Example output of custom_yaml document
 </p>
 </div>
+<blockquote>
+<p><strong>Note</strong>: This example uses a froggeR version pre-0.5.0
+though the main heading will render the same… you get the point ;)</p>
+</blockquote>
 <hr>
 </div>
 <div class="section level2">
@@ -268,7 +241,7 @@ Example output of custom_yaml document
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Initial Setup</strong></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create new project</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"frogs"</span><span class="op">)</span></span></code></pre></div>
 <p>Recommended project structure:</p>
@@ -285,21 +258,26 @@ Example output of custom_yaml document
 <td>Input files, datasets</td>
 </tr>
 <tr class="even">
+<td><code>logos/</code></td>
+<td>Brand logos</td>
+<td>Storing Quarto brand art</td>
+</tr>
+<tr class="odd">
 <td><code>output/</code></td>
 <td>Analysis results</td>
 <td>Figures, tables, exports</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>R/</code></td>
 <td>Custom functions</td>
 <td>R scripts, utilities</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>docs/</code></td>
 <td>Documentation</td>
 <td>Additional guides, notes</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>
 <code>*.qmd</code>**</td>
 <td>Analysis documents</td>
@@ -312,16 +290,14 @@ All others need to be created.</em></p>
 </li>
 <li>
 <p><strong>Additional Documents</strong></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add analysis documents</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="st">"data_prep"</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"data_prep"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
-<span>  filename <span class="op">=</span> <span class="st">"analysis"</span>,</span>
-<span>  custom_yaml <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"analysis"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
@@ -330,9 +306,12 @@ All others need to be created.</em></p>
 ├── frogs.qmd
 ├── data_prep.qmd
 ├── analysis.qmd
+├── _brand.yml
+├── _quarto.yml
 ├── _variables.yml
 ├── custom.scss
 ├── dated_progress_notes.md
+├── references.bib
 └── README.md</code></pre>
 </li>
 </ol>
@@ -407,10 +386,10 @@ All others need to be created.</em></p>
 <h3 id="project-modifications">Project Modifications<a class="anchor" aria-label="anchor" href="#project-modifications"></a>
 </h3>
 <p>Customize your project structure:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"advanced_frogs"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_project"</span><span class="op">)</span></span></code></pre></div>
 <p>Then add specialized documents:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Data preparation</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"01_data_prep"</span><span class="op">)</span></span>
 <span></span>
@@ -420,8 +399,8 @@ All others need to be created.</em></p>
 <span><span class="co"># Results</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/write_quarto.html">write_quarto</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"03_results"</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><strong>Note:</strong> When working in a <code>froggeR</code>
-project, <code><a href="../reference/write_quarto.html">write_quarto()</a></code> automatically uses your project’s
+<p><strong>Note:</strong> When working in a froggeR project,
+<code><a href="../reference/write_quarto.html">write_quarto()</a></code> automatically uses your project’s
 <code>_variables.yml</code> settings by default, ensuring consistent
 styling and metadata across all documents.</p>
 </blockquote>
@@ -429,20 +408,22 @@ styling and metadata across all documents.</p>
 <div class="section level3">
 <h3 id="document-customization">Document Customization<a class="anchor" aria-label="anchor" href="#document-customization"></a>
 </h3>
-<p>Modify individual documents while maintaining project
-consistency:</p>
+<p>Modify individual documents while maintaining project consistency. In
+other words, the <em>document</em>-level YAML structure takes precedence
+and will override <em>project</em>-level settings found in
+<code>_variables.yml</code> and <code>_quarto.yml</code>.</p>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>YAML Additions</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Analysis Results"</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{&lt; var author &gt;}}"</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> last-modified</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Analysis Results"</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{&lt; var author &gt;}}"</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> last-modified</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Style Variations</strong></p>
@@ -473,7 +454,8 @@ consistency:</p>
 <li>
 <strong>Document Problems</strong>
 <ul>
-<li>Confirm <code>_variables.yml</code> exists</li>
+<li>Confirm <code>_variables.yml</code> &amp; <code>_quarto.yml</code>
+exist</li>
 <li>Check YAML syntax</li>
 <li>Verify file locations</li>
 </ul>
@@ -507,7 +489,7 @@ consistency:</p>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p><code>froggeR</code>’s project workflow provides:</p>
+<p>froggeR’s project workflow provides:</p>
 <ul>
 <li>Efficient project initialization</li>
 <li>Consistent document creation</li>
@@ -530,7 +512,7 @@ consistency:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
