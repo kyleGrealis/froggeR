@@ -7,7 +7,7 @@
 #' @inheritParams write_ignore
 #' @param filename Character string. The name of the file without the '.qmd' extension.
 #'   Only letters, numbers, hyphens, and underscores are allowed.
-#' @param example Logical. If TRUE (default), creates a Quarto document with a default to 
+#' @param example Logical. If TRUE, creates a Quarto document with a default to 
 #'   position the brand logo and examples of within-document cross-referencing, links,
 #'   and references.
 #'
@@ -35,7 +35,7 @@
 #' @export
 write_quarto <- function(
   filename = "Untitled-1", path = here::here(), 
-  example = TRUE, .initialize_proj = FALSE
+  example = FALSE, .initialize_proj = FALSE
 ) {
   
   # Validate path
