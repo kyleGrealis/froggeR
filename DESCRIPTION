@@ -40,6 +40,6 @@ Config/build/copy-resources:
     inst/gists/custom_quarto.qmd
     inst/gists/README.md
 Config/testthat/edition: 3
-VignetteBuilder: knitr
+VignetteBuilder: quarto
 URL: https://azimuth-project.tech/froggeR/
 BugReports: https://github.com/kyleGrealis/froggeR/issues
