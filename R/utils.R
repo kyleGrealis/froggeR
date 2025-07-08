@@ -122,7 +122,6 @@
     .yes_settings()
     .global_settings(config_file)
     ui_info('You are currently using project- and global-level settings.')
-    ui_info('Run `froggeR::write_variables()` to reuse project-level settings.')
 
   } else if (project_settings && !froggeR_settings) {
     # Has only project settings
