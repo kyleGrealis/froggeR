@@ -7,7 +7,7 @@
 write_quarto(
   filename = "Untitled-1",
   path = here::here(),
-  example = TRUE,
+  example = FALSE,
   .initialize_proj = FALSE
 )
 }
@@ -17,7 +17,7 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 
 \item{path}{Character string. Path to the project directory.}
 
-\item{example}{Logical. If TRUE (default), creates a Quarto document with a default to 
+\item{example}{Logical. If TRUE, creates a Quarto document with a default to 
 position the brand logo and examples of within-document cross-referencing, links,
 and references.}
 
