@@ -7,15 +7,6 @@ template:
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
 
-navbar:
-  structure:
-    left:  [intro, reference, articles, news]
-    right: [search, github]
-  components:
-    news:
-      text: Changelog
-      href: news/index.html
-
 articles:
   - title: Get Started
     navbar: ~
