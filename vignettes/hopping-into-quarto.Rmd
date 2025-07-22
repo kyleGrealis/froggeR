@@ -156,7 +156,7 @@ url: #https://example.com
 affiliations: 
 ```
 
-Save this file then run `froggeR::save_variables()` to store this configuration file in your operating system's (OS) configuration file location (i.e., in Linux, this is `$HOME/.config/froggeR/config.yml`). This reinforce's froggeR's goal to increase your effeciency now and for future projects.
+Save this file then run `froggeR::save_variables()` to store this configuration file in your operating system's (OS) configuration file location (i.e., in Linux, this is `$HOME/.config/froggeR/config.yml`). This reinforces froggeR's goal to increase your effeciency now and for future projects.
 
 These settings flow through your projects in this order:
 
