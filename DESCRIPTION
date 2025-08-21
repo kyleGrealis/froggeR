@@ -1,7 +1,7 @@
 Package: froggeR
 Type: Package
 Title: Enhance 'Quarto' Project Workflows and Standards
-Version: 0.5.0
+Version: 0.5.2
 Authors@R:
     person(
         "Kyle",
