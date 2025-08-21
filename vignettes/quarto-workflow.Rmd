@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-froggeR streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://azimuth-project.tech/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://azimuth-project.tech/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
+froggeR streamlines your Quarto workflow by providing two powerful functions: [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.html) for complete project initialization and [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.html) for individual document creation. This vignette demonstrates how to use these functions effectively and how they work together.
 
 ----
 
