@@ -40,7 +40,7 @@ This ensures consistency across all your project documents and makes updates eas
 
 ### Understanding SCSS Structure
 
-The [`write_scss()`](https://azimuth-project.tech/froggeR/reference/write_scss.html) function creates a template with three main sections:
+The [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.html) function creates a template with three main sections:
 
 1. **Defaults** (`/*-- scss:defaults --*/`)
     * Basic styling variables
