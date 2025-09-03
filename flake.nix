@@ -30,6 +30,7 @@
             rPackages.fs
             rPackages.here
             rPackages.quarto
+            rPackages.testthat
             rPackages.tidyverse
             rPackages.yaml
           ];
