@@ -25,11 +25,13 @@
             # pkgs.tectonic  # for LaTeX
 
             # Define R environment packages here:
+            rPackages.cli
             rPackages.devtools
-            rPackages.froggeR
+            rPackages.fs
+            rPackages.here
             rPackages.quarto
             rPackages.tidyverse
-            rPackages.tidymodels
+            rPackages.yaml
           ];
           
           # Confirmation message:
