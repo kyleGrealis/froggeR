@@ -2,30 +2,32 @@
 % Please edit documentation in R/quarto_project.R
 \name{quarto_project}
 \alias{quarto_project}
-\title{Create a Custom 'Quarto' Project}
+\title{Create a Custom Quarto Project}
 \usage{
 quarto_project(name, path = here::here(), example = TRUE)
 }
 \arguments{
-\item{name}{Character string. The name of the 'Quarto' project directory and 
-initial \code{.qmd} file.}
+\item{name}{Character. The name of the Quarto project directory and
+initial \code{.qmd} file. Must contain only letters, numbers, hyphens, and
+underscores.}
 
-\item{path}{Character string. Path to the project directory.}
+\item{path}{Character. Path to the parent directory where project will be created.
+Default is current project root via \code{\link[here]{here}}.}
 
-\item{example}{Logical. If TRUE (default), creates a Quarto document with a default to 
-position the brand logo and examples of within-document cross-referencing, links,
+\item{example}{Logical. If \code{TRUE} (default), creates a Quarto document with
+brand logo positioning and examples of within-document cross-referencing, links,
 and references.}
 }
 \value{
 Invisibly returns the path to the created project directory.
 }
 \description{
-This function creates a new 'Quarto' project directory with additional froggeR 
-features. It first calls \code{quarto::quarto_create_project()} to set up the 
+This function creates a new Quarto project directory with additional froggeR
+features. It first calls \code{quarto::quarto_create_project()} to set up the
 basic structure, then enhances it with froggeR-specific files and settings.
 }
 \details{
-This function creates a 'Quarto' project with the following enhancements:
+This function creates a Quarto project with the following enhancements:
 \itemize{
   \item \code{_brand.yml}: Stores Quarto project branding
   \item \code{logos}: Quarto project branding logos directory
@@ -33,9 +35,12 @@ This function creates a 'Quarto' project with the following enhancements:
   \item \code{.gitignore}: Enhanced settings for R projects
   \item \code{README.md}: Template README file
   \item \code{dated_progress_notes.md}: For project progress tracking
-  \item \code{custom.scss}: Custom 'Quarto' styling
+  \item \code{custom.scss}: Custom Quarto styling
+  \item \code{references.bib}: Bibliography template
 }
-If froggeR settings don't exist, it will prompt to create them.
+
+The function requires Quarto version 1.6 or greater. Global froggeR settings
+are automatically applied if available.
 }
 \examples{
 if (interactive() && quarto::quarto_version() >= "1.6") {
@@ -43,16 +48,15 @@ if (interactive() && quarto::quarto_version() >= "1.6") {
   # Create the Quarto project with custom YAML & associated files
   quarto_project("frogs", path = tempdir(), example = TRUE)
 
-  # Confirms files were created (optional, for user confirmation)
-  file.exists(file.path(tempdir(), "frogs.qmd"))     # Quarto doc
-  file.exists(file.path(tempdir(), "_quarto.yml"))  # project YAML file
-
-  # Create a new Quarto project with standard Quarto (no examples)
-  # quarto_project('frogs_standard', path = tempdir(), example = FALSE)
+  # Confirm files were created
+  file.exists(file.path(tempdir(), "frogs", "frogs.qmd"))
+  file.exists(file.path(tempdir(), "frogs", "_quarto.yml"))
 
 }
 
 }
 \seealso{
-\code{\link{write_quarto}}, \code{\link{settings}}
+\code{\link{write_quarto}}, \code{\link{settings}},
+  \code{\link{brand_settings}}, \code{\link{write_brand}}, \code{\link{write_variables}},
+  \code{\link{save_brand}}, \code{\link{save_variables}}
 }

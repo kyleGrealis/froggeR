@@ -2,40 +2,44 @@
 % Please edit documentation in R/write_brand.R
 \name{write_brand}
 \alias{write_brand}
-\title{Write Brand YAML for 'Quarto' Projects}
+\title{Write Brand YAML for Quarto Projects}
 \usage{
-write_brand(
-  path = here::here(),
-  restore_logos = TRUE,
-  .initialize_proj = FALSE
-)
+write_brand(path = here::here(), restore_logos = TRUE)
 }
 \arguments{
-\item{path}{Character string. Path to the project directory.}
+\item{path}{Character. Path to the project directory. Default is current project
+root via \code{\link[here]{here}}.}
 
 \item{restore_logos}{Logical. Restore logo content from system configuration.
-Default is `TRUE`.}
-
-\item{.initialize_proj}{Logical. TRUE only if starting a 
-\code{froggeR::quarto_project()}.}
+Default is \code{TRUE}.}
 }
 \value{
-Invisibly returns `NULL` after creating or updating the `_brand.yml` file.
+Invisibly returns the path to the created file.
 }
 \description{
-This function creates or updates the `_brand.yml` file in a Quarto project
-directory if they exist in the config path.
+This function creates a \code{_brand.yml} file in a Quarto project and opens it
+for editing.
 }
 \details{
-The function will attempt to use the current froggeR settings from the config path. If
-no global configurations exist, a template `_brand.yml` will be created.
+The function will attempt to use the current froggeR settings from the global
+config path. If no global configurations exist, a template \code{_brand.yml}
+will be created.
+
+In interactive sessions, the file is opened in the default editor for immediate
+customization.
 }
 \examples{
-
 # Write the _brand.yml file
 if (interactive()) {
   temp_dir <- tempdir()
+  # In an interactive session, this would also open the file for editing.
   write_brand(temp_dir)
+  # Verify the file was created
+  file.exists(file.path(temp_dir, "_brand.yml"))
 }
 
+}
+\seealso{
+\code{\link{brand_settings}}, \code{\link{save_brand}},
+  \code{\link{settings}}
 }

@@ -2,26 +2,39 @@
 % Please edit documentation in R/save_variables.R
 \name{save_variables}
 \alias{save_variables}
-\title{Save variables YAML for 'Quarto' Projects}
+\title{Save Metadata Configuration to Global froggeR Settings}
 \usage{
 save_variables()
 }
 \value{
-Invisibly returns `NULL` after creating system-level configuration file.
+Invisibly returns \code{NULL} after saving configuration file.
 }
 \description{
-This function saves the current `_variables.yml` file from an existing froggeR
-Quarto project. This provides a safety catch to prevent unintended overwrite if the
-system-level configuration file exists.
+This function saves the current \code{_variables.yml} file from an existing froggeR
+Quarto project to your global (system-wide) froggeR configuration. This allows
+you to reuse metadata across multiple projects.
 }
 \details{
-The function will attempt to create a system-level configuration file from the current
-froggeR Quarto project. If the system-level configuration file already exists, the
-user will be prompted prior to overwrite.
+This function:
+\itemize{
+  \item Reads the project-level \code{_variables.yml} file
+  \item Saves it to your system-wide froggeR config directory
+  \item Prompts for confirmation if a global configuration already exists
+}
+
+The saved configuration is stored in \code{rappdirs::user_config_dir('froggeR')}
+and will automatically be used in new froggeR projects created with
+\code{\link{quarto_project}} or \code{\link{write_variables}}.
+
+This is useful for maintaining consistent author metadata (name, email, affiliations, etc.)
+across all your projects without having to re-enter it each time.
 }
 \examples{
-
-# Write the _variables.yml file
+# Save metadata from current project to global config
 if (interactive()) save_variables()
 
+}
+\seealso{
+\code{\link{settings}}, \code{\link{write_variables}},
+  \code{\link{save_brand}}
 }

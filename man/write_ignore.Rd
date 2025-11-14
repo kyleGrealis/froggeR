@@ -2,34 +2,30 @@
 % Please edit documentation in R/write_ignore.R
 \name{write_ignore}
 \alias{write_ignore}
-\title{Create an enhanced \code{.gitignore} file}
+\title{Create an Enhanced .gitignore File}
 \usage{
-write_ignore(path = here::here(), .initialize_proj = FALSE)
+write_ignore(path = here::here(), aggressive = FALSE)
 }
 \arguments{
-\item{path}{Character string. Path to the project directory.}
+\item{path}{Character. Path to the project directory. Default is current project
+root via \code{\link[here]{here}}.}
 
-\item{.initialize_proj}{Logical. TRUE only if starting a 
-\code{froggeR::quarto_project()}.}
+\item{aggressive}{Logical. If \code{TRUE}, creates a comprehensive \code{.gitignore}
+with aggressive rules for sensitive data. If \code{FALSE} (default), creates
+a minimal \code{.gitignore} suitable for most R projects.}
 }
 \value{
-A \code{.gitignore} file with enhanced security rules. The file includes:\cr
-* R data files (.RData, .rda, .rds)\cr
-* Common data formats (CSV, Excel, text)\cr
-* System and temporary files\cr
-* IDE-specific files
+Invisibly returns the path to the created file.
 }
 \description{
-This function creates a \code{.gitignore} file with enhanced security 
-measures designed to help prevent accidental data leaks. The template includes 
-comprehensive rules for common data file types and sensitive information.
+This function creates a \code{.gitignore} file with either a minimal or aggressive
+set of ignore rules and opens it for editing.
 }
 \details{
-If a \code{.gitignore} file already exists, the user will be prompted before any
-overwriting occurs. The template provides substantial security enhancements
-over basic \code{.gitignore} files.
+The \code{aggressive = TRUE} template includes comprehensive rules for common data
+file types and sensitive information.
 
-WARNING: Always consult your organization's data security team before using git
+\strong{WARNING}: Always consult your organization's data security team before using git
 with any sensitive or protected health information (PHI). This template helps
 prevent accidental data exposure but should not be considered a complete
 security solution.
@@ -38,13 +34,19 @@ security solution.
 # Create a temporary directory for testing
 tmp_dir <- tempdir()
 
-# Write the .gitignore file
+# Write a minimal .gitignore file (default)
 write_ignore(path = tmp_dir)
 
-# Confirm the file was created (optional, for user confirmation)
-file.exists(file.path(tmp_dir, ".gitignore"))
-
-# Clean up: Remove the created file
+# Clean up the first file before creating the next one
 unlink(file.path(tmp_dir, ".gitignore"))
 
+# Write an aggressive .gitignore file
+write_ignore(path = tmp_dir, aggressive = TRUE)
+
+# Clean up
+unlink(file.path(tmp_dir, ".gitignore"))
+
+}
+\seealso{
+\code{\link{quarto_project}}, \code{\link{write_quarto}}
 }

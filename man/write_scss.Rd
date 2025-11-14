@@ -2,27 +2,24 @@
 % Please edit documentation in R/write_scss.R
 \name{write_scss}
 \alias{write_scss}
-\title{Create a 'Quarto' SCSS file}
+\title{Create a Quarto SCSS File}
 \usage{
-write_scss(path = here::here(), .initialize_proj = FALSE)
+write_scss(path = here::here())
 }
 \arguments{
-\item{path}{Character string. Path to the project directory.}
-
-\item{.initialize_proj}{Logical. TRUE only if starting a 
-\code{froggeR::quarto_project()}.}
+\item{path}{Character. Path to the project directory. Default is current project
+root via \code{\link[here]{here}}.}
 }
 \value{
-A SCSS file to customize 'Quarto' styling.
+Invisibly returns the path to the created file.
 }
 \description{
-This function creates the \code{.scss} file so that any 'Quarto' project can be easily
-customized with SCSS styling variables, mixins, and rules.
+This function creates a \code{.scss} file for custom Quarto styling and opens it
+for editing.
 }
 \details{
-The function includes a robust YAML handling mechanism that safely adds new SCSS file.
-
-See \code{vignette("customizing-quarto", package = "froggeR")} vignette for more help.
+The function creates a \code{custom.scss} file with styling variables, mixins,
+and rules for customizing Quarto document appearance.
 }
 \examples{
 # Create a temporary directory for testing
@@ -31,10 +28,13 @@ tmp_dir <- tempdir()
 # Write the SCSS file
 write_scss(path = tmp_dir)
 
-# Confirm the file was created (optional, for user confirmation)
+# Confirm the file was created
 file.exists(file.path(tmp_dir, "custom.scss"))
 
-# Clean up: Remove the created file
+# Clean up
 unlink(file.path(tmp_dir, "custom.scss"))
 
+}
+\seealso{
+\code{\link{quarto_project}}, \code{\link{write_quarto}}
 }
