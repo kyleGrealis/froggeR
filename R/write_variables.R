@@ -84,5 +84,5 @@ create_variables <- function(path) {
   file.copy(from = template_path, to = the_variables_file, overwrite = FALSE)
   ui_done('Created _variables.yml')
 
-  return(the_variables_file)
+  return(normalizePath(the_variables_file, mustWork = TRUE))
 }

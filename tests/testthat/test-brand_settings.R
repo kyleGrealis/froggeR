@@ -314,6 +314,7 @@ test_that(".save_brand_to_yaml handles minimal brand configuration", {
 })
 
 test_that(".save_brand_to_yaml errors with informative message on write failure", {
+  skip_on_os("windows")  # /proc doesn't exist on Windows
   brand <- list(meta = list(name = "Test"))
 
   # Try to write to a path that can't be created

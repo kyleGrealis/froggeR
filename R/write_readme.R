@@ -74,6 +74,6 @@ create_readme <- function(path) {
 
   file.copy(from = readme_path, to = the_readme_file, overwrite = TRUE)
   ui_done('Created README.md')
-  
-  return(the_readme_file)
+
+  return(normalizePath(the_readme_file, mustWork = TRUE))
 }

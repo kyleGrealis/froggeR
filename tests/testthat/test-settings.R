@@ -277,6 +277,7 @@ test_that(".save_metadata_to_yaml creates directory if needed", {
 })
 
 test_that(".save_metadata_to_yaml errors with informative message on write failure", {
+  skip_on_os("windows")  # /proc doesn't exist on Windows
   # Try to write to a path that can't be created
   metadata <- list(name = "Test")
 

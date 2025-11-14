@@ -283,6 +283,14 @@ test_that("quarto_project updates _quarto.yml with project name", {
 test_that("quarto_project creates logos directory for brand", {
   tmp_dir <- withr::local_tempdir()
 
+  # Set up global logos directory for testing
+  config_path <- file.path(tmp_dir, "froggeR_config")
+  logos_path <- file.path(config_path, "logos")
+  dir.create(logos_path, recursive = TRUE)
+
+  # Mock rappdirs::user_config_dir to return our test config path
+  mockery::stub(froggeR::quarto_project, "rappdirs::user_config_dir", config_path)
+
   # Mock all external calls
   mockery::stub(froggeR::quarto_project, "quarto::quarto_version", "1.6.0")
   mockery::stub(froggeR::quarto_project, "quarto::quarto_create_project", function(name, dir, ...) {
@@ -298,7 +306,7 @@ test_that("quarto_project creates logos directory for brand", {
   project_dir <- file.path(tmp_dir, project_name)
   logos_dir <- file.path(project_dir, "logos")
 
-  # The create_brand function should create the logos directory
+  # The create_brand function should create the logos directory when global logos exist
   expect_true(dir.exists(logos_dir))
 })
 

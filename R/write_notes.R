@@ -68,6 +68,6 @@ create_notes <- function(path) {
 
   writeLines(progress_notes_content, con = the_notes_file)
   ui_done('Created dated_progress_notes.md')
-  
-  return(the_notes_file)
+
+  return(normalizePath(the_notes_file, mustWork = TRUE))
 }
