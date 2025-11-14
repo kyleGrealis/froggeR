@@ -29,11 +29,11 @@ install.packages("kyleGrealis/froggeR")
 
 Project setup often involves repetitive tasks that can impede your analysis workflow. froggeR addresses this by providing:
 
-* Automated project initialization with [`quarto_project()`](https://azimuth-project.tech/froggeR/reference/quarto_project.html)
-* Reusable project configurations through [`settings()`](https://azimuth-project.tech/froggeR/reference/froggeR_settings.html)
-* Replicate Quarto project brand styling with [`write_brand()`](https://azimuth-project.tech/froggeR/reference/write_brand.html) and [`save_brand()`](https://azimuth-project.tech/froggeR/reference/save_brand.html)
-* Configurable document templates via [`write_quarto()`](https://azimuth-project.tech/froggeR/reference/write_quarto.html)
-* Consistent styling with [`write_scss()`](https://azimuth-project.tech/froggeR/reference/write_scss.html)
+* Automated project initialization with [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.html)
+* Reusable project configurations through [`settings()`](https://www.kyleGrealis.com/froggeR/reference/froggeR_settings.html)
+* Replicate Quarto project brand styling with [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.html) and [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.html)
+* Configurable document templates via [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.html)
+* Consistent styling with [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.html)
 * Enhanced version control setup
 * Easily add project documentation templates to any existing project, even those not initialized by froggeR.
 

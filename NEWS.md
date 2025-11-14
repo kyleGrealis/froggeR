@@ -89,6 +89,12 @@
 
 ---
 
+# froggeR 0.5.1
+
+## Enhancements
+* Minimal spelling corrections to `NEWS` and vignettes. *No functionality changes!*
+
+
 # froggeR 0.5.0
 
 ## BREAKING!!
