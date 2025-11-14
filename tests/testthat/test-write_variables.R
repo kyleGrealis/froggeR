@@ -16,7 +16,7 @@ test_that("write_variables creates _variables.yml file in valid directory", {
 
   # Check that function returns the file path invisibly
   expect_type(result, "character")
-  expect_equal(result, file.path(tmp_dir, "_variables.yml"))
+  expect_equal(result, normalizePath(file.path(tmp_dir, "_variables.yml")))
 })
 
 test_that("write_variables errors when directory does not exist", {
@@ -86,7 +86,7 @@ test_that("create_variables returns character path", {
 
   expect_type(result, "character")
   expect_equal(basename(result), "_variables.yml")
-  expect_equal(dirname(result), tmp_dir)
+  expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 
 test_that("create_variables errors when path is invalid", {

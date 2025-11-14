@@ -8,7 +8,7 @@ test_that("write_ignore creates .gitignore file successfully with minimal templa
   result <- suppressMessages(write_ignore(path = tmp_dir, aggressive = FALSE))
 
   expect_true(file.exists(file.path(tmp_dir, ".gitignore")))
-  expect_identical(result, file.path(tmp_dir, ".gitignore"))
+  expect_identical(result, normalizePath(file.path(tmp_dir, ".gitignore")))
 })
 
 test_that("write_ignore creates .gitignore file successfully with aggressive template", {
@@ -17,7 +17,7 @@ test_that("write_ignore creates .gitignore file successfully with aggressive tem
   result <- suppressMessages(write_ignore(path = tmp_dir, aggressive = TRUE))
 
   expect_true(file.exists(file.path(tmp_dir, ".gitignore")))
-  expect_identical(result, file.path(tmp_dir, ".gitignore"))
+  expect_identical(result, normalizePath(file.path(tmp_dir, ".gitignore")))
 })
 
 test_that("write_ignore errors when directory doesn't exist", {
@@ -49,7 +49,7 @@ test_that("write_ignore returns path invisibly", {
 
   result <- suppressMessages(write_ignore(path = tmp_dir))
 
-  expect_identical(result, file.path(tmp_dir, ".gitignore"))
+  expect_identical(result, normalizePath(file.path(tmp_dir, ".gitignore")))
 })
 
 test_that("write_ignore handles NULL path", {
@@ -214,7 +214,7 @@ test_that("write_ignore normalizes path correctly", {
 
   # Should still create the file in the correct location
   expect_true(file.exists(result))
-  expect_identical(dirname(result), normalizePath(tmp_dir))
+  expect_identical(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 
 test_that("aggressive parameter is correctly passed through write_ignore to create_ignore", {

@@ -41,8 +41,8 @@ test_that("write_notes returns normalized absolute path", {
   result <- write_notes(path = tmp_dir)
 
   # Result should be absolute path
-  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result))
-  expect_equal(dirname(result), normalizePath(tmp_dir))
+  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
+  expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 
 

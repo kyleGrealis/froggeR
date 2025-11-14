@@ -186,8 +186,8 @@ test_that("create_quarto returns normalized absolute path", {
   ))
 
   # Result should be absolute path
-  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result))
-  expect_equal(dirname(result), normalizePath(tmp_dir))
+  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
+  expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 
 test_that("create_quarto errors when path is invalid", {

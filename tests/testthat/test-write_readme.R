@@ -36,8 +36,8 @@ test_that("write_readme returns normalized absolute path", {
   result <- write_readme(path = tmp_dir)
 
   # Result should be absolute path
-  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result))
-  expect_equal(dirname(result), normalizePath(tmp_dir))
+  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
+  expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 
 
@@ -219,7 +219,7 @@ test_that("create_readme returns absolute path", {
   result <- froggeR:::create_readme(path = tmp_dir)
 
   # Result should be absolute path
-  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result))
+  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
   expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 

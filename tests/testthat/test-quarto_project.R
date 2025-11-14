@@ -288,8 +288,11 @@ test_that("quarto_project creates logos directory for brand", {
   logos_path <- file.path(config_path, "logos")
   dir.create(logos_path, recursive = TRUE)
 
-  # Mock rappdirs::user_config_dir to return our test config path
-  mockery::stub(froggeR::quarto_project, "rappdirs::user_config_dir", config_path)
+  # Mock rappdirs::user_config_dir globally using local_mocked_bindings
+  local_mocked_bindings(
+    user_config_dir = function(...) config_path,
+    .package = "rappdirs"
+  )
 
   # Mock all external calls
   mockery::stub(froggeR::quarto_project, "quarto::quarto_version", "1.6.0")
@@ -453,7 +456,7 @@ test_that("quarto_project normalizes path correctly", {
   )
 
   # Result should be absolute path
-  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result))
+  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
 })
 
 

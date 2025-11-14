@@ -33,8 +33,8 @@ test_that("write_scss returns normalized absolute path", {
   result <- write_scss(path = tmp_dir)
 
   # Result should be absolute path
-  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result))
-  expect_equal(dirname(result), normalizePath(tmp_dir))
+  expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
+  expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
 })
 
 
