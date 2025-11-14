@@ -11,9 +11,10 @@ articles:
   - title: Get Started
     navbar: ~
     contents:
-      - hopping-into-quarto
-      - quarto-workflow
-      - customizing-quarto
+      - from-zero-to-project
+      - set-once-use-everywhere
+      - your-metadata-your-way
+      - building-your-brand-identity
 
 reference:
   - title: "Project Setup"
@@ -21,6 +22,7 @@ reference:
     contents:
       - quarto_project
       - settings
+      - brand_settings
       - save_variables
       - save_brand
   - title: "Document Creation"

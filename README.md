@@ -180,9 +180,9 @@ This provides an interactive workflow to:
 * Access advanced customization options for typography, color palettes, and more
 * Save to project-level, global, or both locations
 
-The branding system allows for a quick interactive setup for core elements, while providing a full template for more advanced customization:
-- **Core Elements (Interactive)**: The most common branding elements -- project name, primary color, and logos -- are configured through a simple interactive process.
-- **Advanced Options (Template)**: For more detailed control, you can opt to edit the full branding template, which includes typography, additional color palettes, code styling, and more.
+The branding system allows for a quick interactive setup for core elements, while providing a full template for more advanced customization:  
+- **Core Elements (Interactive)**: The most common branding elements -- project name, primary color, and logos -- are configured through a simple interactive process.  
+- **Advanced Options (Template)**: For more detailed control, you can opt to edit the full branding template, which includes typography, additional color palettes, code styling, and more.  
 
 ### 📝 Templated Quarto Documents
 
@@ -248,33 +248,33 @@ froggeR validates all configuration inputs to ensure data quality and consistenc
 
 ### Metadata Validation
 
-**Name**: Minimum 2 characters required
-- Example: "Kyle Grealis"
-
-**Email**: Must include @ symbol and domain
-- Example: "user@example.com"
-- Invalid: "user@example" or "user@.com"
-
-**ORCID** (optional): Must follow standard ORCID format
-- Format: 0000-0000-0000-0000
-- Example: "0000-0002-9223-8854"
-- Leave blank if you don't have one
-
-**URL** (optional): Must start with http:// or https://
-- Valid: "https://yoursite.com", "http://example.org"
-- Invalid: "yoursite.com" or "ftp://example.com"
-
-**GitHub Username** (optional): Alphanumeric characters and hyphens only
-- Rules: Max 39 characters, no leading/trailing hyphens
-- Valid: "octocat", "kyle-grealis", "user123"
-- Invalid: "-username", "username-", "user@name"
-
-### Branding Validation
-
-**Hex Color Format**: Must be valid hexadecimal color
-- Long form: #RRGGBB (e.g., "#0066cc", "#FF5733")
-- Short form: #RGB (e.g., "#06c", "#F57")
-- Invalid: "red", "0066cc", "#GGGGGG"
+**Name**: Minimum 2 characters required  
+- Example: "Kyle Grealis"  
+  
+**Email**: Must include @ symbol and domain  
+- Example: "user@example.com"  
+- Invalid: "user@example" or "user@.com"  
+  
+**ORCID** (optional): Must follow standard ORCID format  
+- Format: 0000-0000-0000-0000  
+- Example: "0000-0002-9223-8854"  
+- Leave blank if you don't have one  
+  
+**URL** (optional): Must start with http:// or https://  
+- Valid: "https://yoursite.com", "http://example.org"  
+- Invalid: "yoursite.com" or "ftp://example.com"  
+  
+**GitHub Username** (optional): Alphanumeric characters and hyphens only  
+- Rules: Max 39 characters, no leading/trailing hyphens  
+- Valid: "octocat", "kyle-grealis", "user123"  
+- Invalid: "-username", "username-", "user@name"  
+  
+### Branding Validation  
+  
+**Hex Color Format**: Must be valid hexadecimal color  
+- Long form: #RRGGBB (e.g., "#0066cc", "#FF5733")  
+- Short form: #RGB (e.g., "#06c", "#F57")  
+- Invalid: "red", "0066cc", "#GGGGGG"  
 
 ----
 
@@ -472,13 +472,13 @@ froggeR is licensed under the [MIT License](https://choosealicense.com/licenses/
 
 ## Acknowledgments
 
-froggeR is built with love using R, Quarto, and these amazing packages:
-- [cli](https://cli.r-lib.org/) - User-friendly command line interfaces
-- [fs](https://fs.r-lib.org/) - Cross-platform file system operations
-- [here](https://here.r-lib.org/) - Project-oriented workflows
-- [quarto](https://quarto-dev.github.io/quarto-r/) - Quarto integration for R
-- [usethis](https://usethis.r-lib.org/) - Workflow automation
-- [yaml](https://github.com/vubiostat/r-yaml) - YAML parsing and writing
+froggeR is built with love using R, Quarto, and these amazing packages:  
+- [cli](https://cli.r-lib.org/) - User-friendly command line interfaces  
+- [fs](https://fs.r-lib.org/) - Cross-platform file system operations  
+- [here](https://here.r-lib.org/) - Project-oriented workflows  
+- [quarto](https://quarto-dev.github.io/quarto-r/) - Quarto integration for R  
+- [usethis](https://usethis.r-lib.org/) - Workflow automation  
+- [yaml](https://github.com/vubiostat/r-yaml) - YAML parsing and writing  
 
 ---
 

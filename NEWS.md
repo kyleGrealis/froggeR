@@ -1,4 +1,4 @@
-# froggeR 0.6.0 (2025-11-12)
+# froggeR 0.6.0 (2025-11-13)
 
 ## New features
 
