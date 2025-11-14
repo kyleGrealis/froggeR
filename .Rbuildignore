@@ -13,4 +13,5 @@ PROG_NOTES.md
 ^CRAN-SUBMISSION$
 ..Rcheck$
 
-flake.*
+^vignettes/archive$
+.claude

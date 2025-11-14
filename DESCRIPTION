@@ -1,7 +1,7 @@
 Package: froggeR
 Type: Package
 Title: Enhance 'Quarto' Project Workflows and Standards
-Version: 0.5.2
+Version: 0.6.0
 Authors@R:
     person(
         "Kyle",
@@ -14,7 +14,7 @@ Maintainer: Kyle Grealis <kyleGrealis@icloud.com>
 Description: Streamlines 'Quarto' workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted 'Quarto' documents, inclusion of 'Quarto' brand functionality, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. 
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Depends:
     R (>= 3.5.0)
 Imports:
@@ -25,6 +25,7 @@ Imports:
     quarto (>= 1.3.0),
     rappdirs,
     readr (>= 2.0.0),
+    rlang,
     rstudioapi,
     stringr (>= 1.5.0),
     usethis (>= 2.2.0),
