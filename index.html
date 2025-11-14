@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,9 +41,10 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/hopping-into-quarto.html">Get Hopping with froggeR</a></li>
-    <li><a class="dropdown-item" href="articles/quarto-workflow.html">Quarto Workflow with froggeR</a></li>
-    <li><a class="dropdown-item" href="articles/customizing-quarto.html">Customizing Quarto with froggeR</a></li>
+<li><a class="dropdown-item" href="articles/from-zero-to-project.html">From Zero to Project in Seconds</a></li>
+    <li><a class="dropdown-item" href="articles/set-once-use-everywhere.html">Set Once, Use Everywhere</a></li>
+    <li><a class="dropdown-item" href="articles/your-metadata-your-way.html">Your Metadata, Your Way</a></li>
+    <li><a class="dropdown-item" href="articles/building-your-brand-identity.html">Building Your Brand Identity</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -73,11 +74,41 @@
 <img src="logo.svg" class="logo" alt=""><h1 id="frogger-">froggeR <a class="anchor" aria-label="anchor" href="#frogger-"></a>
 </h1>
 </div>
-<p><a href="https://github.com/kyleGrealis/froggeR" class="external-link"><img src="https://img.shields.io/badge/R--CMD--check-passing-brightgreen" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a> <a href="https://CRAN.R-project.org/package=froggeR" class="external-link"><img src="https://www.r-pkg.org/badges/version/froggeR" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=froggeR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/froggeR" alt="CRAN downloads"></a></p>
+<!-- badges: start -->
+
 <blockquote>
-<p>froggeR version: 0.5.2</p>
+<p><strong>froggeR version: 0.6.0</strong> — Leap into Quarto with confidence</p>
 </blockquote>
 <p>froggeR is an R package designed to streamline the creation and management of Quarto projects. It provides a suite of tools to automate setup, ensure consistency, and enhance collaboration in data science workflows.</p>
+<div class="section level2">
+<h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
+</h2>
+<ul>
+<li><a href="#why-frogger">Why froggeR?</a></li>
+<li><a href="#key-features">Key Features</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#quick-start">Quick Start</a></li>
+<li><a href="#whos-it-for">Who’s it for?</a></li>
+<li>
+<a href="#core-workflows">Core Workflows</a>
+<ul>
+<li><a href="#id_-streamlined-quarto-project-creation">Streamlined Project Creation</a></li>
+<li><a href="#id_-configuration--reusability">Configuration &amp; Reusability</a></li>
+<li><a href="#id_-templated-quarto-documents">Templated Documents</a></li>
+<li><a href="#id_%EF%B8%8F-enhanced-git-protection">Git Protection</a></li>
+<li><a href="#id_-custom-styling-made-easy">Custom Styling</a></li>
+<li><a href="#id_-automated-project-documentation">Project Documentation</a></li>
+</ul>
+</li>
+<li><a href="#function-reference">Function Reference</a></li>
+<li><a href="#input-validation">Input Validation</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#testing--quality">Testing &amp; Quality</a></li>
+<li><a href="#getting-help">Getting Help</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</div>
 <div class="section level2">
 <h2 id="why-frogger">Why froggeR?<a class="anchor" aria-label="anchor" href="#why-frogger"></a>
 </h2>
@@ -100,6 +131,8 @@
 <strong>Customization</strong>: Easy-to-use tools for tailoring project aesthetics</li>
 <li>
 <strong>Reproducibility</strong>: Ensure consistent environments across team members</li>
+<li>
+<strong>Reusability</strong>: Save metadata and branding once, use everywhere</li>
 </ul>
 <hr>
 </div>
@@ -107,28 +140,67 @@
 <h2 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
 </h2>
 <ul>
-<li>One-command Quarto project initialization</li>
-<li>Centralized settings management for consistent metadata</li>
-<li>Quickly create, save, and reuse metadata &amp; Quarto branding</li>
-<li>Automated creation of essential project files (README, .gitignore, etc.)</li>
-<li>Custom YAML and SCSS templating for unique document styling</li>
-<li>Interactive setup process for user-specific configurations</li>
+<li>
+<strong>One-command Quarto project initialization</strong> - Set up complete projects with <code>quarto_project(name)</code>
+</li>
+<li>
+<strong>Interactive metadata configuration</strong> - <code><a href="reference/settings.html">settings()</a></code> manages author info, emails, ORCIDs, affiliations, and GitHub usernames</li>
+<li>
+<strong>Interactive branding configuration</strong> - <code><a href="reference/brand_settings.html">brand_settings()</a></code> provides core setup with advanced template editing options</li>
+<li>
+<strong>Flexible <code>.gitignore</code> options</strong> - Choose between minimal or aggressive data protection settings</li>
+<li>
+<strong>Centralized settings management</strong> - Save to project-level, global (system-wide), or both locations</li>
+<li>
+<strong>Reusable metadata and branding</strong> - Configure once, apply to all future projects automatically</li>
+<li>
+<strong>Templated Quarto documents</strong> - Auto-populate author info, branding, and styling</li>
+<li>
+<strong>Custom YAML and SCSS</strong> - Full control over document appearance and structure</li>
+<li>
+<strong>Automated project files</strong> - Generate READMs, progress notes, bibliographies, and more</li>
+<li>
+<strong>Input validation</strong> - Helpful error messages for emails, colors, ORCIDs, and other fields</li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Install froggeR and create your first project in minutes:</p>
+<div class="section level3">
+<h3 id="from-cran">From CRAN<a class="anchor" aria-label="anchor" href="#from-cran"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Install from CRAN... JUST APPROVED Jan. 15!</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"froggeR"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"froggeR"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="development-version">Development Version<a class="anchor" aria-label="anchor" href="#development-version"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install using pak (recommended)</span></span>
+<span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"kyleGrealis/froggeR"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Or get the development version</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'kyleGrealis/froggeR'</span><span class="op">)</span></span>
+<span><span class="co"># Or use remotes</span></span>
+<span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'kyleGrealis/froggeR'</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
+<p>Get started with froggeR in just a few steps:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create your first froggeR project</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">'frogs'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Step 1: Configure your metadata (one time, reused everywhere)</span></span>
+<span><span class="fu"><a href="reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 2: Configure your branding (optional, one time, reused everywhere)</span></span>
+<span><span class="fu"><a href="reference/brand_settings.html">brand_settings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 3: Create your first froggeR project</span></span>
+<span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">'my_project'</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -141,8 +213,13 @@
 <li>Collaborate in team environments</li>
 <li>Prioritize analysis over setup complexities</li>
 <li>Need rapid project initialization</li>
+<li>Want to maintain consistent branding across documents</li>
 </ul>
 <hr>
+</div>
+<div class="section level2">
+<h2 id="core-workflows">Core Workflows<a class="anchor" aria-label="anchor" href="#core-workflows"></a>
+</h2>
 <p align="center">
 <img src="reference/figures/custom-yaml-rendered.png" width="85%" alt="Rendered Document Example"></p>
 <p align="center">
@@ -153,7 +230,7 @@
 <h3 id="id_-streamlined-quarto-project-creation">🎯 Streamlined Quarto Project Creation<a class="anchor" aria-label="anchor" href="#id_-streamlined-quarto-project-creation"></a>
 </h3>
 <p>Initialize a comprehensive Quarto project with a single command:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">'my_new_project'</span><span class="op">)</span></span></code></pre></div>
 <p>This creates:</p>
 <ul>
@@ -167,48 +244,72 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="id_-centralized-settings-management">🔄 Centralized Settings Management<a class="anchor" aria-label="anchor" href="#id_-centralized-settings-management"></a>
+<h3 id="id_-configuration--reusability">🔧 Configuration &amp; Reusability<a class="anchor" aria-label="anchor" href="#id_-configuration--reusability"></a>
 </h3>
-<p>Maintain consistent metadata across your documents:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>froggeR uses a two-tier configuration approach that flows from global → project → future projects:</p>
+<div class="section level4">
+<h4 id="metadata-configuration">Metadata Configuration<a class="anchor" aria-label="anchor" href="#metadata-configuration"></a>
+</h4>
+<p>Maintain consistent metadata across your documents with <code><a href="reference/settings.html">settings()</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Interactively create or update metadata that is reusable across Quarto projects &amp; documents with:</p>
+<p>This provides an interactive workflow to:</p>
 <ul>
-<li>Author details</li>
-<li>Contact information</li>
-<li>Affiliations</li>
-<li>Project metadata</li>
-<li>Document preferences</li>
+<li>Create or update author details (name, email, ORCID, affiliations, etc.)</li>
+<li>Add GitHub username for collaboration setup</li>
+<li>Manage contact information and professional URLs</li>
+<li>Save to project-level, global (system-wide), or both locations</li>
+<li>View and update existing metadata with smart defaults</li>
 </ul>
+<p>Once configured globally, your metadata is automatically available in all future froggeR projects.</p>
+</div>
+<div class="section level4">
+<h4 id="branding-configuration">Branding Configuration<a class="anchor" aria-label="anchor" href="#branding-configuration"></a>
+</h4>
+<p>Configure project branding with <code><a href="reference/brand_settings.html">brand_settings()</a></code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/brand_settings.html">brand_settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>This provides an interactive workflow to:</p>
+<ul>
+<li>Set project/organization name</li>
+<li>Define primary brand color (with hex color validation)</li>
+<li>Upload logo paths (large and small versions)</li>
+<li>Access advanced customization options for typography, color palettes, and more</li>
+<li>Save to project-level, global, or both locations</li>
+</ul>
+<p>The branding system allows for a quick interactive setup for core elements, while providing a full template for more advanced customization:<br>
+- <strong>Core Elements (Interactive)</strong>: The most common branding elements – project name, primary color, and logos – are configured through a simple interactive process.<br>
+- <strong>Advanced Options (Template)</strong>: For more detailed control, you can opt to edit the full branding template, which includes typography, additional color palettes, code styling, and more.</p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="id_-templated-quarto-documents">📝 Templated Quarto Documents<a class="anchor" aria-label="anchor" href="#id_-templated-quarto-documents"></a>
 </h3>
 <p>Quickly generate new Quarto documents with pre-formatted headers:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_quarto.html">write_quarto</a></span><span class="op">(</span></span>
 <span>  filename <span class="op">=</span> <span class="st">'data_cleaning'</span>,</span>
 <span>  example <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co"># Add tool templates</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>Your saved metadata automatically populates author information and branding.</p>
 </div>
 <div class="section level3">
 <h3 id="id_️-enhanced-git-protection">🛡️ Enhanced Git Protection<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-enhanced-git-protection"></a>
 </h3>
-<p>Set up a comprehensive <code>.gitignore</code> for R projects:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_ignore.html">write_ignore</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Automatically excludes:</p>
-<ul>
-<li>R data files (<code>.RData</code>, <code>.rda</code>, <code>.rds</code>)</li>
-<li>Common data formats (CSV, Excel, text files)</li>
-<li>Sensitive information</li>
-</ul>
+<p>Set up a <code>.gitignore</code> tailored to your project’s needs:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Creates a minimal .gitignore suitable for most R projects</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_ignore.html">write_ignore</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># For projects with sensitive data, create a more comprehensive .gitignore</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_ignore.html">write_ignore</a></span><span class="op">(</span>aggressive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>The default <code><a href="reference/write_ignore.html">write_ignore()</a></code> excludes common R and Quarto artifacts. The <code>aggressive</code> version additionally excludes a wide range of common data file types (e.g., <code>.csv</code>, <code>.xlsx</code>, <code>.rds</code>) to help prevent accidental data exposure.</p>
 </div>
 <div class="section level3">
 <h3 id="id_-custom-styling-made-easy">🌟 Custom Styling Made Easy<a class="anchor" aria-label="anchor" href="#id_-custom-styling-made-easy"></a>
 </h3>
 <p>Generate a SCSS template for custom document styling:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_scss.html">write_scss</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Provides a formatted stylesheet with:</p>
 <ul>
@@ -222,7 +323,7 @@
 <h3 id="id_-automated-project-documentation">📚 Automated Project Documentation<a class="anchor" aria-label="anchor" href="#id_-automated-project-documentation"></a>
 </h3>
 <p>Generate a structured README for your project:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_readme.html">write_readme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Includes sections for:</p>
 <ul>
@@ -235,24 +336,38 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="comparison-with-other-tools">Comparison with Other Tools<a class="anchor" aria-label="anchor" href="#comparison-with-other-tools"></a>
+<h2 id="input-validation">Input Validation<a class="anchor" aria-label="anchor" href="#input-validation"></a>
 </h2>
-<p>While there are other project management tools for R, froggeR stands out by:</p>
-<ul>
-<li>Focusing specifically on Quarto workflows</li>
-<li>Providing a balance between automation and customization</li>
-<li>Offering a comprehensive suite of tools in a single package</li>
-<li>Emphasizing reproducibility and collaboration</li>
-</ul>
+<p>froggeR validates all configuration inputs to ensure data quality and consistency:</p>
+<div class="section level3">
+<h3 id="metadata-validation">Metadata Validation<a class="anchor" aria-label="anchor" href="#metadata-validation"></a>
+</h3>
+<p><strong>Name</strong>: Minimum 2 characters required<br>
+- Example: “Kyle Grealis”</p>
+<p><strong>Email</strong>: Must include @ symbol and domain<br>
+- Example: “<a href="mailto:user@example.com" class="email">user@example.com</a>”<br>
+- Invalid: “<a href="mailto:user@example" class="email">user@example</a>” or “user@.com”</p>
+<p><strong>ORCID</strong> (optional): Must follow standard ORCID format<br>
+- Format: 0000-0000-0000-0000<br>
+- Example: “0000-0002-9223-8854”<br>
+- Leave blank if you don’t have one</p>
+<p><strong>URL</strong> (optional): Must start with <a href="http://" class="external-link uri">http://</a> or <a href="https://" class="external-link uri">https://</a><br>
+- Valid: “<a href="https://yoursite.com" class="external-link uri">https://yoursite.com</a>”, “<a href="http://example.org" class="external-link uri">http://example.org</a>”<br>
+- Invalid: “yoursite.com” or “<a href="ftp://example.com" class="uri">ftp://example.com</a>”</p>
+<p><strong>GitHub Username</strong> (optional): Alphanumeric characters and hyphens only<br>
+- Rules: Max 39 characters, no leading/trailing hyphens<br>
+- Valid: “octocat”, “kyle-grealis”, “user123”<br>
+- Invalid: “-username”, “username-”, “<a href="mailto:user@name" class="email">user@name</a>”</p>
+</div>
+<div class="section level3">
+<h3 id="branding-validation">Branding Validation<a class="anchor" aria-label="anchor" href="#branding-validation"></a>
+</h3>
+<p><strong>Hex Color Format</strong>: Must be valid hexadecimal color<br>
+- Long form: #RRGGBB (e.g., “#0066cc”, “#FF5733”)<br>
+- Short form: #RGB (e.g., “#06c”, “#F57”)<br>
+- Invalid: “red”, “0066cc”, “#GGGGGG”</p>
 <hr>
-<p>We’re constantly improving froggeR. Upcoming features include:</p>
-<ul>
-<li>Quarto dashboard integration</li>
-<li>Integration with version control systems</li>
-<li>Enhanced team collaboration tools</li>
-<li>More customizable templates for various data science workflows</li>
-</ul>
-<hr>
+</div>
 </div>
 <div class="section level2">
 <h2 id="function-reference">Function Reference<a class="anchor" aria-label="anchor" href="#function-reference"></a>
@@ -272,18 +387,27 @@
 <td>Manage persistent Quarto document metadata</td>
 </tr>
 <tr class="even">
+<td><code><a href="reference/brand_settings.html">brand_settings()</a></code></td>
+<td>Manage persistent branding configuration</td>
+</tr>
+<tr class="odd">
 <td><code><a href="reference/quarto_project.html">quarto_project()</a></code></td>
 <td>Initialize a complete Quarto project structure</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>
 <code><a href="reference/write_quarto.html">write_quarto()</a></code>*</td>
 <td>Create consistently formatted Quarto documents</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>
 <code><a href="reference/write_variables.html">write_variables()</a></code>*</td>
 <td>Re-use metadata across projects &amp; documents</td>
+</tr>
+<tr class="even">
+<td>
+<code><a href="reference/write_brand.html">write_brand()</a></code>*</td>
+<td>Create project-level <code>_brand.yml</code> configs</td>
 </tr>
 <tr class="odd">
 <td><code><a href="reference/save_variables.html">save_variables()</a></code></td>
@@ -294,25 +418,21 @@
 <td>Save current <code>_brand.yml</code> to system-level configs</td>
 </tr>
 <tr class="odd">
-<td><code><a href="reference/write_brand.html">write_brand()</a></code></td>
-<td>Create project-level <code>_brand.yml</code> configs</td>
-</tr>
-<tr class="even">
 <td>
 <code><a href="reference/write_ignore.html">write_ignore()</a></code>*</td>
-<td>Configure <code>.gitignore</code> for enhanced data security</td>
+<td>Create a minimal or aggressive <code>.gitignore</code> file</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>
 <code><a href="reference/write_readme.html">write_readme()</a></code>*</td>
 <td>Generate a comprehensive project README</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>
 <code><a href="reference/write_notes.html">write_notes()</a></code>*</td>
 <td>Create a dated progress notes template</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>
 <code><a href="reference/write_scss.html">write_scss()</a></code>*</td>
 <td>Create a customizable SCSS styling template</td>
@@ -323,17 +443,205 @@
 <hr>
 </div>
 <div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="quick-start-setting-up-metadata">Quick Start: Setting Up Metadata<a class="anchor" aria-label="anchor" href="#quick-start-setting-up-metadata"></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run this once to set up your author metadata</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Follow the interactive prompts:</span></span>
+<span><span class="co"># - Enter your name</span></span>
+<span><span class="co"># - Enter your email</span></span>
+<span><span class="co"># - Optional: ORCID, website, GitHub username, affiliations</span></span>
+<span><span class="co"># - Choose to save globally for reuse across all future projects</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="quick-start-configuring-branding">Quick Start: Configuring Branding<a class="anchor" aria-label="anchor" href="#quick-start-configuring-branding"></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run this once to set up your project branding</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/brand_settings.html">brand_settings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Follow the interactive prompts:</span></span>
+<span><span class="co"># - Enter project name</span></span>
+<span><span class="co"># - Enter primary brand color (hex format)</span></span>
+<span><span class="co"># - Upload logo paths</span></span>
+<span><span class="co"># - Optionally edit the full template for advanced options</span></span>
+<span><span class="co"># - Choose to save globally for reuse across projects</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="creating-a-new-project-with-saved-settings">Creating a New Project with Saved Settings<a class="anchor" aria-label="anchor" href="#creating-a-new-project-with-saved-settings"></a>
+</h3>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Your saved metadata and branding are automatically available</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">'my_analysis'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The project automatically includes:</span></span>
+<span><span class="co"># - _variables.yml with your metadata</span></span>
+<span><span class="co"># - _brand.yml with your branding</span></span>
+<span><span class="co"># - Quarto document with your author info pre-filled</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="reusing-metadata-across-projects">Reusing Metadata Across Projects<a class="anchor" aria-label="anchor" href="#reusing-metadata-across-projects"></a>
+</h3>
+<p>Once you’ve saved metadata globally, it flows automatically to new projects:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Project 1: Create and save metadata</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Save globally</span></span>
+<span></span>
+<span><span class="co"># Project 2 (new directory): Metadata is already available</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">'new_project'</span><span class="op">)</span>  <span class="co"># Uses saved metadata automatically</span></span>
+<span></span>
+<span><span class="co"># Project 3: You can still create project-specific overrides</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Choose "Save to this project only" for local override</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="saving-and-applying-branding">Saving and Applying Branding<a class="anchor" aria-label="anchor" href="#saving-and-applying-branding"></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 1: Create your branding once</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/brand_settings.html">brand_settings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 2: Save globally to reuse in all future projects</span></span>
+<span><span class="co"># (Select "Save globally" or "Save to both locations")</span></span>
+<span></span>
+<span><span class="co"># Step 3: Create new projects - branding applies automatically</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/quarto_project.html">quarto_project</a></span><span class="op">(</span><span class="st">'branded_project'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 4: Update branding anytime</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/brand_settings.html">brand_settings</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Choose "Update existing branding"</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+</h2>
+<p><strong>Documentation &amp; Resources:</strong></p>
+<ul>
+<li>📚 <strong>Full Package Documentation</strong> - Visit the <a href="https://www.kyleGrealis.com/froggeR/">froggeR website</a> for complete function references and documentation</li>
+<li>📖 <strong>Vignettes</strong> - Detailed guides and workflows:
+<ul>
+<li>
+<a href="https://www.kyleGrealis.com/froggeR/articles/from-zero-to-project.html">From Zero to Project</a> - Getting started with froggeR</li>
+<li>
+<a href="https://www.kyleGrealis.com/froggeR/articles/building-your-brand-identity.html">Building Your Brand Identity</a> - Comprehensive branding workflows</li>
+<li>
+<a href="https://www.kyleGrealis.com/froggeR/articles/your-metadata-your-way.html">Your Metadata, Your Way</a> - Metadata configuration and management</li>
+<li>
+<a href="https://www.kyleGrealis.com/froggeR/articles/set-once-use-everywhere.html">Set Once, Use Everywhere</a> - Leveraging global configurations across projects</li>
+</ul>
+</li>
+<li>🐛 <strong>Report Issues</strong> - Found a bug or have a feature request? <a href="https://github.com/kyleGrealis/froggeR/issues" class="external-link">Open an issue on GitHub</a>
+</li>
+<li>💬 <strong>Questions?</strong> - Check existing GitHub issues or open a new discussion</li>
+</ul>
+<p><strong>Function Help:</strong></p>
+<p>Get help on any function directly in R:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">?</span><span class="fu">froggeR</span><span class="fu">::</span><span class="va"><a href="reference/quarto_project.html">quarto_project</a></span></span>
+<span><span class="op">?</span><span class="fu">froggeR</span><span class="fu">::</span><span class="va"><a href="reference/settings.html">settings</a></span></span>
+<span><span class="op">?</span><span class="fu">froggeR</span><span class="fu">::</span><span class="va"><a href="reference/brand_settings.html">brand_settings</a></span></span>
+<span><span class="op">?</span><span class="fu">froggeR</span><span class="fu">::</span><span class="va"><a href="reference/write_quarto.html">write_quarto</a></span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="why-frogger-over-other-tools">Why froggeR Over Other Tools?<a class="anchor" aria-label="anchor" href="#why-frogger-over-other-tools"></a>
+</h2>
+<p>While there are other project management tools for R, froggeR stands out by:</p>
+<ul>
+<li>Focusing specifically on Quarto workflows</li>
+<li>Providing a balance between automation and customization</li>
+<li>Offering a comprehensive suite of tools in a single package</li>
+<li>Emphasizing reproducibility and collaboration</li>
+<li>Supporting centralized configuration with project-level overrides</li>
+<li>New in v0.6.0: Enhanced metadata and branding management with interactive workflows</li>
+</ul>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="testing--quality">Testing &amp; Quality<a class="anchor" aria-label="anchor" href="#testing--quality"></a>
+</h2>
+<p>froggeR is thoroughly tested with:</p>
+<ul>
+<li>484 test assertions across 255 comprehensive test cases</li>
+<li>100% function coverage (all 12 exported and 30+ internal functions tested)</li>
+<li>Comprehensive test suites for:
+<ul>
+<li>Settings and metadata management (<code>test-settings.R</code>)</li>
+<li>Branding configuration (<code>test-brand_settings.R</code>)</li>
+<li>YAML generation (<code>test-write_brand.R</code>, <code>test-write_variables.R</code>)</li>
+<li>Quarto document creation (<code>test-write_quarto.R</code>)</li>
+<li>Git configuration (<code>test-write_ignore.R</code>)</li>
+<li>Project initialization (<code>test-quarto_project.R</code>)</li>
+<li>Utility functions and validators (<code>test-utils.R</code>)</li>
+<li>Global settings migration and storage (<code>test-save_brand.R</code>, <code>test-save_variables.R</code>)</li>
+</ul>
+</li>
+</ul>
+<p>All tests pass with 100% success rate. See the <a href="https://github.com/kyleGrealis/froggeR/tree/main/tests/testthat" class="external-link">tests directory</a> for detailed test examples and patterns.</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="upcoming-features">Upcoming Features<a class="anchor" aria-label="anchor" href="#upcoming-features"></a>
+</h2>
+<p>We’re constantly improving froggeR. Upcoming feature considerations include:</p>
+<ul>
+<li>Quarto dashboard integration</li>
+<li>Integration with version control systems</li>
+<li>Enhanced team collaboration tools</li>
+<li>More customizable templates for various data science workflows</li>
+</ul>
+<hr>
+</div>
+<div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
-<p>We’re open to suggestions! If you have ideas for new features, please open an issue on our GitHub repository.</p>
+<p>We welcome contributions and ideas! Here’s how you can help:</p>
+<ul>
+<li>
+<strong>Report bugs</strong> - <a href="https://github.com/kyleGrealis/froggeR/issues" class="external-link">Open an issue</a> with a clear description</li>
+<li>
+<strong>Suggest features</strong> - Have an idea? <a href="https://github.com/kyleGrealis/froggeR/issues" class="external-link">Submit a feature request</a>
+</li>
+<li>
+<strong>Share feedback</strong> - Let us know how froggeR is working for you</li>
+<li>
+<strong>Improve documentation</strong> - Help us make docs clearer and more complete</li>
+</ul>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
-<p><a href="https://choosealicense.com/licenses/mit/" class="external-link">MIT</a></p>
+<p>froggeR is licensed under the <a href="https://choosealicense.com/licenses/mit/" class="external-link">MIT License</a>. See the LICENSE file for details.</p>
 <hr>
-<p>Developed by <a href="https://github.com/kyleGrealis" class="external-link">Kyle Grealis</a></p>
+</div>
+<div class="section level2">
+<h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
+</h2>
+<p>froggeR is built with love using R, Quarto, and these amazing packages:<br>
+- <a href="https://cli.r-lib.org/" class="external-link">cli</a> - User-friendly command line interfaces<br>
+- <a href="https://fs.r-lib.org/" class="external-link">fs</a> - Cross-platform file system operations<br>
+- <a href="https://here.r-lib.org/" class="external-link">here</a> - Project-oriented workflows<br>
+- <a href="https://quarto-dev.github.io/quarto-r/" class="external-link">quarto</a> - Quarto integration for R<br>
+- <a href="https://usethis.r-lib.org/" class="external-link">usethis</a> - Workflow automation<br>
+- <a href="https://github.com/vubiostat/r-yaml" class="external-link">yaml</a> - YAML parsing and writing</p>
+<hr>
+<p><strong>Developed by <a href="https://github.com/kyleGrealis" class="external-link">Kyle Grealis</a></strong></p>
+<p>froggeR makes your Quarto projects jump for joy! 🐸</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -368,7 +676,14 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/kyleGrealis/froggeR" class="external-link"><img src="https://img.shields.io/badge/R_CMD_check-passing-brightgreen.svg" alt="R CMD check: passing"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://github.com/kyleGrealis/froggeR/tree/main/tests/testthat" class="external-link"><img src="https://img.shields.io/badge/tests-484_assertions-brightblue.svg" alt="Tests: 484 assertions"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
@@ -379,7 +694,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

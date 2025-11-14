@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,9 +18,10 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/hopping-into-quarto.html">Get Hopping with froggeR</a></li>
-    <li><a class="dropdown-item" href="../articles/quarto-workflow.html">Quarto Workflow with froggeR</a></li>
-    <li><a class="dropdown-item" href="../articles/customizing-quarto.html">Customizing Quarto with froggeR</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/from-zero-to-project.html">From Zero to Project in Seconds</a></li>
+    <li><a class="dropdown-item" href="../articles/set-once-use-everywhere.html">Set Once, Use Everywhere</a></li>
+    <li><a class="dropdown-item" href="../articles/your-metadata-your-way.html">Your Metadata, Your Way</a></li>
+    <li><a class="dropdown-item" href="../articles/building-your-brand-identity.html">Building Your Brand Identity</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -47,8 +48,7 @@
 
       <div class="section-desc"><p>Functions for creating and configuring Quarto projects</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -58,32 +58,41 @@
           <code><a href="quarto_project.html">quarto_project()</a></code>
 
         </dt>
-        <dd>Create a Custom 'Quarto' Project</dd>
-      </dl><dl><dt>
+        <dd>Create a Custom Quarto Project</dd>
+
+        <dt>
 
           <code><a href="settings.html">settings()</a></code>
 
         </dt>
-        <dd>Manage 'froggeR' Settings</dd>
-      </dl><dl><dt>
+        <dd>Manage froggeR Metadata Settings</dd>
+
+        <dt>
+
+          <code><a href="brand_settings.html">brand_settings()</a></code>
+
+        </dt>
+        <dd>Manage Brand Settings for froggeR Quarto Projects</dd>
+
+        <dt>
 
           <code><a href="save_variables.html">save_variables()</a></code>
 
         </dt>
-        <dd>Save variables YAML for 'Quarto' Projects</dd>
-      </dl><dl><dt>
+        <dd>Save Metadata Configuration to Global froggeR Settings</dd>
+
+        <dt>
 
           <code><a href="save_brand.html">save_brand()</a></code>
 
         </dt>
-        <dd>Save brand YAML for 'Quarto' Projects</dd>
+        <dd>Save Brand Configuration to Global froggeR Settings</dd>
       </dl></div><div class="section level2">
       <h2 id="document-creation">Document Creation<a class="anchor" aria-label="anchor" href="#document-creation"></a></h2>
 
       <div class="section-desc"><p>Functions for creating and styling Quarto documents</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -93,32 +102,34 @@
           <code><a href="write_quarto.html">write_quarto()</a></code>
 
         </dt>
-        <dd>Create a New 'Quarto' Document</dd>
-      </dl><dl><dt>
+        <dd>Create a New Quarto Document</dd>
+
+        <dt>
 
           <code><a href="write_variables.html">write_variables()</a></code>
 
         </dt>
-        <dd>Write Variables YAML for 'Quarto' Projects</dd>
-      </dl><dl><dt>
+        <dd>Write Variables YAML for Quarto Projects</dd>
+
+        <dt>
 
           <code><a href="write_brand.html">write_brand()</a></code>
 
         </dt>
-        <dd>Write Brand YAML for 'Quarto' Projects</dd>
-      </dl><dl><dt>
+        <dd>Write Brand YAML for Quarto Projects</dd>
+
+        <dt>
 
           <code><a href="write_scss.html">write_scss()</a></code>
 
         </dt>
-        <dd>Create a 'Quarto' SCSS file</dd>
+        <dd>Create a Quarto SCSS File</dd>
       </dl></div><div class="section level2">
       <h2 id="project-documentation">Project Documentation<a class="anchor" aria-label="anchor" href="#project-documentation"></a></h2>
 
       <div class="section-desc"><p>Functions for enhancing project documentation and security</p></div>
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -128,19 +139,21 @@
           <code><a href="write_readme.html">write_readme()</a></code>
 
         </dt>
-        <dd>Create a project README file</dd>
-      </dl><dl><dt>
+        <dd>Create a Project README File</dd>
+
+        <dt>
 
           <code><a href="write_notes.html">write_notes()</a></code>
 
         </dt>
-        <dd>Create a project README file</dd>
-      </dl><dl><dt>
+        <dd>Create a Dated Progress Notes File</dd>
+
+        <dt>
 
           <code><a href="write_ignore.html">write_ignore()</a></code>
 
         </dt>
-        <dd>Create an enhanced <code>.gitignore</code> file</dd>
+        <dd>Create an Enhanced .gitignore File</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
@@ -151,7 +164,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

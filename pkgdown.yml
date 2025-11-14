@@ -1,11 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.1.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  customizing-quarto: customizing-quarto.html
-  hopping-into-quarto: hopping-into-quarto.html
-  quarto-workflow: quarto-workflow.html
-last_built: 2025-08-21T19:12Z
+  building-your-brand-identity: building-your-brand-identity.html
+  from-zero-to-project: from-zero-to-project.html
+  set-once-use-everywhere: set-once-use-everywhere.html
+  your-metadata-your-way: your-metadata-your-way.html
+last_built: 2025-11-14T04:39Z
 urls:
   reference: https://www.kyleGrealis.com/froggeR/reference
   article: https://www.kyleGrealis.com/froggeR/articles
