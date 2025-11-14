@@ -2,26 +2,34 @@
 % Please edit documentation in R/settings.R
 \name{settings}
 \alias{settings}
-\title{Manage 'froggeR' Settings}
+\title{Manage froggeR Metadata Settings}
 \usage{
 settings()
 }
 \value{
-No return value; called for side-effects.
+Invisibly returns \code{NULL}. Called for side effects.
 }
 \description{
-This function provides useful instructions and information regarding `froggeR`
- settings.
+Interactively create or update your froggeR metadata for reuse across Quarto projects.
 }
 \details{
-This function can only run in an interactive environment. Choose to:
-- Check for the existence of project- and global-level configuration files 
-- Display current project-level settings
-- Feedback for updating settings
-- Instructions how to reuse settings across multiple `froggeR` Quarto projects.
+This function provides an interactive workflow to:
+\itemize{
+  \item Create new metadata (name, email, ORCID, affiliations, etc.)
+  \item Update existing metadata from project or global configurations
+  \item View current metadata
+  \item Save to project-level, global (system-wide), or both locations
+}
+
+Metadata is stored as YAML and automatically used by \code{\link{write_variables}}
+in future Quarto projects.
 }
 \examples{
 # Only run in an interactive environment
 if (interactive()) froggeR::settings()
 
+}
+\seealso{
+\code{\link{brand_settings}}, \code{\link{write_variables}},
+  \code{\link{save_variables}}
 }

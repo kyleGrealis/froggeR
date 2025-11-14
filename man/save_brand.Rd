@@ -2,29 +2,44 @@
 % Please edit documentation in R/save_brand.R
 \name{save_brand}
 \alias{save_brand}
-\title{Save brand YAML for 'Quarto' Projects}
+\title{Save Brand Configuration to Global froggeR Settings}
 \usage{
 save_brand(save_logos = TRUE)
 }
 \arguments{
-\item{save_logos}{Logical. Save brand logos from `logos` directory. Default is `TRUE`.}
+\item{save_logos}{Logical. Should logo files from the \code{logos} directory also
+be saved to global configuration? Default is \code{TRUE}.}
 }
 \value{
-Invisibly returns `NULL` after creating system-level configuration file.
+Invisibly returns \code{NULL} after saving configuration file.
 }
 \description{
-This function saves the current `_brand.yml` file from an existing froggeR
-Quarto project. This provides a safety catch to prevent unintended overwrite if the
-system-level configuration file exists.
+This function saves the current \code{_brand.yml} file from an existing froggeR
+Quarto project to your global (system-wide) froggeR configuration. This allows
+you to reuse brand settings across multiple projects.
 }
 \details{
-The function will attempt to create a system-level configuration file from the current
-froggeR Quarto project. If the system-level configuration file already exists, the
-user will be prompted prior to overwrite.
+This function:
+\itemize{
+  \item Reads the project-level \code{_brand.yml} file
+  \item Saves it to your system-wide froggeR config directory
+  \item Optionally copies the \code{logos} directory for reuse in future projects
+  \item Prompts for confirmation if a global configuration already exists
+}
+
+The saved configuration is stored in \code{rappdirs::user_config_dir('froggeR')}
+and will automatically be used in new froggeR projects created with
+\code{\link{quarto_project}} or \code{\link{write_brand}}.
 }
 \examples{
-
-# Write the _brand.yml file
+# Save brand settings from current project to global config
 if (interactive()) save_brand()
 
+# Save brand settings but skip logos
+if (interactive()) save_brand(save_logos = FALSE)
+
+}
+\seealso{
+\code{\link{brand_settings}}, \code{\link{write_brand}},
+  \code{\link{save_variables}}
 }

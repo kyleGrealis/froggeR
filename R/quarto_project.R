@@ -1,20 +1,22 @@
-#' Create a Custom 'Quarto' Project
+#' Create a Custom Quarto Project
 #'
-#' This function creates a new 'Quarto' project directory with additional froggeR 
-#' features. It first calls \code{quarto::quarto_create_project()} to set up the 
+#' This function creates a new Quarto project directory with additional froggeR
+#' features. It first calls \code{quarto::quarto_create_project()} to set up the
 #' basic structure, then enhances it with froggeR-specific files and settings.
 #'
-#' @param name Character string. The name of the 'Quarto' project directory and 
-#'   initial \code{.qmd} file.
-#' @param path Character string. Path to the project directory.
-#' @param example Logical. If TRUE (default), creates a Quarto document with a default to 
-#'   position the brand logo and examples of within-document cross-referencing, links,
+#' @param name Character. The name of the Quarto project directory and
+#'   initial \code{.qmd} file. Must contain only letters, numbers, hyphens, and
+#'   underscores.
+#' @param path Character. Path to the parent directory where project will be created.
+#'   Default is current project root via \code{\link[here]{here}}.
+#' @param example Logical. If \code{TRUE} (default), creates a Quarto document with
+#'   brand logo positioning and examples of within-document cross-referencing, links,
 #'   and references.
 #'
 #' @return Invisibly returns the path to the created project directory.
 #'
 #' @details
-#' This function creates a 'Quarto' project with the following enhancements:
+#' This function creates a Quarto project with the following enhancements:
 #' \itemize{
 #'   \item \code{_brand.yml}: Stores Quarto project branding
 #'   \item \code{logos}: Quarto project branding logos directory
@@ -22,48 +24,64 @@
 #'   \item \code{.gitignore}: Enhanced settings for R projects
 #'   \item \code{README.md}: Template README file
 #'   \item \code{dated_progress_notes.md}: For project progress tracking
-#'   \item \code{custom.scss}: Custom 'Quarto' styling
+#'   \item \code{custom.scss}: Custom Quarto styling
+#'   \item \code{references.bib}: Bibliography template
 #' }
-#' If froggeR settings don't exist, it will prompt to create them.
 #'
-#' @seealso \code{\link{write_quarto}}, \code{\link{settings}}
+#' The function requires Quarto version 1.6 or greater. Global froggeR settings
+#' are automatically applied if available.
+#'
+#' @seealso \code{\link{write_quarto}}, \code{\link{settings}},
+#'   \code{\link{brand_settings}}, \code{\link{write_brand}}, \code{\link{write_variables}},
+#'   \code{\link{save_brand}}, \code{\link{save_variables}}
 #'
 #' @examples
 #' if (interactive() && quarto::quarto_version() >= "1.6") {
-#' 
+#'
 #'   # Create the Quarto project with custom YAML & associated files
 #'   quarto_project("frogs", path = tempdir(), example = TRUE)
-#' 
-#'   # Confirms files were created (optional, for user confirmation)
-#'   file.exists(file.path(tempdir(), "frogs.qmd"))     # Quarto doc
-#'   file.exists(file.path(tempdir(), "_quarto.yml"))  # project YAML file
-#' 
-#'   # Create a new Quarto project with standard Quarto (no examples)
-#'   # quarto_project('frogs_standard', path = tempdir(), example = FALSE)
-#' 
+#'
+#'   # Confirm files were created
+#'   file.exists(file.path(tempdir(), "frogs", "frogs.qmd"))
+#'   file.exists(file.path(tempdir(), "frogs", "_quarto.yml"))
+#'
 #' }
 #'
 #' @export
 quarto_project <- function(name, path = here::here(), example = TRUE) {
 
   quarto_version <- quarto::quarto_version()
-  if (quarto_version < "1.6") stop("You need Quarto version 1.6 or greater to use froggeR Quarto projects. See http://quarto.org/docs/download to upgrade.")
+  if (quarto_version < '1.6') {
+    rlang::abort(
+      'You need Quarto version 1.6 or greater to use froggeR Quarto projects. See http://quarto.org/docs/download to upgrade.',
+      class = 'froggeR_quarto_version_error'
+    )
+  }
   
   # Validate path
   if (is.null(path) || is.na(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
+    rlang::abort(
+      'Invalid `path`. Please enter a valid project directory.',
+      class = 'froggeR_invalid_path'
+    )
   }
 
   # Validate name
   if (!grepl('^[a-zA-Z0-9_-]+$', name)) {
-    stop(
-      'Invalid project name. Use only letters, numbers, hyphens, and underscores.',
-      '\nExample: "my-project" or "frog_analysis"'
+    rlang::abort(
+      c(
+        'Invalid project name. Use only letters, numbers, hyphens, and underscores.',
+        'i' = 'Example: "my-project" or "frog_analysis"'
+      ),
+      class = 'froggeR_invalid_project_name'
     )
   }
   
   if (!is.logical(example)) {
-    stop('Parameter `example` must be TRUE or FALSE')
+    rlang::abort(
+      'Parameter `example` must be TRUE or FALSE.',
+      class = 'froggeR_invalid_argument'
+    )
   }
   
   # Normalize the base directory path
@@ -73,9 +91,12 @@ quarto_project <- function(name, path = here::here(), example = TRUE) {
   project_dir <- file.path(path, name)
 
   # Check if directory exists
-  if (dir.exists(project_dir)) {
-    stop(sprintf('Directory named "%s" exists in %s.', name, path))
-  }
+    if (dir.exists(project_dir)) {
+      rlang::abort(
+        sprintf('Directory named "%s" exists in %s.', name, path),
+        class = 'froggeR_directory_exists'
+      )
+    }
   
   # Create the Quarto project
   frog_prompt <- if (interactive()) FALSE else TRUE
@@ -105,26 +126,25 @@ quarto_project <- function(name, path = here::here(), example = TRUE) {
   quarto_content <- readr::read_file(the_quarto_file)
   updated_content <- stringr::str_replace(
     quarto_content,
-    "  title: \"\"",
-    sprintf("  title: \"%s\"", name)
+    '  title: ""',
+    sprintf('  title: "%s"', name)
   )
   readr::write_file(updated_content, the_quarto_file)
-  ui_done("Created _quarto.yml")
+  ui_done('Created _quarto.yml')
   
   # Create project files
-  froggeR::write_variables(path = project_dir, .initialize_proj = TRUE)
-  froggeR::write_brand(path = project_dir, .initialize_proj = TRUE)
-  froggeR::write_scss(path = project_dir, .initialize_proj = TRUE)
-  froggeR::write_ignore(path = project_dir, .initialize_proj = TRUE)
-  froggeR::write_readme(path = project_dir, .initialize_proj = TRUE)
-  froggeR::write_notes(path = project_dir, .initialize_proj = TRUE)
+  create_variables(path = project_dir)
+  create_brand(path = project_dir)
+  create_scss(path = project_dir)
+  create_ignore(path = project_dir)
+  create_readme(path = project_dir)
+  create_notes(path = project_dir)
 
   # Create Quarto document
-  froggeR::write_quarto(
+  create_quarto(
     filename = name,
     path = project_dir,
-    example = example,
-    .initialize_proj = TRUE
+    example = example
   )
 
   # Add references.bib

@@ -1,20 +1,32 @@
-#' Save variables YAML for 'Quarto' Projects
+#' Save Metadata Configuration to Global froggeR Settings
 #'
-#' This function saves the current `_variables.yml` file from an existing froggeR
-#' Quarto project. This provides a safety catch to prevent unintended overwrite if the
-#' system-level configuration file exists.
+#' This function saves the current \code{_variables.yml} file from an existing froggeR
+#' Quarto project to your global (system-wide) froggeR configuration. This allows
+#' you to reuse metadata across multiple projects.
 #'
-#' @return Invisibly returns `NULL` after creating system-level configuration file.
+#' @return Invisibly returns \code{NULL} after saving configuration file.
+#'
 #' @details
-#' The function will attempt to create a system-level configuration file from the current
-#' froggeR Quarto project. If the system-level configuration file already exists, the
-#' user will be prompted prior to overwrite.
+#' This function:
+#' \itemize{
+#'   \item Reads the project-level \code{_variables.yml} file
+#'   \item Saves it to your system-wide froggeR config directory
+#'   \item Prompts for confirmation if a global configuration already exists
+#' }
+#'
+#' The saved configuration is stored in \code{rappdirs::user_config_dir('froggeR')}
+#' and will automatically be used in new froggeR projects created with
+#' \code{\link{quarto_project}} or \code{\link{write_variables}}.
+#'
+#' This is useful for maintaining consistent author metadata (name, email, affiliations, etc.)
+#' across all your projects without having to re-enter it each time.
 #'
 #' @examples
-#'
-#' # Write the _variables.yml file
+#' # Save metadata from current project to global config
 #' if (interactive()) save_variables()
 #'
+#' @seealso \code{\link{settings}}, \code{\link{write_variables}},
+#'   \code{\link{save_brand}}
 #' @export
 save_variables <- function() {
   # Normalize the path for consistency
@@ -35,14 +47,14 @@ save_variables <- function() {
   }
 
   # Global froggeR settings
-  config_path <- rappdirs::user_config_dir("froggeR")
-  config_file <- file.path(config_path, "config.yml")
+  config_path <- rappdirs::user_config_dir('froggeR')
+  config_file <- .handle_global_variables_migration(config_path)
   # Does it exist?
   system_settings <- file.exists(config_file)
   # Overwrite_prompt
   overwrite_prompt <- sprintf(
-    "A system-level %s configuration was found. Overwrite??",
-    col_green("froggeR")
+    'A system-level %s configuration was found. Overwrite??',
+    col_green('froggeR')
   )
 
   # Save the config file or prompt the user to overwrite
@@ -58,7 +70,7 @@ save_variables <- function() {
 
   ui_info(sprintf('Copying project %s settings...', col_green('froggeR')))
   ui_done(sprintf(
-    "Saved _variables.yml to system configuration: \n%s",
+    'Saved _variables.yml to system configuration: \n%s',
     config_file
   ))
 

@@ -2,53 +2,51 @@
 % Please edit documentation in R/write_quarto.R
 \name{write_quarto}
 \alias{write_quarto}
-\title{Create a New 'Quarto' Document}
+\title{Create a New Quarto Document}
 \usage{
-write_quarto(
-  filename = "Untitled-1",
-  path = here::here(),
-  example = FALSE,
-  .initialize_proj = FALSE
-)
+write_quarto(filename = "Untitled-1", path = here::here(), example = FALSE)
 }
 \arguments{
-\item{filename}{Character string. The name of the file without the '.qmd' extension.
-Only letters, numbers, hyphens, and underscores are allowed.}
+\item{filename}{Character. The name of the file without the \code{.qmd}
+extension. Only letters, numbers, hyphens, and underscores are allowed.
+Default is \code{"Untitled-1"}.}
 
-\item{path}{Character string. Path to the project directory.}
+\item{path}{Character. Path to the project directory. Default is current project
+root via \code{\link[here]{here}}.}
 
-\item{example}{Logical. If TRUE, creates a Quarto document with a default to 
-position the brand logo and examples of within-document cross-referencing, links,
-and references.}
-
-\item{.initialize_proj}{Logical. TRUE only if starting a 
-\code{froggeR::quarto_project()}.}
+\item{example}{Logical. If \code{TRUE}, creates a Quarto document with examples
+and ensures that auxiliary files (\code{_variables.yml}, \code{_quarto.yml},
+\code{custom.scss}) exist in the project. Default is \code{FALSE}.}
 }
 \value{
-Invisibly returns NULL after creating the 'Quarto' document.
+Invisibly returns the path to the created Quarto document.
 }
 \description{
-This function creates a new 'Quarto' document (.qmd file) with either a custom
-or standard YAML header. When using a custom header, it integrates with 
-`froggeR::settings()` for reusable metadata across documents.
+This function creates a new Quarto document (\code{.qmd} file) with either a
+custom or standard YAML header and opens it for editing.
+}
+\details{
+When \code{example = TRUE}, the function automatically creates necessary
+auxiliary files if they don't exist. The created document includes example
+content demonstrating cross-references, links, and bibliography integration.
 }
 \examples{
 if (interactive()) {
   # Create a temporary directory for testing
   tmp_dir <- tempdir()
-  
-  # Write the Quarto & associated files for a custom YAML with reusable metadata
-  write_quarto(path = tempdir(), filename = "analysis")
- 
-  # Write the Quarto file with a template requiring more DIY
-  write_quarto(path = tempdir(), filename = "analysis_basic", example = FALSE)
-  
-  # Confirm the file was created (optional, for user confirmation)
+
+  # Write a Quarto document with examples
+  write_quarto(path = tmp_dir, filename = "analysis", example = TRUE)
+
+  # Verify the file was created
   file.exists(file.path(tmp_dir, "analysis.qmd"))
-  file.exists(file.path(tmp_dir, "analysis_basic.qmd"))
-  
-  # Clean up: Remove the created file
-  unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+
+  # Clean up
+  unlink(list.files(tmp_dir, full.names = TRUE), recursive = TRUE)
 }
 
+}
+\seealso{
+\code{\link{quarto_project}}, \code{\link{write_variables}},
+  \code{\link{write_brand}}
 }

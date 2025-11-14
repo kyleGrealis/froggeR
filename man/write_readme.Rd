@@ -2,24 +2,23 @@
 % Please edit documentation in R/write_readme.R
 \name{write_readme}
 \alias{write_readme}
-\title{Create a project README file}
+\title{Create a Project README File}
 \usage{
-write_readme(path = here::here(), .initialize_proj = FALSE)
+write_readme(path = here::here())
 }
 \arguments{
-\item{path}{Character string. Path to the project directory.}
-
-\item{.initialize_proj}{Logical. TRUE only if starting a 
-\code{froggeR::quarto_project()}.}
+\item{path}{Character. Path to the project directory. Default is current project
+root via \code{\link[here]{here}}.}
 }
 \value{
-Creates a comprehensive README template for project documentation.
+Invisibly returns the path to the created file.
 }
 \description{
-This function streamlines project documentation by a README.md file.
+This function streamlines project documentation by creating a \code{README.md} file
+and opening it for editing.
 }
 \details{
-The README.md template includes structured sections for:
+The \code{README.md} template includes structured sections for:
 \itemize{
   \item Project description (study name, principal investigator, author)
   \item Project setup steps for reproducibility
@@ -34,10 +33,13 @@ tmp_dir <- tempdir()
 # Write the README file
 write_readme(path = tmp_dir)
 
-# Confirm the file was created (optional, for user confirmation)
+# Confirm the file was created
 file.exists(file.path(tmp_dir, "README.md"))
 
-# Clean up: Remove the created file
+# Clean up
 unlink(file.path(tmp_dir, "README.md"))
 
+}
+\seealso{
+\code{\link{quarto_project}}, \code{\link{write_notes}}
 }

@@ -1,7 +1,99 @@
+# froggeR 0.6.0 (2025-11-13)
+
+## New features
+
+* New function `brand_settings()` provides an interactive workflow for configuring
+  Quarto project branding. Supports interactive configuration of core branding
+  elements (name, color, logos) and provides options for advanced customization
+  via template editing (typography, palettes, etc.). Brand configurations can be
+  saved to project-level, global (system-wide), or both locations for reuse
+  across projects.
+
+* New function `save_brand()` enables saving and restoring brand configurations
+  from the global froggeR settings directory.
+
+* `settings()` function completely redesigned with enhanced interactive workflow:
+  - Interactive creation and updating of metadata (name, email, ORCID, URL,
+    GitHub username, affiliations)
+  - Ability to save metadata to project-level, global, or both locations
+  - Improved user feedback and guided workflows, including clearer prompts for
+    updating metadata.
+  - Better status reporting for existing configurations
+
+* `write_brand()` gains `restore_logos` argument to enable automatic restoration
+  of logo content from system configuration (default TRUE).
+
+* `write_ignore()` now supports creating either a minimal (default) or an
+  aggressive `.gitignore` file, providing more flexibility for project needs.
+
+## Bug Fixes
+
+* Fixed a bug in `settings()` where empty optional fields could cause an error
+  during metadata cleanup.
+* Resolved an issue in `brand_settings()` where empty optional fields could lead
+  to `null` values in `_brand.yml`, potentially causing issues with Quarto.
+* Addressed potential 'incomplete line errors' in `brand_settings()` by sanitizing
+  prompt display for current values.
+
+## Minor improvements
+
+* Implemented automatic, one-time migration of global settings from `config.yml`
+  to `_variables.yml` for improved consistency and future-proofing.
+* Enhanced README with updated documentation for branding, flexible `.gitignore`
+  options, and improved clarity. README significantly expanded (487 lines) with
+  Table of Contents, better organization, "Getting Help" section, and comprehensive
+  feature highlights.
+* New comprehensive vignettes guide users through Quarto project setup:
+  - `from-zero-to-project.Rmd` - Getting started with froggeR
+  - `building-your-brand-identity.Rmd` - Brand management workflows
+  - `your-metadata-your-way.Rmd` - Metadata configuration and reuse
+  - `set-once-use-everywhere.Rmd` - Leveraging global configurations
+* Improved website URL in package documentation to point to Kyle Grealis' website.
+* Changed vignette builder from Quarto to knitr for better compatibility.
+* Enhanced input validation and error messaging for brand colors.
+* Code style consistency: Applied tidyverse-adjacent style conventions
+  throughout the package for consistent formatting.
+* Comprehensive documentation generation: Generated roxygen2 documentation for
+  all 12 public functions and 30+ internal helper functions with @noRd tags.
+  All documentation files (.Rd) are CRAN-ready.
+* NAMESPACE file updated with proper exports and imports for CRAN compliance.
+
+## Testing
+
+* Comprehensive test suite expansion: Added 3,327+ lines of new tests across
+  13 test files (test-brand_settings.R, test-settings.R, test-write_brand.R,
+  test-write_quarto.R, test-quarto_project.R, test-save_brand.R,
+  test-save_variables.R, test-utils.R, test-write_ignore.R, test-write_notes.R,
+  test-write_readme.R, test-write_scss.R, test-write_variables.R).
+* Test coverage now includes: brand configuration workflows, metadata management,
+  edge cases with empty/NA values, error handling, path normalization, and file
+  creation logic.
+* 255 test cases with 484+ individual assertions across all exported functions,
+  providing excellent coverage of new features and refactored functions, ensuring
+  robust package behavior across various scenarios.
+
+## Internal Changes
+
+* Refactored `write_*` functions to simplify their public API by removing the
+  `.initialize_proj` argument. Core file creation logic is now handled by
+  internal `create_*` functions, while exported `write_*` functions manage
+  interactive editing.
+* Standardized error handling across the package to use `rlang::abort()` with
+  custom error classes, providing more consistent and informative error messages.
+* Resolved `R CMD check` issues, including fixing example code, ensuring proper
+  `usethis::ui_warn` import, removing unnecessary `:::` calls, and addressing
+  'incomplete final line' warnings in template files.
+* Significantly updated and expanded the comprehensive test suite to cover all
+  refactored `write_*` functions, new internal `create_*` functions, and the
+  global configuration migration logic.
+
+---
+
 # froggeR 0.5.1
 
 ## Enhancements
 * Minimal spelling corrections to `NEWS` and vignettes. *No functionality changes!*
+
 
 # froggeR 0.5.0
 

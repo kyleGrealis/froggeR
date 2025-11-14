@@ -1,219 +1,42 @@
 # Helpers: ---------------------------------------------------
 
-#' Console output function
-#' 
-#' Internal helper to provide info about project-level settings
-#' @noRd
-.yes_settings <- function() {
-  ui_done('Project-level settings file (`_variables.yml`) found.')
-}
-
-#' Console output function
-#' 
-#' Internal helper to provide info about project-level settings
-#' @noRd
-.no_settings <- function() {
-  ui_oops('No project-level settings file (`_variables.yml`) found.')
-}
-
-#' Console output function
-#' 
-#' Internal helper to provide info about project-level settings
-#' @noRd
-.global_settings <- function(config_file) {
-  ui_done(sprintf('Global %s settings found at: %s', col_green('froggeR'), config_file))
-}
-
-#' Console output function
-#' 
-#' Internal helper to provide info about creating project-level settings
-#' @noRd
-.how_to <- function() {
-  ui_info(
-    sprintf(
-      'Run %s to create project-level settings.',
-      col_green('froggeR::write_variables()')
-    )
-  )
-}
-
-
-#' Check for existence of configuration files
-#' 
-#' Internal helper to verify presence of project and global settings files.
-#' @param config_file Path to global config file
-#' @param project_settings Logical indicating if project settings exist
-#' @param froggeR_settings Logical indicating if global settings exist
-#' @noRd
-.check <- function(config_file, project_settings, froggeR_settings) {
-
-  if (project_settings && froggeR_settings) {
-    # Has both project and froggeR settings
-    .yes_settings()
-    .global_settings(config_file)
-    ui_done('You are currently using project- and global-level settings.')
-
-  } else if (project_settings && !froggeR_settings) {
-    # Has only project settings
-    .yes_settings()
-    ui_oops(sprintf('No global %s config file found', col_green('froggeR')))
-
-  } else if (froggeR_settings && !project_settings) {
-    # Has only froggeR settings
-    .no_settings()
-    ui_info(sprintf(
-      'However, a %s config file was found at: %s', col_green('froggeR'), config_file
-    ))
-
-  } else {
-    ui_oops('No project-level or global settings file found.')
-  }
-}
-
-#' Check for ability to display project-level configuration file
-#' 
-#' Internal helper to display contents of project settings file.
-#' @param config_file Path to global config file
-#' @param project_settings Logical indicating if project settings exist
-#' @param froggeR_settings Logical indicating if global settings exist
-#' @noRd
-.display <- function(config_file, project_settings, froggeR_settings) {
-  if (project_settings) {
-    message('\nYour `_variables.yml` contents:\n')
-    cat(readLines(here::here('_variables.yml')), sep = '\n')
-  } else if (froggeR_settings) {
-    .no_settings()
-    ui_info(sprintf(
-      'However, a %s config file was found at: %s', col_green('froggeR'), config_file
-    ))
-    cat(readLines(config_file), sep = '\n')
-  } else {
-    ui_oops('No project-level or global settings file found.')
-    .how_to()
-  }
-}
-
-#' Check for ability to update project-level configuration file
-#' 
-#' Internal helper to update project settings file.
-#' @param settings_file Path of project settings file (`_variables.yml`)
-#' @noRd
-.update <- function(settings_file) {
-  if (file.exists(settings_file)) {
-    .yes_settings()
-    ui_info('Open the `_variables.yml` file to update project-level settings.')
-  } else {
-    .no_settings()
-    .how_to()
-  }
-}
-
-#' Check for ability to reuse configuration files
-#' 
-#' Internal helper to verify reusability of project and global settings files.
-#' @param config_file Path to global config file
-#' @param project_settings Logical indicating if project settings exist
-#' @param froggeR_settings Logical indicating if global settings exist
-#' @noRd
-.reuse <- function(config_file, project_settings, froggeR_settings) {
-
-  if (project_settings && froggeR_settings) {
-    # Has both project and froggeR settings
-    .yes_settings()
-    .global_settings(config_file)
-    ui_info('You are currently using project- and global-level settings.')
-
-  } else if (project_settings && !froggeR_settings) {
-    # Has only project settings
-    .yes_settings()
-    ui_info(
-      sprintf(
-        'To reuse your current project-level settings (`_variables.yml`) for your next %s Quarto project, save the settings file to a special configurations folder. Run %s',
-        col_green('froggeR'),
-        col_green('froggeR::save_variables()')
-      )
-    )
-    message(
-      sprintf(      
-        '\n\nYour personalized configurations will automatically be used during your next %s Quarto project.',
-        col_green('froggeR')
-      )
-    )
-
-  } else if (froggeR_settings && !project_settings) {
-    # Has only froggeR settings
-    ui_info(
-      sprintf(
-        'To reuse your global %s YAML settings (name, email, etc.) in your current project path (%s), run %s',
-        col_green('froggeR'), here::here(), col_green('froggeR::save_variables()')
-      )
-    )
-
-  } else {
-    # Neither settings found
-    ui_info(
-      sprintf(
-        'Run `froggeR::write_variables() to create project-level settings.\nTo reuse them in your next %s Quarto project, run %s',
-        col_green('froggeR'),
-        col_green('froggeR::save_variables()')
-      )
-    )
-  }
-}
-
-#' Console output function
-#' 
-#' Internal helper to provide info about using `froggeR` settings
-#' @noRd
-.more_info <- function() {
-  ui_info('Run `vignette(package = "froggeR")` to find out how to effectively use settings across multiple projects.')
-}
-
-#' Write .Rproj File
+#' Validate and Normalize Project Path
 #'
-#' Helper function to create or overwrite an RStudio project file (.Rproj).
-#' Ensures consistent settings across froggeR projects.
+#' Internal helper to validate that a path exists and normalize it for consistency.
+#' Used across all write_* and save_* functions.
 #'
-#' @inheritParams write_ignore
-#' @param name Character string. Name of the .Rproj file.
-#' @return Invisibly returns NULL after creating the .Rproj file.
+#' @param path Character. Path to validate. Must be an existing directory.
+#'
+#' @return Character. Normalized absolute path.
+#'
+#' @details
+#' Raises an error if path is \code{NULL}, \code{NA}, or does not exist as a directory.
+#'
 #' @noRd
-.write_rproj <- function(name = here::here(), path) {
-  # Validate path
+.validate_and_normalize_path <- function(path) {
   if (is.null(path) || is.na(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
+    rlang::abort(
+      'Invalid path. Please enter a valid project directory.',
+      class = 'froggeR_invalid_path'
+    )
   }
 
-  # Normalize the path for consistency
-  path <- normalizePath(path, mustWork = TRUE)
-
-  # Define the target file path
-  the_rproj_file <- file.path(path, paste0(name, ".Rproj"))
-
-  # Check for existing .Rproj
-  if (file.exists(the_rproj_file)) {
-    stop('.Rproj found in project directory!')
-  }
-
-  # Define .Rproj content
-  content <- "Version: 1.0\nRestoreWorkspace: Default\nSaveWorkspace: Default\nAlwaysSaveHistory: Default\nEnableCodeIndexing: Yes\nUseSpacesForTab: Yes\nNumSpacesForTab: 2\nEncoding: UTF-8\nRnwWeave: Sweave\nLaTeX: pdfLaTeX\nAutoAppendNewline: Yes\nStripTrailingWhitespace: Yes\n"
-
-  # Write .Rproj file
-  writeLines(content, the_rproj_file)
-  ui_done(paste0("Created ", name, ".Rproj"))
-
-  return(invisible(NULL))
+  normalizePath(path, mustWork = TRUE)
 }
 
-#' Helper for creating custom.scss & _quarto.yml
-#' 
-#' @inheritParams write_ignore
-#' @return SCSS file, Quarto project YAML file, or both
+#' Ensure Auxiliary Files Exist
+#'
+#' Internal helper that creates \code{_quarto.yml} and \code{custom.scss} if missing.
+#' Used when creating example Quarto documents.
+#'
+#' @param path Character. Path to project directory.
+#'
+#' @return Invisibly returns \code{NULL}. Called for side effects.
 #' @noRd
-.ensure_auxiliary_files <- function(path, .initialize_proj) {
+.ensure_auxiliary_files <- function(path) {
   # Validate the path
   if (!dir.exists(path)) {
-    stop("Invalid path. The specified directory does not exist.")
+    rlang::abort('Invalid path. The specified directory does not exist.', class = 'froggeR_invalid_path')
   }
 
   # Define paths for auxiliary files
@@ -222,12 +45,60 @@
 
   # Handle _quarto.yml
   if (!file.exists(quarto_yml_path)) {
-    writeLines("project:\n  title: \"Quarto Project\"", quarto_yml_path)
-    ui_done("Created _quarto.yml")
+    writeLines('project:\n  title: "Quarto Project"', quarto_yml_path)
+    ui_done('Created _quarto.yml')
   }
 
   # Handle custom.scss
   if (!file.exists(scss_path)) {
-    write_scss(path = path, .initialize_proj = .initialize_proj)
+    create_scss(path = path)
   }
+}
+
+#' Handle Migration of Global Config File Name
+#'
+#' Checks for the old \code{config.yml} and renames it to \code{_variables.yml}
+#' to align with new package convention. This is a one-time operation.
+#'
+#' @param config_path Character. Path to the froggeR config directory.
+#'
+#' @return Character. Path to the correct global variables file.
+#'
+#' @details
+#' This function handles backward compatibility for users who have the old
+#' \code{config.yml} naming convention. It attempts to rename the file once
+#' and warns if unable to do so.
+#'
+#' @noRd
+.handle_global_variables_migration <- function(config_path) {
+  old_config_file <- file.path(config_path, 'config.yml')
+  new_config_file <- file.path(config_path, '_variables.yml')
+
+  if (!file.exists(new_config_file) && file.exists(old_config_file)) {
+    tryCatch(
+      {
+        file.rename(from = old_config_file, to = new_config_file)
+        ui_info(
+          c(
+            "Global config file has been renamed from 'config.yml' to '_variables.yml' for consistency.",
+            'i' = 'This is a one-time migration.'
+          )
+        )
+      },
+      error = function(e) {
+        # In case of permission errors, etc., warn the user but don't fail.
+        # The package will proceed as if no config exists, which is safe.
+        ui_warn(
+          c(
+            "Could not automatically rename global 'config.yml' to '_variables.yml'.",
+            'x' = 'Please rename it manually in: {config_path}'
+          )
+        )
+        # Return the old file path so the app can proceed for this session
+        return(old_config_file)
+      }
+    )
+  }
+
+  return(new_config_file)
 }

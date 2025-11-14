@@ -12,3 +12,6 @@ PROG_NOTES.md
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ..Rcheck$
+
+^vignettes/archive$
+.claude
