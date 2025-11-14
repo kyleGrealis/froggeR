@@ -71,7 +71,7 @@ Run `quarto_project()` with a project name:
 froggeR::quarto_project(name = "sleep-analysis")
 ```
 
-That's it. froggeR creates the complete project structure and opens it in a new RStudio session.
+That's it. froggeR creates the complete project structure and opens it in a new Positron or RStudio session.
 
 ## A Complete Example
 
@@ -102,7 +102,7 @@ She's starting a new analysis project:
 ✔ froggeR project setup complete. Opening in new session...
 ```
 
-A new RStudio session opens with the complete project ready to go.
+A new Positron or RStudio session opens with the complete project ready to go.
 
 ## What Was Created?
 
@@ -188,9 +188,7 @@ The execution sequence:
    - `write_notes()` - Progress tracking
    - `write_quarto()` - Initial Quarto document
 6. **Copy references template**: Add `references.bib`
-7. **Open in new session**: Launch RStudio with the new project
-
-All functions are called with `.initialize_proj = TRUE` to prevent auto-opening files, since they're in a new project location.
+7. **Open in new session**: Launch Positron or RStudio with the new project
 
 ## Global Settings Integration
 
@@ -206,24 +204,24 @@ This is why configuring global settings first is powerful—your projects automa
 
 Comparison: Manual vs. froggeR
 
-**Manual process** (15-20 minutes):
-1. Create project directory
-2. Initialize Quarto project
-3. Create and configure `_quarto.yml`
-4. Create `_variables.yml` and type author info
-5. Create `_brand.yml`
-6. Create and configure `custom.scss`
-7. Set up `.gitignore`
-8. Create README, progress file, initial document
-9. Create `references.bib`
+**Manual process** (15-20 minutes):  
+1. Create project directory  
+2. Initialize Quarto project  
+3. Create and configure `_quarto.yml`  
+4. Create `_variables.yml` and type author info  
+5. Create `_brand.yml`  
+6. Create and configure `custom.scss`  
+7. Set up `.gitignore`  
+8. Create README, progress file, initial document  
+9. Create `references.bib`  
 10. Test render and fix configuration errors
 
 **froggeR process** (30 seconds):
 1. Run `froggeR::quarto_project(name = "my-project")`
 
-**Annual savings** (20 projects/year):
-- Manual: 20 × 17.5 min = 350 min (5.8 hours)
-- froggeR: 20 × 0.5 min = 10 min
+**Annual savings** (20 projects/year):  
+- Manual: 20 × 17.5 min = 350 min (5.8 hours)  
+- froggeR: 20 × 0.5 min = 10 min  
 - **Saved: 340 minutes per year**
 
 ## Error Handling
@@ -290,15 +288,15 @@ git add .
 git commit -m "Initial project setup with froggeR"
 ```
 
-What gets committed:
-- All configuration files
-- All templates
-- Initial Quarto document
+What gets committed:  
+- All configuration files  
+- All templates  
+- Initial Quarto document  
 - Progress notes
 
-What gets ignored:
-- R session data (`.RData`, `.Rhistory`, etc.)
-- Quarto build artifacts (`/.quarto/`, `/_site/`)
+What gets ignored:  
+- R session data (`.RData`, `.Rhistory`, etc.)  
+- Quarto build artifacts (`/.quarto/`, `/_site/`)  
 - Rendered HTML files (unless modified)
 
 ## Next Steps
