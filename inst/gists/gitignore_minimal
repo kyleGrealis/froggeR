@@ -1,0 +1,47 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session data
+.RData
+
+# Project files
+.Rproj.user/
+
+# RStudio files
+.Rproj
+
+# R package build artifacts
+.Rbuildignore
+.Rinstignore
+.Rcheck/
+.Rprofile
+.Renviron
+.DS_Store
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Compiled files
+*.o
+*.so
+*.dll
+
+# Markdown/Quarto artifacts
+*.html
+*.pdf
+*.tex
+*.log
+*.aux
+*.bbl
+*.blg
+*.toc
+*.snm
+*.nav
+*.out
+*.vrb
+*.synctex.gz
+_book/
+_site/
+_freeze/
