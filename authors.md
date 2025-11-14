@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/kyleGrealis/froggeR/blob/v0.6.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/kyleGrealis/froggeR/blob/main/DESCRIPTION)
 
 Grealis K (2025). *froggeR: Enhance 'Quarto' Project Workflows and
 Standards*. R package version 0.6.0,
