@@ -69,6 +69,6 @@ create_scss <- function(path) {
 
   file.copy(from = template_path, to = the_scss_file, overwrite = FALSE)
   ui_done('Created custom.scss')
-  
-  return(the_scss_file)
+
+  return(normalizePath(the_scss_file, mustWork = TRUE))
 }

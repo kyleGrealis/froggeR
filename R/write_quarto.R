@@ -118,6 +118,6 @@ create_quarto <- function(filename, path, example) {
   ui_done(sprintf(
     'Created %s.qmd %s', filename, ifelse(example, col_green('with examples'), '')
   ))
-  
-  return(the_quarto_file)
+
+  return(normalizePath(the_quarto_file, mustWork = TRUE))
 }

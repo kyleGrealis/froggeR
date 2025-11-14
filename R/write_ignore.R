@@ -83,6 +83,6 @@ create_ignore <- function(path, aggressive = FALSE) {
 
   file.copy(from = template_path, to = the_ignore_file, overwrite = FALSE)
   ui_done(sprintf('Created .gitignore (%s version)', if (aggressive) 'aggressive' else 'minimal'))
-  
-  return(the_ignore_file)
+
+  return(normalizePath(the_ignore_file, mustWork = TRUE))
 }

@@ -162,7 +162,7 @@ quarto_project <- function(name, path = here::here(), example = TRUE) {
   
   # Open project in new window & session:
   if (interactive()) rstudioapi::openProject(path = project_dir, newSession = TRUE)
-  
-  # Return the project directory path invisibly
-  invisible(project_dir)
+
+  # Return the project directory path invisibly (normalized)
+  invisible(normalizePath(project_dir, mustWork = TRUE))
 }
