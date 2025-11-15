@@ -4,6 +4,7 @@
 [![R CMD check: passing](https://img.shields.io/badge/R_CMD_check-passing-brightgreen.svg)](https://github.com/kyleGrealis/froggeR)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Tests: 484 assertions](https://img.shields.io/badge/tests-484_assertions-brightblue.svg)](https://github.com/kyleGrealis/froggeR/tree/main/tests/testthat)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
 <!-- badges: end -->
 
 > **froggeR version: 0.6.0** — Leap into Quarto with confidence

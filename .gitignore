@@ -43,3 +43,6 @@ inst/doc
 docs
 cran-comments.md
 ^CRAN-SUBMISSION$
+
+/.quarto/
+**/*.quarto_ipynb
