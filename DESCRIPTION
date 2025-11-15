@@ -6,11 +6,11 @@ Authors@R:
     person(
         "Kyle",
         "Grealis",
-        email = "kyleGrealis@icloud.com",
+        email = "kyleGrealis@proton.me",
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-9223-8854")
     )
-Maintainer: Kyle Grealis <kyleGrealis@icloud.com>
+Maintainer: Kyle Grealis <kyleGrealis@proton.me>
 Description: Streamlines 'Quarto' workflows by providing tools for consistent project setup and documentation. Enables portability through reusable metadata, automated project structure creation, and standardized templates. Features include enhanced project initialization, pre-formatted 'Quarto' documents, inclusion of 'Quarto' brand functionality, comprehensive data protection settings, custom styling, and structured documentation generation. Designed to improve efficiency and collaboration in R data science projects by reducing repetitive setup tasks while maintaining consistent formatting across multiple documents. 
 License: MIT + file LICENSE
 Encoding: UTF-8
