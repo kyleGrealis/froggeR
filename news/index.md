@@ -2,6 +2,8 @@
 
 ## froggeR 0.6.0 (2025-11-13)
 
+CRAN release: 2025-11-14
+
 ### New features
 
 - New function
