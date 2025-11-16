@@ -1,4 +1,5 @@
-# froggeR <img src="man/figures/logo.png" align="right" height="130"  alt="" />
+# froggeR <img src="man/figures/froggeR_hex.svg" align="right" height="130"  alt="" />
+<!-- # froggeR <img src="man/figures/logo.png" align="right" height="130"  alt="" /> -->
 
 <!-- badges: start -->
 [![R CMD check: passing](https://img.shields.io/badge/R_CMD_check-passing-brightgreen.svg)](https://github.com/kyleGrealis/froggeR)
