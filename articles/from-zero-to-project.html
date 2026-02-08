@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +39,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/from-zero-to-project.html">From Zero to Project in Seconds</a></li>
-    <li><a class="dropdown-item" href="../articles/set-once-use-everywhere.html">Set Once, Use Everywhere</a></li>
-    <li><a class="dropdown-item" href="../articles/your-metadata-your-way.html">Your Metadata, Your Way</a></li>
-    <li><a class="dropdown-item" href="../articles/building-your-brand-identity.html">Building Your Brand Identity</a></li>
+    <li><a class="dropdown-item" href="../articles/every-file-in-its-place.html">Every File in Its Place</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -81,408 +79,218 @@
     
     
 <div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="the-case-for-convention">The case for convention<a class="anchor" aria-label="anchor" href="#the-case-for-convention"></a>
 </h2>
-<p>Starting a new Quarto project usually involves multiple tedious
-steps: creating directories, copying templates, configuring YAML files,
-setting up version control, creating initial documents.</p>
-<p>The <code><a href="../reference/quarto_project.html">quarto_project()</a></code> function changes this. With a
-single command, you get a complete, production-ready Quarto project with
-all configuration, styling, and scaffolding you need to start working
-immediately.</p>
+<p>Most programming languages agree on where files belong. Python has
+its package layout. Node has <code>src/</code>, <code>public/</code>,
+<code>package.json</code>. Others give you a directory tree on day
+one.</p>
+<p>R has no such agreement. Scripts, Quarto documents, data files, and
+stylesheets pile up in the root directory. Every project is organized
+differently, or not at all. Switching between projects means re-learning
+the layout every time.</p>
+<p>froggeR enforces one:</p>
+<ul>
+<li>
+<code>R/</code> for scripts</li>
+<li>
+<code>pages/</code> for Quarto documents</li>
+<li>
+<code>www/</code> for stylesheets and assets</li>
+<li>
+<code>data/</code> for data files</li>
+<li>
+<code>logos/</code> for brand images</li>
+</ul>
+<p>This is not complicated. That is the point. The same convention maps
+directly to R package structure (<code>R/</code>, <code>inst/</code>,
+<code>man/</code>), to Shiny frameworks like <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> and <a href="https://appsilon.github.io/rhino/" class="external-link">rhino</a>, and to web
+frameworks in other languages. Learn it once, use it everywhere.</p>
 </div>
 <div class="section level2">
-<h2 id="what-gets-created">What Gets Created?<a class="anchor" aria-label="anchor" href="#what-gets-created"></a>
+<h2 id="init">
+<code>init()</code><a class="anchor" aria-label="anchor" href="#init"></a>
 </h2>
-<p>When you run <code><a href="../reference/quarto_project.html">quarto_project()</a></code>, froggeR creates a
-complete project structure:</p>
-<pre><code>my-project/
-├── _brand.yml                    # Branding configuration
-├── _quarto.yml                   # Quarto project configuration
-├── _variables.yml                # Author metadata
-├── custom.scss                   # Custom styling
-├── .gitignore                    # Enhanced version control settings
-├── README.md                     # Project documentation
-├── dated_progress_notes.md       # Project tracking
-├── references.bib                # Bibliography template
-└── my-project.qmd                # Initial Quarto document</code></pre>
-<p>Every file is configured, ready to use, and integrated with your
-global settings.</p>
+<p>One command builds the full scaffold:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/init.html">init</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"my_project"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>my_project/
+├── R/
+│   ├── _data_dictionary.R    # Variable labels and metadata
+│   ├── _libraries.R          # Centralized package loading
+│   └── _load.R               # Sources everything. Your entry point.
+├── pages/
+│   ├── index.qmd             # Main Quarto document
+│   └── references.bib        # Bibliography
+├── www/
+│   ├── custom.scss           # Custom styling
+│   └── tables.js             # Table enhancements
+├── logos/                    # Brand logos
+├── data/                     # Data files (gitignored)
+├── _brand.yml                # Quarto brand configuration
+├── _quarto.yml               # Quarto project configuration
+├── _variables.yml            # Author metadata
+├── .gitignore                # Opinionated git protection
+├── .pre-commit-config.yaml   # Pre-commit hook configuration
+└── README.md</code></pre>
+<p><code><a href="../reference/init.html">init()</a></code> downloads the latest template from <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a>
+and populates the directory with the full scaffold. If you have
+previously saved global config with <code><a href="../reference/save_variables.html">save_variables()</a></code> or
+<code><a href="../reference/save_brand.html">save_brand()</a></code>, your metadata and branding are already in
+place.</p>
+<div class="section level3">
+<h3 id="what-each-directory-is-for">What each directory is for<a class="anchor" aria-label="anchor" href="#what-each-directory-is-for"></a>
+</h3>
+<p><strong><code>R/</code></strong> contains R scripts.
+<code>_load.R</code> is the entry point: it sources
+<code>_libraries.R</code> (package loading) and
+<code>_data_dictionary.R</code> (variable labels and metadata). Add your
+own scripts here.</p>
+<p><strong><code>pages/</code></strong> contains Quarto documents.
+<code>index.qmd</code> is the default landing page.
+<code>references.bib</code> holds your bibliography. Add new pages with
+<code><a href="../reference/write_quarto.html">write_quarto()</a></code>.</p>
+<p><strong><code>www/</code></strong> contains web assets.
+<code>custom.scss</code> controls document styling.
+<code>tables.js</code> provides table enhancements. Keep stylesheets,
+images, and scripts here.</p>
+<p><strong><code>data/</code></strong> is for data files. It is
+gitignored by default, so you can keep raw and processed data here
+without worrying about accidentally committing it.</p>
+<p><strong><code>logos/</code></strong> holds brand images referenced by
+<code>_brand.yml</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="root-level-configuration">Root-level configuration<a class="anchor" aria-label="anchor" href="#root-level-configuration"></a>
+</h3>
+<p>The files in the project root are configuration:</p>
+<ul>
+<li>
+<strong><code>_quarto.yml</code></strong> defines project-level
+rendering options. See <a href="https://quarto.org/docs/projects/quarto-projects.html" class="external-link">Quarto
+Project Basics</a>.</li>
+<li>
+<strong><code>_brand.yml</code></strong> defines your visual
+identity: colors, logos, typography. See <a href="https://quarto.org/docs/authoring/brand.html" class="external-link">Quarto
+Brand</a>.</li>
+<li>
+<strong><code>_variables.yml</code></strong> stores author metadata:
+name, email, etc.</li>
+<li>
+<strong><code>.gitignore</code></strong> keeps R artifacts, rendered
+output, and data files out of version control.</li>
+<li>
+<strong><code>.pre-commit-config.yaml</code></strong> runs code
+quality checks before every commit. See below.</li>
+</ul>
+</div>
 </div>
 <div class="section level2">
-<h2 id="the-basic-workflow">The Basic Workflow<a class="anchor" aria-label="anchor" href="#the-basic-workflow"></a>
+<h2 id="pre-commit-hooks">Pre-commit hooks<a class="anchor" aria-label="anchor" href="#pre-commit-hooks"></a>
 </h2>
+<p>The template includes a <code>.pre-commit-config.yaml</code> that
+integrates with <a href="https://pre-commit.com" class="external-link">pre-commit</a> to run
+automated checks before every <code>git commit</code>. This catches
+problems early: unstyled code, lint violations, debug statements left
+in, large files accidentally staged.</p>
 <div class="section level3">
-<h3 id="step-1-ensure-you-have-quarto-1-6">Step 1: Ensure You Have Quarto 1.6+<a class="anchor" aria-label="anchor" href="#step-1-ensure-you-have-quarto-1-6"></a>
+<h3 id="what-is-included">What is included<a class="anchor" aria-label="anchor" href="#what-is-included"></a>
 </h3>
-<p>froggeR requires Quarto 1.6+ for branding support:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">quarto</span><span class="fu">::</span><span class="fu"><a href="https://quarto-dev.github.io/quarto-r/reference/quarto_version.html" class="external-link">quarto_version</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># [1] '1.6.33'</span></span></code></pre></div>
-<p>If needed, upgrade at <a href="https://quarto.org/docs/download/" class="external-link uri">https://quarto.org/docs/download/</a>.</p>
+<p>From <a href="https://lorenzwalthert.github.io/precommit/" class="external-link">{precommit}</a>:</p>
+<ul>
+<li>
+<strong>style-files</strong>: Formats R code with <a href="https://styler.r-lib.org/" class="external-link">{styler}</a> using tidyverse
+conventions</li>
+<li>
+<strong>lintr</strong>: Runs <a href="https://lintr.r-lib.org/" class="external-link">{lintr}</a> static analysis</li>
+<li>
+<strong>parsable-R</strong>: Confirms all R files parse without
+errors</li>
+<li>
+<strong>no-browser-statement</strong>: Catches leftover
+<code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> calls</li>
+<li>
+<strong>no-debug-statement</strong>: Catches leftover
+<code><a href="https://rdrr.io/r/base/debug.html" class="external-link">debug()</a></code> and <code><a href="https://rdrr.io/r/base/debug.html" class="external-link">debugonce()</a></code> calls</li>
+</ul>
+<p>From <a href="https://github.com/pre-commit/pre-commit-hooks" class="external-link">pre-commit-hooks</a>:</p>
+<ul>
+<li>
+<strong>check-added-large-files</strong>: Blocks files over 200
+KB</li>
+<li>
+<strong>end-of-file-fixer</strong>: Ensures files end with a
+newline</li>
+</ul>
+<p>Local:</p>
+<ul>
+<li>
+<strong>forbid-to-commit</strong>: Blocks <code>.Rhistory</code>,
+<code>.RData</code>, <code>.Rds</code>, and <code>.rds</code> files</li>
+</ul>
 </div>
 <div class="section level3">
-<h3 id="step-2-configure-your-settings-recommended">Step 2: Configure Your Settings (Recommended)<a class="anchor" aria-label="anchor" href="#step-2-configure-your-settings-recommended"></a>
+<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h3>
-<p>Configure your global metadata and branding:</p>
+<p>Install the R packages and initialize:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/settings.html">settings</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/brand_settings.html">brand_settings</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This is optional but ensures your projects automatically include your
-author information and branding.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"precommit"</span>, <span class="st">"styler"</span>, <span class="st">"lintr"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">precommit</span><span class="fu">::</span><span class="fu">use_precommit</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><a href="https://lorenzwalthert.github.io/precommit/" class="external-link">{precommit}</a>
+handles installing the pre-commit framework itself. See <a href="https://pre-commit.com/#install" class="external-link">pre-commit.com</a> for manual
+installation options.</p>
 </div>
 <div class="section level3">
-<h3 id="step-3-create-your-project">Step 3: Create Your Project<a class="anchor" aria-label="anchor" href="#step-3-create-your-project"></a>
+<h3 id="adapting-or-removing">Adapting or removing<a class="anchor" aria-label="anchor" href="#adapting-or-removing"></a>
 </h3>
-<p>Run <code><a href="../reference/quarto_project.html">quarto_project()</a></code> with a project name:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"sleep-analysis"</span><span class="op">)</span></span></code></pre></div>
-<p>That’s it. froggeR creates the complete project structure and opens
-it in a new Positron or RStudio session.</p>
+<p>The hooks are a starting point. Edit
+<code>.pre-commit-config.yaml</code> to add, remove, or reconfigure
+hooks for your workflow. If you do not want pre-commit at all, delete
+the file. No other part of froggeR depends on it.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="a-complete-example">A Complete Example<a class="anchor" aria-label="anchor" href="#a-complete-example"></a>
+<h2 id="your-settings-follow-you">Your settings follow you<a class="anchor" aria-label="anchor" href="#your-settings-follow-you"></a>
 </h2>
-<p>Let’s walk through a real-world example with Dr. Rachel Kim.</p>
-<p>Rachel has configured global settings:</p>
-<ul>
-<li>
-<strong>Metadata</strong>: Name, email, ORCID, affiliation (via
-<code><a href="../reference/settings.html">settings()</a></code>)</li>
-<li>
-<strong>Branding</strong>: Kim Lab name, logo, and blue color (via
-<code><a href="../reference/brand_settings.html">brand_settings()</a></code>)</li>
-</ul>
-<p>She’s starting a new analysis project:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">&gt;</span> froggeR<span class="sc">::</span><span class="fu">quarto_project</span>(<span class="at">name =</span> <span class="st">"sleep-deprivation-study"</span>, <span class="at">path =</span> <span class="st">"~/research"</span>, <span class="at">example =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>✔ Created Quarto project directory<span class="sc">:</span> sleep<span class="sc">-</span>deprivation<span class="sc">-</span>study</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>✔ Created _quarto.yml</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>ℹ Copying existing froggeR settings...</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>✔ Created _variables.yml</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>ℹ Copying existing froggeR brand settings...</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>✔ Created _brand.yml</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>✔ Created custom.scss</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>✔ Created .gitignore</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>✔ Created README.md</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>✔ Created dated_progress_notes.md</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>✔ Created sleep<span class="sc">-</span>deprivation<span class="sc">-</span>study.qmd with examples</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>✔ Created references.bib</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>✔ froggeR project setup complete. Opening <span class="cf">in</span> new session...</span></code></pre></div>
-<p>A new Positron or RStudio session opens with the complete project
-ready to go.</p>
-</div>
-<div class="section level2">
-<h2 id="what-was-created">What Was Created?<a class="anchor" aria-label="anchor" href="#what-was-created"></a>
-</h2>
-<p>Each file serves a specific purpose:</p>
-<p><strong><code>_quarto.yml</code></strong> - Project configuration
-with sensible defaults for HTML rendering, table of contents, code
-folding, and bibliography support; references variables from
-<code>_variables.yml</code></p>
-<p><strong><code>_variables.yml</code></strong> - Author metadata
-automatically populated from global settings</p>
-<p><strong><code>_brand.yml</code></strong> - Branding configuration
-automatically copied from global settings (see <a href="building-your-brand-identity.html">Building Your Brand
-Identity</a> for details)</p>
-<p><strong><code>custom.scss</code></strong> - SCSS template for custom
-styling, ready for customization</p>
-<p><strong><code>.gitignore</code></strong> - Pre-configured to exclude
-R and Quarto artifacts</p>
-<p><strong><code>README.md</code></strong> - Template for project
-documentation</p>
-<p><strong><code>dated_progress_notes.md</code></strong> - Dated file
-for tracking project progress</p>
-<p><strong><code>references.bib</code></strong> - Template bibliography
-file for citations</p>
-<p><strong><code>sleep-deprivation-study.qmd</code></strong> - Initial
-Quarto document with examples (because <code>example = TRUE</code>)</p>
-</div>
-<div class="section level2">
-<h2 id="function-parameters">Function Parameters<a class="anchor" aria-label="anchor" href="#function-parameters"></a>
-</h2>
-<div class="section level3">
-<h3 id="name-required">
-<code>name</code> (required)<a class="anchor" aria-label="anchor" href="#name-required"></a>
-</h3>
-<p>The project name. Used for directory name, .qmd filename, and project
-title.</p>
-<p><strong>Rules</strong>: Only letters, numbers, hyphens, and
-underscores</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Good</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my-analysis"</span><span class="op">)</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"study_2024"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Bad</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my analysis"</span><span class="op">)</span>  <span class="co"># Spaces not allowed</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"study@2024"</span><span class="op">)</span>  <span class="co"># Special characters not allowed</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="path-optional">
-<code>path</code> (optional)<a class="anchor" aria-label="anchor" href="#path-optional"></a>
-</h3>
-<p>Where to create the project. Defaults to current working
-directory.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create in current directory</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"analysis"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create in specific location</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"analysis"</span>, path <span class="op">=</span> <span class="st">"~/research/projects"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="example-optional-default-true">
-<code>example</code> (optional, default = <code>TRUE</code>)<a class="anchor" aria-label="anchor" href="#example-optional-default-true"></a>
-</h3>
-<p>Whether to include examples in the initial <code>.qmd</code>
-file.</p>
-<ul>
-<li>
-<code>example = TRUE</code>: Includes example content showing Quarto
-features</li>
-<li>
-<code>example = FALSE</code>: Creates a minimal Quarto document</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># With examples (default)</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"learning-project"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Minimal document</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"analysis"</span>, example <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="how-it-works">How It Works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
-</h2>
-<p>The execution sequence:</p>
+<p>froggeR stores configuration in two places:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Validate inputs</strong>: Check Quarto version, path
-validity, project name format</li>
+<strong>Project-level</strong>: <code>_variables.yml</code> and
+<code>_brand.yml</code> in your project directory. These are committed
+to version control and used by the current project.</li>
 <li>
-<strong>Create project directory</strong>: Call
-<code><a href="https://quarto-dev.github.io/quarto-r/reference/quarto_create_project.html" class="external-link">quarto::quarto_create_project()</a></code>
-</li>
-<li>
-<strong>Remove default files</strong>: Delete Quarto’s default
-files</li>
-<li>
-<strong>Add custom <code>_quarto.yml</code></strong>: Copy froggeR’s
-template with title updated</li>
-<li>
-<strong>Write configuration files</strong>: Call helper functions in
-sequence
+<strong>Global</strong>: Your system’s configuration directory,
+managed by the <code>rappdirs</code> package.
 <ul>
-<li>
-<code><a href="../reference/write_variables.html">write_variables()</a></code> - Author metadata</li>
-<li>
-<code><a href="../reference/write_brand.html">write_brand()</a></code> - Branding configuration</li>
-<li>
-<code><a href="../reference/write_scss.html">write_scss()</a></code> - Custom styling</li>
-<li>
-<code><a href="../reference/write_ignore.html">write_ignore()</a></code> - Version control settings</li>
-<li>
-<code><a href="../reference/write_readme.html">write_readme()</a></code> - Documentation template</li>
-<li>
-<code><a href="../reference/write_notes.html">write_notes()</a></code> - Progress tracking</li>
-<li>
-<code><a href="../reference/write_quarto.html">write_quarto()</a></code> - Initial Quarto document</li>
+<li>Linux/macOS: <code>~/.config/froggeR/</code>
+</li>
+<li>Windows:
+<code>C:\Users\&lt;username&gt;\AppData\Local\froggeR\</code>
+</li>
 </ul>
 </li>
-<li>
-<strong>Copy references template</strong>: Add
-<code>references.bib</code>
-</li>
-<li>
-<strong>Open in new session</strong>: Launch Positron or RStudio
-with the new project</li>
 </ol>
-</div>
-<div class="section level2">
-<h2 id="global-settings-integration">Global Settings Integration<a class="anchor" aria-label="anchor" href="#global-settings-integration"></a>
-</h2>
-<p>When <code><a href="../reference/write_variables.html">write_variables()</a></code> and <code><a href="../reference/write_brand.html">write_brand()</a></code>
-run, they check for global settings:</p>
-<ul>
-<li>If global <code>config.yml</code> exists → copy to project
-<code>_variables.yml</code>
-</li>
-<li>If global <code>_brand.yml</code> exists → copy to project
-<code>_brand.yml</code>
-</li>
-<li>If neither exists → create minimal templates</li>
-</ul>
-<p>This is why configuring global settings first is powerful—your
-projects automatically inherit them.</p>
-</div>
-<div class="section level2">
-<h2 id="time-savings">Time Savings<a class="anchor" aria-label="anchor" href="#time-savings"></a>
-</h2>
-<p>Comparison: Manual vs. froggeR</p>
-<p><strong>Manual process</strong> (15-20 minutes):<br>
-1. Create project directory<br>
-2. Initialize Quarto project<br>
-3. Create and configure <code>_quarto.yml</code><br>
-4. Create <code>_variables.yml</code> and type author info<br>
-5. Create <code>_brand.yml</code><br>
-6. Create and configure <code>custom.scss</code><br>
-7. Set up <code>.gitignore</code><br>
-8. Create README, progress file, initial document<br>
-9. Create <code>references.bib</code><br>
-10. Test render and fix configuration errors</p>
-<p><strong>froggeR process</strong> (30 seconds): 1. Run
-<code>froggeR::quarto_project(name = "my-project")</code></p>
-<p><strong>Annual savings</strong> (20 projects/year):<br>
-- Manual: 20 × 17.5 min = 350 min (5.8 hours)<br>
-- froggeR: 20 × 0.5 min = 10 min<br>
-- <strong>Saved: 340 minutes per year</strong></p>
-</div>
-<div class="section level2">
-<h2 id="error-handling">Error Handling<a class="anchor" aria-label="anchor" href="#error-handling"></a>
-</h2>
-<div class="section level3">
-<h3 id="you-need-quarto-version-1-6-or-greater">“You need Quarto version 1.6 or greater”<a class="anchor" aria-label="anchor" href="#you-need-quarto-version-1-6-or-greater"></a>
-</h3>
-<p>Upgrade Quarto at <a href="https://quarto.org/docs/download/" class="external-link uri">https://quarto.org/docs/download/</a></p>
-</div>
-<div class="section level3">
-<h3 id="invalid-path--please-enter-a-valid-project-directory-">“Invalid <code>path</code>. Please enter a valid project
-directory.”<a class="anchor" aria-label="anchor" href="#invalid-path--please-enter-a-valid-project-directory-"></a>
-</h3>
-<p>The <code>path</code> parameter must point to an existing
-directory:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create directory if needed</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"~/research"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Then create project</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"analysis"</span>, path <span class="op">=</span> <span class="st">"~/research"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="directory-named-my-project-exists">“Directory named ‘my-project’ exists”<a class="anchor" aria-label="anchor" href="#directory-named-my-project-exists"></a>
-</h3>
-<p>Choose a different name or remove the existing directory:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Different name</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my-project-v2"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Or remove existing (be careful!)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"~/research/my-project"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="invalid-project-name">“Invalid project name”<a class="anchor" aria-label="anchor" href="#invalid-project-name"></a>
-</h3>
-<p>Project names must use only letters, numbers, hyphens, and
-underscores:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Good</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my-analysis"</span><span class="op">)</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"study_2024"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Bad</span></span>
-<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/quarto_project.html">quarto_project</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my analysis!"</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="customizing-after-creation">Customizing After Creation<a class="anchor" aria-label="anchor" href="#customizing-after-creation"></a>
-</h2>
-<p>After <code><a href="../reference/quarto_project.html">quarto_project()</a></code> creates your project, you can
-customize:</p>
+<p>Global config is set once and applied to every future project created
+with <code><a href="../reference/init.html">init()</a></code>. Edit the project copy directly when you need
+something specific.</p>
+<p>If you have configured global settings before running
+<code><a href="../reference/init.html">init()</a></code>, your new project inherits them automatically:</p>
 <ul>
 <li>
-<strong><code>_quarto.yml</code></strong>: Modify project-level
-defaults (table of contents depth, code folding, layout, and references
-variables from <code>_variables.yml</code>)</li>
+<strong><code>_variables.yml</code></strong>: Global config
+overwrites the template version</li>
 <li>
-<strong><code>custom.scss</code></strong>: Add custom styling for
-callouts, figures, custom classes</li>
+<strong><code>_brand.yml</code></strong>: Global config overwrites
+the template version</li>
 <li>
-<strong><code>references.bib</code></strong>: Add your
-citations</li>
-<li>
-<strong><code>dated_progress_notes.md</code></strong>: Track project
-progress</li>
-<li>
-<strong><code>README.md</code></strong>: Document your project</li>
+<strong><code>logos/</code></strong>: Global logos supplement the
+template (adds missing logos without removing existing ones)</li>
 </ul>
-</div>
-<div class="section level2">
-<h2 id="integration-with-version-control">Integration with Version Control<a class="anchor" aria-label="anchor" href="#integration-with-version-control"></a>
-</h2>
-<p>The <code>.gitignore</code> is pre-configured for R and Quarto
-projects:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="bu">cd</span> my-project</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">git</span> init</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial project setup with froggeR"</span></span></code></pre></div>
-<p>What gets committed:<br>
-- All configuration files<br>
-- All templates<br>
-- Initial Quarto document<br>
-- Progress notes</p>
-<p>What gets ignored:<br>
-- R session data (<code>.RData</code>, <code>.Rhistory</code>,
-etc.)<br>
-- Quarto build artifacts (<code>/.quarto/</code>,
-<code>/_site/</code>)<br>
-- Rendered HTML files (unless modified)</p>
-</div>
-<div class="section level2">
-<h2 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
-</h2>
-<p>Explore how <code><a href="../reference/quarto_project.html">quarto_project()</a></code> integrates with the broader
-froggeR ecosystem:</p>
-<ul>
-<li>
-<a href="set-once-use-everywhere.html">Set Once, Use Everywhere</a>
-- Understand global settings</li>
-<li>
-<a href="your-metadata-your-way.html">Your Metadata, Your Way</a> -
-Deep dive into <code><a href="../reference/settings.html">settings()</a></code>
-</li>
-<li>
-<a href="building-your-brand-identity.html">Building Your Brand
-Identity</a> - Deep dive into <code><a href="../reference/brand_settings.html">brand_settings()</a></code>
-</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<p>The <code><a href="../reference/quarto_project.html">quarto_project()</a></code> function transforms project
-creation from 15-20 minutes to 30 seconds:</p>
-<ul>
-<li>
-<strong>Creates complete project structure</strong> with all
-necessary files</li>
-<li>
-<strong>Integrates global settings</strong> for metadata and
-branding</li>
-<li>
-<strong>Provides working examples</strong> (optional) for
-learning</li>
-<li>
-<strong>Configures version control</strong> appropriately</li>
-<li>
-<strong>Opens in new session</strong> for immediate
-productivity</li>
-</ul>
-<p>Key parameters:</p>
-<ul>
-<li>
-<code>name</code>: Project name (required)</li>
-<li>
-<code>path</code>: Where to create project (optional, defaults to
-current directory)</li>
-<li>
-<code>example</code>: Include example content (optional, defaults to
-<code>TRUE</code>)</li>
-</ul>
-<p>By combining <code><a href="../reference/settings.html">settings()</a></code>, <code><a href="../reference/brand_settings.html">brand_settings()</a></code>,
-and <code><a href="../reference/quarto_project.html">quarto_project()</a></code>, you create a powerful workflow that
-eliminates repetitive setup and lets you focus on your actual work.</p>
+<p>Use <code><a href="../reference/write_variables.html">write_variables()</a></code> and <code><a href="../reference/write_brand.html">write_brand()</a></code> to
+create and edit your configuration files, then
+<code><a href="../reference/save_variables.html">save_variables()</a></code> and <code><a href="../reference/save_brand.html">save_brand()</a></code> to persist
+them globally. Every future <code><a href="../reference/init.html">init()</a></code> call starts with your
+configuration in place.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

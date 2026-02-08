@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +19,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/from-zero-to-project.html">From Zero to Project in Seconds</a></li>
-    <li><a class="dropdown-item" href="../articles/set-once-use-everywhere.html">Set Once, Use Everywhere</a></li>
-    <li><a class="dropdown-item" href="../articles/your-metadata-your-way.html">Your Metadata, Your Way</a></li>
-    <li><a class="dropdown-item" href="../articles/building-your-brand-identity.html">Building Your Brand Identity</a></li>
+    <li><a class="dropdown-item" href="../articles/every-file-in-its-place.html">Every File in Its Place</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -45,60 +43,59 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.0" id="frogger-100-2026-02-07">froggeR 1.0.0 (2026-02-07)<a class="anchor" aria-label="anchor" href="#frogger-100-2026-02-07"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-1-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0"></a></h3>
+<ul><li><p><code>write_notes()</code> and <code>write_readme()</code> have been removed. These files are now included in the project template downloaded by <code><a href="../reference/init.html">init()</a></code>.</p></li>
+<li><p><code><a href="../reference/write_ignore.html">write_ignore()</a></code> no longer accepts an <code>aggressive</code> parameter. A single <code>.gitignore</code> is provided.</p></li>
+<li><p><code><a href="../reference/quarto_project.html">quarto_project()</a></code> is deprecated in favor of <code><a href="../reference/init.html">init()</a></code>. It now outputs a deprecation warning and advises to use <code><a href="../reference/init.html">init()</a></code> after creating the project directory.</p></li>
+<li><p><code>settings()</code> and <code>brand_settings()</code> have been removed. Use <code><a href="../reference/write_variables.html">write_variables()</a></code> and <code><a href="../reference/write_brand.html">write_brand()</a></code> to create and edit configuration files directly. These functions now handle existing files gracefully (opening them for editing instead of erroring) and print reference URLs to the console.</p></li>
+<li><p>The <code>your-metadata-your-way</code> and <code>building-your-brand-identity</code> vignettes have been removed.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
+<ul><li><p>New function <code><a href="../reference/init.html">init()</a></code> is the primary entry point for creating froggeR projects. It downloads the latest project scaffold from the companion <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a> repository and retrieves saved user configuration (<code>_variables.yml</code>, <code>_brand.yml</code>, <code>logos/</code>) from <code>~/.config/froggeR/</code>.</p></li>
+<li><p><strong>Template architecture</strong>: Project templates now live in a separate repository (<code>kyleGrealis/frogger-templates</code>), decoupled from CRAN release cycles. Template improvements reach users immediately without a package update.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="dependencies-1-0-0">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies-1-0-0"></a></h3>
+<ul><li>The <code>quarto</code>, <code>glue</code>, <code>readr</code>, and <code>stringr</code> packages have been removed from Imports.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-1-0-0">Testing<a class="anchor" aria-label="anchor" href="#testing-1-0-0"></a></h3>
+<ul><li>Test suite restructured following function removals.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-1-0-0">Internal<a class="anchor" aria-label="anchor" href="#internal-1-0-0"></a></h3>
+<ul><li><p>All template files previously bundled in <code>inst/gists/</code> have been removed. All templates are now fetched from the companion repository at runtime.</p></li>
+<li><p>New internal helper <code>.fetch_template()</code> downloads individual files from the template repository.</p></li>
+<li><p>New internal helper <code>.restore_saved_config()</code> handles copying global user configuration into new projects during <code><a href="../reference/init.html">init()</a></code>.</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="frogger-060-2025-11-13">froggeR 0.6.0 (2025-11-13)<a class="anchor" aria-label="anchor" href="#frogger-060-2025-11-13"></a></h2><p class="text-muted">CRAN release: 2025-11-14</p>
 <div class="section level3">
 <h3 id="new-features-0-6-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
-<ul><li><p>New function <code><a href="../reference/brand_settings.html">brand_settings()</a></code> provides an interactive workflow for configuring Quarto project branding. Supports interactive configuration of core branding elements (name, color, logos) and provides options for advanced customization via template editing (typography, palettes, etc.). Brand configurations can be saved to project-level, global (system-wide), or both locations for reuse across projects.</p></li>
-<li><p>New function <code><a href="../reference/save_brand.html">save_brand()</a></code> enables saving and restoring brand configurations from the global froggeR settings directory.</p></li>
-<li>
-<p><code><a href="../reference/settings.html">settings()</a></code> function completely redesigned with enhanced interactive workflow:</p>
-<ul><li>Interactive creation and updating of metadata (name, email, ORCID, URL, GitHub username, affiliations)</li>
-<li>Ability to save metadata to project-level, global, or both locations</li>
-<li>Improved user feedback and guided workflows, including clearer prompts for updating metadata.</li>
-<li>Better status reporting for existing configurations</li>
-</ul></li>
-<li><p><code><a href="../reference/write_brand.html">write_brand()</a></code> gains <code>restore_logos</code> argument to enable automatic restoration of logo content from system configuration (default TRUE).</p></li>
-<li><p><code><a href="../reference/write_ignore.html">write_ignore()</a></code> now supports creating either a minimal (default) or an aggressive <code>.gitignore</code> file, providing more flexibility for project needs.</p></li>
+<ul><li><p>New function <code>brand_settings()</code> for interactive branding configuration (name, colors, logos, typography). Saved to project-level, global, or both.</p></li>
+<li><p>New function <code><a href="../reference/save_brand.html">save_brand()</a></code> for saving brand configuration to global settings.</p></li>
+<li><p><code>settings()</code> redesigned with interactive metadata workflow, input validation, and project/global save options.</p></li>
+<li><p><code><a href="../reference/write_brand.html">write_brand()</a></code> gains <code>restore_logos</code> argument.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-0-6-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-0"></a></h3>
-<ul><li>Fixed a bug in <code><a href="../reference/settings.html">settings()</a></code> where empty optional fields could cause an error during metadata cleanup.</li>
-<li>Resolved an issue in <code><a href="../reference/brand_settings.html">brand_settings()</a></code> where empty optional fields could lead to <code>null</code> values in <code>_brand.yml</code>, potentially causing issues with Quarto.</li>
-<li>Addressed potential ‘incomplete line errors’ in <code><a href="../reference/brand_settings.html">brand_settings()</a></code> by sanitizing prompt display for current values.</li>
+<h3 id="bug-fixes-0-6-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-0"></a></h3>
+<ul><li>Fixed empty optional fields causing errors in <code>settings()</code> and <code>brand_settings()</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-0-6-0">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-0-6-0"></a></h3>
-<ul><li>Implemented automatic, one-time migration of global settings from <code>config.yml</code> to <code>_variables.yml</code> for improved consistency and future-proofing.</li>
-<li>Enhanced README with updated documentation for branding, flexible <code>.gitignore</code> options, and improved clarity. README significantly expanded (487 lines) with Table of Contents, better organization, “Getting Help” section, and comprehensive feature highlights.</li>
-<li>New comprehensive vignettes guide users through Quarto project setup:
-<ul><li>
-<code>from-zero-to-project.Rmd</code> - Getting started with froggeR</li>
-<li>
-<code>building-your-brand-identity.Rmd</code> - Brand management workflows</li>
-<li>
-<code>your-metadata-your-way.Rmd</code> - Metadata configuration and reuse</li>
-<li>
-<code>set-once-use-everywhere.Rmd</code> - Leveraging global configurations</li>
-</ul></li>
-<li>Improved website URL in package documentation to point to Kyle Grealis’ website.</li>
-<li>Changed vignette builder from Quarto to knitr for better compatibility.</li>
-<li>Enhanced input validation and error messaging for brand colors.</li>
-<li>Code style consistency: Applied tidyverse-adjacent style conventions throughout the package for consistent formatting.</li>
-<li>Comprehensive documentation generation: Generated roxygen2 documentation for all 12 public functions and 30+ internal helper functions with <a href="https://github.com/noRd" class="external-link">@noRd</a> tags. All documentation files (.Rd) are CRAN-ready.</li>
-<li>NAMESPACE file updated with proper exports and imports for CRAN compliance.</li>
+<ul><li>Automatic one-time migration from <code>config.yml</code> to <code>_variables.yml</code>.</li>
+<li>Four vignettes added covering project setup, branding, metadata, and global configuration.</li>
+<li>Switched vignette builder from Quarto to knitr for CRAN compatibility.</li>
+<li>Input validation for hex colors, ORCID, email, GitHub username, and URLs.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="testing-0-6-0">Testing<a class="anchor" aria-label="anchor" href="#testing-0-6-0"></a></h3>
-<ul><li>Comprehensive test suite expansion: Added 3,327+ lines of new tests across 13 test files (test-brand_settings.R, test-settings.R, test-write_brand.R, test-write_quarto.R, test-quarto_project.R, test-save_brand.R, test-save_variables.R, test-utils.R, test-write_ignore.R, test-write_notes.R, test-write_readme.R, test-write_scss.R, test-write_variables.R).</li>
-<li>Test coverage now includes: brand configuration workflows, metadata management, edge cases with empty/NA values, error handling, path normalization, and file creation logic.</li>
-<li>255 test cases with 484+ individual assertions across all exported functions, providing excellent coverage of new features and refactored functions, ensuring robust package behavior across various scenarios.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="internal-changes-0-6-0">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-6-0"></a></h3>
-<ul><li>Refactored <code>write_*</code> functions to simplify their public API by removing the <code>.initialize_proj</code> argument. Core file creation logic is now handled by internal <code>create_*</code> functions, while exported <code>write_*</code> functions manage interactive editing.</li>
-<li>Standardized error handling across the package to use <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::abort()</a></code> with custom error classes, providing more consistent and informative error messages.</li>
-<li>Resolved <code>R CMD check</code> issues, including fixing example code, ensuring proper <code><a href="https://usethis.r-lib.org/reference/ui-legacy-functions.html" class="external-link">usethis::ui_warn</a></code> import, removing unnecessary <code>:::</code> calls, and addressing ‘incomplete final line’ warnings in template files.</li>
-<li>Significantly updated and expanded the comprehensive test suite to cover all refactored <code>write_*</code> functions, new internal <code>create_*</code> functions, and the global configuration migration logic.</li>
+<h3 id="internal-0-6-0">Internal<a class="anchor" aria-label="anchor" href="#internal-0-6-0"></a></h3>
+<ul><li>Refactored <code>write_*</code> functions: public API delegates to internal <code>create_*</code> workers. Standardized error handling with <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">rlang::abort()</a></code> and custom classes.</li>
+<li>Expanded test suite across all exported and internal functions.</li>
 </ul><hr></div>
 </div>
     <div class="section level2">
@@ -148,14 +145,14 @@
 </ul></div>
 <div class="section level3">
 <h3 id="internal-changes-0-4-0">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-4-0"></a></h3>
-<ul><li>Fixed tests for <code><a href="../reference/write_notes.html">write_notes()</a></code> and <code><a href="../reference/write_readme.html">write_readme()</a></code> to reflect updated content.</li>
+<ul><li>Fixed tests for <code>write_notes()</code> and <code>write_readme()</code> to reflect updated content.</li>
 </ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="frogger-030">froggeR 0.3.0<a class="anchor" aria-label="anchor" href="#frogger-030"></a></h2><p class="text-muted">CRAN release: 2025-01-15</p>
 <div class="section level3">
 <h3 id="enhancements-0-3-0">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-0-3-0"></a></h3>
-<ul><li>The <code><a href="../reference/settings.html">settings()</a></code> function replaces <code>froggeR_settings</code> and provides a menu-driven interface. User’s can now check, view, &amp; get instructions to use Quarto metadata within and across projects. Learn how to apply user-specific metadata from the global config file, or store local project metadata for reuse on future froggeR Quarto projects.</li>
+<ul><li>The <code>settings()</code> function replaces <code>froggeR_settings</code> and provides a menu-driven interface. Users can now check, view, and get instructions to use Quarto metadata within and across projects. Learn how to apply user-specific metadata from the global config file, or store local project metadata for reuse on future froggeR Quarto projects.</li>
 <li>The suite of <code>write_*</code> functions open the created files for immediate viewing &amp; editing (in interactive sessions).</li>
 <li>Revised console feedback so users are always informed about how froggeR is helping streamline your project.</li>
 </ul></div>
@@ -214,8 +211,7 @@
 <h3 id="internal-changes-0-2-2">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-2-2"></a></h3>
 <ul><li>Consolidated helper functions into <code>helpers.R</code> for better maintainability and organization.</li>
 <li>Improved modularity of settings and file management functions to align with best practices.</li>
-</ul><p>🎉 With version 0.2.2, froggeR introduces more robust Quarto project management, making metadata handling and customization easier and more intuitive for users.</p>
-<hr></div>
+</ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="frogger-021">froggeR 0.2.1<a class="anchor" aria-label="anchor" href="#frogger-021"></a></h2>
@@ -268,7 +264,7 @@
 <ul><li>
 <code><a href="../reference/write_quarto.html">write_quarto()</a></code> for consistent document creation</li>
 <li>
-<code><a href="../reference/write_readme.html">write_readme()</a></code> for structured project documentation</li>
+<code>write_readme()</code> for structured project documentation</li>
 <li>
 <code><a href="../reference/write_ignore.html">write_ignore()</a></code> for enhanced Git security</li>
 <li>

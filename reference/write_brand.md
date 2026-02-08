@@ -1,7 +1,11 @@
 # Write Brand YAML for Quarto Projects
 
-This function creates a `_brand.yml` file in a Quarto project and opens
-it for editing.
+Creates or opens a `_brand.yml` file in a Quarto project for editing. If
+the file already exists, it is opened directly. If global froggeR brand
+settings exist, those are used as the starting point. Otherwise, the
+template is downloaded from the
+[frogger-templates](https://github.com/kyleGrealis/frogger-templates)
+repository.
 
 ## Usage
 
@@ -23,32 +27,30 @@ write_brand(path = here::here(), restore_logos = TRUE)
 
 ## Value
 
-Invisibly returns the path to the created file.
+Invisibly returns the path to the file.
 
 ## Details
 
-The function will attempt to use the current froggeR settings from the
-global config path. If no global configurations exist, a template
-`_brand.yml` will be created.
+The `_brand.yml` file defines your visual identity for Quarto documents:
+colors, logos, typography, and more. See the [brand.yml
+specification](https://posit-dev.github.io/brand-yml/) for the full list
+of available options.
 
-In interactive sessions, the file is opened in the default editor for
-immediate customization.
+Use
+[`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+to persist your project-level brand configuration to the global config
+directory for reuse across projects.
 
 ## See also
 
-[`brand_settings`](https://www.kyleGrealis.com/froggeR/reference/brand_settings.md),
 [`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md),
-[`settings`](https://www.kyleGrealis.com/froggeR/reference/settings.md)
+[`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
+[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md)
 
 ## Examples
 
 ``` r
-# Write the _brand.yml file
-if (interactive()) {
-  temp_dir <- tempdir()
-  # In an interactive session, this would also open the file for editing.
-  write_brand(temp_dir)
-  # Verify the file was created
-  file.exists(file.path(temp_dir, "_brand.yml"))
-}
+if (FALSE) { # \dontrun{
+write_brand()
+} # }
 ```

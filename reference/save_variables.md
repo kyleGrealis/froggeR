@@ -28,8 +28,7 @@ This function:
 The saved configuration is stored in
 `rappdirs::user_config_dir('froggeR')` and will automatically be used in
 new froggeR projects created with
-[`quarto_project`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
-or
+[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md) or
 [`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md).
 
 This is useful for maintaining consistent author metadata (name, email,
@@ -38,7 +37,6 @@ it each time.
 
 ## See also
 
-[`settings`](https://www.kyleGrealis.com/froggeR/reference/settings.md),
 [`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
 [`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
 

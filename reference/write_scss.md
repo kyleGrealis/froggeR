@@ -1,7 +1,10 @@
 # Create a Quarto SCSS File
 
-This function creates a `.scss` file for custom Quarto styling and opens
-it for editing.
+Creates or opens a `www/custom.scss` file in a Quarto project. If the
+file already exists, it is opened directly. Otherwise, the template is
+downloaded from the
+[frogger-templates](https://github.com/kyleGrealis/frogger-templates)
+repository.
 
 ## Usage
 
@@ -18,32 +21,23 @@ write_scss(path = here::here())
 
 ## Value
 
-Invisibly returns the path to the created file.
+Invisibly returns the path to the file.
 
 ## Details
 
-The function creates a `custom.scss` file with styling variables,
-mixins, and rules for customizing Quarto document appearance.
+The function creates a `www/custom.scss` file with styling variables,
+mixins, and rules for customizing Quarto document appearance. The `www/`
+directory is created automatically if it does not exist.
 
 ## See also
 
-[`quarto_project`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md),
+[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md),
 [`write_quarto`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
 
 ## Examples
 
 ``` r
-# Create a temporary directory for testing
-tmp_dir <- tempdir()
-
-# Write the SCSS file
-write_scss(path = tmp_dir)
-#> ✔ Created custom.scss
-
-# Confirm the file was created
-file.exists(file.path(tmp_dir, "custom.scss"))
-#> [1] TRUE
-
-# Clean up
-unlink(file.path(tmp_dir, "custom.scss"))
+if (FALSE) { # \dontrun{
+write_scss()
+} # }
 ```

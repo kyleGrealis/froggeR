@@ -2,11 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  building-your-brand-identity: building-your-brand-identity.html
+  every-file-in-its-place: every-file-in-its-place.html
   from-zero-to-project: from-zero-to-project.html
-  set-once-use-everywhere: set-once-use-everywhere.html
-  your-metadata-your-way: your-metadata-your-way.html
-last_built: 2025-11-16T03:32Z
+last_built: 2026-02-08T23:34Z
 urls:
   reference: https://www.kyleGrealis.com/froggeR/reference
   article: https://www.kyleGrealis.com/froggeR/articles
