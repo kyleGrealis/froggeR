@@ -12,29 +12,24 @@ articles:
     navbar: ~
     contents:
       - from-zero-to-project
-      - set-once-use-everywhere
-      - your-metadata-your-way
-      - building-your-brand-identity
+      - every-file-in-its-place
 
 reference:
   - title: "Project Setup"
     desc: "Functions for creating and configuring Quarto projects"
     contents:
+      - init
       - quarto_project
-      - settings
-      - brand_settings
+      - write_variables
+      - write_brand
       - save_variables
       - save_brand
   - title: "Document Creation"
     desc: "Functions for creating and styling Quarto documents"
     contents:
       - write_quarto
-      - write_variables
-      - write_brand
       - write_scss
-  - title: "Project Documentation"
-    desc: "Functions for enhancing project documentation and security"
+  - title: "Project Files"
+    desc: "Functions for creating individual project files"
     contents:
-      - write_readme
-      - write_notes
       - write_ignore

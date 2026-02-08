@@ -1,0 +1,158 @@
+---
+title: "Every File in Its Place"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Every File in Its Place}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Why organize scripts?
+
+A project with five R files is manageable. A project with fifteen is not, unless they follow a pattern.
+
+froggeR puts three files in every project's `R/` directory:
+
+- `_load.R` -- the entry point
+- `_libraries.R` -- package loading
+- `_data_dictionary.R` -- variable labels and metadata
+
+The underscore prefix is intentional. It sorts these files above your analysis scripts in any directory listing, signaling that they are infrastructure, not analysis.
+
+## `_load.R`: one file to source
+
+`_load.R` is the single entry point for your project. Source it, and everything initializes:
+
+```r
+source(here::here("R", "_load.R"))
+```
+
+Inside, it sources the other infrastructure files and runs any project-wide setup:
+
+```r
+# R/_load.R
+source(here::here("R", "_libraries.R"))
+source(here::here("R", "_data_dictionary.R"))
+```
+
+This cascading pattern means your Quarto documents and analysis scripts never need more than one `source()` call. As your project grows, add new files to `_load.R`:
+
+```r
+source(here::here("R", "_libraries.R"))
+source(here::here("R", "_data_dictionary.R"))
+source(here::here("R", "helpers.R"))
+source(here::here("R", "clean_data.R"))
+```
+
+Your Quarto documents stay clean. One `source()` call at the top, then analysis.
+
+## `_libraries.R`: packages in one place
+
+```r
+# R/_libraries.R
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(gt)
+})
+```
+
+Every `library()` call lives here. Not scattered across scripts. Not duplicated in Quarto documents. One file, one place to check.
+
+This matters for three reasons:
+
+1. **Visibility**: Anyone opening the project can see every dependency immediately.
+2. **Maintenance**: Adding or removing a package is a one-line change in one file.
+3. **Clean output**: `suppressPackageStartupMessages()` keeps your console and rendered documents free of startup noise.
+
+## `_data_dictionary.R`: label your variables
+
+```r
+# R/_data_dictionary.R
+dictionary <- dplyr::tribble(
+  ~Variable, ~Description,
+  "age", "Age in years",
+  "sbp", "Systolic blood pressure (mmHg)",
+  "treatment", "Treatment group assignment",
+)
+```
+
+A data dictionary maps variable names to human-readable labels. Keeping it in a dedicated file means your labels are defined once and available everywhere, not buried inside whichever analysis script needed them first.
+
+This is designed for use with [{sumExtras}](https://kylegrealis.com/sumExtras/) with `sumExtras::add_auto_labels()`. Your [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get human-readable labels without manual labeling in every script. Define labels once here, apply them anywhere.
+
+## `_quarto.yml`: the config expects the convention
+
+The directory structure is not just a suggestion. The template's `_quarto.yml` is wired to it:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+  resources: www
+  render:
+    - "pages/*.qmd"
+```
+
+Quarto only renders `.qmd` files found in `pages/`. Static assets in `www/` are copied to the output as resources. Rendered HTML goes to `docs/`, keeping build artifacts out of your source directories.
+
+The styling and sidebar also reference these paths directly:
+
+```yaml
+format:
+  html:
+    theme:
+      - default
+      - brand
+      - www/custom.scss
+
+website:
+  sidebar:
+    contents:
+      - text: Home
+        href: pages/index.qmd
+```
+
+`custom.scss` is expected in `www/`. The sidebar links to documents in `pages/`. If you move files out of convention, these references break and Quarto will tell you something is missing without telling you why.
+
+This is the payoff of a fixed directory layout: the configuration works because the structure is predictable. You do not need to edit `_quarto.yml` to wire up paths. They are already correct.
+
+For the full `_quarto.yml` specification, see [Quarto Project Basics](https://quarto.org/docs/projects/quarto-projects.html).
+
+## `here::here()` and why relative paths break
+
+Every `source()` call in the template uses `here::here()`:
+
+```r
+source(here::here("R", "_load.R"))
+```
+
+Not this:
+
+```r
+source("R/_load.R")
+```
+
+The difference matters the moment your working directory is not the project root. In a froggeR project, that happens by design.
+
+When you render `pages/index.qmd`, Quarto sets the working directory to `pages/`. A relative path like `"R/_load.R"` resolves to `pages/R/_load.R`, which does not exist. The render fails, and the error message does not make the cause obvious.
+
+`here::here()` resolves paths from the project root, the directory containing your `.Rproj` or `.here` file, regardless of the current working directory. `here::here("R", "_load.R")` always points to the right file, whether you call it from the console, from a script in `R/`, or from a Quarto document in `pages/`.
+
+This is not just about `source()`. Use `here::here()` for every file path in your project:
+
+```r
+# Reading data
+df <- readr::read_csv(here::here("data", "raw_data.csv"))
+
+# Saving output
+ggsave(here::here("www", "figure1.png"))
+```
+
+One habit that prevents an entire class of path-related errors. See the [{here}](https://here.r-lib.org/) package documentation for more.

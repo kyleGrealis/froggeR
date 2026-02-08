@@ -4,7 +4,7 @@
 \alias{write_quarto}
 \title{Create a New Quarto Document}
 \usage{
-write_quarto(filename = "Untitled-1", path = here::here(), example = FALSE)
+write_quarto(filename = "Untitled-1", path = here::here())
 }
 \arguments{
 \item{filename}{Character. The name of the file without the \code{.qmd}
@@ -13,40 +13,31 @@ Default is \code{"Untitled-1"}.}
 
 \item{path}{Character. Path to the project directory. Default is current project
 root via \code{\link[here]{here}}.}
-
-\item{example}{Logical. If \code{TRUE}, creates a Quarto document with examples
-and ensures that auxiliary files (\code{_variables.yml}, \code{_quarto.yml},
-\code{custom.scss}) exist in the project. Default is \code{FALSE}.}
 }
 \value{
 Invisibly returns the path to the created Quarto document.
 }
 \description{
-This function creates a new Quarto document (\code{.qmd} file) with either a
-custom or standard YAML header and opens it for editing.
+Downloads the Quarto template from the
+\href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
+repository and writes it to the \code{pages/} directory. Errors if a file
+with the same name already exists.
 }
 \details{
-When \code{example = TRUE}, the function automatically creates necessary
-auxiliary files if they don't exist. The created document includes example
-content demonstrating cross-references, links, and bibliography integration.
+The file is written to \code{pages/<filename>.qmd}. The \code{pages/}
+directory is created automatically if it does not exist.
 }
 \examples{
-if (interactive()) {
-  # Create a temporary directory for testing
-  tmp_dir <- tempdir()
+\dontrun{
+# Create a Quarto document with the default name
+write_quarto()
 
-  # Write a Quarto document with examples
-  write_quarto(path = tmp_dir, filename = "analysis", example = TRUE)
-
-  # Verify the file was created
-  file.exists(file.path(tmp_dir, "analysis.qmd"))
-
-  # Clean up
-  unlink(list.files(tmp_dir, full.names = TRUE), recursive = TRUE)
+# Create a Quarto document with a custom name
+write_quarto(filename = "analysis")
 }
 
 }
 \seealso{
-\code{\link{quarto_project}}, \code{\link{write_variables}},
+\code{\link{init}}, \code{\link{write_variables}},
   \code{\link{write_brand}}
 }

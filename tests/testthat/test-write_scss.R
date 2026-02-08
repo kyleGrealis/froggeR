@@ -1,40 +1,51 @@
 library(testthat)
 library(froggeR)
 
-# Test write_scss() - Main exported function ====
+# Test write_scss() ====
 
-test_that("write_scss creates custom.scss successfully", {
+test_that("write_scss creates www/custom.scss successfully", {
   tmp_dir <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
 
   result <- write_scss(path = tmp_dir)
 
-  # File should be created
-  expect_true(file.exists(file.path(tmp_dir, "custom.scss")))
-
-  # Function returns file path invisibly
+  expect_true(file.exists(file.path(tmp_dir, "www", "custom.scss")))
+  expect_true(dir.exists(file.path(tmp_dir, "www")))
   expect_equal(basename(result), "custom.scss")
 })
 
-test_that("write_scss creates file with correct template content", {
+test_that("write_scss creates file with SCSS template content", {
   tmp_dir <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
 
   result <- write_scss(path = tmp_dir)
   content <- readLines(result)
 
-  # Verify SCSS template content is present
-  expect_true(any(grepl("^/\\*-- scss:defaults --\\*/", content)))
-  expect_true(any(grepl("^/\\*-- scss:mixins --\\*/", content)))
-  expect_true(any(grepl("^/\\*-- scss:rules --\\*/", content)))
+  expect_true(any(grepl("scss:defaults", content)))
+  expect_true(any(grepl("scss:mixins", content)))
+  expect_true(any(grepl("scss:rules", content)))
 })
 
 test_that("write_scss returns normalized absolute path", {
   tmp_dir <- withr::local_tempdir()
 
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
   result <- write_scss(path = tmp_dir)
 
-  # Result should be absolute path
   expect_true(grepl("^/", result) || grepl("^[A-Z]:/", result) || grepl("^[A-Z]:\\\\", result))
-  expect_equal(normalizePath(dirname(result)), normalizePath(tmp_dir))
+  expect_equal(normalizePath(dirname(result)), normalizePath(file.path(tmp_dir, "www")))
 })
 
 
@@ -50,18 +61,20 @@ test_that("write_scss errors when directory doesn't exist", {
   )
 })
 
-test_that("write_scss errors when file already exists", {
+test_that("write_scss opens existing file without error", {
   tmp_dir <- withr::local_tempdir()
 
-  # Create the file manually
-  scss_file <- file.path(tmp_dir, "custom.scss")
-  writeLines("/* test */", scss_file)
+  www_dir <- file.path(tmp_dir, "www")
+  dir.create(www_dir)
+  writeLines("/* test */", file.path(www_dir, "custom.scss"))
 
-  # Try to create - should error with appropriate message
-  expect_error(
-    write_scss(path = tmp_dir),
-    "A SCSS file already exists"
-  )
+  # Should succeed (opens existing file)
+  result <- suppressMessages(write_scss(path = tmp_dir))
+  expect_true(file.exists(result))
+  expect_equal(basename(result), "custom.scss")
+
+  # Content should be unchanged
+  expect_equal(readLines(result), "/* test */")
 })
 
 test_that("write_scss errors on NULL path", {
@@ -89,11 +102,15 @@ test_that("write_scss errors on empty string path", {
 })
 
 
-# Edge cases and path handling ====
+# Edge cases ====
 
 test_that("write_scss handles empty directory", {
   tmp_dir <- withr::local_tempdir()
-  # Directory is empty by default
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
 
   result <- write_scss(path = tmp_dir)
 
@@ -104,12 +121,15 @@ test_that("write_scss handles empty directory", {
 test_that("write_scss handles path with trailing slash", {
   tmp_dir <- withr::local_tempdir()
 
-  # Add trailing slash
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
   path_with_slash <- paste0(tmp_dir, "/")
   result <- write_scss(path = path_with_slash)
 
-  # Should still create in correct location
-  expect_true(file.exists(file.path(tmp_dir, "custom.scss")))
+  expect_true(file.exists(file.path(tmp_dir, "www", "custom.scss")))
   expect_true(file.exists(result))
 })
 
@@ -118,92 +138,32 @@ test_that("write_scss creates file in nested directory structure", {
   nested_dir <- file.path(tmp_base, "project", "docs")
   dir.create(nested_dir, recursive = TRUE)
 
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
   result <- write_scss(path = nested_dir)
 
   expect_true(file.exists(result))
   expect_equal(basename(result), "custom.scss")
-  expect_true(grepl("project/docs", result) || grepl("project\\\\docs", result))
+  expect_true(grepl("project/docs/www", result) || grepl("project\\\\docs\\\\www", result))
 })
 
 
 # Content validation tests ====
 
-test_that("write_scss file is valid SCSS", {
+test_that("write_scss file is readable and not empty", {
   tmp_dir <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
 
   result <- write_scss(path = tmp_dir)
   content <- readLines(result)
 
-  # File should not be empty
-  expect_true(length(content) > 0)
-
-  # Should contain SCSS sections
-  expect_true(any(grepl("scss:defaults", content)))
-  expect_true(any(grepl("scss:mixins", content)))
-  expect_true(any(grepl("scss:rules", content)))
-})
-
-test_that("write_scss file is readable", {
-  tmp_dir <- withr::local_tempdir()
-
-  result <- write_scss(path = tmp_dir)
-
-  # Should be able to read the file without errors
-  expect_silent({
-    content <- readLines(result)
-  })
-
-  # Content should be character vector
   expect_type(content, "character")
-})
-
-test_that("write_scss file has expected SCSS structure", {
-  tmp_dir <- withr::local_tempdir()
-
-  result <- write_scss(path = tmp_dir)
-  content <- paste(readLines(result), collapse = "\n")
-
-  # Check for SCSS-specific patterns
-  expect_true(grepl("/\\*-- scss:defaults --\\*/", content))
-  expect_true(grepl("/\\*-- scss:mixins --\\*/", content))
-  expect_true(grepl("/\\*-- scss:rules --\\*/", content))
-
-  # Should contain color variable examples
-  expect_true(grepl("\\$primary", content))
-})
-
-
-# Template existence tests ====
-
-test_that("SCSS template file exists in package", {
-  template_path <- system.file("gists/custom.scss", package = "froggeR")
-
-  expect_true(file.exists(template_path))
-  expect_false(template_path == "")
-})
-
-test_that("SCSS template has expected content", {
-  template_path <- system.file("gists/custom.scss", package = "froggeR")
-  content <- readLines(template_path)
-
-  # Template should have SCSS structure
   expect_true(length(content) > 0)
-  expect_true(any(grepl("scss:defaults", content)))
-  expect_true(any(grepl("scss:rules", content)))
-})
-
-test_that("write_scss template matches created file", {
-  tmp_dir <- withr::local_tempdir()
-
-  result <- write_scss(path = tmp_dir)
-
-  # Get template content
-  template_path <- system.file("gists/custom.scss", package = "froggeR")
-  template_content <- readLines(template_path)
-
-  # Get created file content
-  created_content <- readLines(result)
-
-  # Content should match template
-  expect_equal(created_content, template_content)
 })

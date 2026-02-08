@@ -11,30 +11,39 @@ write_variables(path = here::here())
 root via \code{\link[here]{here}}.}
 }
 \value{
-Invisibly returns the path to the created file.
+Invisibly returns the path to the file.
 }
 \description{
-This function creates a \code{_variables.yml} file in a Quarto project
-and opens it for editing.
+Creates or opens a \code{_variables.yml} file in a Quarto project for editing.
+If the file already exists, it is opened directly. If global froggeR settings
+exist, those are used as the starting point. Otherwise, the template is
+downloaded from the
+\href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
+repository.
 }
 \details{
-The function will attempt to use the current froggeR settings from the global
-config path. If no global configurations exist, a template \code{_variables.yml}
-will be created. This file stores reusable metadata (author name, email, ORCID, etc.)
-that can be referenced throughout Quarto documents.
+The \code{_variables.yml} file stores reusable author metadata that Quarto
+documents can reference. Available fields:
+
+\itemize{
+  \item \code{name}: Your full name as it appears in publications
+  \item \code{email}: Contact email address
+  \item \code{orcid}: ORCID identifier (e.g., 0000-0001-2345-6789)
+  \item \code{url}: Personal website or profile URL
+  \item \code{github}: GitHub username
+  \item \code{affiliations}: Institution, department, etc.
+}
+
+Use \code{\link{save_variables}} to persist your project-level metadata to
+the global config directory for reuse across projects.
 }
 \examples{
-# Write the _variables.yml file
-if (interactive()) {
-  temp_dir <- tempdir()
-  # In an interactive session, this would also open the file for editing.
-  write_variables(temp_dir)
-  # Verify the file was created
-  file.exists(file.path(temp_dir, "_variables.yml"))
+\dontrun{
+write_variables()
 }
 
 }
 \seealso{
-\code{\link{settings}}, \code{\link{save_variables}},
-  \code{\link{brand_settings}}, \code{\link{quarto_project}}
+\code{\link{save_variables}}, \code{\link{write_brand}},
+  \code{\link{init}}
 }

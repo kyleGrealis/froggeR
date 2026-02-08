@@ -2,51 +2,30 @@
 % Please edit documentation in R/write_ignore.R
 \name{write_ignore}
 \alias{write_ignore}
-\title{Create an Enhanced .gitignore File}
+\title{Create a .gitignore File}
 \usage{
-write_ignore(path = here::here(), aggressive = FALSE)
+write_ignore(path = here::here())
 }
 \arguments{
 \item{path}{Character. Path to the project directory. Default is current project
 root via \code{\link[here]{here}}.}
-
-\item{aggressive}{Logical. If \code{TRUE}, creates a comprehensive \code{.gitignore}
-with aggressive rules for sensitive data. If \code{FALSE} (default), creates
-a minimal \code{.gitignore} suitable for most R projects.}
 }
 \value{
-Invisibly returns the path to the created file.
+Invisibly returns the path to the file.
 }
 \description{
-This function creates a \code{.gitignore} file with either a minimal or aggressive
-set of ignore rules and opens it for editing.
-}
-\details{
-The \code{aggressive = TRUE} template includes comprehensive rules for common data
-file types and sensitive information.
-
-\strong{WARNING}: Always consult your organization's data security team before using git
-with any sensitive or protected health information (PHI). This template helps
-prevent accidental data exposure but should not be considered a complete
-security solution.
+Creates or opens a \code{.gitignore} file in a Quarto project. If the file
+already exists, it is opened directly. Otherwise, the opinionated template is
+downloaded from the
+\href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
+repository.
 }
 \examples{
-# Create a temporary directory for testing
-tmp_dir <- tempdir()
-
-# Write a minimal .gitignore file (default)
-write_ignore(path = tmp_dir)
-
-# Clean up the first file before creating the next one
-unlink(file.path(tmp_dir, ".gitignore"))
-
-# Write an aggressive .gitignore file
-write_ignore(path = tmp_dir, aggressive = TRUE)
-
-# Clean up
-unlink(file.path(tmp_dir, ".gitignore"))
+\dontrun{
+write_ignore()
+}
 
 }
 \seealso{
-\code{\link{quarto_project}}, \code{\link{write_quarto}}
+\code{\link{init}}, \code{\link{write_quarto}}
 }

@@ -2,10 +2,10 @@
 
 test_that("save_brand errors when no project _brand.yml exists", {
   tmp_dir <- withr::local_tempdir()
-  mockery::stub(froggeR::save_brand, "here::here", tmp_dir)
 
-  # Expect a message about missing file
-  expect_message(froggeR::save_brand(), "No current _brand.yml file exists")
+  local_mocked_bindings(here = function(...) tmp_dir, .package = "here")
+
+  expect_message(save_brand(), "No current _brand.yml file exists")
 })
 
 test_that("save_brand saves to global config when no global config exists", {
@@ -15,11 +15,11 @@ test_that("save_brand saves to global config when no global config exists", {
 
   config_dir <- withr::local_tempdir()
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
 
   # Should copy without prompting since no global config exists
-  suppressMessages(froggeR::save_brand(save_logos = FALSE))
+  suppressMessages(save_brand(save_logos = FALSE))
 
   saved_brand <- file.path(config_dir, "_brand.yml")
   expect_true(file.exists(saved_brand))
@@ -38,12 +38,12 @@ test_that("save_brand prompts for overwrite when global file exists and user con
   existing_brand <- file.path(config_dir, "_brand.yml")
   yaml::write_yaml(list(brand = "OldBrand", color = "green"), existing_brand)
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
-  mockery::stub(froggeR::save_brand, "ui_yeah", function(...) TRUE)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
+  local_mocked_bindings(ui_yeah = function(...) TRUE, .package = "froggeR")
 
   # Should overwrite when user confirms
-  suppressMessages(froggeR::save_brand(save_logos = FALSE))
+  suppressMessages(save_brand(save_logos = FALSE))
 
   saved_content <- yaml::read_yaml(existing_brand)
   expect_equal(saved_content$brand, "NewBrand")
@@ -59,12 +59,12 @@ test_that("save_brand respects user declining overwrite", {
   existing_brand <- file.path(config_dir, "_brand.yml")
   yaml::write_yaml(list(brand = "OldBrand", color = "green"), existing_brand)
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
-  mockery::stub(froggeR::save_brand, "ui_yeah", function(...) FALSE)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
+  local_mocked_bindings(ui_yeah = function(...) FALSE, .package = "froggeR")
 
   # Should not overwrite when user declines
-  suppressMessages(froggeR::save_brand(save_logos = FALSE))
+  suppressMessages(save_brand(save_logos = FALSE))
 
   saved_content <- yaml::read_yaml(existing_brand)
   expect_equal(saved_content$brand, "OldBrand")
@@ -83,11 +83,11 @@ test_that("save_brand skips logo copying when save_logos = FALSE", {
 
   config_dir <- withr::local_tempdir()
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
 
   # Should not copy logos when save_logos = FALSE
-  suppressMessages(froggeR::save_brand(save_logos = FALSE))
+  suppressMessages(save_brand(save_logos = FALSE))
 
   expect_false(dir.exists(file.path(config_dir, "logos")))
 })
@@ -104,14 +104,12 @@ test_that("save_brand copies logos directory when save_logos = TRUE and no globa
 
   config_dir <- withr::local_tempdir()
 
-  # Need to stub dir.exists to work with working directory changes
-  # The function checks dir.exists('logos') which is relative
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
 
   # Temporarily change working directory for the test
   withr::with_dir(tmp_project, {
-    suppressMessages(froggeR::save_brand(save_logos = TRUE))
+    suppressMessages(save_brand(save_logos = TRUE))
   })
 
   expect_true(dir.exists(file.path(config_dir, "logos")))
@@ -135,13 +133,13 @@ test_that("save_brand prompts for overwrite when global logos exist and user con
   dir.create(config_logos)
   writeLines("old logo content", file.path(config_logos, "logo.png"))
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
-  mockery::stub(froggeR::save_brand, "ui_yeah", function(...) TRUE)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
+  local_mocked_bindings(ui_yeah = function(...) TRUE, .package = "froggeR")
 
   # Temporarily change working directory for the test
   withr::with_dir(tmp_project, {
-    suppressMessages(froggeR::save_brand(save_logos = TRUE))
+    suppressMessages(save_brand(save_logos = TRUE))
   })
 
   # Should have new logo content
@@ -166,13 +164,13 @@ test_that("save_brand respects user declining logos overwrite", {
   dir.create(config_logos)
   writeLines("old logo content", file.path(config_logos, "logo.png"))
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
-  mockery::stub(froggeR::save_brand, "ui_yeah", function(...) FALSE)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
+  local_mocked_bindings(ui_yeah = function(...) FALSE, .package = "froggeR")
 
   # Temporarily change working directory for the test
   withr::with_dir(tmp_project, {
-    suppressMessages(froggeR::save_brand(save_logos = TRUE))
+    suppressMessages(save_brand(save_logos = TRUE))
   })
 
   # Should still have old logo content
@@ -189,13 +187,13 @@ test_that("save_brand handles missing logos directory gracefully", {
 
   config_dir <- withr::local_tempdir()
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
 
   # Temporarily change working directory for the test
   withr::with_dir(tmp_project, {
     # Should handle missing logos gracefully
-    expect_message(froggeR::save_brand(save_logos = TRUE), "No project-level 'logos' directory")
+    expect_message(save_brand(save_logos = TRUE), "No project-level 'logos' directory")
   })
 
   expect_false(dir.exists(file.path(config_dir, "logos")))
@@ -208,10 +206,10 @@ test_that("save_brand returns NULL invisibly", {
 
   config_dir <- withr::local_tempdir()
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
 
-  result <- suppressMessages(froggeR::save_brand(save_logos = FALSE))
+  result <- suppressMessages(save_brand(save_logos = FALSE))
   expect_null(result)
 })
 
@@ -222,9 +220,9 @@ test_that("save_brand prints success message on completion", {
 
   config_dir <- withr::local_tempdir()
 
-  mockery::stub(froggeR::save_brand, "here::here", tmp_project)
-  mockery::stub(froggeR::save_brand, "rappdirs::user_config_dir", config_dir)
+  local_mocked_bindings(here = function(...) tmp_project, .package = "here")
+  local_mocked_bindings(user_config_dir = function(...) config_dir, .package = "rappdirs")
 
   # The function should print completion messages
-  expect_message(froggeR::save_brand(save_logos = FALSE), "Saved _brand.yml to system configuration")
+  expect_message(save_brand(save_logos = FALSE), "Saved _brand.yml to system configuration")
 })

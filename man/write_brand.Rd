@@ -14,32 +14,32 @@ root via \code{\link[here]{here}}.}
 Default is \code{TRUE}.}
 }
 \value{
-Invisibly returns the path to the created file.
+Invisibly returns the path to the file.
 }
 \description{
-This function creates a \code{_brand.yml} file in a Quarto project and opens it
-for editing.
+Creates or opens a \code{_brand.yml} file in a Quarto project for editing.
+If the file already exists, it is opened directly. If global froggeR brand
+settings exist, those are used as the starting point. Otherwise, the template
+is downloaded from the
+\href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
+repository.
 }
 \details{
-The function will attempt to use the current froggeR settings from the global
-config path. If no global configurations exist, a template \code{_brand.yml}
-will be created.
+The \code{_brand.yml} file defines your visual identity for Quarto documents:
+colors, logos, typography, and more. See the
+\href{https://posit-dev.github.io/brand-yml/}{brand.yml specification} for
+the full list of available options.
 
-In interactive sessions, the file is opened in the default editor for immediate
-customization.
+Use \code{\link{save_brand}} to persist your project-level brand configuration
+to the global config directory for reuse across projects.
 }
 \examples{
-# Write the _brand.yml file
-if (interactive()) {
-  temp_dir <- tempdir()
-  # In an interactive session, this would also open the file for editing.
-  write_brand(temp_dir)
-  # Verify the file was created
-  file.exists(file.path(temp_dir, "_brand.yml"))
+\dontrun{
+write_brand()
 }
 
 }
 \seealso{
-\code{\link{brand_settings}}, \code{\link{save_brand}},
-  \code{\link{settings}}
+\code{\link{save_brand}}, \code{\link{write_variables}},
+  \code{\link{init}}
 }

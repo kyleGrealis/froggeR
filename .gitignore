@@ -33,6 +33,7 @@ Thumbs.db
 
 # Claude and other AI
 .claude/
+CLAUDE.md
 
 # project-level
 PROG_NOTES.md
@@ -42,7 +43,7 @@ inst/doc
 /Meta/
 docs
 cran-comments.md
-^CRAN-SUBMISSION$
+CRAN-SUBMISSION
 
 /.quarto/
 **/*.quarto_ipynb

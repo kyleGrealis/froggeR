@@ -7,56 +7,27 @@
 quarto_project(name, path = here::here(), example = TRUE)
 }
 \arguments{
-\item{name}{Character. The name of the Quarto project directory and
-initial \code{.qmd} file. Must contain only letters, numbers, hyphens, and
-underscores.}
+\item{name}{Character. The name of the Quarto project directory.}
 
 \item{path}{Character. Path to the parent directory where project will be created.
 Default is current project root via \code{\link[here]{here}}.}
 
-\item{example}{Logical. If \code{TRUE} (default), creates a Quarto document with
-brand logo positioning and examples of within-document cross-referencing, links,
-and references.}
+\item{example}{Logical. Ignored. Kept for backward compatibility.}
 }
 \value{
 Invisibly returns the path to the created project directory.
 }
 \description{
-This function creates a new Quarto project directory with additional froggeR
-features. It first calls \code{quarto::quarto_create_project()} to set up the
-basic structure, then enhances it with froggeR-specific files and settings.
-}
-\details{
-This function creates a Quarto project with the following enhancements:
-\itemize{
-  \item \code{_brand.yml}: Stores Quarto project branding
-  \item \code{logos}: Quarto project branding logos directory
-  \item \code{_variables.yml}: Stores reusable YAML variables
-  \item \code{.gitignore}: Enhanced settings for R projects
-  \item \code{README.md}: Template README file
-  \item \code{dated_progress_notes.md}: For project progress tracking
-  \item \code{custom.scss}: Custom Quarto styling
-  \item \code{references.bib}: Bibliography template
-}
-
-The function requires Quarto version 1.6 or greater. Global froggeR settings
-are automatically applied if available.
+\strong{Deprecated.} \code{quarto_project()} has been replaced by \code{\link{init}()}, which
+downloads the latest opinionated scaffold from GitHub. This function now
+creates the project directory and delegates to \code{init()}.
 }
 \examples{
-if (interactive() && quarto::quarto_version() >= "1.6") {
-
-  # Create the Quarto project with custom YAML & associated files
-  quarto_project("frogs", path = tempdir(), example = TRUE)
-
-  # Confirm files were created
-  file.exists(file.path(tempdir(), "frogs", "frogs.qmd"))
-  file.exists(file.path(tempdir(), "frogs", "_quarto.yml"))
-
+\dontrun{
+quarto_project("frogs", path = tempdir())
 }
 
 }
 \seealso{
-\code{\link{write_quarto}}, \code{\link{settings}},
-  \code{\link{brand_settings}}, \code{\link{write_brand}}, \code{\link{write_variables}},
-  \code{\link{save_brand}}, \code{\link{save_variables}}
+\code{\link{init}}
 }

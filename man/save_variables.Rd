@@ -24,7 +24,7 @@ This function:
 
 The saved configuration is stored in \code{rappdirs::user_config_dir('froggeR')}
 and will automatically be used in new froggeR projects created with
-\code{\link{quarto_project}} or \code{\link{write_variables}}.
+\code{\link{init}} or \code{\link{write_variables}}.
 
 This is useful for maintaining consistent author metadata (name, email, affiliations, etc.)
 across all your projects without having to re-enter it each time.
@@ -35,6 +35,5 @@ if (interactive()) save_variables()
 
 }
 \seealso{
-\code{\link{settings}}, \code{\link{write_variables}},
-  \code{\link{save_brand}}
+\code{\link{write_variables}}, \code{\link{save_brand}}
 }

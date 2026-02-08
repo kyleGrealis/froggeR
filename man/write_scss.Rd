@@ -11,30 +11,26 @@ write_scss(path = here::here())
 root via \code{\link[here]{here}}.}
 }
 \value{
-Invisibly returns the path to the created file.
+Invisibly returns the path to the file.
 }
 \description{
-This function creates a \code{.scss} file for custom Quarto styling and opens it
-for editing.
+Creates or opens a \code{www/custom.scss} file in a Quarto project. If the
+file already exists, it is opened directly. Otherwise, the template is
+downloaded from the
+\href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
+repository.
 }
 \details{
-The function creates a \code{custom.scss} file with styling variables, mixins,
-and rules for customizing Quarto document appearance.
+The function creates a \code{www/custom.scss} file with styling variables,
+mixins, and rules for customizing Quarto document appearance. The \code{www/}
+directory is created automatically if it does not exist.
 }
 \examples{
-# Create a temporary directory for testing
-tmp_dir <- tempdir()
-
-# Write the SCSS file
-write_scss(path = tmp_dir)
-
-# Confirm the file was created
-file.exists(file.path(tmp_dir, "custom.scss"))
-
-# Clean up
-unlink(file.path(tmp_dir, "custom.scss"))
+\dontrun{
+write_scss()
+}
 
 }
 \seealso{
-\code{\link{quarto_project}}, \code{\link{write_quarto}}
+\code{\link{init}}, \code{\link{write_quarto}}
 }

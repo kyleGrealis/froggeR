@@ -29,7 +29,7 @@ This function:
 
 The saved configuration is stored in \code{rappdirs::user_config_dir('froggeR')}
 and will automatically be used in new froggeR projects created with
-\code{\link{quarto_project}} or \code{\link{write_brand}}.
+\code{\link{init}} or \code{\link{write_brand}}.
 }
 \examples{
 # Save brand settings from current project to global config
@@ -40,6 +40,5 @@ if (interactive()) save_brand(save_logos = FALSE)
 
 }
 \seealso{
-\code{\link{brand_settings}}, \code{\link{write_brand}},
-  \code{\link{save_variables}}
+\code{\link{write_brand}}, \code{\link{save_variables}}
 }

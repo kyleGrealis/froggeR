@@ -1,17 +1,19 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-PROG_NOTES.md
+^PROG_NOTES\.md$
 ^doc$
 ^Meta$
 ^docs$
 ^_pkgdown\.yml$
 ^pkgdown$
 ^\.github$
-.quarto$
+^\.quarto$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
-..Rcheck$
+^.*\.Rcheck$
 
 ^vignettes/archive$
-.claude
+^\.claude$
+^CLAUDE\.md$
+^\.pre-commit-config\.yaml$
