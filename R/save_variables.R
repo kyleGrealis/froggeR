@@ -52,7 +52,7 @@ save_variables <- function() {
   system_settings <- file.exists(config_file)
   # Overwrite_prompt
   overwrite_prompt <- sprintf(
-    "A system-level %s configuration was found. Overwrite??",
+    "A system-level %s configuration was found. Overwrite?",
     col_green("froggeR")
   )
 

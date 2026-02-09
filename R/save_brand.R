@@ -56,7 +56,7 @@ save_brand <- function(save_logos = TRUE) {
   system_settings <- file.exists(brand_file)
   # Overwrite_prompt
   overwrite_prompt <- sprintf(
-    "A system-level %s configuration was found. Overwrite??",
+    "A system-level %s configuration was found. Overwrite?",
     col_green("froggeR")
   )
 
@@ -83,12 +83,12 @@ save_brand <- function(save_logos = TRUE) {
   # Does local directory exist?
   logos_dir <- dir.exists(local_logos)
   # No logos directory prompt
-  no_local_logos <- "No project-level 'logos' directory was found. Skipping..."
+  no_local_logos <- "No project-level 'logos' directory was found. Skipping."
   # Does the froggeR logos directory exist?
   frogger_logos <- dir.exists(file.path(config_path, "logos"))
   # Overwrite config logos prompt
   config_logos_overwrite <- sprintf(
-    "A system-level %s configuration was found. Overwrite??",
+    "A system-level %s configuration was found. Overwrite?",
     col_green("froggeR logos")
   )
 
