@@ -51,9 +51,9 @@ write_brand <- function(path = here::here(), restore_logos = TRUE) {
     frogger_logos <- file.path(config_path, "logos")
     logos_dest <- file.path(path, "logos")
     if (dir.exists(logos_dest)) {
-      ui_oops("Logos directory already exists in this project. Skipping...")
+      ui_oops("Logos directory already exists in this project. Skipping.")
     } else if (!dir.exists(frogger_logos)) {
-      ui_info("No config level 'logos' directory was found. Skipping...")
+      ui_info("No config level 'logos' directory was found. Skipping.")
     } else {
       fs::dir_copy(frogger_logos, logos_dest)
       ui_done(sprintf("Copying existing %s logos.", col_green("froggeR")))
