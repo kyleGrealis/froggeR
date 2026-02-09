@@ -91,7 +91,7 @@ everywhere, not buried inside whichever analysis script needed them
 first.
 
 This is designed for use with
-[{sumExtras}](https://kylegrealis.com/sumExtras/) with
+[{sumExtras}](https://www.kylegrealis.com/sumExtras/) with
 `sumExtras::add_auto_labels()`. Your
 [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get
 human-readable labels without manual labeling in every script. Define
