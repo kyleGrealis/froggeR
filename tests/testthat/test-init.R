@@ -180,12 +180,31 @@ test_that("init restores saved logos from global config", {
 
 # Error handling tests ====
 
-test_that("init errors on invalid path", {
-  expect_error(
-    init(path = file.path(tempdir(), "nonexistent_xyz")),
-    "Invalid path",
-    class = "froggeR_invalid_path"
+test_that("init creates non-existent directory", {
+  tmp_dir <- withr::local_tempdir()
+  project_dir <- file.path(tmp_dir, "brand-new-project")
+
+  fake_zip <- tempfile(fileext = ".zip")
+  .create_fake_template_zip(fake_zip)
+
+  local_mocked_bindings(
+    download.file = function(url, destfile, ...) {
+      file.copy(fake_zip, destfile, overwrite = TRUE)
+      0L
+    },
+    .package = "utils"
   )
+  local_mocked_bindings(
+    user_config_dir = function(...) file.path(tmp_dir, "no_config"),
+    .package = "rappdirs"
+  )
+
+  expect_false(dir.exists(project_dir))
+  result <- init(path = project_dir)
+  expect_true(dir.exists(project_dir))
+  expect_true(file.exists(file.path(project_dir, "_quarto.yml")))
+
+  unlink(fake_zip)
 })
 
 test_that("init errors on NULL path", {
@@ -314,6 +333,87 @@ test_that("init works fine without any global config", {
 
   # Template files should still be there
   expect_true(file.exists(file.path(project_dir, "_quarto.yml")))
+
+  unlink(fake_zip)
+})
+
+
+# Additive behavior tests ====
+
+test_that("init skips existing files and does not overwrite them", {
+  tmp_dir <- withr::local_tempdir()
+  project_dir <- file.path(tmp_dir, "myproject")
+  dir.create(project_dir)
+
+  # Pre-populate with a README that should NOT be overwritten
+  original_content <- "My existing README content"
+  writeLines(original_content, file.path(project_dir, "README.md"))
+
+  fake_zip <- tempfile(fileext = ".zip")
+  .create_fake_template_zip(fake_zip)
+
+  local_mocked_bindings(
+    download.file = function(url, destfile, ...) {
+      file.copy(fake_zip, destfile, overwrite = TRUE)
+      0L
+    },
+    .package = "utils"
+  )
+  local_mocked_bindings(
+    user_config_dir = function(...) file.path(tmp_dir, "no_config"),
+    .package = "rappdirs"
+  )
+
+  init(path = project_dir)
+
+  # README.md should still have original content
+  expect_equal(readLines(file.path(project_dir, "README.md")), original_content)
+
+  # Template files that didn't exist should be created
+  expect_true(file.exists(file.path(project_dir, "_quarto.yml")))
+  expect_true(file.exists(file.path(project_dir, "_brand.yml")))
+
+  unlink(fake_zip)
+})
+
+test_that("init does not overwrite pre-existing config files during restore", {
+  tmp_dir <- withr::local_tempdir()
+  project_dir <- file.path(tmp_dir, "myproject")
+  dir.create(project_dir)
+
+  # Pre-populate with existing _variables.yml
+  original_vars <- "author:\n  name: Original Author"
+  writeLines(original_vars, file.path(project_dir, "_variables.yml"))
+
+  # Set up global config with different content
+  fake_config <- file.path(tmp_dir, "config")
+  dir.create(fake_config)
+  writeLines(
+    "author:\n  name: Global Config Author",
+    file.path(fake_config, "_variables.yml")
+  )
+
+  fake_zip <- tempfile(fileext = ".zip")
+  .create_fake_template_zip(fake_zip)
+
+  local_mocked_bindings(
+    download.file = function(url, destfile, ...) {
+      file.copy(fake_zip, destfile, overwrite = TRUE)
+      0L
+    },
+    .package = "utils"
+  )
+  local_mocked_bindings(
+    user_config_dir = function(...) fake_config,
+    .package = "rappdirs"
+  )
+
+  init(path = project_dir)
+
+  # Pre-existing _variables.yml should NOT be overwritten by config restore
+  content <- readLines(file.path(project_dir, "_variables.yml"))
+  expect_true(any(grepl("Original Author", content)))
+  expect_false(any(grepl("Global Config Author", content)))
 
   unlink(fake_zip)
 })

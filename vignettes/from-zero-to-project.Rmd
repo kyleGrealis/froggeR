@@ -60,7 +60,7 @@ my_project/
 └── README.md
 ```
 
-`init()` downloads the latest template from [frogger-templates](https://github.com/kyleGrealis/frogger-templates) and populates the directory with the full scaffold. If you have previously saved global config with `save_variables()` or `save_brand()`, your metadata and branding are already in place.
+`init()` creates the target directory if it does not exist, downloads the latest template from [frogger-templates](https://github.com/kyleGrealis/frogger-templates), and copies only files that are not already present. Existing files are never overwritten. If you have previously saved global config with `save_variables()` or `save_brand()`, your metadata and branding are applied automatically.
 
 ### What each directory is for
 

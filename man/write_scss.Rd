@@ -4,30 +4,41 @@
 \alias{write_scss}
 \title{Create a Quarto SCSS File}
 \usage{
-write_scss(path = here::here())
+write_scss(filename = "custom", path = here::here())
 }
 \arguments{
-\item{path}{Character. Path to the project directory. Default is current project
-root via \code{\link[here]{here}}.}
+\item{filename}{Character. The name of the file without the \code{.scss}
+extension. A \code{www/} prefix and \code{.scss} extension are stripped
+automatically if provided, so \code{"custom2"} and
+\code{"www/custom2.scss"} are equivalent. Only letters, numbers, hyphens,
+and underscores are allowed. Default is \code{"custom"}.}
+
+\item{path}{Character. Path to the project directory. Default is current
+working directory via \code{\link[here]{here}}.}
 }
 \value{
 Invisibly returns the path to the file.
 }
 \description{
-Creates or opens a \code{www/custom.scss} file in a Quarto project. If the
-file already exists, it is opened directly. Otherwise, the template is
+Creates or opens an SCSS file in the \code{www/} directory. If the file
+already exists, it is opened directly. Otherwise, the template is
 downloaded from the
 \href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
 repository.
 }
 \details{
-The function creates a \code{www/custom.scss} file with styling variables,
-mixins, and rules for customizing Quarto document appearance. The \code{www/}
+The file is written to \code{www/<filename>.scss}. The \code{www/}
 directory is created automatically if it does not exist.
 }
 \examples{
 \dontrun{
+# Create the default custom.scss
 write_scss()
+
+# Create a second SCSS file
+write_scss("custom2")
+# These are equivalent
+write_scss("www/custom2.scss")
 }
 
 }

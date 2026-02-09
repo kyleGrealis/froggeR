@@ -7,8 +7,9 @@
 init(path = here::here())
 }
 \arguments{
-\item{path}{Character. Directory where the project will be created. Must
-already exist. Default is current project root via \code{\link[here]{here}}.}
+\item{path}{Character. Directory where the project will be created. If the
+directory does not exist, it will be created. Default is current project
+root via \code{\link[here]{here}}.}
 }
 \value{
 Invisibly returns the normalized \code{path}.
@@ -22,12 +23,16 @@ recommended way to start a new froggeR project.
 \details{
 The function performs these steps:
 \enumerate{
+  \item Creates the target directory if it does not exist
   \item Downloads the latest template zip from GitHub
-  \item Unpacks the scaffold into \code{path}
+  \item Copies only files that do not already exist (never overwrites)
   \item Restores saved user config (\code{_variables.yml}, \code{_brand.yml},
     \code{logos/}) from \code{~/.config/froggeR/} if present
   \item Creates a \code{data/} directory (gitignored by default)
 }
+
+Existing files are never overwritten. Each created and skipped file is
+reported individually so you can see exactly what changed.
 
 Global configuration is saved via \code{\link{save_variables}} and
 \code{\link{save_brand}}. If no saved config exists, the template defaults
@@ -35,8 +40,7 @@ are used as-is.
 }
 \examples{
 \dontrun{
-# Initialize in an existing empty directory
-dir.create(file.path(tempdir(), "my-project"))
+# Create a new project (directory is created automatically)
 init(path = file.path(tempdir(), "my-project"))
 }
 

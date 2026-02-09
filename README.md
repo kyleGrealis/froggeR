@@ -119,6 +119,7 @@ Generate a SCSS template for custom document styling:
 
 ```r
 froggeR::write_scss()
+froggeR::write_scss("tables")
 ```
 
 Provides a formatted stylesheet with:
@@ -136,7 +137,7 @@ Customize your document's appearance by uncommenting desired styles.
 | Function | Description |
 |----------|-------------|
 | `init()` | Initialize a complete project from the latest remote template |
-| `quarto_project()` | **Deprecated.** Use `init()` instead |
+| `quarto_project()` | **Removed.** Use `init()` instead |
 | `write_quarto()` | Create a Quarto document in `pages/` |
 | `write_variables()` | Create a `_variables.yml` metadata file |
 | `write_brand()` | Create a `_brand.yml` brand configuration file |

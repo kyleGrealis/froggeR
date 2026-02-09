@@ -49,6 +49,67 @@ test_that("write_scss returns normalized absolute path", {
 })
 
 
+# Filename parameter tests ====
+
+test_that("write_scss creates file with custom filename", {
+  tmp_dir <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
+  result <- write_scss("tables", path = tmp_dir)
+
+  expect_true(file.exists(file.path(tmp_dir, "www", "tables.scss")))
+  expect_equal(basename(result), "tables.scss")
+})
+
+test_that("write_scss strips www/ prefix from filename", {
+  tmp_dir <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
+  result <- write_scss("www/custom2.scss", path = tmp_dir)
+
+  expect_true(file.exists(file.path(tmp_dir, "www", "custom2.scss")))
+  expect_equal(basename(result), "custom2.scss")
+})
+
+test_that("write_scss strips .scss extension from filename", {
+  tmp_dir <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
+  result <- write_scss("custom3.scss", path = tmp_dir)
+
+  expect_true(file.exists(file.path(tmp_dir, "www", "custom3.scss")))
+  expect_equal(basename(result), "custom3.scss")
+})
+
+test_that("write_scss treats bare name and full path equivalently", {
+  tmp1 <- withr::local_tempdir()
+  tmp2 <- withr::local_tempdir()
+
+  local_mocked_bindings(
+    .fetch_template = function(...) .fake_scss_template(),
+    .package = "froggeR"
+  )
+
+  result1 <- write_scss("custom2", path = tmp1)
+  result2 <- write_scss("www/custom2.scss", path = tmp2)
+
+  expect_equal(basename(result1), basename(result2))
+  expect_equal(basename(result1), "custom2.scss")
+})
+
+
 # Error handling tests ====
 
 test_that("write_scss errors when directory doesn't exist", {
@@ -98,6 +159,15 @@ test_that("write_scss errors on empty string path", {
     write_scss(path = ""),
     "Invalid path",
     class = "froggeR_invalid_path"
+  )
+})
+
+test_that("write_scss errors on invalid filename characters", {
+  tmp_dir <- withr::local_tempdir()
+
+  expect_error(
+    write_scss("bad file name!", path = tmp_dir),
+    "Invalid filename"
   )
 })
 
