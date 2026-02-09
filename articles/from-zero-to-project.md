@@ -54,14 +54,15 @@ froggeR::init(path = "my_project")
     └── README.md
 
 [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
-downloads the latest template from
-[frogger-templates](https://github.com/kyleGrealis/frogger-templates)
-and populates the directory with the full scaffold. If you have
-previously saved global config with
+creates the target directory if it does not exist, downloads the latest
+template from
+[frogger-templates](https://github.com/kyleGrealis/frogger-templates),
+and copies only files that are not already present. Existing files are
+never overwritten. If you have previously saved global config with
 [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
 or
 [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md),
-your metadata and branding are already in place.
+your metadata and branding are applied automatically.
 
 ### What each directory is for
 

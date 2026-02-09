@@ -146,6 +146,7 @@ Generate a SCSS template for custom document styling:
 
 ``` r
 froggeR::write_scss()
+froggeR::write_scss("tables")
 ```
 
 Provides a formatted stylesheet with:
@@ -160,17 +161,17 @@ Customize your document’s appearance by uncommenting desired styles.
 
 ## Function Reference
 
-| Function                                                                                | Description                                                                                   |
-|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)                       | Initialize a complete project from the latest remote template                                 |
-| [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)   | **Deprecated.** Use [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) instead |
-| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `pages/`                                                          |
-| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file                                                       |
-| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)         | Create a `_brand.yml` brand configuration file                                                |
-| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)   | Save project `_variables.yml` to global config                                                |
-| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)           | Save project `_brand.yml` to global config                                                    |
-| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)       | Create an opinionated `.gitignore`                                                            |
-| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)           | Create a `custom.scss` styling template in `www/`                                             |
+| Function                                                                                | Description                                                                                |
+|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)                       | Initialize a complete project from the latest remote template                              |
+| [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)   | **Removed.** Use [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) instead |
+| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `pages/`                                                       |
+| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file                                                    |
+| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)         | Create a `_brand.yml` brand configuration file                                             |
+| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)   | Save project `_variables.yml` to global config                                             |
+| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)           | Save project `_brand.yml` to global config                                                 |
+| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)       | Create an opinionated `.gitignore`                                                         |
+| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)           | Create a `custom.scss` styling template in `www/`                                          |
 
 ------------------------------------------------------------------------
 

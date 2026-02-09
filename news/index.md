@@ -1,8 +1,13 @@
 # Changelog
 
-## froggeR 1.0.0 (2026-02-07)
+## froggeR 1.0.0 (2026-02-09)
 
 ### Breaking changes
+
+- [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
+  has been removed. It now errors with a message directing users to
+  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+  instead.
 
 - `write_notes()` and `write_readme()` have been removed. These files
   are now included in the project template downloaded by
@@ -11,13 +16,6 @@
 - [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)
   no longer accepts an `aggressive` parameter. A single `.gitignore` is
   provided.
-
-- [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
-  is deprecated in favor of
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md). It
-  now outputs a deprecation warning and advises to use
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
-  after creating the project directory.
 
 - `settings()` and `brand_settings()` have been removed. Use
   [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
@@ -38,7 +36,16 @@
   the latest project scaffold from the companion
   [frogger-templates](https://github.com/kyleGrealis/frogger-templates)
   repository and retrieves saved user configuration (`_variables.yml`,
-  `_brand.yml`, `logos/`) from `~/.config/froggeR/`.
+  `_brand.yml`, `logos/`) from `~/.config/froggeR/`. The target
+  directory is created automatically if it does not exist. Existing
+  files are never overwritten, and each created or skipped file is
+  reported individually.
+
+- [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)
+  gains a `filename` parameter (default `"custom"`). A `www/` prefix and
+  `.scss` extension are stripped automatically, so
+  `write_scss("tables")` and `write_scss("www/tables.scss")` are
+  equivalent.
 
 - **Template architecture**: Project templates now live in a separate
   repository (`kyleGrealis/frogger-templates`), decoupled from CRAN

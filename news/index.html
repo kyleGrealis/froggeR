@@ -43,18 +43,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="frogger-100-2026-02-07">froggeR 1.0.0 (2026-02-07)<a class="anchor" aria-label="anchor" href="#frogger-100-2026-02-07"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="frogger-100-2026-02-09">froggeR 1.0.0 (2026-02-09)<a class="anchor" aria-label="anchor" href="#frogger-100-2026-02-09"></a></h2>
 <div class="section level3">
 <h3 id="breaking-changes-1-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0"></a></h3>
-<ul><li><p><code>write_notes()</code> and <code>write_readme()</code> have been removed. These files are now included in the project template downloaded by <code><a href="../reference/init.html">init()</a></code>.</p></li>
+<ul><li><p><code><a href="../reference/quarto_project.html">quarto_project()</a></code> has been removed. It now errors with a message directing users to <code><a href="../reference/init.html">init()</a></code> instead.</p></li>
+<li><p><code>write_notes()</code> and <code>write_readme()</code> have been removed. These files are now included in the project template downloaded by <code><a href="../reference/init.html">init()</a></code>.</p></li>
 <li><p><code><a href="../reference/write_ignore.html">write_ignore()</a></code> no longer accepts an <code>aggressive</code> parameter. A single <code>.gitignore</code> is provided.</p></li>
-<li><p><code><a href="../reference/quarto_project.html">quarto_project()</a></code> is deprecated in favor of <code><a href="../reference/init.html">init()</a></code>. It now outputs a deprecation warning and advises to use <code><a href="../reference/init.html">init()</a></code> after creating the project directory.</p></li>
 <li><p><code>settings()</code> and <code>brand_settings()</code> have been removed. Use <code><a href="../reference/write_variables.html">write_variables()</a></code> and <code><a href="../reference/write_brand.html">write_brand()</a></code> to create and edit configuration files directly. These functions now handle existing files gracefully (opening them for editing instead of erroring) and print reference URLs to the console.</p></li>
 <li><p>The <code>your-metadata-your-way</code> and <code>building-your-brand-identity</code> vignettes have been removed.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
-<ul><li><p>New function <code><a href="../reference/init.html">init()</a></code> is the primary entry point for creating froggeR projects. It downloads the latest project scaffold from the companion <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a> repository and retrieves saved user configuration (<code>_variables.yml</code>, <code>_brand.yml</code>, <code>logos/</code>) from <code>~/.config/froggeR/</code>.</p></li>
+<ul><li><p>New function <code><a href="../reference/init.html">init()</a></code> is the primary entry point for creating froggeR projects. It downloads the latest project scaffold from the companion <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a> repository and retrieves saved user configuration (<code>_variables.yml</code>, <code>_brand.yml</code>, <code>logos/</code>) from <code>~/.config/froggeR/</code>. The target directory is created automatically if it does not exist. Existing files are never overwritten, and each created or skipped file is reported individually.</p></li>
+<li><p><code><a href="../reference/write_scss.html">write_scss()</a></code> gains a <code>filename</code> parameter (default <code>"custom"</code>). A <code>www/</code> prefix and <code>.scss</code> extension are stripped automatically, so <code>write_scss("tables")</code> and <code>write_scss("www/tables.scss")</code> are equivalent.</p></li>
 <li><p><strong>Template architecture</strong>: Project templates now live in a separate repository (<code>kyleGrealis/frogger-templates</code>), decoupled from CRAN release cycles. Template improvements reach users immediately without a package update.</p></li>
 </ul></div>
 <div class="section level3">

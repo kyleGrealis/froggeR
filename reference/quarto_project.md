@@ -1,10 +1,8 @@
 # Create a Custom Quarto Project
 
-**Deprecated.** `quarto_project()` has been replaced by
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md), which
-downloads the latest opinionated scaffold from GitHub. This function now
-creates the project directory and delegates to
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md).
+**Deprecated.** Use
+[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+instead.
 
 ## Usage
 
@@ -16,21 +14,19 @@ quarto_project(name, path = here::here(), example = TRUE)
 
 - name:
 
-  Character. The name of the Quarto project directory.
+  Character. Ignored.
 
 - path:
 
-  Character. Path to the parent directory where project will be created.
-  Default is current project root via
-  [`here`](https://here.r-lib.org/reference/here.html).
+  Character. Ignored.
 
 - example:
 
-  Logical. Ignored. Kept for backward compatibility.
+  Logical. Ignored.
 
 ## Value
 
-Invisibly returns the path to the created project directory.
+Does not return. Always errors with a deprecation message.
 
 ## See also
 
@@ -40,6 +36,7 @@ Invisibly returns the path to the created project directory.
 
 ``` r
 if (FALSE) { # \dontrun{
-quarto_project("frogs", path = tempdir())
+# Use init() instead
+init(path = "my-project")
 } # }
 ```

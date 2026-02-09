@@ -133,11 +133,12 @@ frameworks in other languages. Learn it once, use it everywhere.</p>
 ├── .gitignore                # Opinionated git protection
 ├── .pre-commit-config.yaml   # Pre-commit hook configuration
 └── README.md</code></pre>
-<p><code><a href="../reference/init.html">init()</a></code> downloads the latest template from <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a>
-and populates the directory with the full scaffold. If you have
-previously saved global config with <code><a href="../reference/save_variables.html">save_variables()</a></code> or
-<code><a href="../reference/save_brand.html">save_brand()</a></code>, your metadata and branding are already in
-place.</p>
+<p><code><a href="../reference/init.html">init()</a></code> creates the target directory if it does not
+exist, downloads the latest template from <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a>,
+and copies only files that are not already present. Existing files are
+never overwritten. If you have previously saved global config with
+<code><a href="../reference/save_variables.html">save_variables()</a></code> or <code><a href="../reference/save_brand.html">save_brand()</a></code>, your
+metadata and branding are applied automatically.</p>
 <div class="section level3">
 <h3 id="what-each-directory-is-for">What each directory is for<a class="anchor" aria-label="anchor" href="#what-each-directory-is-for"></a>
 </h3>

@@ -15,9 +15,9 @@ init(path = here::here())
 
 - path:
 
-  Character. Directory where the project will be created. Must already
-  exist. Default is current project root via
-  [`here`](https://here.r-lib.org/reference/here.html).
+  Character. Directory where the project will be created. If the
+  directory does not exist, it will be created. Default is current
+  project root via [`here`](https://here.r-lib.org/reference/here.html).
 
 ## Value
 
@@ -27,14 +27,19 @@ Invisibly returns the normalized `path`.
 
 The function performs these steps:
 
-1.  Downloads the latest template zip from GitHub
+1.  Creates the target directory if it does not exist
 
-2.  Unpacks the scaffold into `path`
+2.  Downloads the latest template zip from GitHub
 
-3.  Restores saved user config (`_variables.yml`, `_brand.yml`,
+3.  Copies only files that do not already exist (never overwrites)
+
+4.  Restores saved user config (`_variables.yml`, `_brand.yml`,
     `logos/`) from `~/.config/froggeR/` if present
 
-4.  Creates a `data/` directory (gitignored by default)
+5.  Creates a `data/` directory (gitignored by default)
+
+Existing files are never overwritten. Each created and skipped file is
+reported individually so you can see exactly what changed.
 
 Global configuration is saved via
 [`save_variables`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
@@ -53,8 +58,7 @@ If no saved config exists, the template defaults are used as-is.
 
 ``` r
 if (FALSE) { # \dontrun{
-# Initialize in an existing empty directory
-dir.create(file.path(tempdir(), "my-project"))
+# Create a new project (directory is created automatically)
 init(path = file.path(tempdir(), "my-project"))
 } # }
 ```

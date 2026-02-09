@@ -66,8 +66,9 @@ recommended way to start a new froggeR project.</p>
 
 
 <dl><dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
-<dd><p>Character. Directory where the project will be created. Must
-already exist. Default is current project root via <code><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></code>.</p></dd>
+<dd><p>Character. Directory where the project will be created. If the
+directory does not exist, it will be created. Default is current project
+root via <code><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -76,12 +77,15 @@ already exist. Default is current project root via <code><a href="https://here.r
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function performs these steps:</p><ol><li><p>Downloads the latest template zip from GitHub</p></li>
-<li><p>Unpacks the scaffold into <code>path</code></p></li>
+    <p>The function performs these steps:</p><ol><li><p>Creates the target directory if it does not exist</p></li>
+<li><p>Downloads the latest template zip from GitHub</p></li>
+<li><p>Copies only files that do not already exist (never overwrites)</p></li>
 <li><p>Restores saved user config (<code>_variables.yml</code>, <code>_brand.yml</code>,
     <code>logos/</code>) from <code>~/.config/froggeR/</code> if present</p></li>
 <li><p>Creates a <code>data/</code> directory (gitignored by default)</p></li>
-</ol><p>Global configuration is saved via <code><a href="save_variables.html">save_variables</a></code> and
+</ol><p>Existing files are never overwritten. Each created and skipped file is
+reported individually so you can see exactly what changed.</p>
+<p>Global configuration is saved via <code><a href="save_variables.html">save_variables</a></code> and
 <code><a href="save_brand.html">save_brand</a></code>. If no saved config exists, the template defaults
 are used as-is.</p>
     </div>
@@ -94,8 +98,7 @@ are used as-is.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Initialize in an existing empty directory</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"my-project"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Create a new project (directory is created automatically)</span></span></span>
 <span class="r-in"><span><span class="fu">init</span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"my-project"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
