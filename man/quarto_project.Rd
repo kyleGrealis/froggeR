@@ -7,24 +7,22 @@
 quarto_project(name, path = here::here(), example = TRUE)
 }
 \arguments{
-\item{name}{Character. The name of the Quarto project directory.}
+\item{name}{Character. Ignored.}
 
-\item{path}{Character. Path to the parent directory where project will be created.
-Default is current project root via \code{\link[here]{here}}.}
+\item{path}{Character. Ignored.}
 
-\item{example}{Logical. Ignored. Kept for backward compatibility.}
+\item{example}{Logical. Ignored.}
 }
 \value{
-Invisibly returns the path to the created project directory.
+Does not return. Always errors with a deprecation message.
 }
 \description{
-\strong{Deprecated.} \code{quarto_project()} has been replaced by \code{\link{init}()}, which
-downloads the latest opinionated scaffold from GitHub. This function now
-creates the project directory and delegates to \code{init()}.
+\strong{Deprecated.} Use \code{\link{init}()} instead.
 }
 \examples{
 \dontrun{
-quarto_project("frogs", path = tempdir())
+# Use init() instead
+init(path = "my-project")
 }
 
 }
