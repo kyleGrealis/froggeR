@@ -77,31 +77,14 @@
 <blockquote>
 <p><strong>froggeR</strong>: Structured project standards for R and Quarto</p>
 </blockquote>
-<p>Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. froggeR offers a standard: <code>R/</code> for scripts, <code>pages/</code> for Quarto documents, <code>data/</code> for data files, <code>www/</code> for assets. Build habits that carry over whether you’re writing an analysis, building an R package, or picking up a new language entirely.</p>
+<p>Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> offers a standard: <code>R/</code> for scripts, <code>pages/</code> for Quarto documents, <code>data/</code> for data files, <code>www/</code> for assets. Build habits that carry over whether you’re writing an analysis, building an R package, or picking up a new language entirely.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"froggeR"</span><span class="op">)</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/init.html">init</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"my_project"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
+<h2 id="why-frogger">Why <code>{froggeR}</code>?<a class="anchor" aria-label="anchor" href="#why-frogger"></a>
 </h2>
-<ul>
-<li><a href="#why-frogger">Why froggeR?</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#project-creation">Project Creation</a></li>
-<li><a href="#configuration--reusability">Configuration &amp; Reusability</a></li>
-<li><a href="#templated-quarto-documents">Templated Quarto Documents</a></li>
-<li><a href="#enhanced-git-protection">Git Protection</a></li>
-<li><a href="#custom-styling-made-easy">Custom Styling</a></li>
-<li><a href="#function-reference">Function Reference</a></li>
-<li><a href="#getting-help">Getting Help</a></li>
-<li><a href="#contributing">Contributing</a></li>
-<li><a href="#license">License</a></li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="why-frogger">Why froggeR?<a class="anchor" aria-label="anchor" href="#why-frogger"></a>
-</h2>
-<p>froggeR gives every project the same enforced layout so you spend time analyzing, not organizing:</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> gives every project the same enforced layout so you spend time analyzing, not organizing:</p>
 <ul>
 <li>
 <strong>Structure by default</strong>: <code><a href="reference/init.html">init()</a></code> downloads the latest scaffold and you’re working in seconds. Scripts go in <code>R/</code>, Quarto documents in <code>pages/</code>, assets in <code>www/</code>, data in <code>data/</code>. Every project, every time.</li>
@@ -131,12 +114,12 @@
 <p>This creates:</p>
 <pre><code>my_new_project/
 ├── R/
-│   ├── _data_dictionary.R   # Variable labels and metadata
-│   ├── _libraries.R         # Centralized package loading
-│   └── _load.R              # Sources everything. Your entry point.
+│   ├── _data_dictionary.R    # Variable labels and metadata
+│   ├── _libraries.R          # Centralized package loading
+│   └── _load.R               # Sources everything. Your entry point.
 ├── pages/
-│   ├── index.qmd            # Main Quarto document
-│   └── references.bib       # Bibliography
+│   ├── index.qmd             # Main Quarto document
+│   └── references.bib        # Bibliography
 ├── www/
 │   ├── custom.scss           # Custom styling
 │   └── tables.js             # Table enhancements
@@ -152,7 +135,7 @@
 <div class="section level2">
 <h2 id="configuration--reusability">Configuration &amp; Reusability<a class="anchor" aria-label="anchor" href="#configuration--reusability"></a>
 </h2>
-<p>froggeR stores configuration at two levels: global (system-wide) and project-local. Set it up once, and every future project inherits your settings.</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> stores configuration at two levels: global (system-wide) and project-local. Set it up once, and every future project inherits your settings.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_variables.html">write_variables</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Create/edit _variables.yml (author metadata)</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_brand.html">write_brand</a></span><span class="op">(</span><span class="op">)</span>     <span class="co"># Create/edit _brand.yml (colors, logos, typography)</span></span></code></pre></div>
@@ -173,7 +156,7 @@
 <div class="section level2">
 <h2 id="enhanced-git-protection">Enhanced Git Protection<a class="anchor" aria-label="anchor" href="#enhanced-git-protection"></a>
 </h2>
-<p>froggeR includes a <code>.gitignore</code> that covers R artifacts, Quarto build files, data files, and common sensitive patterns:</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> includes a <code>.gitignore</code> that covers R artifacts, Quarto build files, data files, and common sensitive patterns:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_ignore.html">write_ignore</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>One set of rules. Comprehensive by default. If your project needs additional exclusions, edit <code>.gitignore</code> directly.</p>
@@ -276,7 +259,7 @@
 <strong>Suggest features</strong> - Have an idea? <a href="https://github.com/kyleGrealis/froggeR/issues" class="external-link">Submit a feature request</a>
 </li>
 <li>
-<strong>Share feedback</strong> - Let us know how froggeR is working for you</li>
+<strong>Share feedback</strong> - Let us know how <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> is working for you</li>
 <li>
 <strong>Improve documentation</strong> - Help us make docs clearer and more complete</li>
 </ul>
@@ -285,13 +268,7 @@
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
-<p>froggeR is licensed under the <a href="https://choosealicense.com/licenses/mit/" class="external-link">MIT License</a>. See the LICENSE file for details.</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
-</h2>
-<p>froggeR is built with these excellent packages: - <a href="https://cli.r-lib.org/" class="external-link">cli</a> - User-friendly command line interfaces - <a href="https://fs.r-lib.org/" class="external-link">fs</a> - Cross-platform file system operations - <a href="https://here.r-lib.org/" class="external-link">here</a> - Project-oriented workflows - <a href="https://usethis.r-lib.org/" class="external-link">usethis</a> - Workflow automation - <a href="https://rappdirs.r-lib.org/" class="external-link">rappdirs</a> - Cross-platform configuration paths</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> is licensed under the <a href="https://choosealicense.com/licenses/mit/" class="external-link">MIT License</a>. See the LICENSE file for details.</p>
 <hr>
 <p><strong>Developed by <a href="https://github.com/kyleGrealis" class="external-link">Kyle Grealis</a></strong></p>
 </div>

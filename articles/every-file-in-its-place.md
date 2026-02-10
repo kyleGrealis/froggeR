@@ -5,7 +5,8 @@
 A project with five R files is manageable. A project with fifteen is
 not, unless they follow a pattern.
 
-froggeR puts three files in every project’s `R/` directory:
+[froggeR](https://www.kyleGrealis.com/froggeR/) puts three files in
+every project’s `R/` directory:
 
 - `_load.R` – the entry point
 - `_libraries.R` – package loading
@@ -13,7 +14,7 @@ froggeR puts three files in every project’s `R/` directory:
 
 The underscore prefix is intentional. It sorts these files above your
 analysis scripts in any directory listing, signaling that they are
-infrastructure, not analysis.
+**infrastructure**, not analysis.
 
 ## `_load.R`: one file to source
 
@@ -91,7 +92,8 @@ everywhere, not buried inside whichever analysis script needed them
 first.
 
 This is designed for use with
-[{sumExtras}](https://www.kylegrealis.com/sumExtras/) with
+[{sumExtras}](https://www.kylegrealis.com/sumExtras/) using the
+`options(sumExtras.auto_labels = TRUE)` and then to
 `sumExtras::add_auto_labels()`. Your
 [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get
 human-readable labels without manual labeling in every script. Define
@@ -113,7 +115,9 @@ project:
 
 Quarto only renders `.qmd` files found in `pages/`. Static assets in
 `www/` are copied to the output as resources. Rendered HTML goes to
-`docs/`, keeping build artifacts out of your source directories.
+`docs/`, keeping build artifacts out of your source directories. Explore
+the documentation for other [Quarto
+project](https://quarto.org/docs/projects/quarto-projects.html) types.
 
 The styling and sidebar also reference these paths directly:
 
@@ -138,7 +142,9 @@ and Quarto will tell you something is missing without telling you why.
 
 This is the payoff of a fixed directory layout: the configuration works
 because the structure is predictable. You do not need to edit
-`_quarto.yml` to wire up paths. They are already correct.
+`_quarto.yml` to wire up paths. They are already correct. Add more files
+in the `contents` section as your project grows and follow the example
+for `Home` for `pages/index.qmd`.
 
 For the full `_quarto.yml` specification, see [Quarto Project
 Basics](https://quarto.org/docs/projects/quarto-projects.html).
@@ -160,7 +166,8 @@ source("R/_load.R")
 ```
 
 The difference matters the moment your working directory is not the
-project root. In a froggeR project, that happens by design.
+project root. In a [froggeR](https://www.kyleGrealis.com/froggeR/)
+project, that happens by design.
 
 When you render `pages/index.qmd`, Quarto sets the working directory to
 `pages/`. A relative path like `"R/_load.R"` resolves to

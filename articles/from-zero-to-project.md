@@ -11,7 +11,7 @@ stylesheets pile up in the root directory. Every project is organized
 differently, or not at all. Switching between projects means re-learning
 the layout every time.
 
-froggeR enforces one:
+[froggeR](https://www.kyleGrealis.com/froggeR/) enforces one:
 
 - `R/` for scripts
 - `pages/` for Quarto documents
@@ -150,12 +150,13 @@ installation options.
 
 The hooks are a starting point. Edit `.pre-commit-config.yaml` to add,
 remove, or reconfigure hooks for your workflow. If you do not want
-pre-commit at all, delete the file. No other part of froggeR depends on
-it.
+pre-commit at all, delete the file. No other part of
+[froggeR](https://www.kyleGrealis.com/froggeR/) depends on it.
 
 ## Your settings follow you
 
-froggeR stores configuration in two places:
+[froggeR](https://www.kyleGrealis.com/froggeR/) stores configuration in
+two places:
 
 1.  **Project-level**: `_variables.yml` and `_brand.yml` in your project
     directory. These are committed to version control and used by the

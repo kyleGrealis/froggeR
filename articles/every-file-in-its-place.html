@@ -83,8 +83,8 @@
 </h2>
 <p>A project with five R files is manageable. A project with fifteen is
 not, unless they follow a pattern.</p>
-<p>froggeR puts three files in every project’s <code>R/</code>
-directory:</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> puts three files in every project’s
+<code>R/</code> directory:</p>
 <ul>
 <li>
 <code>_load.R</code> – the entry point</li>
@@ -95,7 +95,7 @@ directory:</p>
 </ul>
 <p>The underscore prefix is intentional. It sorts these files above your
 analysis scripts in any directory listing, signaling that they are
-infrastructure, not analysis.</p>
+<strong>infrastructure</strong>, not analysis.</p>
 </div>
 <div class="section level2">
 <h2 id="load-r-one-file-to-source">
@@ -165,7 +165,8 @@ rendered documents free of startup noise.</li>
 Keeping it in a dedicated file means your labels are defined once and
 available everywhere, not buried inside whichever analysis script needed
 them first.</p>
-<p>This is designed for use with <a href="https://www.kylegrealis.com/sumExtras/" class="external-link">{sumExtras}</a> with
+<p>This is designed for use with <a href="https://www.kylegrealis.com/sumExtras/" class="external-link">{sumExtras}</a> using the
+<code>options(sumExtras.auto_labels = TRUE)</code> and then to
 <code>sumExtras::add_auto_labels()</code>. Your <a href="https://www.danieldsjoberg.com/gtsummary/" class="external-link">{gtsummary}</a> tables
 get human-readable labels without manual labeling in every script.
 Define labels once here, apply them anywhere.</p>
@@ -185,7 +186,9 @@ Define labels once here, apply them anywhere.</p>
 <p>Quarto only renders <code>.qmd</code> files found in
 <code>pages/</code>. Static assets in <code>www/</code> are copied to
 the output as resources. Rendered HTML goes to <code>docs/</code>,
-keeping build artifacts out of your source directories.</p>
+keeping build artifacts out of your source directories. Explore the
+documentation for other <a href="https://quarto.org/docs/projects/quarto-projects.html" class="external-link">Quarto
+project</a> types.</p>
 <p>The styling and sidebar also reference these paths directly:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
@@ -205,7 +208,10 @@ of convention, these references break and Quarto will tell you something
 is missing without telling you why.</p>
 <p>This is the payoff of a fixed directory layout: the configuration
 works because the structure is predictable. You do not need to edit
-<code>_quarto.yml</code> to wire up paths. They are already correct.</p>
+<code>_quarto.yml</code> to wire up paths. They are already correct. Add
+more files in the <code>contents</code> section as your project grows
+and follow the example for <code>Home</code> for
+<code>pages/index.qmd</code>.</p>
 <p>For the full <code>_quarto.yml</code> specification, see <a href="https://quarto.org/docs/projects/quarto-projects.html" class="external-link">Quarto
 Project Basics</a>.</p>
 </div>
@@ -221,7 +227,8 @@ Project Basics</a>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"R/_load.R"</span><span class="op">)</span></span></code></pre></div>
 <p>The difference matters the moment your working directory is not the
-project root. In a froggeR project, that happens by design.</p>
+project root. In a <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> project, that happens by
+design.</p>
 <p>When you render <code>pages/index.qmd</code>, Quarto sets the working
 directory to <code>pages/</code>. A relative path like
 <code>"R/_load.R"</code> resolves to <code>pages/R/_load.R</code>, which
