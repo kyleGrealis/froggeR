@@ -9,30 +9,16 @@
 
 > **froggeR**: Structured project standards for R and Quarto
 
-Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. froggeR offers a standard: `R/` for scripts, `pages/` for Quarto documents, `data/` for data files, `www/` for assets. Build habits that carry over whether you're writing an analysis, building an R package, or picking up a new language entirely.
+Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. `{froggeR}` offers a standard: `R/` for scripts, `pages/` for Quarto documents, `data/` for data files, `www/` for assets. Build habits that carry over whether you're writing an analysis, building an R package, or picking up a new language entirely.
 
 ```r
 install.packages("froggeR")
 froggeR::init(path = "my_project")
 ```
 
-## Table of Contents
+## Why `{froggeR}`?
 
-- [Why froggeR?](#why-frogger)
-- [Installation](#installation)
-- [Project Creation](#project-creation)
-- [Configuration & Reusability](#configuration--reusability)
-- [Templated Quarto Documents](#templated-quarto-documents)
-- [Git Protection](#enhanced-git-protection)
-- [Custom Styling](#custom-styling-made-easy)
-- [Function Reference](#function-reference)
-- [Getting Help](#getting-help)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Why froggeR?
-
-froggeR gives every project the same enforced layout so you spend time analyzing, not organizing:
+`{froggeR}` gives every project the same enforced layout so you spend time analyzing, not organizing:
 
 * **Structure by default**: `init()` downloads the latest scaffold and you're working in seconds. Scripts go in `R/`, Quarto documents in `pages/`, assets in `www/`, data in `data/`. Every project, every time.
 * **Opinionated starting points**: `R/_load.R`, `R/_libraries.R`, and `R/_data_dictionary.R` give every project a consistent entry point. `write_quarto()` creates pre-formatted `.qmd` files with your author info and branding baked in.
@@ -61,12 +47,12 @@ This creates:
 ```
 my_new_project/
 ├── R/
-│   ├── _data_dictionary.R   # Variable labels and metadata
-│   ├── _libraries.R         # Centralized package loading
-│   └── _load.R              # Sources everything. Your entry point.
-├── pages/
-│   ├── index.qmd            # Main Quarto document
-│   └── references.bib       # Bibliography
+│   ├── _data_dictionary.R    # Variable labels and metadata
+│   ├── _libraries.R          # Centralized package loading
+│   └── _load.R               # Sources everything. Your entry point.
+├── pages/ 
+│   ├── index.qmd             # Main Quarto document
+│   └── references.bib        # Bibliography
 ├── www/
 │   ├── custom.scss           # Custom styling
 │   └── tables.js             # Table enhancements
@@ -82,7 +68,7 @@ my_new_project/
 
 ## Configuration & Reusability
 
-froggeR stores configuration at two levels: global (system-wide) and project-local. Set it up once, and every future project inherits your settings.
+`{froggeR}` stores configuration at two levels: global (system-wide) and project-local. Set it up once, and every future project inherits your settings.
 
 ```r
 froggeR::write_variables() # Create/edit _variables.yml (author metadata)
@@ -110,7 +96,7 @@ Your saved metadata automatically populates author information and branding.
 
 ## Enhanced Git Protection
 
-froggeR includes a `.gitignore` that covers R artifacts, Quarto build files, data files, and common sensitive patterns:
+`{froggeR}` includes a `.gitignore` that covers R artifacts, Quarto build files, data files, and common sensitive patterns:
 
 ```r
 froggeR::write_ignore()
@@ -154,11 +140,11 @@ Customize your document's appearance by uncommenting desired styles.
 
 ## Getting Help
 
-- **Documentation**: [froggeR website](https://www.kyleGrealis.com/froggeR/) for full function references and vignettes
-- **Vignettes**:
-  - [From Zero to Project](https://www.kyleGrealis.com/froggeR/articles/from-zero-to-project.html)
-  - [Every File in Its Place](https://www.kyleGrealis.com/froggeR/articles/every-file-in-its-place.html)
-- **Issues**: Found a bug or have a feature request? [Open an issue](https://github.com/kyleGrealis/froggeR/issues)
+* **Documentation**: [froggeR website](https://www.kyleGrealis.com/froggeR/) for full function references and vignettes
+* **Vignettes**:
+  * [From Zero to Project](https://www.kyleGrealis.com/froggeR/articles/from-zero-to-project.html)
+  * [Every File in Its Place](https://www.kyleGrealis.com/froggeR/articles/every-file-in-its-place.html)
+* **Issues**: Found a bug or have a feature request? [Open an issue](https://github.com/kyleGrealis/froggeR/issues)
 
 ----
 
@@ -166,27 +152,16 @@ Customize your document's appearance by uncommenting desired styles.
 
 We welcome contributions and ideas! Here's how you can help:
 
-- **Report bugs** - [Open an issue](https://github.com/kyleGrealis/froggeR/issues) with a clear description
-- **Suggest features** - Have an idea? [Submit a feature request](https://github.com/kyleGrealis/froggeR/issues)
-- **Share feedback** - Let us know how froggeR is working for you
-- **Improve documentation** - Help us make docs clearer and more complete
+* **Report bugs** - [Open an issue](https://github.com/kyleGrealis/froggeR/issues) with a clear description
+* **Suggest features** - Have an idea? [Submit a feature request](https://github.com/kyleGrealis/froggeR/issues)
+* **Share feedback** - Let us know how `{froggeR}` is working for you
+* **Improve documentation** - Help us make docs clearer and more complete
 
 ----
 
 ## License
 
-froggeR is licensed under the [MIT License](https://choosealicense.com/licenses/mit/). See the LICENSE file for details.
-
-----
-
-## Acknowledgments
-
-froggeR is built with these excellent packages:
-- [cli](https://cli.r-lib.org/) - User-friendly command line interfaces
-- [fs](https://fs.r-lib.org/) - Cross-platform file system operations
-- [here](https://here.r-lib.org/) - Project-oriented workflows
-- [usethis](https://usethis.r-lib.org/) - Workflow automation
-- [rappdirs](https://rappdirs.r-lib.org/) - Cross-platform configuration paths
+`{froggeR}` is licensed under the [MIT License](https://choosealicense.com/licenses/mit/). See the LICENSE file for details.
 
 ---
 

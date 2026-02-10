@@ -20,7 +20,7 @@ Most programming languages agree on where files belong. Python has its package l
 
 R has no such agreement. Scripts, Quarto documents, data files, and stylesheets pile up in the root directory. Every project is organized differently, or not at all. Switching between projects means re-learning the layout every time.
 
-froggeR enforces one:
+`{froggeR}` enforces one:
 
 - `R/` for scripts
 - `pages/` for Quarto documents
@@ -120,11 +120,11 @@ precommit::use_precommit()
 
 ### Adapting or removing
 
-The hooks are a starting point. Edit `.pre-commit-config.yaml` to add, remove, or reconfigure hooks for your workflow. If you do not want pre-commit at all, delete the file. No other part of froggeR depends on it.
+The hooks are a starting point. Edit `.pre-commit-config.yaml` to add, remove, or reconfigure hooks for your workflow. If you do not want pre-commit at all, delete the file. No other part of `{froggeR}` depends on it.
 
 ## Your settings follow you
 
-froggeR stores configuration in two places:
+`{froggeR}` stores configuration in two places:
 
 1. **Project-level**: `_variables.yml` and `_brand.yml` in your project directory. These are committed to version control and used by the current project.
 2. **Global**: Your system's configuration directory, managed by the `rappdirs` package.
