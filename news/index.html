@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +39,19 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/kyleGrealis/froggeR/blob/v1.0.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/kyleGrealis/froggeR/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="frogger-101">froggeR 1.0.1<a class="anchor" aria-label="anchor" href="#frogger-101"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-0-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-1"></a></h3>
+<ul><li><p><code><a href="../reference/init.html">init()</a></code> no longer swallows directory creation errors. If <code><a href="https://fs.r-lib.org/reference/create.html" class="external-link">fs::dir_create()</a></code> fails, the actual error is reported instead of a generic “Invalid path.”</p></li>
+<li><p>File writers (<code><a href="../reference/write_variables.html">write_variables()</a></code>, <code><a href="../reference/write_brand.html">write_brand()</a></code>, <code><a href="../reference/write_quarto.html">write_quarto()</a></code>, etc.) check whether <code><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy()</a></code> succeeded before reporting success. A failed copy raises an error instead of silent success.</p></li>
+<li><p><code><a href="../reference/save_variables.html">save_variables()</a></code> and <code><a href="../reference/save_brand.html">save_brand()</a></code> check whether <code><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy()</a></code> succeeded before reporting “Saved.” A failed copy raises an error instead of silent success.</p></li>
+<li><p><code><a href="../reference/init.html">init()</a></code> warns and skips individual template files that fail to copy instead of silently counting them as created.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="frogger-100-2026-02-09">froggeR 1.0.0 (2026-02-09)<a class="anchor" aria-label="anchor" href="#frogger-100-2026-02-09"></a></h2>
 <div class="section level3">

@@ -1,5 +1,34 @@
 # Changelog
 
+## froggeR 1.0.1
+
+### Bug fixes
+
+- [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) no
+  longer swallows directory creation errors. If
+  [`fs::dir_create()`](https://fs.r-lib.org/reference/create.html)
+  fails, the actual error is reported instead of a generic “Invalid
+  path.”
+
+- File writers
+  ([`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
+  [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md),
+  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md),
+  etc.) check whether [`file.copy()`](https://rdrr.io/r/base/files.html)
+  succeeded before reporting success. A failed copy raises an error
+  instead of silent success.
+
+- [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+  and
+  [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+  check whether [`file.copy()`](https://rdrr.io/r/base/files.html)
+  succeeded before reporting “Saved.” A failed copy raises an error
+  instead of silent success.
+
+- [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+  warns and skips individual template files that fail to copy instead of
+  silently counting them as created.
+
 ## froggeR 1.0.0 (2026-02-09)
 
 ### Breaking changes

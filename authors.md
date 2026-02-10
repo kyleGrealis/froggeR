@@ -8,16 +8,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/kyleGrealis/froggeR/blob/v1.0.0/DESCRIPTION)
+[`inst/CITATION`](https://github.com/kyleGrealis/froggeR/blob/main/inst/CITATION)
 
 Grealis K (2026). *froggeR: Structured Project Standards for R and
-'Quarto'*. R package version 1.0.0,
+Quarto*. R package version 1.0.1,
 <https://www.kyleGrealis.com/froggeR/>.
 
     @Manual{,
-      title = {froggeR: Structured Project Standards for R and 'Quarto'},
+      title = {froggeR: Structured Project Standards for R and Quarto},
       author = {Kyle Grealis},
       year = {2026},
-      note = {R package version 1.0.0},
+      note = {R package version 1.0.1},
       url = {https://www.kyleGrealis.com/froggeR/},
     }

@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,17 +78,20 @@
 <p><strong>froggeR</strong>: Structured project standards for R and Quarto</p>
 </blockquote>
 <p>Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. froggeR offers a standard: <code>R/</code> for scripts, <code>pages/</code> for Quarto documents, <code>data/</code> for data files, <code>www/</code> for assets. Build habits that carry over whether you’re writing an analysis, building an R package, or picking up a new language entirely.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"froggeR"</span><span class="op">)</span></span>
+<span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/init.html">init</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"my_project"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
 </h2>
 <ul>
 <li><a href="#why-frogger">Why froggeR?</a></li>
 <li><a href="#installation">Installation</a></li>
-<li><a href="#id_-project-creation">Project Creation</a></li>
-<li><a href="#id_-configuration--reusability">Configuration &amp; Reusability</a></li>
-<li><a href="#id_-templated-quarto-documents">Templated Quarto Documents</a></li>
-<li><a href="#id_%EF%B8%8F-enhanced-git-protection">Git Protection</a></li>
-<li><a href="#id_-custom-styling-made-easy">Custom Styling</a></li>
+<li><a href="#project-creation">Project Creation</a></li>
+<li><a href="#configuration--reusability">Configuration &amp; Reusability</a></li>
+<li><a href="#templated-quarto-documents">Templated Quarto Documents</a></li>
+<li><a href="#enhanced-git-protection">Git Protection</a></li>
+<li><a href="#custom-styling-made-easy">Custom Styling</a></li>
 <li><a href="#function-reference">Function Reference</a></li>
 <li><a href="#getting-help">Getting Help</a></li>
 <li><a href="#contributing">Contributing</a></li>
@@ -116,14 +119,14 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"froggeR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="id_-project-creation">🎯 Project Creation<a class="anchor" aria-label="anchor" href="#id_-project-creation"></a>
+<h2 id="project-creation">Project Creation<a class="anchor" aria-label="anchor" href="#project-creation"></a>
 </h2>
 <p>Initialize a complete project with a single command:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/init.html">init</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"my_new_project"</span><span class="op">)</span></span></code></pre></div>
 <p>This creates:</p>
 <pre><code>my_new_project/
@@ -147,39 +150,39 @@
 └── README.md</code></pre>
 </div>
 <div class="section level2">
-<h2 id="id_-configuration--reusability">🔧 Configuration &amp; Reusability<a class="anchor" aria-label="anchor" href="#id_-configuration--reusability"></a>
+<h2 id="configuration--reusability">Configuration &amp; Reusability<a class="anchor" aria-label="anchor" href="#configuration--reusability"></a>
 </h2>
 <p>froggeR stores configuration at two levels: global (system-wide) and project-local. Set it up once, and every future project inherits your settings.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_variables.html">write_variables</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Create/edit _variables.yml (author metadata)</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_brand.html">write_brand</a></span><span class="op">(</span><span class="op">)</span>     <span class="co"># Create/edit _brand.yml (colors, logos, typography)</span></span></code></pre></div>
 <p>Both functions create the file if it does not exist, or open it for editing if it does. New files start from your global config or the remote template. When you’re happy, persist to global config:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/save_variables.html">save_variables</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Save project metadata for reuse</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/save_brand.html">save_brand</a></span><span class="op">(</span><span class="op">)</span>      <span class="co"># Save project branding for reuse</span></span></code></pre></div>
 <p>Global settings populate every new project created with <code><a href="reference/init.html">init()</a></code>. Edit the project copy directly when you need something specific.</p>
 </div>
 <div class="section level2">
-<h2 id="id_-templated-quarto-documents">📝 Templated Quarto Documents<a class="anchor" aria-label="anchor" href="#id_-templated-quarto-documents"></a>
+<h2 id="templated-quarto-documents">Templated Quarto Documents<a class="anchor" aria-label="anchor" href="#templated-quarto-documents"></a>
 </h2>
 <p>Quickly generate new Quarto documents with pre-formatted headers:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_quarto.html">write_quarto</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"monthly_report"</span><span class="op">)</span></span></code></pre></div>
 <p>Your saved metadata automatically populates author information and branding.</p>
 </div>
 <div class="section level2">
-<h2 id="id_️-enhanced-git-protection">🛡️ Enhanced Git Protection<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-enhanced-git-protection"></a>
+<h2 id="enhanced-git-protection">Enhanced Git Protection<a class="anchor" aria-label="anchor" href="#enhanced-git-protection"></a>
 </h2>
 <p>froggeR includes a <code>.gitignore</code> that covers R artifacts, Quarto build files, data files, and common sensitive patterns:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_ignore.html">write_ignore</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>One set of rules. Comprehensive by default. If your project needs additional exclusions, edit <code>.gitignore</code> directly.</p>
 </div>
 <div class="section level2">
-<h2 id="id_-custom-styling-made-easy">🌟 Custom Styling Made Easy<a class="anchor" aria-label="anchor" href="#id_-custom-styling-made-easy"></a>
+<h2 id="custom-styling-made-easy">Custom Styling Made Easy<a class="anchor" aria-label="anchor" href="#custom-styling-made-easy"></a>
 </h2>
 <p>Generate a SCSS template for custom document styling:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_scss.html">write_scss</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/write_scss.html">write_scss</a></span><span class="op">(</span><span class="st">"tables"</span><span class="op">)</span></span></code></pre></div>
 <p>Provides a formatted stylesheet with:</p>
@@ -209,37 +212,32 @@
 <td>Initialize a complete project from the latest remote template</td>
 </tr>
 <tr class="even">
-<td><code><a href="reference/quarto_project.html">quarto_project()</a></code></td>
-<td>
-<strong>Removed.</strong> Use <code><a href="reference/init.html">init()</a></code> instead</td>
-</tr>
-<tr class="odd">
 <td><code><a href="reference/write_quarto.html">write_quarto()</a></code></td>
 <td>Create a Quarto document in <code>pages/</code>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code><a href="reference/write_variables.html">write_variables()</a></code></td>
 <td>Create a <code>_variables.yml</code> metadata file</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code><a href="reference/write_brand.html">write_brand()</a></code></td>
 <td>Create a <code>_brand.yml</code> brand configuration file</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code><a href="reference/save_variables.html">save_variables()</a></code></td>
 <td>Save project <code>_variables.yml</code> to global config</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code><a href="reference/save_brand.html">save_brand()</a></code></td>
 <td>Save project <code>_brand.yml</code> to global config</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code><a href="reference/write_ignore.html">write_ignore()</a></code></td>
 <td>Create an opinionated <code>.gitignore</code>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code><a href="reference/write_scss.html">write_scss()</a></code></td>
 <td>Create a <code>custom.scss</code> styling template in <code>www/</code>
 </td>

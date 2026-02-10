@@ -10,15 +10,20 @@ Quarto documents, `data/` for data files, `www/` for assets. Build
 habits that carry over whether you’re writing an analysis, building an R
 package, or picking up a new language entirely.
 
+``` r
+install.packages("froggeR")
+froggeR::init(path = "my_project")
+```
+
 ## Table of Contents
 
 - [Why froggeR?](#why-frogger)
 - [Installation](#installation)
-- [Project Creation](#id_-project-creation)
-- [Configuration & Reusability](#id_-configuration--reusability)
-- [Templated Quarto Documents](#id_-templated-quarto-documents)
-- [Git Protection](#id_%EF%B8%8F-enhanced-git-protection)
-- [Custom Styling](#id_-custom-styling-made-easy)
+- [Project Creation](#project-creation)
+- [Configuration & Reusability](#configuration--reusability)
+- [Templated Quarto Documents](#templated-quarto-documents)
+- [Git Protection](#enhanced-git-protection)
+- [Custom Styling](#custom-styling-made-easy)
 - [Function Reference](#function-reference)
 - [Getting Help](#getting-help)
 - [Contributing](#contributing)
@@ -63,7 +68,7 @@ analyzing, not organizing:
 install.packages("froggeR")
 ```
 
-## 🎯 Project Creation
+## Project Creation
 
 Initialize a complete project with a single command:
 
@@ -93,7 +98,7 @@ This creates:
     ├── .pre-commit-config.yaml   # Pre-commit hook configuration
     └── README.md
 
-## 🔧 Configuration & Reusability
+## Configuration & Reusability
 
 froggeR stores configuration at two levels: global (system-wide) and
 project-local. Set it up once, and every future project inherits your
@@ -117,7 +122,7 @@ Global settings populate every new project created with
 [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md). Edit
 the project copy directly when you need something specific.
 
-## 📝 Templated Quarto Documents
+## Templated Quarto Documents
 
 Quickly generate new Quarto documents with pre-formatted headers:
 
@@ -128,7 +133,7 @@ froggeR::write_quarto(filename = "monthly_report")
 Your saved metadata automatically populates author information and
 branding.
 
-## 🛡️ Enhanced Git Protection
+## Enhanced Git Protection
 
 froggeR includes a `.gitignore` that covers R artifacts, Quarto build
 files, data files, and common sensitive patterns:
@@ -140,7 +145,7 @@ froggeR::write_ignore()
 One set of rules. Comprehensive by default. If your project needs
 additional exclusions, edit `.gitignore` directly.
 
-## 🌟 Custom Styling Made Easy
+## Custom Styling Made Easy
 
 Generate a SCSS template for custom document styling:
 
@@ -161,17 +166,16 @@ Customize your document’s appearance by uncommenting desired styles.
 
 ## Function Reference
 
-| Function                                                                                | Description                                                                                |
-|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)                       | Initialize a complete project from the latest remote template                              |
-| [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)   | **Removed.** Use [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) instead |
-| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `pages/`                                                       |
-| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file                                                    |
-| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)         | Create a `_brand.yml` brand configuration file                                             |
-| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)   | Save project `_variables.yml` to global config                                             |
-| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)           | Save project `_brand.yml` to global config                                                 |
-| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)       | Create an opinionated `.gitignore`                                                         |
-| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)           | Create a `custom.scss` styling template in `www/`                                          |
+| Function                                                                                | Description                                                   |
+|-----------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)                       | Initialize a complete project from the latest remote template |
+| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `pages/`                          |
+| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file                       |
+| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)         | Create a `_brand.yml` brand configuration file                |
+| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)   | Save project `_variables.yml` to global config                |
+| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)           | Save project `_brand.yml` to global config                    |
+| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)       | Create an opinionated `.gitignore`                            |
+| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)           | Create a `custom.scss` styling template in `www/`             |
 
 ------------------------------------------------------------------------
 
