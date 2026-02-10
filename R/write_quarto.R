@@ -58,7 +58,12 @@ write_quarto <- function(filename = "Untitled-1", path = here::here()) {
 
   # Fetch template from GitHub
   template <- .fetch_template("pages/index.qmd")
-  file.copy(from = template, to = dest, overwrite = FALSE)
+  if (!file.copy(from = template, to = dest, overwrite = FALSE)) {
+    rlang::abort(
+      sprintf("Failed to create %s.qmd in pages/.", filename),
+      class = "froggeR_file_error"
+    )
+  }
   ui_done(sprintf("%s.qmd written to pages/", filename))
 
   dest <- normalizePath(dest, mustWork = TRUE)

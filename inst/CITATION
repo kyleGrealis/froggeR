@@ -1,0 +1,12 @@
+bibentry(
+  bibtype = "Manual",
+  title = "froggeR: Structured Project Standards for R and Quarto",
+  author = person(
+    "Kyle", "Grealis",
+    email = "kyleGrealis@proton.me",
+    comment = c(ORCID = "0000-0002-9223-8854")
+  ),
+  year = "2026",
+  note = "R package version 1.0.1",
+  url = "https://www.kyleGrealis.com/froggeR/"
+)

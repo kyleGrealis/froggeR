@@ -66,14 +66,20 @@ save_brand <- function(save_logos = TRUE) {
   # Save the config file or prompt the user to overwrite
   if (system_settings) {
     if (ui_yeah(overwrite_prompt)) {
-      file.copy(from = the_brand_file, to = brand_file, overwrite = TRUE)
+      if (!file.copy(from = the_brand_file, to = brand_file, overwrite = TRUE)) {
+        rlang::abort("Failed to save _brand.yml to system configuration.",
+                     class = "froggeR_file_error")
+      }
       ui_info(sprintf("Copying project %s settings...", col_green("froggeR")))
       ui_done(sprintf("Saved _brand.yml to system configuration: \n%s", brand_file))
     } else {
       ui_oops("No changes were made.")
     }
   } else {
-    file.copy(from = the_brand_file, to = brand_file, overwrite = FALSE)
+    if (!file.copy(from = the_brand_file, to = brand_file, overwrite = FALSE)) {
+      rlang::abort("Failed to save _brand.yml to system configuration.",
+                   class = "froggeR_file_error")
+    }
     ui_info(sprintf("Copying project %s settings...", col_green("froggeR")))
     ui_done(sprintf("Saved _brand.yml to system configuration: \n%s", brand_file))
   }

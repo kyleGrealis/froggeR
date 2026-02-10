@@ -11,15 +11,20 @@
 
 Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. froggeR offers a standard: `R/` for scripts, `pages/` for Quarto documents, `data/` for data files, `www/` for assets. Build habits that carry over whether you're writing an analysis, building an R package, or picking up a new language entirely.
 
+```r
+install.packages("froggeR")
+froggeR::init(path = "my_project")
+```
+
 ## Table of Contents
 
 - [Why froggeR?](#why-frogger)
 - [Installation](#installation)
-- [Project Creation](#-project-creation)
-- [Configuration & Reusability](#-configuration--reusability)
-- [Templated Quarto Documents](#-templated-quarto-documents)
-- [Git Protection](#️-enhanced-git-protection)
-- [Custom Styling](#-custom-styling-made-easy)
+- [Project Creation](#project-creation)
+- [Configuration & Reusability](#configuration--reusability)
+- [Templated Quarto Documents](#templated-quarto-documents)
+- [Git Protection](#enhanced-git-protection)
+- [Custom Styling](#custom-styling-made-easy)
 - [Function Reference](#function-reference)
 - [Getting Help](#getting-help)
 - [Contributing](#contributing)
@@ -43,7 +48,7 @@ froggeR gives every project the same enforced layout so you spend time analyzing
 install.packages("froggeR")
 ```
 
-## 🎯 Project Creation
+## Project Creation
 
 Initialize a complete project with a single command:
 
@@ -75,7 +80,7 @@ my_new_project/
 └── README.md
 ```
 
-## 🔧 Configuration & Reusability
+## Configuration & Reusability
 
 froggeR stores configuration at two levels: global (system-wide) and project-local. Set it up once, and every future project inherits your settings.
 
@@ -93,7 +98,7 @@ froggeR::save_brand()      # Save project branding for reuse
 
 Global settings populate every new project created with `init()`. Edit the project copy directly when you need something specific.
 
-## 📝 Templated Quarto Documents
+## Templated Quarto Documents
 
 Quickly generate new Quarto documents with pre-formatted headers:
 
@@ -103,7 +108,7 @@ froggeR::write_quarto(filename = "monthly_report")
 
 Your saved metadata automatically populates author information and branding.
 
-## 🛡️ Enhanced Git Protection
+## Enhanced Git Protection
 
 froggeR includes a `.gitignore` that covers R artifacts, Quarto build files, data files, and common sensitive patterns:
 
@@ -113,7 +118,7 @@ froggeR::write_ignore()
 
 One set of rules. Comprehensive by default. If your project needs additional exclusions, edit `.gitignore` directly.
 
-## 🌟 Custom Styling Made Easy
+## Custom Styling Made Easy
 
 Generate a SCSS template for custom document styling:
 
@@ -137,7 +142,6 @@ Customize your document's appearance by uncommenting desired styles.
 | Function | Description |
 |----------|-------------|
 | `init()` | Initialize a complete project from the latest remote template |
-| `quarto_project()` | **Removed.** Use `init()` instead |
 | `write_quarto()` | Create a Quarto document in `pages/` |
 | `write_variables()` | Create a `_variables.yml` metadata file |
 | `write_brand()` | Create a `_brand.yml` brand configuration file |

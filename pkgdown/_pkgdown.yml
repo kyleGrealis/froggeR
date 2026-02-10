@@ -19,7 +19,6 @@ reference:
     desc: "Functions for creating and configuring Quarto projects"
     contents:
       - init
-      - quarto_project
       - write_variables
       - write_brand
       - save_variables
@@ -33,3 +32,7 @@ reference:
     desc: "Functions for creating individual project files"
     contents:
       - write_ignore
+  - title: "Deprecated"
+    desc: "Functions removed in 1.0.0"
+    contents:
+      - quarto_project
