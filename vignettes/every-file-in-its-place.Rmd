@@ -18,13 +18,13 @@ knitr::opts_chunk$set(
 
 A project with five R files is manageable. A project with fifteen is not, unless they follow a pattern.
 
-froggeR puts three files in every project's `R/` directory:
+`{froggeR}` puts three files in every project's `R/` directory:
 
 - `_load.R` -- the entry point
 - `_libraries.R` -- package loading
 - `_data_dictionary.R` -- variable labels and metadata
 
-The underscore prefix is intentional. It sorts these files above your analysis scripts in any directory listing, signaling that they are infrastructure, not analysis.
+The underscore prefix is intentional. It sorts these files above your analysis scripts in any directory listing, signaling that they are **infrastructure**, not analysis.
 
 ## `_load.R`: one file to source
 
@@ -85,7 +85,7 @@ dictionary <- dplyr::tribble(
 
 A data dictionary maps variable names to human-readable labels. Keeping it in a dedicated file means your labels are defined once and available everywhere, not buried inside whichever analysis script needed them first.
 
-This is designed for use with [{sumExtras}](https://www.kylegrealis.com/sumExtras/) with `sumExtras::add_auto_labels()`. Your [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get human-readable labels without manual labeling in every script. Define labels once here, apply them anywhere.
+This is designed for use with [{sumExtras}](https://www.kylegrealis.com/sumExtras/) using the `options(sumExtras.auto_labels = TRUE)` and then to `sumExtras::add_auto_labels()`. Your [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get human-readable labels without manual labeling in every script. Define labels once here, apply them anywhere.
 
 ## `_quarto.yml`: the config expects the convention
 
@@ -100,7 +100,7 @@ project:
     - "pages/*.qmd"
 ```
 
-Quarto only renders `.qmd` files found in `pages/`. Static assets in `www/` are copied to the output as resources. Rendered HTML goes to `docs/`, keeping build artifacts out of your source directories.
+Quarto only renders `.qmd` files found in `pages/`. Static assets in `www/` are copied to the output as resources. Rendered HTML goes to `docs/`, keeping build artifacts out of your source directories. Explore the documentation for other [Quarto project](https://quarto.org/docs/projects/quarto-projects.html) types.
 
 The styling and sidebar also reference these paths directly:
 
@@ -121,7 +121,7 @@ website:
 
 `custom.scss` is expected in `www/`. The sidebar links to documents in `pages/`. If you move files out of convention, these references break and Quarto will tell you something is missing without telling you why.
 
-This is the payoff of a fixed directory layout: the configuration works because the structure is predictable. You do not need to edit `_quarto.yml` to wire up paths. They are already correct.
+This is the payoff of a fixed directory layout: the configuration works because the structure is predictable. You do not need to edit `_quarto.yml` to wire up paths. They are already correct. Add more files in the `contents` section as your project grows and follow the example for `Home` for `pages/index.qmd`.
 
 For the full `_quarto.yml` specification, see [Quarto Project Basics](https://quarto.org/docs/projects/quarto-projects.html).
 
@@ -139,7 +139,7 @@ Not this:
 source("R/_load.R")
 ```
 
-The difference matters the moment your working directory is not the project root. In a froggeR project, that happens by design.
+The difference matters the moment your working directory is not the project root. In a `{froggeR}` project, that happens by design.
 
 When you render `pages/index.qmd`, Quarto sets the working directory to `pages/`. A relative path like `"R/_load.R"` resolves to `pages/R/_load.R`, which does not exist. The render fails, and the error message does not make the cause obvious.
 
