@@ -1,3 +1,21 @@
+# froggeR 1.0.1
+
+## Bug fixes
+
+* `init()` no longer swallows directory creation errors. If `fs::dir_create()`
+  fails, the actual error is reported instead of a generic "Invalid path."
+
+* File writers (`write_variables()`, `write_brand()`, `write_quarto()`, etc.)
+  check whether `file.copy()` succeeded before reporting success. A failed copy
+  raises an error instead of silent success.
+
+* `save_variables()` and `save_brand()` check whether `file.copy()` succeeded
+  before reporting "Saved." A failed copy raises an error instead of silent
+  success.
+
+* `init()` warns and skips individual template files that fail to copy instead
+  of silently counting them as created.
+
 # froggeR 1.0.0 (2026-02-09)
 
 ## Breaking changes

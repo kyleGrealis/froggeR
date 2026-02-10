@@ -90,10 +90,16 @@
     # Use global config if available, otherwise fetch from template repo
     if (!is.null(global_config_file) && file.exists(global_config_file)) {
       ui_info(sprintf("Copying existing %s settings...", col_green("froggeR")))
-      file.copy(from = global_config_file, to = dest_file, overwrite = FALSE)
+      copied <- file.copy(from = global_config_file, to = dest_file, overwrite = FALSE)
     } else {
       template <- .fetch_template(template_repo_path)
-      file.copy(from = template, to = dest_file, overwrite = FALSE)
+      copied <- file.copy(from = template, to = dest_file, overwrite = FALSE)
+    }
+    if (!copied) {
+      rlang::abort(
+        sprintf("Failed to create %s.", label),
+        class = "froggeR_file_error"
+      )
     }
     ui_done(sprintf("Created %s", label))
   }

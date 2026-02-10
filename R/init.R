@@ -43,7 +43,15 @@ init <- function(path = here::here()) {
   if (!is.null(path) && !is.na(path) && !dir.exists(path)) {
     tryCatch(
       fs::dir_create(path),
-      error = function(e) NULL
+      error = function(e) {
+        rlang::abort(
+          c(
+            sprintf("Cannot create directory: %s", path),
+            "x" = conditionMessage(e)
+          ),
+          class = "froggeR_invalid_path"
+        )
+      }
     )
   }
 
@@ -135,7 +143,10 @@ init <- function(path = here::here()) {
     dst_dir <- dirname(dst)
     if (!dir.exists(dst_dir)) fs::dir_create(dst_dir)
 
-    file.copy(src, dst)
+    if (!file.copy(src, dst)) {
+      ui_warn(sprintf("Failed to copy %s", rel_path))
+      next
+    }
     created <- c(created, rel_path)
   }
 
