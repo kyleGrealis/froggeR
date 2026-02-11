@@ -166,8 +166,9 @@ Keeping it in a dedicated file means your labels are defined once and
 available everywhere, not buried inside whichever analysis script needed
 them first.</p>
 <p>This is designed for use with <a href="https://www.kylegrealis.com/sumExtras/" class="external-link">{sumExtras}</a> using the
-<code>options(sumExtras.auto_labels = TRUE)</code> and then to
-<code>sumExtras::add_auto_labels()</code>. Your <a href="https://www.danieldsjoberg.com/gtsummary/" class="external-link">{gtsummary}</a> tables
+<code>options(sumExtras.auto_labels = TRUE)</code> and
+<code>options(sumExtras.prefer_dictionary = TRUE)</code> for automatic
+labelling. Your <a href="https://www.danieldsjoberg.com/gtsummary/" class="external-link">{gtsummary}</a> tables
 get human-readable labels without manual labeling in every script.
 Define labels once here, apply them anywhere.</p>
 </div>

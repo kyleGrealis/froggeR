@@ -93,9 +93,9 @@ first.
 
 This is designed for use with
 [{sumExtras}](https://www.kylegrealis.com/sumExtras/) using the
-`options(sumExtras.auto_labels = TRUE)` and then to
-`sumExtras::add_auto_labels()`. Your
-[{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get
+`options(sumExtras.auto_labels = TRUE)` and
+`options(sumExtras.prefer_dictionary = TRUE)` for automatic labelling.
+Your [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get
 human-readable labels without manual labeling in every script. Define
 labels once here, apply them anywhere.
 
