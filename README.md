@@ -1,10 +1,11 @@
 # froggeR <img src="man/figures/logo.png" align="right" height="130"  alt="" />
 
 <!-- badges: start -->
-[![R CMD check: passing](https://img.shields.io/badge/R_CMD_check-passing-brightgreen.svg)](https://github.com/kyleGrealis/froggeR)
+[![R-CMD-check](https://github.com/kyleGrealis/froggeR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kyleGrealis/froggeR/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![Tests: passing](https://img.shields.io/badge/tests-passing-brightblue.svg)](https://github.com/kyleGrealis/froggeR/tree/main/tests/testthat)
-[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN status](https://www.r-pkg.org/badges/version/froggeR)](https://CRAN.R-project.org/package=froggeR)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/froggeR)](https://cran.r-project.org/package=froggeR)
 <!-- badges: end -->
 
 > **froggeR**: Structured project standards for R and Quarto
