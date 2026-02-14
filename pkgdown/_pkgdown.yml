@@ -1,4 +1,15 @@
 url: https://www.kyleGrealis.com/froggeR/
+
+development:
+  mode: auto
+
+repo:
+  url:
+    home: https://github.com/kyleGrealis/froggeR/
+    source: https://github.com/kyleGrealis/froggeR/blob/HEAD/
+    issue: https://github.com/kyleGrealis/froggeR/issues/
+    user: https://github.com/
+
 template:
   bootstrap: 5
   light-switch: true
@@ -6,6 +17,31 @@ template:
     font-size: 0.9rem
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
+
+home:
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, lightswitch, github]
+  components:
+    intro:
+      text: Get Started
+      href: articles/from-zero-to-project.html
+    articles:
+      text: Articles
+      menu:
+        - text: Every File in Its Place
+          href: articles/every-file-in-its-place.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/kyleGrealis/froggeR
+      aria-label: GitHub
 
 articles:
   - title: Get Started
@@ -36,3 +72,14 @@ reference:
     desc: "Functions removed in 1.0.0"
     contents:
       - quarto_project
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
+
+authors:
+  Kyle Grealis:
+    href: https://www.kylegrealis.com
+  sidebar:
+    roles: [aut, cre]
