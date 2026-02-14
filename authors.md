@@ -2,13 +2,13 @@
 
 ## Authors
 
-- **Kyle Grealis**. Author, maintainer.
+- **[Kyle Grealis](https://www.kylegrealis.com)**. Author, maintainer.
   [](https://orcid.org/0000-0002-9223-8854)
 
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/kyleGrealis/froggeR/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/kyleGrealis/froggeR/blob/HEAD/inst/CITATION)
 
 Grealis K (2026). *froggeR: Structured Project Standards for R and
 Quarto*. R package version 1.0.1,
