@@ -2,6 +2,16 @@
 
 ## froggeR 1.0.1
 
+### Enhancements
+
+- The `pages/` directory has been renamed to `analysis/`, following the
+  research compendium convention described in Marwick, Boettiger, and
+  Mullen (2018).
+  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+  now writes to `analysis/` instead of `pages/`. Thanks to Raymond
+  Balise ([@RaymondBalise](https://github.com/RaymondBalise)) for the
+  suggestion and citation.
+
 ### Bug fixes
 
 - [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) no
@@ -30,6 +40,8 @@
   silently counting them as created.
 
 ## froggeR 1.0.0 (2026-02-09)
+
+CRAN release: 2026-02-09
 
 ### Breaking changes
 

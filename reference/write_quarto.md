@@ -2,7 +2,7 @@
 
 Downloads the Quarto template from the
 [frogger-templates](https://github.com/kyleGrealis/frogger-templates)
-repository and writes it to the `pages/` directory. Errors if a file
+repository and writes it to the `analysis/` directory. Errors if a file
 with the same name already exists.
 
 ## Usage
@@ -30,8 +30,8 @@ Invisibly returns the path to the created Quarto document.
 
 ## Details
 
-The file is written to `pages/<filename>.qmd`. The `pages/` directory is
-created automatically if it does not exist.
+The file is written to `analysis/<filename>.qmd`. The `analysis/`
+directory is created automatically if it does not exist.
 
 ## See also
 

@@ -6,24 +6,26 @@ Most programming languages agree on where files belong. Python has its
 package layout. Node has `src/`, `public/`, `package.json`. Others give
 you a directory tree on day one.
 
-R has no such agreement. Scripts, Quarto documents, data files, and
-stylesheets pile up in the root directory. Every project is organized
-differently, or not at all. Switching between projects means re-learning
-the layout every time.
+R has strong conventions for packages (`R/`, `man/`, `inst/`), but
+analytical projects have not always had the same structure. Marwick,
+Boettiger, and Mullen (2018) proposed the *research compendium* as a
+standard way to organize the digital materials of a project so that
+others can inspect, reproduce, and extend the work. Their layout uses
+familiar R package conventions and adds an `analysis/` directory for the
+project’s computational work.
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) enforces one:
+[froggeR](https://www.kyleGrealis.com/froggeR/) builds on this idea,
+adapting it for Quarto-based projects:
 
 - `R/` for scripts
-- `pages/` for Quarto documents
+- `analysis/` for Quarto (and .Rmd) documents
 - `www/` for stylesheets and assets
 - `data/` for data files
 - `logos/` for brand images
 
-This is not complicated. That is the point. The same convention maps
-directly to R package structure (`R/`, `inst/`, `man/`), to Shiny
-frameworks like [golem](https://thinkr-open.github.io/golem/) and
-[rhino](https://appsilon.github.io/rhino/), and to web frameworks in
-other languages. Learn it once, use it everywhere.
+The same convention maps to R package structure, to Shiny frameworks
+like [rhino](https://appsilon.github.io/rhino/), and to web frameworks
+in other languages.
 
 ## `init()`
 
@@ -38,7 +40,7 @@ froggeR::init(path = "my_project")
     │   ├── _data_dictionary.R    # Variable labels and metadata
     │   ├── _libraries.R          # Centralized package loading
     │   └── _load.R               # Sources everything. Your entry point.
-    ├── pages/
+    ├── analysis/
     │   ├── index.qmd             # Main Quarto document
     │   └── references.bib        # Bibliography
     ├── www/
@@ -70,9 +72,9 @@ your metadata and branding are applied automatically.
 `_libraries.R` (package loading) and `_data_dictionary.R` (variable
 labels and metadata). Add your own scripts here.
 
-**`pages/`** contains Quarto documents. `index.qmd` is the default
-landing page. `references.bib` holds your bibliography. Add new pages
-with
+**`analysis/`** contains Quarto documents. `index.qmd` is the default
+landing page. `references.bib` holds your bibliography. Add new analysis
+files with
 [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md).
 
 **`www/`** contains web assets. `custom.scss` controls document styling.
@@ -190,3 +192,10 @@ and
 to persist them globally. Every future
 [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) call
 starts with your configuration in place.
+
+## References
+
+Marwick, B., Boettiger, C., & Mullen, L. (2018). Packaging data
+analytical work reproducibly using R (and friends). *The American
+Statistician*, 72(1), 80-88.
+[doi:10.1080/00031305.2017.1375986](https://doi.org/10.1080/00031305.2017.1375986)

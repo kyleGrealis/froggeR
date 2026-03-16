@@ -83,8 +83,8 @@
 </h2>
 <p>A project with five R files is manageable. A project with fifteen is
 not, unless they follow a pattern.</p>
-<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> puts three files in every project’s
-<code>R/</code> directory:</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> initializes with three files in every
+project’s <code>R/</code> directory:</p>
 <ul>
 <li>
 <code>_load.R</code> – the entry point</li>
@@ -93,9 +93,10 @@ not, unless they follow a pattern.</p>
 <li>
 <code>_data_dictionary.R</code> – variable labels and metadata</li>
 </ul>
-<p>The underscore prefix is intentional. It sorts these files above your
-analysis scripts in any directory listing, signaling that they are
-<strong>infrastructure</strong>, not analysis.</p>
+<p>These are <strong>infrastructure</strong> files. They set up the
+project so your analysis scripts can focus on the work. The underscore
+prefix keeps them sorted above everything else in the directory listing,
+making them easy to find.</p>
 </div>
 <div class="section level2">
 <h2 id="load-r-one-file-to-source">
@@ -173,19 +174,19 @@ get human-readable labels without manual labeling in every script.
 Define labels once here, apply them anywhere.</p>
 </div>
 <div class="section level2">
-<h2 id="quarto-yml-the-config-expects-the-convention">
-<code>_quarto.yml</code>: the config expects the convention<a class="anchor" aria-label="anchor" href="#quarto-yml-the-config-expects-the-convention"></a>
+<h2 id="quarto-yml-how-it-all-connects">
+<code>_quarto.yml</code>: how it all connects<a class="anchor" aria-label="anchor" href="#quarto-yml-how-it-all-connects"></a>
 </h2>
-<p>The directory structure is not just a suggestion. The template’s
-<code>_quarto.yml</code> is wired to it:</p>
+<p>The template’s <code>_quarto.yml</code> is configured to match the
+directory layout:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> docs</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> www</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"pages/*.qmd"</span></span></code></pre></div>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"analysis/*.qmd"</span></span></code></pre></div>
 <p>Quarto only renders <code>.qmd</code> files found in
-<code>pages/</code>. Static assets in <code>www/</code> are copied to
+<code>analysis/</code>. Static assets in <code>www/</code> are copied to
 the output as resources. Rendered HTML goes to <code>docs/</code>,
 keeping build artifacts out of your source directories. Explore the
 documentation for other <a href="https://quarto.org/docs/projects/quarto-projects.html" class="external-link">Quarto
@@ -202,17 +203,14 @@ project</a> types.</p>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="at">  </span><span class="fu">sidebar</span><span class="kw">:</span></span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="at">    </span><span class="fu">contents</span><span class="kw">:</span></span>
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Home</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> pages/index.qmd</span></span></code></pre></div>
-<p><code>custom.scss</code> is expected in <code>www/</code>. The
-sidebar links to documents in <code>pages/</code>. If you move files out
-of convention, these references break and Quarto will tell you something
-is missing without telling you why.</p>
-<p>This is the payoff of a fixed directory layout: the configuration
-works because the structure is predictable. You do not need to edit
-<code>_quarto.yml</code> to wire up paths. They are already correct. Add
-more files in the <code>contents</code> section as your project grows
-and follow the example for <code>Home</code> for
-<code>pages/index.qmd</code>.</p>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> analysis/index.qmd</span></span></code></pre></div>
+<p><code>custom.scss</code> is expected in <code>www/</code>, and the
+sidebar links to documents in <code>analysis/</code>. Because the
+directory layout is predictable, the configuration works out of the box.
+You do not need to edit <code>_quarto.yml</code> to wire up paths. They
+are already correct. Add new documents to <code>analysis/</code>, then
+reference them in the <code>contents</code> section following the
+pattern shown for <code>analysis/index.qmd</code>.</p>
 <p>For the full <code>_quarto.yml</code> specification, see <a href="https://quarto.org/docs/projects/quarto-projects.html" class="external-link">Quarto
 Project Basics</a>.</p>
 </div>
@@ -230,18 +228,18 @@ Project Basics</a>.</p>
 <p>The difference matters the moment your working directory is not the
 project root. In a <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> project, that happens by
 design.</p>
-<p>When you render <code>pages/index.qmd</code>, Quarto sets the working
-directory to <code>pages/</code>. A relative path like
-<code>"R/_load.R"</code> resolves to <code>pages/R/_load.R</code>, which
-does not exist. The render fails, and the error message does not make
-the cause obvious.</p>
+<p>When you render <code>analysis/index.qmd</code>, Quarto sets the
+working directory to <code>analysis/</code>. A relative path like
+<code>"R/_load.R"</code> resolves to <code>analysis/R/_load.R</code>,
+which does not exist. The render fails, and the error message does not
+make the cause obvious.</p>
 <p><code><a href="https://here.r-lib.org/reference/here.html" class="external-link">here::here()</a></code> resolves paths from the project root, the
 directory containing your <code>.Rproj</code> or <code>.here</code>
 file, regardless of the current working directory.
 <code>here::here("R", "_load.R")</code> always points to the right file,
 whether you call it from the console, from a script in <code>R/</code>,
-or from a Quarto document in <code>pages/</code>.</p>
-<p>This is not just about <code><a href="https://rdrr.io/r/base/source.html" class="external-link">source()</a></code>. Use
+or from a Quarto document in <code>analysis/</code>.</p>
+<p>This is not just about <code><a href="https://rdrr.io/r/base/source.html" class="external-link">source()</a></code>. You should use
 <code><a href="https://here.r-lib.org/reference/here.html" class="external-link">here::here()</a></code> for every file path in your project:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reading data</span></span>
@@ -249,9 +247,9 @@ or from a Quarto document in <code>pages/</code>.</p>
 <span></span>
 <span><span class="co"># Saving output</span></span>
 <span><span class="fu">ggsave</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"www"</span>, <span class="st">"figure1.png"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>One habit that prevents an entire class of path-related errors. See
-the <a href="https://here.r-lib.org/" class="external-link">{here}</a> package documentation
-for more.</p>
+<p>Setting this one habit helps prevent an entire class of path-related
+errors. See the <a href="https://here.r-lib.org/" class="external-link">{here}</a> package
+documentation for more.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

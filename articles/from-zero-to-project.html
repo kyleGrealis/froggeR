@@ -85,16 +85,21 @@
 its package layout. Node has <code>src/</code>, <code>public/</code>,
 <code>package.json</code>. Others give you a directory tree on day
 one.</p>
-<p>R has no such agreement. Scripts, Quarto documents, data files, and
-stylesheets pile up in the root directory. Every project is organized
-differently, or not at all. Switching between projects means re-learning
-the layout every time.</p>
-<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> enforces one:</p>
+<p>R has strong conventions for packages (<code>R/</code>,
+<code>man/</code>, <code>inst/</code>), but analytical projects have not
+always had the same structure. Marwick, Boettiger, and Mullen (2018)
+proposed the <em>research compendium</em> as a standard way to organize
+the digital materials of a project so that others can inspect,
+reproduce, and extend the work. Their layout uses familiar R package
+conventions and adds an <code>analysis/</code> directory for the
+project’s computational work.</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> builds on this idea, adapting it for
+Quarto-based projects:</p>
 <ul>
 <li>
 <code>R/</code> for scripts</li>
 <li>
-<code>pages/</code> for Quarto documents</li>
+<code>analysis/</code> for Quarto (and .Rmd) documents</li>
 <li>
 <code>www/</code> for stylesheets and assets</li>
 <li>
@@ -102,10 +107,9 @@ the layout every time.</p>
 <li>
 <code>logos/</code> for brand images</li>
 </ul>
-<p>This is not complicated. That is the point. The same convention maps
-directly to R package structure (<code>R/</code>, <code>inst/</code>,
-<code>man/</code>), to Shiny frameworks like <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> and <a href="https://appsilon.github.io/rhino/" class="external-link">rhino</a>, and to web
-frameworks in other languages. Learn it once, use it everywhere.</p>
+<p>The same convention maps to R package structure, to Shiny frameworks
+like <a href="https://appsilon.github.io/rhino/" class="external-link">rhino</a>, and to web
+frameworks in other languages.</p>
 </div>
 <div class="section level2">
 <h2 id="init">
@@ -119,7 +123,7 @@ frameworks in other languages. Learn it once, use it everywhere.</p>
 │   ├── _data_dictionary.R    # Variable labels and metadata
 │   ├── _libraries.R          # Centralized package loading
 │   └── _load.R               # Sources everything. Your entry point.
-├── pages/
+├── analysis/
 │   ├── index.qmd             # Main Quarto document
 │   └── references.bib        # Bibliography
 ├── www/
@@ -147,10 +151,10 @@ metadata and branding are applied automatically.</p>
 <code>_libraries.R</code> (package loading) and
 <code>_data_dictionary.R</code> (variable labels and metadata). Add your
 own scripts here.</p>
-<p><strong><code>pages/</code></strong> contains Quarto documents.
+<p><strong><code>analysis/</code></strong> contains Quarto documents.
 <code>index.qmd</code> is the default landing page.
-<code>references.bib</code> holds your bibliography. Add new pages with
-<code><a href="../reference/write_quarto.html">write_quarto()</a></code>.</p>
+<code>references.bib</code> holds your bibliography. Add new analysis
+files with <code><a href="../reference/write_quarto.html">write_quarto()</a></code>.</p>
 <p><strong><code>www/</code></strong> contains web assets.
 <code>custom.scss</code> controls document styling.
 <code>tables.js</code> provides table enhancements. Keep stylesheets,
@@ -292,6 +296,13 @@ create and edit your configuration files, then
 <code><a href="../reference/save_variables.html">save_variables()</a></code> and <code><a href="../reference/save_brand.html">save_brand()</a></code> to persist
 them globally. Every future <code><a href="../reference/init.html">init()</a></code> call starts with your
 configuration in place.</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Marwick, B., Boettiger, C., &amp; Mullen, L. (2018). Packaging data
+analytical work reproducibly using R (and friends). <em>The American
+Statistician</em>, 72(1), 80-88. <a href="https://doi.org/10.1080/00031305.2017.1375986" class="external-link">doi:10.1080/00031305.2017.1375986</a></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

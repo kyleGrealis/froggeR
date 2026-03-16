@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Structured Project Standards for R and Quarto • froggeR</title>
+<title>Project Scaffolding for R and Quarto • froggeR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,9 +15,9 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Structured Project Standards for R and Quarto">
-<meta name="description" content="Provides an opinionated project scaffold for R and Quarto analysis work, enforcing a consistent directory layout with scripts in R/, .qmd files in pages/, and assets in www/. The primary entry point, init(), downloads the latest template from a companion GitHub repository so that project structure evolves independently of package releases. Supports persistent author metadata and Quarto brand configuration that carry across projects automatically.">
-<meta property="og:description" content="Provides an opinionated project scaffold for R and Quarto analysis work, enforcing a consistent directory layout with scripts in R/, .qmd files in pages/, and assets in www/. The primary entry point, init(), downloads the latest template from a companion GitHub repository so that project structure evolves independently of package releases. Supports persistent author metadata and Quarto brand configuration that carry across projects automatically.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Project Scaffolding for R and Quarto">
+<meta name="description" content="Creates structured R and Quarto projects with a consistent directory layout: scripts in R/, analysis documents in analysis/, and web assets in www/. The primary entry point, init(), downloads the latest template from a companion GitHub repository so that project structure evolves independently of package releases. Supports persistent author metadata and Quarto brand configuration that carry across projects automatically.">
+<meta property="og:description" content="Creates structured R and Quarto projects with a consistent directory layout: scripts in R/, analysis documents in analysis/, and web assets in www/. The primary entry point, init(), downloads the latest template from a companion GitHub repository so that project structure evolves independently of package releases. Supports persistent author metadata and Quarto brand configuration that carry across projects automatically.">
 <meta property="og:image" content="https://www.kyleGrealis.com/froggeR/logo.svg">
 </head>
 <body>
@@ -75,19 +75,19 @@
 <!-- badges: start -->
 
 <blockquote>
-<p><strong>froggeR</strong>: Structured project standards for R and Quarto</p>
+<p><strong>froggeR</strong>: Leap into structured Quarto projects</p>
 </blockquote>
-<p>Most programming languages have conventions for where files belong. R rarely agrees on one, and it shows. Scripts, Quarto documents, stylesheets, and data files pile up in root directories like laundry on a chair. <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> offers a standard: <code>R/</code> for scripts, <code>pages/</code> for Quarto documents, <code>data/</code> for data files, <code>www/</code> for assets. Build habits that carry over whether you’re writing an analysis, building an R package, or picking up a new language entirely.</p>
+<p>R has strong conventions for packages, but analytical projects have not always had the same structure. My own projects were no exception. Scripts, Quarto documents, stylesheets, and data files piled up in root directories like laundry on a chair. Inspired by the <a href="https://doi.org/10.1080/00031305.2017.1375986" class="external-link">research compendium</a> (Marwick, Boettiger, &amp; Mullen, 2018), <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> gives your Quarto projects a predictable layout: <code>R/</code> for scripts, <code>analysis/</code> for Quarto (and .Rmd) documents, <code>data/</code> for data files, <code>www/</code> for assets. The same conventions carry over whether you’re writing an analysis, building an R package, or picking up a new language.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"froggeR"</span><span class="op">)</span></span>
 <span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="reference/init.html">init</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"my_project"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="why-frogger">Why <code>{froggeR}</code>?<a class="anchor" aria-label="anchor" href="#why-frogger"></a>
 </h2>
-<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> gives every project the same enforced layout so you spend time analyzing, not organizing:</p>
+<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> gives every project a consistent layout so you spend time analyzing, not organizing:</p>
 <ul>
 <li>
-<strong>Structure by default</strong>: <code><a href="reference/init.html">init()</a></code> downloads the latest scaffold and you’re working in seconds. Scripts go in <code>R/</code>, Quarto documents in <code>pages/</code>, assets in <code>www/</code>, data in <code>data/</code>. Every project, every time.</li>
+<strong>Structure by default</strong>: <code><a href="reference/init.html">init()</a></code> downloads the latest scaffold and you’re working in seconds. Scripts go in <code>R/</code>, Quarto documents in <code>analysis/</code>, assets in <code>www/</code>, data in <code>data/</code>.</li>
 <li>
 <strong>Opinionated starting points</strong>: <code>R/_load.R</code>, <code>R/_libraries.R</code>, and <code>R/_data_dictionary.R</code> give every project a consistent entry point. <code><a href="reference/write_quarto.html">write_quarto()</a></code> creates pre-formatted <code>.qmd</code> files with your author info and branding baked in.</li>
 <li>
@@ -95,7 +95,7 @@
 <li>
 <strong>Protected by default</strong>: An opinionated <code>.gitignore</code> and pre-commit hooks keep sensitive data and common R artifacts out of version control.</li>
 <li>
-<strong>Transferable habits</strong>: The same directory conventions used here mirror what you’ll find in R packages, Shiny frameworks like golem and rhino, and other languages entirely. Good habits compound.</li>
+<strong>Transferable habits</strong>: The same directory conventions used here mirror what you’ll find in R packages, Shiny frameworks like rhino, and other languages entirely.</li>
 </ul>
 <hr>
 </div>
@@ -117,7 +117,7 @@
 │   ├── _data_dictionary.R    # Variable labels and metadata
 │   ├── _libraries.R          # Centralized package loading
 │   └── _load.R               # Sources everything. Your entry point.
-├── pages/
+├── analysis/
 │   ├── index.qmd             # Main Quarto document
 │   └── references.bib        # Bibliography
 ├── www/
@@ -196,7 +196,7 @@
 </tr>
 <tr class="even">
 <td><code><a href="reference/write_quarto.html">write_quarto()</a></code></td>
-<td>Create a Quarto document in <code>pages/</code>
+<td>Create a Quarto document in <code>analysis/</code>
 </td>
 </tr>
 <tr class="odd">

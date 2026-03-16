@@ -1,15 +1,18 @@
 # froggeR
 
-> **froggeR**: Structured project standards for R and Quarto
+> **froggeR**: Leap into structured Quarto projects
 
-Most programming languages have conventions for where files belong. R
-rarely agrees on one, and it shows. Scripts, Quarto documents,
-stylesheets, and data files pile up in root directories like laundry on
-a chair. [froggeR](https://www.kyleGrealis.com/froggeR/) offers a
-standard: `R/` for scripts, `pages/` for Quarto documents, `data/` for
-data files, `www/` for assets. Build habits that carry over whether
-you’re writing an analysis, building an R package, or picking up a new
-language entirely.
+R has strong conventions for packages, but analytical projects have not
+always had the same structure. My own projects were no exception.
+Scripts, Quarto documents, stylesheets, and data files piled up in root
+directories like laundry on a chair. Inspired by the [research
+compendium](https://doi.org/10.1080/00031305.2017.1375986) (Marwick,
+Boettiger, & Mullen, 2018),
+[froggeR](https://www.kyleGrealis.com/froggeR/) gives your Quarto
+projects a predictable layout: `R/` for scripts, `analysis/` for Quarto
+(and .Rmd) documents, `data/` for data files, `www/` for assets. The
+same conventions carry over whether you’re writing an analysis, building
+an R package, or picking up a new language.
 
 ``` r
 install.packages("froggeR")
@@ -18,14 +21,14 @@ froggeR::init(path = "my_project")
 
 ## Why `{froggeR}`?
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) gives every project the
-same enforced layout so you spend time analyzing, not organizing:
+[froggeR](https://www.kyleGrealis.com/froggeR/) gives every project a
+consistent layout so you spend time analyzing, not organizing:
 
 - **Structure by default**:
   [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
   downloads the latest scaffold and you’re working in seconds. Scripts
-  go in `R/`, Quarto documents in `pages/`, assets in `www/`, data in
-  `data/`. Every project, every time.
+  go in `R/`, Quarto documents in `analysis/`, assets in `www/`, data in
+  `data/`.
 - **Opinionated starting points**: `R/_load.R`, `R/_libraries.R`, and
   `R/_data_dictionary.R` give every project a consistent entry point.
   [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
@@ -44,8 +47,8 @@ same enforced layout so you spend time analyzing, not organizing:
   hooks keep sensitive data and common R artifacts out of version
   control.
 - **Transferable habits**: The same directory conventions used here
-  mirror what you’ll find in R packages, Shiny frameworks like golem and
-  rhino, and other languages entirely. Good habits compound.
+  mirror what you’ll find in R packages, Shiny frameworks like rhino,
+  and other languages entirely.
 
 ------------------------------------------------------------------------
 
@@ -70,7 +73,7 @@ This creates:
     │   ├── _data_dictionary.R    # Variable labels and metadata
     │   ├── _libraries.R          # Centralized package loading
     │   └── _load.R               # Sources everything. Your entry point.
-    ├── pages/
+    ├── analysis/
     │   ├── index.qmd             # Main Quarto document
     │   └── references.bib        # Bibliography
     ├── www/
@@ -157,7 +160,7 @@ Customize your document’s appearance by uncommenting desired styles.
 | Function                                                                                | Description                                                   |
 |-----------------------------------------------------------------------------------------|---------------------------------------------------------------|
 | [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)                       | Initialize a complete project from the latest remote template |
-| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `pages/`                          |
+| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `analysis/`                       |
 | [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file                       |
 | [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)         | Create a `_brand.yml` brand configuration file                |
 | [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)   | Save project `_variables.yml` to global config                |

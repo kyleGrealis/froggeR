@@ -5,16 +5,17 @@
 A project with five R files is manageable. A project with fifteen is
 not, unless they follow a pattern.
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) puts three files in
-every project’s `R/` directory:
+[froggeR](https://www.kyleGrealis.com/froggeR/) initializes with three
+files in every project’s `R/` directory:
 
 - `_load.R` – the entry point
 - `_libraries.R` – package loading
 - `_data_dictionary.R` – variable labels and metadata
 
-The underscore prefix is intentional. It sorts these files above your
-analysis scripts in any directory listing, signaling that they are
-**infrastructure**, not analysis.
+These are **infrastructure** files. They set up the project so your
+analysis scripts can focus on the work. The underscore prefix keeps them
+sorted above everything else in the directory listing, making them easy
+to find.
 
 ## `_load.R`: one file to source
 
@@ -99,10 +100,10 @@ Your [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get
 human-readable labels without manual labeling in every script. Define
 labels once here, apply them anywhere.
 
-## `_quarto.yml`: the config expects the convention
+## `_quarto.yml`: how it all connects
 
-The directory structure is not just a suggestion. The template’s
-`_quarto.yml` is wired to it:
+The template’s `_quarto.yml` is configured to match the directory
+layout:
 
 ``` yaml
 project:
@@ -110,10 +111,10 @@ project:
   output-dir: docs
   resources: www
   render:
-    - "pages/*.qmd"
+    - "analysis/*.qmd"
 ```
 
-Quarto only renders `.qmd` files found in `pages/`. Static assets in
+Quarto only renders `.qmd` files found in `analysis/`. Static assets in
 `www/` are copied to the output as resources. Rendered HTML goes to
 `docs/`, keeping build artifacts out of your source directories. Explore
 the documentation for other [Quarto
@@ -133,18 +134,15 @@ website:
   sidebar:
     contents:
       - text: Home
-        href: pages/index.qmd
+        href: analysis/index.qmd
 ```
 
-`custom.scss` is expected in `www/`. The sidebar links to documents in
-`pages/`. If you move files out of convention, these references break
-and Quarto will tell you something is missing without telling you why.
-
-This is the payoff of a fixed directory layout: the configuration works
-because the structure is predictable. You do not need to edit
-`_quarto.yml` to wire up paths. They are already correct. Add more files
-in the `contents` section as your project grows and follow the example
-for `Home` for `pages/index.qmd`.
+`custom.scss` is expected in `www/`, and the sidebar links to documents
+in `analysis/`. Because the directory layout is predictable, the
+configuration works out of the box. You do not need to edit
+`_quarto.yml` to wire up paths. They are already correct. Add new
+documents to `analysis/`, then reference them in the `contents` section
+following the pattern shown for `analysis/index.qmd`.
 
 For the full `_quarto.yml` specification, see [Quarto Project
 Basics](https://quarto.org/docs/projects/quarto-projects.html).
@@ -169,21 +167,22 @@ The difference matters the moment your working directory is not the
 project root. In a [froggeR](https://www.kyleGrealis.com/froggeR/)
 project, that happens by design.
 
-When you render `pages/index.qmd`, Quarto sets the working directory to
-`pages/`. A relative path like `"R/_load.R"` resolves to
-`pages/R/_load.R`, which does not exist. The render fails, and the error
-message does not make the cause obvious.
+When you render `analysis/index.qmd`, Quarto sets the working directory
+to `analysis/`. A relative path like `"R/_load.R"` resolves to
+`analysis/R/_load.R`, which does not exist. The render fails, and the
+error message does not make the cause obvious.
 
 [`here::here()`](https://here.r-lib.org/reference/here.html) resolves
 paths from the project root, the directory containing your `.Rproj` or
 `.here` file, regardless of the current working directory.
 `here::here("R", "_load.R")` always points to the right file, whether
 you call it from the console, from a script in `R/`, or from a Quarto
-document in `pages/`.
+document in `analysis/`.
 
 This is not just about [`source()`](https://rdrr.io/r/base/source.html).
-Use [`here::here()`](https://here.r-lib.org/reference/here.html) for
-every file path in your project:
+You should use
+[`here::here()`](https://here.r-lib.org/reference/here.html) for every
+file path in your project:
 
 ``` r
 # Reading data
@@ -193,5 +192,6 @@ df <- readr::read_csv(here::here("data", "raw_data.csv"))
 ggsave(here::here("www", "figure1.png"))
 ```
 
-One habit that prevents an entire class of path-related errors. See the
-[{here}](https://here.r-lib.org/) package documentation for more.
+Setting this one habit helps prevent an entire class of path-related
+errors. See the [{here}](https://here.r-lib.org/) package documentation
+for more.
