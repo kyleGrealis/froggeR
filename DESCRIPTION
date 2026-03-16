@@ -1,6 +1,6 @@
 Package: froggeR
 Type: Package
-Title: Structured Project Standards for R and 'Quarto'
+Title: Project Scaffolding for R and 'Quarto'
 Version: 1.0.1
 Authors@R:
     person(
@@ -10,7 +10,7 @@ Authors@R:
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-9223-8854")
     )
-Description: Provides an opinionated project scaffold for R and 'Quarto' analysis work, enforcing a consistent directory layout with scripts in R/, .qmd files in pages/, and assets in www/. The primary entry point, init(), downloads the latest template from a companion GitHub repository so that project structure evolves independently of package releases. Supports persistent author metadata and 'Quarto' brand configuration that carry across projects automatically.
+Description: Creates structured R and 'Quarto' projects with a consistent directory layout: scripts in R/, analysis documents in analysis/, and web assets in www/. The primary entry point, init(), downloads the latest template from a companion 'GitHub' repository so that project structure evolves independently of package releases. Supports persistent author metadata and 'Quarto' brand configuration that carry across projects automatically.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.3.3

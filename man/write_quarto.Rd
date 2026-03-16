@@ -20,11 +20,11 @@ Invisibly returns the path to the created Quarto document.
 \description{
 Downloads the Quarto template from the
 \href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
-repository and writes it to the \code{pages/} directory. Errors if a file
+repository and writes it to the \code{analysis/} directory. Errors if a file
 with the same name already exists.
 }
 \details{
-The file is written to \code{pages/<filename>.qmd}. The \code{pages/}
+The file is written to \code{analysis/<filename>.qmd}. The \code{analysis/}
 directory is created automatically if it does not exist.
 }
 \examples{
