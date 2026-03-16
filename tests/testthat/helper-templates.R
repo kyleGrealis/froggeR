@@ -84,7 +84,7 @@
   dir.create(template_root, recursive = TRUE)
 
   dir.create(file.path(template_root, "R"))
-  dir.create(file.path(template_root, "pages"))
+  dir.create(file.path(template_root, "analysis"))
   dir.create(file.path(template_root, "www"))
   dir.create(file.path(template_root, "logos"))
 

@@ -3,7 +3,7 @@ library(froggeR)
 
 # Tests for write_quarto() ====
 
-test_that("write_quarto creates .qmd file in pages/ directory", {
+test_that("write_quarto creates .qmd file in analysis/ directory", {
   tmp_dir <- withr::local_tempdir()
 
   local_mocked_bindings(
@@ -16,7 +16,7 @@ test_that("write_quarto creates .qmd file in pages/ directory", {
     path = tmp_dir
   ))
 
-  expect_true(file.exists(file.path(tmp_dir, "pages", "test-doc.qmd")))
+  expect_true(file.exists(file.path(tmp_dir, "analysis", "test-doc.qmd")))
   expect_type(result, "character")
   expect_equal(basename(result), "test-doc.qmd")
 })
@@ -31,7 +31,7 @@ test_that("write_quarto uses default filename", {
 
   result <- suppressMessages(write_quarto(path = tmp_dir))
 
-  expect_true(file.exists(file.path(tmp_dir, "pages", "Untitled-1.qmd")))
+  expect_true(file.exists(file.path(tmp_dir, "analysis", "Untitled-1.qmd")))
 })
 
 test_that("write_quarto does not call edit_file when non-interactive", {
@@ -46,10 +46,10 @@ test_that("write_quarto does not call edit_file when non-interactive", {
     suppressMessages(write_quarto(path = tmp_dir, filename = "test"))
   )
 
-  expect_true(file.exists(file.path(tmp_dir, "pages", "test.qmd")))
+  expect_true(file.exists(file.path(tmp_dir, "analysis", "test.qmd")))
 })
 
-test_that("write_quarto creates pages/ directory automatically", {
+test_that("write_quarto creates analysis/ directory automatically", {
   tmp_dir <- withr::local_tempdir()
 
   local_mocked_bindings(
@@ -59,7 +59,7 @@ test_that("write_quarto creates pages/ directory automatically", {
 
   suppressMessages(write_quarto(filename = "test", path = tmp_dir))
 
-  expect_true(dir.exists(file.path(tmp_dir, "pages")))
+  expect_true(dir.exists(file.path(tmp_dir, "analysis")))
 })
 
 
@@ -83,9 +83,9 @@ test_that("write_quarto errors when .qmd file already exists", {
     .package = "froggeR"
   )
 
-  pages_dir <- file.path(tmp_dir, "pages")
-  dir.create(pages_dir)
-  writeLines("---\ntitle: Test\n---", file.path(pages_dir, "existing.qmd"))
+  analysis_dir <- file.path(tmp_dir, "analysis")
+  dir.create(analysis_dir)
+  writeLines("---\ntitle: Test\n---", file.path(analysis_dir, "existing.qmd"))
 
   expect_error(
     write_quarto(path = tmp_dir, filename = "existing"),

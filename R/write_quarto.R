@@ -2,7 +2,7 @@
 #'
 #' Downloads the Quarto template from the
 #' \href{https://github.com/kyleGrealis/frogger-templates}{frogger-templates}
-#' repository and writes it to the \code{pages/} directory. Errors if a file
+#' repository and writes it to the \code{analysis/} directory. Errors if a file
 #' with the same name already exists.
 #'
 #' @param filename Character. The name of the file without the \code{.qmd}
@@ -14,7 +14,7 @@
 #' @return Invisibly returns the path to the created Quarto document.
 #'
 #' @details
-#' The file is written to \code{pages/<filename>.qmd}. The \code{pages/}
+#' The file is written to \code{analysis/<filename>.qmd}. The \code{analysis/}
 #' directory is created automatically if it does not exist.
 #'
 #' @examples
@@ -41,30 +41,30 @@ write_quarto <- function(filename = "Untitled-1", path = here::here()) {
     rlang::abort("Invalid filename. Use only letters, numbers, hyphens, and underscores.")
   }
 
-  # Ensure pages/ directory exists
-  pages_dir <- file.path(path, "pages")
-  fs::dir_create(pages_dir)
+  # Ensure analysis/ directory exists
+  analysis_dir <- file.path(path, "analysis")
+  fs::dir_create(analysis_dir)
 
-  complete_filename <- paste0("pages/", filename, ".qmd")
+  complete_filename <- paste0("analysis/", filename, ".qmd")
   dest <- file.path(path, complete_filename)
 
   # Multi-file writer: error on duplicate
   if (file.exists(dest)) {
     rlang::abort(
-      sprintf("%s.qmd already exists in pages/.", filename),
+      sprintf("%s.qmd already exists in analysis/.", filename),
       class = "froggeR_file_exists"
     )
   }
 
   # Fetch template from GitHub
-  template <- .fetch_template("pages/index.qmd")
+  template <- .fetch_template("analysis/index.qmd")
   if (!file.copy(from = template, to = dest, overwrite = FALSE)) {
     rlang::abort(
-      sprintf("Failed to create %s.qmd in pages/.", filename),
+      sprintf("Failed to create %s.qmd in analysis/.", filename),
       class = "froggeR_file_error"
     )
   }
-  ui_done(sprintf("%s.qmd written to pages/", filename))
+  ui_done(sprintf("%s.qmd written to analysis/", filename))
 
   dest <- normalizePath(dest, mustWork = TRUE)
 

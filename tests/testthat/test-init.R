@@ -28,7 +28,7 @@ test_that("init creates expected directory structure from template", {
 
   # Template directories should exist
   expect_true(dir.exists(file.path(project_dir, "R")))
-  expect_true(dir.exists(file.path(project_dir, "pages")))
+  expect_true(dir.exists(file.path(project_dir, "analysis")))
   expect_true(dir.exists(file.path(project_dir, "www")))
   expect_true(dir.exists(file.path(project_dir, "logos")))
 

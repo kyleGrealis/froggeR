@@ -1,5 +1,12 @@
 # froggeR 1.0.1
 
+## Enhancements
+
+* The `pages/` directory has been renamed to `analysis/`, following the
+  research compendium convention described in Marwick, Boettiger, and Mullen
+  (2018). `write_quarto()` now writes to `analysis/` instead of `pages/`.
+  Thanks to Raymond Balise (@RaymondBalise) for the suggestion and citation.
+
 ## Bug fixes
 
 * `init()` no longer swallows directory creation errors. If `fs::dir_create()`
