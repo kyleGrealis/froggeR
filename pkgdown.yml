@@ -1,10 +1,10 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   every-file-in-its-place: every-file-in-its-place.html
   from-zero-to-project: from-zero-to-project.html
-last_built: 2026-03-16T20:56Z
+last_built: 2026-07-01T15:25Z
 urls:
   reference: https://www.kyleGrealis.com/froggeR/reference
   article: https://www.kyleGrealis.com/froggeR/articles

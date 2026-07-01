@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Project Scaffolding for R and Quarto">
 <meta name="description" content="Creates structured R and Quarto projects with a consistent directory layout: scripts in R/, analysis documents in analysis/, and web assets in www/. The primary entry point, init(), downloads the latest template from a companion GitHub repository so that project structure evolves independently of package releases. Supports persistent author metadata and Quarto brand configuration that carry across projects automatically.">
@@ -74,6 +74,7 @@
 </div>
 <!-- badges: start -->
 
+<p><a href="https://CRAN.R-project.org/package=froggeR" class="external-link"><img src="https://www.r-pkg.org/badges/version/froggeR" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=froggeR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/froggeR" alt="CRAN downloads"></a> <a href="https://cran.r-project.org/package=froggeR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/froggeR" alt="CRAN downloads"></a> <!-- badges: end --></p>
 <blockquote>
 <p><strong>froggeR</strong>: Leap into structured Quarto projects</p>
 </blockquote>
@@ -185,42 +186,42 @@
 <col width="43%">
 <col width="56%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Function</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code><a href="reference/init.html">init()</a></code></td>
 <td>Initialize a complete project from the latest remote template</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code><a href="reference/write_quarto.html">write_quarto()</a></code></td>
 <td>Create a Quarto document in <code>analysis/</code>
 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code><a href="reference/write_variables.html">write_variables()</a></code></td>
 <td>Create a <code>_variables.yml</code> metadata file</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code><a href="reference/write_brand.html">write_brand()</a></code></td>
 <td>Create a <code>_brand.yml</code> brand configuration file</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code><a href="reference/save_variables.html">save_variables()</a></code></td>
 <td>Save project <code>_variables.yml</code> to global config</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code><a href="reference/save_brand.html">save_brand()</a></code></td>
 <td>Save project <code>_brand.yml</code> to global config</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code><a href="reference/write_ignore.html">write_ignore()</a></code></td>
 <td>Create an opinionated <code>.gitignore</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><code><a href="reference/write_scss.html">write_scss()</a></code></td>
 <td>Create a <code>custom.scss</code> styling template in <code>www/</code>
 </td>

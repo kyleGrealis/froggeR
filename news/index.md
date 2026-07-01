@@ -2,6 +2,8 @@
 
 ## froggeR 1.0.1
 
+CRAN release: 2026-03-17
+
 ### Enhancements
 
 - The `pages/` directory has been renamed to `analysis/`, following the

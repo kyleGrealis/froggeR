@@ -1,5 +1,12 @@
 # froggeR
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/froggeR)](https://CRAN.R-project.org/package=froggeR)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/froggeR)](https://cran.r-project.org/package=froggeR)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/froggeR)](https://cran.r-project.org/package=froggeR)
+
 > **froggeR**: Leap into structured Quarto projects
 
 R has strong conventions for packages, but analytical projects have not
@@ -15,6 +22,7 @@ same conventions carry over whether you’re writing an analysis, building
 an R package, or picking up a new language.
 
 ``` r
+
 install.packages("froggeR")
 froggeR::init(path = "my_project")
 ```
@@ -55,6 +63,7 @@ consistent layout so you spend time analyzing, not organizing:
 ## Installation
 
 ``` r
+
 install.packages("froggeR")
 ```
 
@@ -63,6 +72,7 @@ install.packages("froggeR")
 Initialize a complete project with a single command:
 
 ``` r
+
 froggeR::init(path = "my_new_project")
 ```
 
@@ -95,6 +105,7 @@ two levels: global (system-wide) and project-local. Set it up once, and
 every future project inherits your settings.
 
 ``` r
+
 froggeR::write_variables() # Create/edit _variables.yml (author metadata)
 froggeR::write_brand()     # Create/edit _brand.yml (colors, logos, typography)
 ```
@@ -104,6 +115,7 @@ editing if it does. New files start from your global config or the
 remote template. When you’re happy, persist to global config:
 
 ``` r
+
 froggeR::save_variables()  # Save project metadata for reuse
 froggeR::save_brand()      # Save project branding for reuse
 ```
@@ -117,6 +129,7 @@ the project copy directly when you need something specific.
 Quickly generate new Quarto documents with pre-formatted headers:
 
 ``` r
+
 froggeR::write_quarto(filename = "monthly_report")
 ```
 
@@ -130,6 +143,7 @@ that covers R artifacts, Quarto build files, data files, and common
 sensitive patterns:
 
 ``` r
+
 froggeR::write_ignore()
 ```
 
@@ -141,6 +155,7 @@ additional exclusions, edit `.gitignore` directly.
 Generate a SCSS template for custom document styling:
 
 ``` r
+
 froggeR::write_scss()
 froggeR::write_scss("tables")
 ```
@@ -157,16 +172,16 @@ Customize your document’s appearance by uncommenting desired styles.
 
 ## Function Reference
 
-| Function                                                                                | Description                                                   |
-|-----------------------------------------------------------------------------------------|---------------------------------------------------------------|
-| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)                       | Initialize a complete project from the latest remote template |
-| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)       | Create a Quarto document in `analysis/`                       |
-| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file                       |
-| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)         | Create a `_brand.yml` brand configuration file                |
-| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)   | Save project `_variables.yml` to global config                |
-| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)           | Save project `_brand.yml` to global config                    |
-| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)       | Create an opinionated `.gitignore`                            |
-| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)           | Create a `custom.scss` styling template in `www/`             |
+| Function | Description |
+|----|----|
+| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) | Initialize a complete project from the latest remote template |
+| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md) | Create a Quarto document in `analysis/` |
+| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file |
+| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md) | Create a `_brand.yml` brand configuration file |
+| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md) | Save project `_variables.yml` to global config |
+| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md) | Save project `_brand.yml` to global config |
+| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md) | Create an opinionated `.gitignore` |
+| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md) | Create a `custom.scss` styling template in `www/` |
 
 ------------------------------------------------------------------------
 

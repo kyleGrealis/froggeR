@@ -23,6 +23,7 @@ to find.
 everything initializes:
 
 ``` r
+
 source(here::here("R", "_load.R"))
 ```
 
@@ -30,6 +31,7 @@ Inside, it sources the other infrastructure files and runs any
 project-wide setup:
 
 ``` r
+
 # R/_load.R
 source(here::here("R", "_libraries.R"))
 source(here::here("R", "_data_dictionary.R"))
@@ -41,6 +43,7 @@ never need more than one
 grows, add new files to `_load.R`:
 
 ``` r
+
 source(here::here("R", "_libraries.R"))
 source(here::here("R", "_data_dictionary.R"))
 source(here::here("R", "helpers.R"))
@@ -54,6 +57,7 @@ analysis.
 ## `_libraries.R`: packages in one place
 
 ``` r
+
 # R/_libraries.R
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -78,6 +82,7 @@ This matters for three reasons:
 ## `_data_dictionary.R`: label your variables
 
 ``` r
+
 # R/_data_dictionary.R
 dictionary <- dplyr::tribble(
   ~Variable, ~Description,
@@ -154,12 +159,14 @@ template uses
 [`here::here()`](https://here.r-lib.org/reference/here.html):
 
 ``` r
+
 source(here::here("R", "_load.R"))
 ```
 
 Not this:
 
 ``` r
+
 source("R/_load.R")
 ```
 
@@ -185,6 +192,7 @@ You should use
 file path in your project:
 
 ``` r
+
 # Reading data
 df <- readr::read_csv(here::here("data", "raw_data.csv"))
 

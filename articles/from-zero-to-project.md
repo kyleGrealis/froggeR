@@ -32,6 +32,7 @@ in other languages.
 One command builds the full scaffold:
 
 ``` r
+
 froggeR::init(path = "my_project")
 ```
 
@@ -139,6 +140,7 @@ Local:
 Install the R packages and initialize:
 
 ``` r
+
 install.packages(c("precommit", "styler", "lintr"))
 precommit::use_precommit()
 ```
