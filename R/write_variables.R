@@ -56,8 +56,8 @@ write_variables <- function(path = here::here()) {
   if (interactive()) usethis::edit_file(dest)
   
   ui_info(paste(
-    "Field reference:", 
-    "https://www.kyleGrealis.com/froggeR/reference/write_variables.html"
+    "Field reference:",
+    "https://kylegrealis.github.io/froggeR/reference/write_variables.html"
   ))
 
   invisible(dest)

@@ -1,3 +1,17 @@
+# froggeR 1.1.0
+
+## Enhancements
+
+* Projects created with `init()` now include built-in AI coding assistant instructions (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`) and four project skills in `.agents/skills/`:
+  * `frogger-workflow`: Scaffolds Quarto documents in `analysis/`, centralizes `library()` calls in `R/_libraries.R`, maintains variable labels in `R/_data_dictionary.R`, and manages styles in `www/`.
+  * `frogger-brand`: Configures `_variables.yml` and `_brand.yml`, wires Quarto `{{< var >}}` and `{{< brand >}}` shortcodes, and persists defaults to global `{froggeR}` settings.
+  * `frogger-devlog`: Audits R and Quarto code comments, logs analytical and methodological decisions in `DECISIONS.md`, and maintains `CHANGELOG.md`.
+  * `frogger-commit`: Drafts structured `type(scope): summary` git commit messages.
+
+* Updated the project template's `_quarto.yml` to render standalone, self-contained HTML documents (`embed-resources: true`, `execute-dir: project`, and `logos` included in project resources) and use Bunny Fonts in `_brand.yml`.
+
+* Removed `.pre-commit-config.yaml` from the project scaffold and updated package vignettes (`from-zero-to-project`, `every-file-in-its-place`) and `README.md`.
+
 # froggeR 1.0.1
 
 ## Enhancements

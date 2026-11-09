@@ -16,4 +16,3 @@
 ^vignettes/archive$
 ^\.claude$
 ^CLAUDE\.md$
-^\.pre-commit-config\.yaml$

@@ -1,4 +1,4 @@
-url: https://www.kyleGrealis.com/froggeR/
+url: https://kylegrealis.github.io/froggeR/
 
 development:
   mode: auto
@@ -100,6 +100,6 @@ footer:
 
 authors:
   Kyle Grealis:
-    href: https://www.kylegrealis.com
+    href: https://kylegrealis.com
   sidebar:
     roles: [aut, cre]

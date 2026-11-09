@@ -40,6 +40,7 @@ froggeR::init(path = "my_project")
 
 ```
 my_project/
+├── .agents/                  # AI agent skills (workflow, brand, devlog, commit)
 ├── R/
 │   ├── _data_dictionary.R    # Variable labels and metadata
 │   ├── _libraries.R          # Centralized package loading
@@ -52,11 +53,13 @@ my_project/
 │   └── tables.js             # Table enhancements
 ├── logos/                    # Brand logos
 ├── data/                     # Data files (gitignored)
+├── AGENTS.md                 # Project conventions for AI coding assistants
+├── CLAUDE.md                 # Pointer to AGENTS.md and .agents/skills/
+├── GEMINI.md                 # Pointer to AGENTS.md and .agents/skills/
 ├── _brand.yml                # Quarto brand configuration
 ├── _quarto.yml               # Quarto project configuration
 ├── _variables.yml            # Author metadata
 ├── .gitignore                # Opinionated git protection
-├── .pre-commit-config.yaml   # Pre-commit hook configuration
 └── README.md
 ```
 
@@ -82,45 +85,16 @@ The files in the project root are configuration:
 - **`_brand.yml`** defines your visual identity: colors, logos, typography. See [Quarto Brand](https://quarto.org/docs/authoring/brand.html).
 - **`_variables.yml`** stores author metadata: name, email, etc.
 - **`.gitignore`** keeps R artifacts, rendered output, and data files out of version control.
-- **`.pre-commit-config.yaml`** runs code quality checks before every commit. See below.
+- **`AGENTS.md`** (`CLAUDE.md`, `GEMINI.md`) and **`.agents/skills/`** provide project architecture instructions and workflow skills for AI coding assistants.
 
-## Pre-commit hooks
+## Built-in AI agent skills
 
-The template includes a `.pre-commit-config.yaml` that integrates with [pre-commit](https://pre-commit.com) to run automated checks before every `git commit`. This catches problems early: unstyled code, lint violations, debug statements left in, large files accidentally staged.
+The template includes `AGENTS.md` (along with `CLAUDE.md` and `GEMINI.md` pointers) and four project skills inside `.agents/skills/` so AI coding assistants understand `{froggeR}` conventions without manual prompting:
 
-### What is included
-
-From [{precommit}](https://lorenzwalthert.github.io/precommit/):
-
-- **style-files**: Formats R code with [{styler}](https://styler.r-lib.org/) using tidyverse conventions
-- **lintr**: Runs [{lintr}](https://lintr.r-lib.org/) static analysis
-- **parsable-R**: Confirms all R files parse without errors
-- **no-browser-statement**: Catches leftover `browser()` calls
-- **no-debug-statement**: Catches leftover `debug()` and `debugonce()` calls
-
-From [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks):
-
-- **check-added-large-files**: Blocks files over 200 KB
-- **end-of-file-fixer**: Ensures files end with a newline
-
-Local:
-
-- **forbid-to-commit**: Blocks `.Rhistory`, `.RData`, `.Rds`, and `.rds` files
-
-### Setup
-
-Install the R packages and initialize:
-
-```r
-install.packages(c("precommit", "styler", "lintr"))
-precommit::use_precommit()
-```
-
-[{precommit}](https://lorenzwalthert.github.io/precommit/) handles installing the pre-commit framework itself. See [pre-commit.com](https://pre-commit.com/#install) for manual installation options.
-
-### Adapting or removing
-
-The hooks are a starting point. Edit `.pre-commit-config.yaml` to add, remove, or reconfigure hooks for your workflow. If you do not want pre-commit at all, delete the file. No other part of `{froggeR}` depends on it.
+- **`frogger-workflow`**: Scaffolds new Quarto documents in `analysis/`, keeps `library()` calls centralized in `R/_libraries.R`, updates variable labels in `R/_data_dictionary.R`, and manages styles in `www/`.
+- **`frogger-brand`**: Walks through setting up `_variables.yml` and `_brand.yml`, wires metadata and brand logo shortcodes into documents, and persists defaults to your global `{froggeR}` config.
+- **`frogger-devlog`**: Audits R and Quarto code comments, records analytical and methodological choices in `DECISIONS.md`, and maintains `CHANGELOG.md`.
+- **`frogger-commit`**: Drafts structured `type(scope): summary` git commit messages with 2-space indented bullets explaining what changed and why.
 
 ## Your settings follow you
 

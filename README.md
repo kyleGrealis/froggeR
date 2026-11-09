@@ -26,7 +26,8 @@ froggeR::init(path = "my_project")
 * **Structure by default**: `init()` downloads the latest scaffold and you're working in seconds. Scripts go in `R/`, Quarto documents in `analysis/`, assets in `www/`, data in `data/`.
 * **Opinionated starting points**: `R/_load.R`, `R/_libraries.R`, and `R/_data_dictionary.R` give every project a consistent entry point. `write_quarto()` creates pre-formatted `.qmd` files with your author info and branding baked in.
 * **Configure once, reuse everywhere**: `write_variables()` and `write_brand()` create your metadata and branding files. Save globally with `save_variables()` and `save_brand()`, and every future project picks them up automatically.
-* **Protected by default**: An opinionated `.gitignore` and pre-commit hooks keep sensitive data and common R artifacts out of version control.
+* **Protected by default**: An opinionated `.gitignore` keeps sensitive data and common R artifacts out of version control.
+* **AI agent ready**: Includes `AGENTS.md` (`CLAUDE.md`, `GEMINI.md`) and `.agents/skills/` (`frogger-workflow`, `frogger-brand`, `frogger-devlog`, `frogger-commit`) so AI coding assistants follow your project conventions automatically.
 * **Transferable habits**: The same directory conventions used here mirror what you'll find in R packages, Shiny frameworks like rhino, and other languages entirely.
 
 ----
@@ -49,6 +50,7 @@ This creates:
 
 ```
 my_new_project/
+├── .agents/                  # AI agent skills (workflow, brand, devlog, commit)
 ├── R/
 │   ├── _data_dictionary.R    # Variable labels and metadata
 │   ├── _libraries.R          # Centralized package loading
@@ -61,11 +63,13 @@ my_new_project/
 │   └── tables.js             # Table enhancements
 ├── logos/                    # Brand logos
 ├── data/                     # Data files (gitignored)
+├── AGENTS.md                 # Project conventions for AI coding assistants
+├── CLAUDE.md                 # Pointer to AGENTS.md and .agents/skills/
+├── GEMINI.md                 # Pointer to AGENTS.md and .agents/skills/
 ├── _brand.yml                # Quarto brand configuration
 ├── _quarto.yml               # Quarto project configuration
 ├── _variables.yml            # Author metadata
 ├── .gitignore                # Opinionated git protection
-├── .pre-commit-config.yaml   # Pre-commit hook configuration
 └── README.md
 ```
 
@@ -143,10 +147,10 @@ Customize your document's appearance by uncommenting desired styles.
 
 ## Getting Help
 
-* **Documentation**: [froggeR website](https://www.kyleGrealis.com/froggeR/) for full function references and vignettes
+* **Documentation**: [froggeR website](https://kylegrealis.github.io/froggeR/) for full function references and vignettes
 * **Vignettes**:
-  * [From Zero to Project](https://www.kyleGrealis.com/froggeR/articles/from-zero-to-project.html)
-  * [Every File in Its Place](https://www.kyleGrealis.com/froggeR/articles/every-file-in-its-place.html)
+  * [From Zero to Project](https://kylegrealis.github.io/froggeR/articles/from-zero-to-project.html)
+  * [Every File in Its Place](https://kylegrealis.github.io/froggeR/articles/every-file-in-its-place.html)
 * **Issues**: Found a bug or have a feature request? [Open an issue](https://github.com/kyleGrealis/froggeR/issues)
 
 ----

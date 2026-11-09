@@ -1,7 +1,7 @@
 Package: froggeR
 Type: Package
 Title: Project Scaffolding for R and 'Quarto'
-Version: 1.0.1
+Version: 1.1.0
 Authors@R:
     person(
         "Kyle",
@@ -32,6 +32,6 @@ Suggests:
     yaml
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://www.kyleGrealis.com/froggeR/,
+URL: https://kylegrealis.github.io/froggeR/,
     https://github.com/kyleGrealis/froggeR
 BugReports: https://github.com/kyleGrealis/froggeR/issues
