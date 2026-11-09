@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">froggeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,7 @@ the digital materials of a project so that others can inspect,
 reproduce, and extend the work. Their layout uses familiar R package
 conventions and adds an <code>analysis/</code> directory for the
 project’s computational work.</p>
-<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> builds on this idea, adapting it for
+<p><a href="https://kylegrealis.github.io/froggeR/">froggeR</a> builds on this idea, adapting it for
 Quarto-based projects:</p>
 <ul>
 <li>
@@ -119,6 +119,7 @@ frameworks in other languages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">froggeR</span><span class="fu">::</span><span class="fu"><a href="../reference/init.html">init</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"my_project"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>my_project/
+├── .agents/                  # AI agent skills (workflow, brand, devlog, commit)
 ├── R/
 │   ├── _data_dictionary.R    # Variable labels and metadata
 │   ├── _libraries.R          # Centralized package loading
@@ -131,11 +132,13 @@ frameworks in other languages.</p>
 │   └── tables.js             # Table enhancements
 ├── logos/                    # Brand logos
 ├── data/                     # Data files (gitignored)
+├── AGENTS.md                 # Project conventions for AI coding assistants
+├── CLAUDE.md                 # Pointer to AGENTS.md and .agents/skills/
+├── GEMINI.md                 # Pointer to AGENTS.md and .agents/skills/
 ├── _brand.yml                # Quarto brand configuration
 ├── _quarto.yml               # Quarto project configuration
 ├── _variables.yml            # Author metadata
 ├── .gitignore                # Opinionated git protection
-├── .pre-commit-config.yaml   # Pre-commit hook configuration
 └── README.md</code></pre>
 <p><code><a href="../reference/init.html">init()</a></code> creates the target directory if it does not
 exist, downloads the latest template from <a href="https://github.com/kyleGrealis/frogger-templates" class="external-link">frogger-templates</a>,
@@ -185,79 +188,48 @@ name, email, etc.</li>
 <strong><code>.gitignore</code></strong> keeps R artifacts, rendered
 output, and data files out of version control.</li>
 <li>
-<strong><code>.pre-commit-config.yaml</code></strong> runs code
-quality checks before every commit. See below.</li>
+<strong><code>AGENTS.md</code></strong> (<code>CLAUDE.md</code>,
+<code>GEMINI.md</code>) and
+<strong><code>.agents/skills/</code></strong> provide project
+architecture instructions and workflow skills for AI coding
+assistants.</li>
 </ul>
 </div>
 </div>
 <div class="section level2">
-<h2 id="pre-commit-hooks">Pre-commit hooks<a class="anchor" aria-label="anchor" href="#pre-commit-hooks"></a>
+<h2 id="built-in-ai-agent-skills">Built-in AI agent skills<a class="anchor" aria-label="anchor" href="#built-in-ai-agent-skills"></a>
 </h2>
-<p>The template includes a <code>.pre-commit-config.yaml</code> that
-integrates with <a href="https://pre-commit.com" class="external-link">pre-commit</a> to run
-automated checks before every <code>git commit</code>. This catches
-problems early: unstyled code, lint violations, debug statements left
-in, large files accidentally staged.</p>
-<div class="section level3">
-<h3 id="what-is-included">What is included<a class="anchor" aria-label="anchor" href="#what-is-included"></a>
-</h3>
-<p>From <a href="https://lorenzwalthert.github.io/precommit/" class="external-link">{precommit}</a>:</p>
+<p>The template includes <code>AGENTS.md</code> (along with
+<code>CLAUDE.md</code> and <code>GEMINI.md</code> pointers) and four
+project skills inside <code>.agents/skills/</code> so AI coding
+assistants understand <a href="https://kylegrealis.github.io/froggeR/">froggeR</a> conventions without manual
+prompting:</p>
 <ul>
 <li>
-<strong>style-files</strong>: Formats R code with <a href="https://styler.r-lib.org/" class="external-link">{styler}</a> using tidyverse
-conventions</li>
+<strong><code>frogger-workflow</code></strong>: Scaffolds new Quarto
+documents in <code>analysis/</code>, keeps <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> calls
+centralized in <code>R/_libraries.R</code>, updates variable labels in
+<code>R/_data_dictionary.R</code>, and manages styles in
+<code>www/</code>.</li>
 <li>
-<strong>lintr</strong>: Runs <a href="https://lintr.r-lib.org/" class="external-link">{lintr}</a> static analysis</li>
+<strong><code>frogger-brand</code></strong>: Walks through setting
+up <code>_variables.yml</code> and <code>_brand.yml</code>, wires
+metadata and brand logo shortcodes into documents, and persists defaults
+to your global <a href="https://kylegrealis.github.io/froggeR/">froggeR</a> config.</li>
 <li>
-<strong>parsable-R</strong>: Confirms all R files parse without
-errors</li>
+<strong><code>frogger-devlog</code></strong>: Audits R and Quarto
+code comments, records analytical and methodological choices in
+<code>DECISIONS.md</code>, and maintains <code>CHANGELOG.md</code>.</li>
 <li>
-<strong>no-browser-statement</strong>: Catches leftover
-<code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> calls</li>
-<li>
-<strong>no-debug-statement</strong>: Catches leftover
-<code><a href="https://rdrr.io/r/base/debug.html" class="external-link">debug()</a></code> and <code><a href="https://rdrr.io/r/base/debug.html" class="external-link">debugonce()</a></code> calls</li>
+<strong><code>frogger-commit</code></strong>: Drafts structured
+<code>type(scope): summary</code> git commit messages with 2-space
+indented bullets explaining what changed and why.</li>
 </ul>
-<p>From <a href="https://github.com/pre-commit/pre-commit-hooks" class="external-link">pre-commit-hooks</a>:</p>
-<ul>
-<li>
-<strong>check-added-large-files</strong>: Blocks files over 200
-KB</li>
-<li>
-<strong>end-of-file-fixer</strong>: Ensures files end with a
-newline</li>
-</ul>
-<p>Local:</p>
-<ul>
-<li>
-<strong>forbid-to-commit</strong>: Blocks <code>.Rhistory</code>,
-<code>.RData</code>, <code>.Rds</code>, and <code>.rds</code> files</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h3>
-<p>Install the R packages and initialize:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"precommit"</span>, <span class="st">"styler"</span>, <span class="st">"lintr"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">precommit</span><span class="fu">::</span><span class="fu">use_precommit</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><a href="https://lorenzwalthert.github.io/precommit/" class="external-link">{precommit}</a>
-handles installing the pre-commit framework itself. See <a href="https://pre-commit.com/#install" class="external-link">pre-commit.com</a> for manual
-installation options.</p>
-</div>
-<div class="section level3">
-<h3 id="adapting-or-removing">Adapting or removing<a class="anchor" aria-label="anchor" href="#adapting-or-removing"></a>
-</h3>
-<p>The hooks are a starting point. Edit
-<code>.pre-commit-config.yaml</code> to add, remove, or reconfigure
-hooks for your workflow. If you do not want pre-commit at all, delete
-the file. No other part of <a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> depends on it.</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="your-settings-follow-you">Your settings follow you<a class="anchor" aria-label="anchor" href="#your-settings-follow-you"></a>
 </h2>
-<p><a href="https://www.kyleGrealis.com/froggeR/">froggeR</a> stores configuration in two places:</p>
+<p><a href="https://kylegrealis.github.io/froggeR/">froggeR</a> stores configuration in two places:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Project-level</strong>: <code>_variables.yml</code> and
@@ -311,11 +283,11 @@ Statistician</em>, 72(1), 80-88. <a href="https://doi.org/10.1080/00031305.2017.
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://www.kylegrealis.com" class="external-link">Kyle Grealis</a>.</p>
+  <p>Developed by <a href="https://kylegrealis.com" class="external-link">Kyle Grealis</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -28,8 +28,8 @@ This function:
 The saved configuration is stored in
 `rappdirs::user_config_dir('froggeR')` and will automatically be used in
 new froggeR projects created with
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md) or
-[`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md).
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md) or
+[`write_variables`](https://kylegrealis.github.io/froggeR/reference/write_variables.md).
 
 This is useful for maintaining consistent author metadata (name, email,
 affiliations, etc.) across all your projects without having to re-enter
@@ -37,8 +37,8 @@ it each time.
 
 ## See also
 
-[`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
-[`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+[`write_variables`](https://kylegrealis.github.io/froggeR/reference/write_variables.md),
+[`save_brand`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
 
 ## Examples
 

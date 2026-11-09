@@ -35,9 +35,9 @@ directory is created automatically if it does not exist.
 
 ## See also
 
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md),
-[`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
-[`write_brand`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md),
+[`write_variables`](https://kylegrealis.github.io/froggeR/reference/write_variables.md),
+[`write_brand`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
 
 ## Examples
 

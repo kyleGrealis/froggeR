@@ -25,8 +25,8 @@ Invisibly returns the path to the file.
 
 ## See also
 
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md),
-[`write_quarto`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md),
+[`write_quarto`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
 
 ## Examples
 

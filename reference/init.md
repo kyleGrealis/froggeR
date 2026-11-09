@@ -42,17 +42,17 @@ Existing files are never overwritten. Each created and skipped file is
 reported individually so you can see exactly what changed.
 
 Global configuration is saved via
-[`save_variables`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+[`save_variables`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
 and
-[`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md).
+[`save_brand`](https://kylegrealis.github.io/froggeR/reference/save_brand.md).
 If no saved config exists, the template defaults are used as-is.
 
 ## See also
 
-[`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
-[`write_brand`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md),
-[`save_variables`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md),
-[`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+[`write_variables`](https://kylegrealis.github.io/froggeR/reference/write_variables.md),
+[`write_brand`](https://kylegrealis.github.io/froggeR/reference/write_brand.md),
+[`save_variables`](https://kylegrealis.github.io/froggeR/reference/save_variables.md),
+[`save_brand`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
 
 ## Examples
 

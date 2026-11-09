@@ -37,13 +37,13 @@ This function:
 The saved configuration is stored in
 `rappdirs::user_config_dir('froggeR')` and will automatically be used in
 new froggeR projects created with
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md) or
-[`write_brand`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md).
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md) or
+[`write_brand`](https://kylegrealis.github.io/froggeR/reference/write_brand.md).
 
 ## See also
 
-[`write_brand`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md),
-[`save_variables`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+[`write_brand`](https://kylegrealis.github.io/froggeR/reference/write_brand.md),
+[`save_variables`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
 
 ## Examples
 

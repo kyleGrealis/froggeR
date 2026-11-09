@@ -1,5 +1,38 @@
 # Changelog
 
+## froggeR 1.1.0
+
+### Enhancements
+
+- Projects created with
+  [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md)
+  now include built-in AI coding assistant instructions (`AGENTS.md`,
+  `CLAUDE.md`, `GEMINI.md`) and four project skills in
+  `.agents/skills/`:
+
+  - `frogger-workflow`: Scaffolds Quarto documents in `analysis/`,
+    centralizes [`library()`](https://rdrr.io/r/base/library.html) calls
+    in `R/_libraries.R`, maintains variable labels in
+    `R/_data_dictionary.R`, and manages styles in `www/`.
+  - `frogger-brand`: Configures `_variables.yml` and `_brand.yml`, wires
+    Quarto `{{< var >}}` and `{{< brand >}}` shortcodes, and persists
+    defaults to global [froggeR](https://kylegrealis.github.io/froggeR/)
+    settings.
+  - `frogger-devlog`: Audits R and Quarto code comments, logs analytical
+    and methodological decisions in `DECISIONS.md`, and maintains
+    `CHANGELOG.md`.
+  - `frogger-commit`: Drafts structured `type(scope): summary` git
+    commit messages.
+
+- Updated the project template’s `_quarto.yml` to render standalone,
+  self-contained HTML documents (`embed-resources: true`,
+  `execute-dir: project`, and `logos` included in project resources) and
+  use Bunny Fonts in `_brand.yml`.
+
+- Removed `.pre-commit-config.yaml` from the project scaffold and
+  updated package vignettes (`from-zero-to-project`,
+  `every-file-in-its-place`) and `README.md`.
+
 ## froggeR 1.0.1
 
 CRAN release: 2026-03-17
@@ -9,35 +42,35 @@ CRAN release: 2026-03-17
 - The `pages/` directory has been renamed to `analysis/`, following the
   research compendium convention described in Marwick, Boettiger, and
   Mullen (2018).
-  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+  [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
   now writes to `analysis/` instead of `pages/`. Thanks to Raymond
   Balise ([@RaymondBalise](https://github.com/RaymondBalise)) for the
   suggestion and citation.
 
 ### Bug fixes
 
-- [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) no
+- [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md) no
   longer swallows directory creation errors. If
   [`fs::dir_create()`](https://fs.r-lib.org/reference/create.html)
   fails, the actual error is reported instead of a generic “Invalid
   path.”
 
 - File writers
-  ([`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
-  [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md),
-  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md),
+  ([`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md),
+  [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md),
+  [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md),
   etc.) check whether [`file.copy()`](https://rdrr.io/r/base/files.html)
   succeeded before reporting success. A failed copy raises an error
   instead of silent success.
 
-- [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+- [`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
   and
-  [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+  [`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
   check whether [`file.copy()`](https://rdrr.io/r/base/files.html)
   succeeded before reporting “Saved.” A failed copy raises an error
   instead of silent success.
 
-- [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+- [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md)
   warns and skips individual template files that fail to copy instead of
   silently counting them as created.
 
@@ -47,23 +80,23 @@ CRAN release: 2026-02-09
 
 ### Breaking changes
 
-- [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
+- [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md)
   has been removed. It now errors with a message directing users to
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+  [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md)
   instead.
 
 - `write_notes()` and `write_readme()` have been removed. These files
   are now included in the project template downloaded by
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md).
+  [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md).
 
-- [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)
+- [`write_ignore()`](https://kylegrealis.github.io/froggeR/reference/write_ignore.md)
   no longer accepts an `aggressive` parameter. A single `.gitignore` is
   provided.
 
 - `settings()` and `brand_settings()` have been removed. Use
-  [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+  [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
   and
-  [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+  [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
   to create and edit configuration files directly. These functions now
   handle existing files gracefully (opening them for editing instead of
   erroring) and print reference URLs to the console.
@@ -74,7 +107,7 @@ CRAN release: 2026-02-09
 ### New features
 
 - New function
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) is
+  [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md) is
   the primary entry point for creating froggeR projects. It downloads
   the latest project scaffold from the companion
   [frogger-templates](https://github.com/kyleGrealis/frogger-templates)
@@ -84,7 +117,7 @@ CRAN release: 2026-02-09
   files are never overwritten, and each created or skipped file is
   reported individually.
 
-- [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)
+- [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.md)
   gains a `filename` parameter (default `"custom"`). A `www/` prefix and
   `.scss` extension are stripped automatically, so
   `write_scss("tables")` and `write_scss("www/tables.scss")` are
@@ -115,7 +148,7 @@ CRAN release: 2026-02-09
 
 - New internal helper `.restore_saved_config()` handles copying global
   user configuration into new projects during
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md).
+  [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md).
 
 ## froggeR 0.6.0 (2025-11-13)
 
@@ -128,13 +161,13 @@ CRAN release: 2025-11-14
   both.
 
 - New function
-  [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+  [`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
   for saving brand configuration to global settings.
 
 - `settings()` redesigned with interactive metadata workflow, input
   validation, and project/global save options.
 
-- [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+- [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
   gains `restore_logos` argument.
 
 ### Bug fixes
@@ -176,7 +209,7 @@ CRAN release: 2025-07-08
 
 ### BREAKING!!
 
-- [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+- [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
   argument `custom_yaml` has been replaced with `example`, defaulting to
   TRUE. The Quarto file templates have been reworked to use Quarto brand
   structure. This simplifies the YAML within the document, but may
@@ -185,9 +218,9 @@ CRAN release: 2025-07-08
 ### Enhancements
 
 - 2 new Quarto brand YAML functions have been added:
-  [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+  [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
   &
-  [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md).
+  [`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md).
   These functions allow users to add project `_brand.yml` file and save
   the current `_brand.yml` to where your machine stores configuration
   files. There are added arguments to save & restore your brand logos
@@ -199,12 +232,12 @@ CRAN release: 2025-07-08
   progress. Weighing the value of including defaults versus a more
   minimalistic approach.
 - Removed creation of `.Rproj` file in
-  [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md).
+  [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md).
 
 ### Bug Fixes
 
 - Corrected logic flow in
-  [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+  [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
   that caused unintentional stoppage.
 
 ------------------------------------------------------------------------
@@ -216,7 +249,7 @@ CRAN release: 2025-03-16
 ### Enhancements
 
 - NEW:
-  [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+  [`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
   is a new function to store the current project-level `_variables.yml`
   to the system configuration file path. It offers to overwrite if the
   system config exists.
@@ -232,7 +265,7 @@ CRAN release: 2025-03-16
 
 ### Documentation
 
-- [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+- [`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
   documentation added to README
 
 ### Internal Changes
@@ -274,7 +307,7 @@ CRAN release: 2025-01-15
 
 - Removed ability to change metadata from the console. Instructions are
   now provided and, for
-  [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
+  [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md),
   the config file is opened in the interactive session.
 - Separated `write_readme`; now includes `write_notes` for a
   project-level progress notes template.
@@ -290,21 +323,21 @@ CRAN release: 2025-01-15
 
 ### Enhancements
 
-- **[`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)**:
+- **[`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md)**:
   - Streamlined integration with auxiliary functions for creating
     project-level files.
   - Improved error handling and user feedback when creating Quarto
     projects.
   - Ensured proper connection to
-    [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+    [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
     for managing `_variables.yml`.
-- **[`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)**:
+- **[`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)**:
   - Enhanced functionality to automatically call
-    [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+    [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
     for `_variables.yml` creation.
   - Added clearer messaging for users when froggeR settings are missing,
     guiding them to set up metadata.
-- **[`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)**:
+- **[`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)**:
   - Introduced as a new function to create and manage `_variables.yml`
     files in a modular way.
   - Handles automatic population of YAML metadata using froggeR
@@ -323,10 +356,10 @@ CRAN release: 2025-01-15
 ### Documentation
 
 - Enhanced roxygen documentation for
-  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md),
-  [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md),
+  [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md),
+  [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md),
   and
-  [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+  [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
   with detailed examples and explanations.
 - Updated vignettes to demonstrate the modular design and improved
   workflows.
@@ -345,7 +378,7 @@ CRAN release: 2025-01-15
 ### Enhancements
 
 - Improved
-  [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)
+  [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.md)
   function for more streamlined YAML updates in Quarto documents.
 - Enhanced user feedback in `froggeR_settings()` function, providing
   clearer output of current settings.
@@ -365,18 +398,18 @@ CRAN release: 2025-01-15
 ## froggeR 0.2.0
 
 - Renamed `default` parameter to `custom_yaml` in
-  [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
+  [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md)
   and
-  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+  [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
   for clarity.
 - Refactored `froggeR_settings()` to use YAML for configuration storage.
 - Changed how settings are stored and retrieved. Settings are now stored
   in `~/.config/froggeR/config.yml`.
 - Improved user interaction in `froggeR_settings()` function.
 - Modified
-  [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
+  [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md)
   and
-  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+  [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
   to use the new YAML-based settings.
 - Added `.check_settings()` function to provide user feedback on
   incomplete settings.
@@ -396,7 +429,7 @@ CRAN release: 2025-01-15
 ### Major Features
 
 - Implemented enhanced Quarto project creation with
-  [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
+  [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md)
   - Automated project structure setup
   - Custom YAML integration
   - Built-in .gitignore configuration
@@ -407,12 +440,12 @@ CRAN release: 2025-01-15
   - Project metadata configuration
   - TOC preferences
 - Created document generation tools
-  - [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+  - [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
     for consistent document creation
   - `write_readme()` for structured project documentation
-  - [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)
+  - [`write_ignore()`](https://kylegrealis.github.io/froggeR/reference/write_ignore.md)
     for enhanced Git security
-  - [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)
+  - [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.md)
     for custom styling templates
 
 ### Documentation

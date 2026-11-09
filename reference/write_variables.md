@@ -42,15 +42,15 @@ documents can reference. Available fields:
 - `affiliations`: Institution, department, etc.
 
 Use
-[`save_variables`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+[`save_variables`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
 to persist your project-level metadata to the global config directory
 for reuse across projects.
 
 ## See also
 
-[`save_variables`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md),
-[`write_brand`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md),
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+[`save_variables`](https://kylegrealis.github.io/froggeR/reference/save_variables.md),
+[`write_brand`](https://kylegrealis.github.io/froggeR/reference/write_brand.md),
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md)
 
 ## Examples
 

@@ -15,7 +15,7 @@ Scripts, Quarto documents, stylesheets, and data files piled up in root
 directories like laundry on a chair. Inspired by the [research
 compendium](https://doi.org/10.1080/00031305.2017.1375986) (Marwick,
 Boettiger, & Mullen, 2018),
-[froggeR](https://www.kyleGrealis.com/froggeR/) gives your Quarto
+[froggeR](https://kylegrealis.github.io/froggeR/) gives your Quarto
 projects a predictable layout: `R/` for scripts, `analysis/` for Quarto
 (and .Rmd) documents, `data/` for data files, `www/` for assets. The
 same conventions carry over whether you’re writing an analysis, building
@@ -29,31 +29,34 @@ froggeR::init(path = "my_project")
 
 ## Why `{froggeR}`?
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) gives every project a
+[froggeR](https://kylegrealis.github.io/froggeR/) gives every project a
 consistent layout so you spend time analyzing, not organizing:
 
 - **Structure by default**:
-  [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+  [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md)
   downloads the latest scaffold and you’re working in seconds. Scripts
   go in `R/`, Quarto documents in `analysis/`, assets in `www/`, data in
   `data/`.
 - **Opinionated starting points**: `R/_load.R`, `R/_libraries.R`, and
   `R/_data_dictionary.R` give every project a consistent entry point.
-  [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+  [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
   creates pre-formatted `.qmd` files with your author info and branding
   baked in.
 - **Configure once, reuse everywhere**:
-  [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+  [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
   and
-  [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+  [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
   create your metadata and branding files. Save globally with
-  [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+  [`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
   and
-  [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md),
+  [`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md),
   and every future project picks them up automatically.
-- **Protected by default**: An opinionated `.gitignore` and pre-commit
-  hooks keep sensitive data and common R artifacts out of version
-  control.
+- **Protected by default**: An opinionated `.gitignore` keeps sensitive
+  data and common R artifacts out of version control.
+- **AI agent ready**: Includes `AGENTS.md` (`CLAUDE.md`, `GEMINI.md`)
+  and `.agents/skills/` (`frogger-workflow`, `frogger-brand`,
+  `frogger-devlog`, `frogger-commit`) so AI coding assistants follow
+  your project conventions automatically.
 - **Transferable habits**: The same directory conventions used here
   mirror what you’ll find in R packages, Shiny frameworks like rhino,
   and other languages entirely.
@@ -79,6 +82,7 @@ froggeR::init(path = "my_new_project")
 This creates:
 
     my_new_project/
+    ├── .agents/                  # AI agent skills (workflow, brand, devlog, commit)
     ├── R/
     │   ├── _data_dictionary.R    # Variable labels and metadata
     │   ├── _libraries.R          # Centralized package loading
@@ -91,18 +95,20 @@ This creates:
     │   └── tables.js             # Table enhancements
     ├── logos/                    # Brand logos
     ├── data/                     # Data files (gitignored)
+    ├── AGENTS.md                 # Project conventions for AI coding assistants
+    ├── CLAUDE.md                 # Pointer to AGENTS.md and .agents/skills/
+    ├── GEMINI.md                 # Pointer to AGENTS.md and .agents/skills/
     ├── _brand.yml                # Quarto brand configuration
     ├── _quarto.yml               # Quarto project configuration
     ├── _variables.yml            # Author metadata
     ├── .gitignore                # Opinionated git protection
-    ├── .pre-commit-config.yaml   # Pre-commit hook configuration
     └── README.md
 
 ## Configuration & Reusability
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) stores configuration at
-two levels: global (system-wide) and project-local. Set it up once, and
-every future project inherits your settings.
+[froggeR](https://kylegrealis.github.io/froggeR/) stores configuration
+at two levels: global (system-wide) and project-local. Set it up once,
+and every future project inherits your settings.
 
 ``` r
 
@@ -121,8 +127,8 @@ froggeR::save_brand()      # Save project branding for reuse
 ```
 
 Global settings populate every new project created with
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md). Edit
-the project copy directly when you need something specific.
+[`init()`](https://kylegrealis.github.io/froggeR/reference/init.md).
+Edit the project copy directly when you need something specific.
 
 ## Templated Quarto Documents
 
@@ -138,9 +144,9 @@ branding.
 
 ## Enhanced Git Protection
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) includes a `.gitignore`
-that covers R artifacts, Quarto build files, data files, and common
-sensitive patterns:
+[froggeR](https://kylegrealis.github.io/froggeR/) includes a
+`.gitignore` that covers R artifacts, Quarto build files, data files,
+and common sensitive patterns:
 
 ``` r
 
@@ -174,27 +180,27 @@ Customize your document’s appearance by uncommenting desired styles.
 
 | Function | Description |
 |----|----|
-| [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) | Initialize a complete project from the latest remote template |
-| [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md) | Create a Quarto document in `analysis/` |
-| [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file |
-| [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md) | Create a `_brand.yml` brand configuration file |
-| [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md) | Save project `_variables.yml` to global config |
-| [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md) | Save project `_brand.yml` to global config |
-| [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md) | Create an opinionated `.gitignore` |
-| [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md) | Create a `custom.scss` styling template in `www/` |
+| [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md) | Initialize a complete project from the latest remote template |
+| [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md) | Create a Quarto document in `analysis/` |
+| [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md) | Create a `_variables.yml` metadata file |
+| [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md) | Create a `_brand.yml` brand configuration file |
+| [`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md) | Save project `_variables.yml` to global config |
+| [`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md) | Save project `_brand.yml` to global config |
+| [`write_ignore()`](https://kylegrealis.github.io/froggeR/reference/write_ignore.md) | Create an opinionated `.gitignore` |
+| [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.md) | Create a `custom.scss` styling template in `www/` |
 
 ------------------------------------------------------------------------
 
 ## Getting Help
 
 - **Documentation**: [froggeR
-  website](https://www.kyleGrealis.com/froggeR/) for full function
+  website](https://kylegrealis.github.io/froggeR/) for full function
   references and vignettes
 - **Vignettes**:
   - [From Zero to
-    Project](https://www.kyleGrealis.com/froggeR/articles/from-zero-to-project.html)
+    Project](https://kylegrealis.github.io/froggeR/articles/from-zero-to-project.html)
   - [Every File in Its
-    Place](https://www.kyleGrealis.com/froggeR/articles/every-file-in-its-place.html)
+    Place](https://kylegrealis.github.io/froggeR/articles/every-file-in-its-place.html)
 - **Issues**: Found a bug or have a feature request? [Open an
   issue](https://github.com/kyleGrealis/froggeR/issues)
 
@@ -210,7 +216,7 @@ We welcome contributions and ideas! Here’s how you can help:
 - **Suggest features** - Have an idea? [Submit a feature
   request](https://github.com/kyleGrealis/froggeR/issues)
 - **Share feedback** - Let us know how
-  [froggeR](https://www.kyleGrealis.com/froggeR/) is working for you
+  [froggeR](https://kylegrealis.github.io/froggeR/) is working for you
 - **Improve documentation** - Help us make docs clearer and more
   complete
 
@@ -218,7 +224,7 @@ We welcome contributions and ideas! Here’s how you can help:
 
 ## License
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) is licensed under the
+[froggeR](https://kylegrealis.github.io/froggeR/) is licensed under the
 [MIT License](https://choosealicense.com/licenses/mit/). See the LICENSE
 file for details.
 
@@ -232,38 +238,38 @@ file for details.
 
 Functions for creating and configuring Quarto projects
 
-- [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) :
+- [`init()`](https://kylegrealis.github.io/froggeR/reference/init.md) :
   Initialize a froggeR Project from the Template
-- [`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+- [`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
   : Write Variables YAML for Quarto Projects
-- [`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+- [`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
   : Write Brand YAML for Quarto Projects
-- [`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+- [`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
   : Save Metadata Configuration to Global froggeR Settings
-- [`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+- [`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
   : Save Brand Configuration to Global froggeR Settings
 
 ## Document Creation
 
 Functions for creating and styling Quarto documents
 
-- [`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md)
+- [`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md)
   : Create a New Quarto Document
-- [`write_scss()`](https://www.kyleGrealis.com/froggeR/reference/write_scss.md)
+- [`write_scss()`](https://kylegrealis.github.io/froggeR/reference/write_scss.md)
   : Create a Quarto SCSS File
 
 ## Project Files
 
 Functions for creating individual project files
 
-- [`write_ignore()`](https://www.kyleGrealis.com/froggeR/reference/write_ignore.md)
+- [`write_ignore()`](https://kylegrealis.github.io/froggeR/reference/write_ignore.md)
   : Create a .gitignore File
 
 ## Deprecated
 
 Functions removed in 1.0.0
 
-- [`quarto_project()`](https://www.kyleGrealis.com/froggeR/reference/quarto_project.md)
+- [`quarto_project()`](https://kylegrealis.github.io/froggeR/reference/quarto_project.md)
   : Create a Custom Quarto Project
 
 # Articles
@@ -271,6 +277,6 @@ Functions removed in 1.0.0
 ### Get Started
 
 - [From Zero to Project in
-  Seconds](https://www.kyleGrealis.com/froggeR/articles/from-zero-to-project.md):
+  Seconds](https://kylegrealis.github.io/froggeR/articles/from-zero-to-project.md):
 - [Every File in Its
-  Place](https://www.kyleGrealis.com/froggeR/articles/every-file-in-its-place.md):
+  Place](https://kylegrealis.github.io/froggeR/articles/every-file-in-its-place.md):

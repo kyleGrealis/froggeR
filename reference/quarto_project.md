@@ -1,7 +1,7 @@
 # Create a Custom Quarto Project
 
 **Deprecated.** Use
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+[`init()`](https://kylegrealis.github.io/froggeR/reference/init.md)
 instead.
 
 ## Usage
@@ -30,7 +30,7 @@ Does not return. Always errors with a deprecation message.
 
 ## See also
 
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md)
 
 ## Examples
 

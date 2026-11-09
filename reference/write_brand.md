@@ -37,15 +37,15 @@ specification](https://posit-dev.github.io/brand-yml/) for the full list
 of available options.
 
 Use
-[`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+[`save_brand`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
 to persist your project-level brand configuration to the global config
 directory for reuse across projects.
 
 ## See also
 
-[`save_brand`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md),
-[`write_variables`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md),
-[`init`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+[`save_brand`](https://kylegrealis.github.io/froggeR/reference/save_brand.md),
+[`write_variables`](https://kylegrealis.github.io/froggeR/reference/write_variables.md),
+[`init`](https://kylegrealis.github.io/froggeR/reference/init.md)
 
 ## Examples
 

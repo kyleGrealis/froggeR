@@ -14,7 +14,7 @@ others can inspect, reproduce, and extend the work. Their layout uses
 familiar R package conventions and adds an `analysis/` directory for the
 project’s computational work.
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) builds on this idea,
+[froggeR](https://kylegrealis.github.io/froggeR/) builds on this idea,
 adapting it for Quarto-based projects:
 
 - `R/` for scripts
@@ -37,6 +37,7 @@ froggeR::init(path = "my_project")
 ```
 
     my_project/
+    ├── .agents/                  # AI agent skills (workflow, brand, devlog, commit)
     ├── R/
     │   ├── _data_dictionary.R    # Variable labels and metadata
     │   ├── _libraries.R          # Centralized package loading
@@ -49,22 +50,24 @@ froggeR::init(path = "my_project")
     │   └── tables.js             # Table enhancements
     ├── logos/                    # Brand logos
     ├── data/                     # Data files (gitignored)
+    ├── AGENTS.md                 # Project conventions for AI coding assistants
+    ├── CLAUDE.md                 # Pointer to AGENTS.md and .agents/skills/
+    ├── GEMINI.md                 # Pointer to AGENTS.md and .agents/skills/
     ├── _brand.yml                # Quarto brand configuration
     ├── _quarto.yml               # Quarto project configuration
     ├── _variables.yml            # Author metadata
     ├── .gitignore                # Opinionated git protection
-    ├── .pre-commit-config.yaml   # Pre-commit hook configuration
     └── README.md
 
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md)
+[`init()`](https://kylegrealis.github.io/froggeR/reference/init.md)
 creates the target directory if it does not exist, downloads the latest
 template from
 [frogger-templates](https://github.com/kyleGrealis/frogger-templates),
 and copies only files that are not already present. Existing files are
 never overwritten. If you have previously saved global config with
-[`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+[`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
 or
-[`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md),
+[`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md),
 your metadata and branding are applied automatically.
 
 ### What each directory is for
@@ -76,7 +79,7 @@ labels and metadata). Add your own scripts here.
 **`analysis/`** contains Quarto documents. `index.qmd` is the default
 landing page. `references.bib` holds your bibliography. Add new analysis
 files with
-[`write_quarto()`](https://www.kyleGrealis.com/froggeR/reference/write_quarto.md).
+[`write_quarto()`](https://kylegrealis.github.io/froggeR/reference/write_quarto.md).
 
 **`www/`** contains web assets. `custom.scss` controls document styling.
 `tables.js` provides table enhancements. Keep stylesheets, images, and
@@ -101,66 +104,37 @@ The files in the project root are configuration:
 - **`_variables.yml`** stores author metadata: name, email, etc.
 - **`.gitignore`** keeps R artifacts, rendered output, and data files
   out of version control.
-- **`.pre-commit-config.yaml`** runs code quality checks before every
-  commit. See below.
+- **`AGENTS.md`** (`CLAUDE.md`, `GEMINI.md`) and **`.agents/skills/`**
+  provide project architecture instructions and workflow skills for AI
+  coding assistants.
 
-## Pre-commit hooks
+## Built-in AI agent skills
 
-The template includes a `.pre-commit-config.yaml` that integrates with
-[pre-commit](https://pre-commit.com) to run automated checks before
-every `git commit`. This catches problems early: unstyled code, lint
-violations, debug statements left in, large files accidentally staged.
+The template includes `AGENTS.md` (along with `CLAUDE.md` and
+`GEMINI.md` pointers) and four project skills inside `.agents/skills/`
+so AI coding assistants understand
+[froggeR](https://kylegrealis.github.io/froggeR/) conventions without
+manual prompting:
 
-### What is included
-
-From [{precommit}](https://lorenzwalthert.github.io/precommit/):
-
-- **style-files**: Formats R code with
-  [{styler}](https://styler.r-lib.org/) using tidyverse conventions
-- **lintr**: Runs [{lintr}](https://lintr.r-lib.org/) static analysis
-- **parsable-R**: Confirms all R files parse without errors
-- **no-browser-statement**: Catches leftover
-  [`browser()`](https://rdrr.io/r/base/browser.html) calls
-- **no-debug-statement**: Catches leftover
-  [`debug()`](https://rdrr.io/r/base/debug.html) and
-  [`debugonce()`](https://rdrr.io/r/base/debug.html) calls
-
-From [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks):
-
-- **check-added-large-files**: Blocks files over 200 KB
-- **end-of-file-fixer**: Ensures files end with a newline
-
-Local:
-
-- **forbid-to-commit**: Blocks `.Rhistory`, `.RData`, `.Rds`, and `.rds`
-  files
-
-### Setup
-
-Install the R packages and initialize:
-
-``` r
-
-install.packages(c("precommit", "styler", "lintr"))
-precommit::use_precommit()
-```
-
-[{precommit}](https://lorenzwalthert.github.io/precommit/) handles
-installing the pre-commit framework itself. See
-[pre-commit.com](https://pre-commit.com/#install) for manual
-installation options.
-
-### Adapting or removing
-
-The hooks are a starting point. Edit `.pre-commit-config.yaml` to add,
-remove, or reconfigure hooks for your workflow. If you do not want
-pre-commit at all, delete the file. No other part of
-[froggeR](https://www.kyleGrealis.com/froggeR/) depends on it.
+- **`frogger-workflow`**: Scaffolds new Quarto documents in `analysis/`,
+  keeps [`library()`](https://rdrr.io/r/base/library.html) calls
+  centralized in `R/_libraries.R`, updates variable labels in
+  `R/_data_dictionary.R`, and manages styles in `www/`.
+- **`frogger-brand`**: Walks through setting up `_variables.yml` and
+  `_brand.yml`, wires metadata and brand logo shortcodes into documents,
+  and persists defaults to your global
+  [froggeR](https://kylegrealis.github.io/froggeR/) config.
+- **`frogger-devlog`**: Audits R and Quarto code comments, records
+  analytical and methodological choices in `DECISIONS.md`, and maintains
+  `CHANGELOG.md`.
+- **`frogger-commit`**: Drafts structured `type(scope): summary` git
+  commit messages with 2-space indented bullets explaining what changed
+  and why.
 
 ## Your settings follow you
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) stores configuration in
-two places:
+[froggeR](https://kylegrealis.github.io/froggeR/) stores configuration
+in two places:
 
 1.  **Project-level**: `_variables.yml` and `_brand.yml` in your project
     directory. These are committed to version control and used by the
@@ -171,12 +145,13 @@ two places:
     - Windows: `C:\Users\<username>\AppData\Local\froggeR\`
 
 Global config is set once and applied to every future project created
-with [`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md).
+with
+[`init()`](https://kylegrealis.github.io/froggeR/reference/init.md).
 Edit the project copy directly when you need something specific.
 
 If you have configured global settings before running
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md), your
-new project inherits them automatically:
+[`init()`](https://kylegrealis.github.io/froggeR/reference/init.md),
+your new project inherits them automatically:
 
 - **`_variables.yml`**: Global config overwrites the template version
 - **`_brand.yml`**: Global config overwrites the template version
@@ -184,15 +159,15 @@ new project inherits them automatically:
   without removing existing ones)
 
 Use
-[`write_variables()`](https://www.kyleGrealis.com/froggeR/reference/write_variables.md)
+[`write_variables()`](https://kylegrealis.github.io/froggeR/reference/write_variables.md)
 and
-[`write_brand()`](https://www.kyleGrealis.com/froggeR/reference/write_brand.md)
+[`write_brand()`](https://kylegrealis.github.io/froggeR/reference/write_brand.md)
 to create and edit your configuration files, then
-[`save_variables()`](https://www.kyleGrealis.com/froggeR/reference/save_variables.md)
+[`save_variables()`](https://kylegrealis.github.io/froggeR/reference/save_variables.md)
 and
-[`save_brand()`](https://www.kyleGrealis.com/froggeR/reference/save_brand.md)
+[`save_brand()`](https://kylegrealis.github.io/froggeR/reference/save_brand.md)
 to persist them globally. Every future
-[`init()`](https://www.kyleGrealis.com/froggeR/reference/init.md) call
+[`init()`](https://kylegrealis.github.io/froggeR/reference/init.md) call
 starts with your configuration in place.
 
 ## References

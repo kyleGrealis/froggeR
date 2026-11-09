@@ -5,7 +5,7 @@
 A project with five R files is manageable. A project with fifteen is
 not, unless they follow a pattern.
 
-[froggeR](https://www.kyleGrealis.com/froggeR/) initializes with three
+[froggeR](https://kylegrealis.github.io/froggeR/) initializes with three
 files in every project’s `R/` directory:
 
 - `_load.R` – the entry point
@@ -98,7 +98,7 @@ everywhere, not buried inside whichever analysis script needed them
 first.
 
 This is designed for use with
-[{sumExtras}](https://www.kylegrealis.com/sumExtras/) using the
+[{sumExtras}](https://kylegrealis.github.io/sumExtras/) using the
 `options(sumExtras.auto_labels = TRUE)` and
 `options(sumExtras.prefer_dictionary = TRUE)` for automatic labelling.
 Your [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) tables get
@@ -112,42 +112,40 @@ layout:
 
 ``` yaml
 project:
-  type: website
+  title: "Project Title"
   output-dir: docs
-  resources: www
+  execute-dir: project
+  resources:
+    - www
+    - logos
   render:
     - "analysis/*.qmd"
 ```
 
-Quarto only renders `.qmd` files found in `analysis/`. Static assets in
-`www/` are copied to the output as resources. Rendered HTML goes to
-`docs/`, keeping build artifacts out of your source directories. Explore
-the documentation for other [Quarto
+Quarto renders `.qmd` files found in `analysis/` with
+`execute-dir: project` so code chunks evaluate from the project root.
+Static assets in `www/` and `logos/` are copied to the output as
+resources. Rendered HTML goes to `docs/`, keeping build artifacts out of
+your source directories. Explore the documentation for other [Quarto
 project](https://quarto.org/docs/projects/quarto-projects.html) types.
 
-The styling and sidebar also reference these paths directly:
+The styling and format options also reference these paths directly:
 
 ``` yaml
 format:
   html:
+    embed-resources: true
     theme:
       - default
       - brand
       - www/custom.scss
-
-website:
-  sidebar:
-    contents:
-      - text: Home
-        href: analysis/index.qmd
 ```
 
-`custom.scss` is expected in `www/`, and the sidebar links to documents
-in `analysis/`. Because the directory layout is predictable, the
-configuration works out of the box. You do not need to edit
-`_quarto.yml` to wire up paths. They are already correct. Add new
-documents to `analysis/`, then reference them in the `contents` section
-following the pattern shown for `analysis/index.qmd`.
+`custom.scss` is expected in `www/`, and `embed-resources: true`
+produces self-contained HTML reports in `docs/analysis/` that are easy
+to share. Because the directory layout is predictable, the configuration
+works out of the box. You do not need to edit `_quarto.yml` to wire up
+paths. They are already correct.
 
 For the full `_quarto.yml` specification, see [Quarto Project
 Basics](https://quarto.org/docs/projects/quarto-projects.html).
@@ -171,7 +169,7 @@ source("R/_load.R")
 ```
 
 The difference matters the moment your working directory is not the
-project root. In a [froggeR](https://www.kyleGrealis.com/froggeR/)
+project root. In a [froggeR](https://kylegrealis.github.io/froggeR/)
 project, that happens by design.
 
 When you render `analysis/index.qmd`, Quarto sets the working directory
