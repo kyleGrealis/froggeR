@@ -1,6 +1,8 @@
 # Changelog
 
-## froggeR 1.1.0
+## froggeR 1.1.0 (2026-11-09)
+
+CRAN release: 2026-11-09
 
 ### Enhancements
 
